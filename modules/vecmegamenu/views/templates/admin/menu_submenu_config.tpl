@@ -1,33 +1,21 @@
 <div class="panel container">
 
 	<h3><i class="icon-cog"></i> {l s='Submenu settings' mod='vecmegamenu'}</h3>
-	<form id="module_form" class="defaultForm form-horizontal" action="index.php?controller=AdminModules&amp;configure=vecmegamenu&amp;token={Tools::getAdminTokenLite('AdminModules')|escape:'html':'UTF-8'}" method="post" enctype="multipart/form-data" novalidate="">
+	<form id="module_form" class="defaultForm form-horizontal submenu-settings" action="index.php?controller=AdminModules&amp;configure=vecmegamenu&amp;token={Tools::getAdminTokenLite('AdminModules')|escape:'html':'UTF-8'}" method="post" enctype="multipart/form-data" novalidate="">
 		<input type="hidden" name="id_vecmegamenu_item" value="{$id_vecmegamenu_item}" />
 		<div class="panel">
 			<div class="form-wrapper">
 				<div class="form-group">
                     <label class="control-label col-lg-2" for="submenu_width">{l s='Submenu width' mod='vecmegamenu'}</label>
                     <div class="col-lg-10">
-                        <select id="submenu_width" name="submenu_width" class="form-control fixed-width-xl">	
-							<option value="12" {if $submenu_info.submenu_width == 12}selected="selected"{/if}>12/12</option>
-							<option value="11" {if $submenu_info.submenu_width == 11}selected="selected"{/if}>11/12</option>
-							<option value="10" {if $submenu_info.submenu_width == 10}selected="selected"{/if}>10/12</option>
-							<option value="9" {if $submenu_info.submenu_width == 9}selected="selected"{/if}>9/12</option>
-							<option value="8" {if $submenu_info.submenu_width == 8}selected="selected"{/if}>8/12</option>
-							<option value="7" {if $submenu_info.submenu_width == 7}selected="selected"{/if}>7/12</option>
-							<option value="6" {if $submenu_info.submenu_width == 6}selected="selected"{/if}>6/12</option>
-							<option value="5" {if $submenu_info.submenu_width == 5}selected="selected"{/if}>5/12</option>
-							<option value="4" {if $submenu_info.submenu_width == 4}selected="selected"{/if}>4/12</option>
-							<option value="3" {if $submenu_info.submenu_width == 3}selected="selected"{/if}>3/12</option>
-							<option value="2" {if $submenu_info.submenu_width == 2}selected="selected"{/if}>2/12</option>
-							<option value="1" {if $submenu_info.submenu_width == 1}selected="selected"{/if}>1/12</option>
-                        </select>
+                        <input class="fixed-width-xl" name="submenu_width" value="{if $submenu_info.submenu_width}{$submenu_info.submenu_width}{/if}" id="submenu_width" type="text">
+                        <p class="help-block">{l s='Set maxium width of submenu. You must provide px or percent suffix (example 500px or 100vw). Full width = 100vw' mod='vecmegamenu'}</p>
                     </div>
                 </div>
                 <div class="form-group">
 	                <label class="control-label col-lg-2" for="submenu_class">{l s='Specific class' mod='vecmegamenu'}</label>
 	                <div class="col-lg-6">
-	                    <input class="" name="submenu_class" value="{if $submenu_info.submenu_class}{$submenu_info.submenu_class}{/if}" id="submenu_class" type="text">
+	                    <input class="fixed-width-xl" name="submenu_class" value="{if $submenu_info.submenu_class}{$submenu_info.submenu_class}{/if}" id="submenu_class" type="text">
 	                </div>
 	            </div>
                 <div class="form-group">
@@ -98,6 +86,7 @@
 	</form>
 	<script type="text/javascript">
 		$(document).ready(function(){
+            SubmenuChangeType();
 			$('#submenu_bg').change(function(){
 	            SubmenuChangeType();
 	        });

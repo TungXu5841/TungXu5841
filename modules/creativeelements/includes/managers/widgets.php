@@ -76,7 +76,9 @@ class WidgetsManager
             'shortcode',
             'html',
             'menu-anchor',
+            'links-list',
 
+            'slideshow',
             'product-grid',
             'product-carousel',
             'product-box',
@@ -96,6 +98,7 @@ class WidgetsManager
             'site-logo',
             'site-title',
             'nav-menu',
+            'megamenu',
             'shopping-cart',
             'ajax-search',
             'sign-in',

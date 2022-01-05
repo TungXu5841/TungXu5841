@@ -49,7 +49,7 @@ class VecSampleDataMenu
 
 		$return &= Db::getInstance()->Execute('INSERT IGNORE INTO `'._DB_PREFIX_.'vecmegamenu_submenu` (`id_submenu`, `id_vecmegamenu_item`, `submenu_class`, `active`, `submenu_width`, `submenu_bg`, `submenu_bg_color`, `submenu_bg_image`, `submenu_bg_repeat`, `submenu_bg_position`) VALUES 		
 		(1, 1, "", 1, "", "", "", "", "", ""),		
-		(2, 2, "", 1, 12, 1, "", "", 1, 1)		
+		(2, 2, "", 1, "1000px", 1, "", "", 1, 1)		
 		;');
 
 		$return &= Db::getInstance()->Execute('INSERT IGNORE INTO `'._DB_PREFIX_.'vecmegamenu_submenu_row` (`id_row`, `id_vecmegamenu_item`, `class`, `position`, `active`) VALUES 			

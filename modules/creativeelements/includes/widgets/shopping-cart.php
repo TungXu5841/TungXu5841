@@ -354,10 +354,10 @@ class WidgetShoppingCart extends WidgetBase{
 			return print '<div class="ce-remote-render"></div>';
 		}
 
-		if( \Module::isEnabled('vec_shoppingcart') ) {
+		if( \Module::isEnabled('vecshoppingcart') ) {
 			$settings = $this->getSettings();
 			$icon = $settings['cart_icon'];
-			$module = \Module::getInstanceByName( 'vec_shoppingcart' );
+			$module = \Module::getInstanceByName( 'vecshoppingcart' );
 			echo $module->renderWidget( null, [ 'icon' => $icon ] );
 		}
 	} 

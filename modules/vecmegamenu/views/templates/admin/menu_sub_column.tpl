@@ -44,9 +44,11 @@
                                 <option value="9">9/12</option>
                                 <option value="10">10/12</option>
                                 <option value="11">11/12</option>
-                                <option value="12">12/12</option>
+                                <option value="12" selected="selected">12/12</option>
                             </select>
+                            <p class="help-block" style="clear:both;">{l s='Select 12/12 in case you build submenu for FLYOUT type' mod='vecmegamenu'}</p>
                         </div>
+
                     </div>
                     <div class="form-group">
                         <label class="control-label col-lg-2">{l s='Column title' mod='vecmegamenu'}</label>

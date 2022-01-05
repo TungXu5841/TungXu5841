@@ -687,11 +687,11 @@ class WidgetAjaxSearch extends WidgetBase {
 		if (is_admin()){
             return print '<div class="ce-remote-render"></div>';
         }
-        if(\Module::isEnabled('vec_searchbar'))
+        if(\Module::isEnabled('vecsearchbar'))
         {
             $settings = $this->getSettings();
 
-            $module = \Module::getInstanceByName('vec_searchbar');
+            $module = \Module::getInstanceByName('vecsearchbar');
             $params = array(
                 'placeholder'       => $settings['placeholder'],
                 'search_type'       => $settings['search_type'],

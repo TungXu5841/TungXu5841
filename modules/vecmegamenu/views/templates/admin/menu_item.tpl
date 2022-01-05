@@ -23,150 +23,150 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<form id="module_form" class="defaultForm form-horizontal" action="index.php?controller=AdminModules&amp;configure=vecmegamenu&amp;token={Tools::getAdminTokenLite('AdminModules')|escape:'html':'UTF-8'}" method="post" enctype="multipart/form-data" novalidate="">
+<form id="module_form" class="defaultForm form-horizontal themevec-module" action="index.php?controller=AdminModules&amp;configure=vecmegamenu&amp;token={Tools::getAdminTokenLite('AdminModules')|escape:'html':'UTF-8'}" method="post" enctype="multipart/form-data" novalidate="">
 <div class="panel"><h3><i class="icon-list-ul"></i> {l s='Menu Item' mod='vecmegamenu'}</h3>
-	<div class="form-wrapper" id="menuContent" >
-		<div class="form-group">
-			<label class="control-label col-lg-3">{l s='Title' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				{foreach from=$languages item=language}
-					{if $languages|count > 1}
-						<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
-					{/if}
-					<div class="col-lg-6">
-					<input type="text" class="title" id="title_{$language.id_lang|intval}" name="title_{$language.id_lang|intval}" value="{if isset($menu->title[$language.id_lang|intval])}{$menu->title[$language.id_lang|intval]}{else}menu title{/if}"/>
+	
+	<div class="form-group">
+		<label class="control-label col-lg-3">{l s='Title' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			{foreach from=$languages item=language}
+				{if $languages|count > 1}
+					<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
+				{/if}
+				<div class="col-lg-6">
+				<input type="text" class="title" id="title_{$language.id_lang|intval}" name="title_{$language.id_lang|intval}" value="{if isset($menu->title[$language.id_lang|intval])}{$menu->title[$language.id_lang|intval]}{else}menu title{/if}"/>
+				</div>
+				{if $languages|count > 1}
+					<div class="col-lg-2">
+						<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
+							{$language.iso_code|escape:'html':'UTF-8'}
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							{foreach from=$languages item=lang}
+							<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
+							{/foreach}
+						</ul>
 					</div>
-					{if $languages|count > 1}
-						<div class="col-lg-2">
-							<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
-								{$language.iso_code|escape:'html':'UTF-8'}
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								{foreach from=$languages item=lang}
-								<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
-								{/foreach}
-							</ul>
-						</div>
-					{/if}
-					{if $languages|count > 1}
-						</div>
-					{/if}
-				{/foreach}
-				<p class="help-block" style="clear:both;">{l s='>>> If use Prestashop link and want to use Prestashop title, leave it empty.' mod='vecmegamenu'}</p>
-			</div>
-		</div>
-		<div class="form-group lab-type-link">
-			<label class="control-label col-lg-3">{l s='Type Link' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				<select id="type_link" name="type_link" class="form-control fixed-width-xl" data-default="0">
-	                <option value="0" {if $menu->type_link == 0}selected="selected" {/if}>{l s='PrestaShop Link' mod='vecmegamenu'}</option>
-	                <option value="1" {if $menu->type_link == 1}selected="selected" {/if}>{l s='Custom Link' mod='vecmegamenu'}</option>
-	                <option value="2" {if $menu->type_link == 2}selected="selected" {/if}>{l s='None' mod='vecmegamenu'}</option>
-	            </select>
-			</div>
-		</div>
-		
-		<div class="form-group custom_link">
-			<label class="control-label col-lg-3">{l s='Custom link' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				{foreach from=$languages item=language}
-					{if $languages|count > 1}
-						<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
-					{/if}
-					<div class="col-lg-6">
-					<input type="text" id="custom_link_{$language.id_lang|intval}" name="custom_link_{$language.id_lang|intval}" value="{if isset($menu->custom_link[$language.id_lang|intval])}{$menu->custom_link[$language.id_lang|intval]}{else}#{/if}"/>
+				{/if}
+				{if $languages|count > 1}
 					</div>
-					{if $languages|count > 1}
-						<div class="col-lg-2">
-							<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
-								{$language.iso_code|escape:'html':'UTF-8'}
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								{foreach from=$languages item=lang}
-								<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
-								{/foreach}
-							</ul>
-						</div>
-					{/if}
-					{if $languages|count > 1}
-						</div>
-					{/if}
-				{/foreach}
-			</div>
-		</div>
-		<div class="form-group ps_link">
-			<label class="control-label col-lg-3">{l s='PrestaShop Link' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				<select class="form-control fixed-width-xl" name="link" id="link">
-					{$all_options|escape:'quotes':'UTF-8'}
-				</select>
-				<script type="text/javascript">
-					$(document).ready(function(){
-						$("#link").val('{$menu->link}');
-					});
-				</script>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-lg-3">{l s='Sub Title' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				{foreach from=$languages item=language}
-					{if $languages|count > 1}
-						<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
-					{/if}
-					<div class="col-lg-6">
-					<input type="text" class="subtitle" id="subtitle_{$language.id_lang|intval}" name="subtitle_{$language.id_lang|intval}" value="{if $menu->subtitle[$language.id_lang|intval]}{$menu->subtitle[$language.id_lang|intval]}{/if}"/>
-					</div>
-					{if $languages|count > 1}
-						<div class="col-lg-2">
-							<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
-								{$language.iso_code|escape:'html':'UTF-8'}
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu">
-								{foreach from=$languages item=lang}
-								<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
-								{/foreach}
-							</ul>
-						</div>
-					{/if}
-					{if $languages|count > 1}
-						</div>
-					{/if}
-				{/foreach}
-			</div>
-		</div>
-		<div class="form-group lab-type-icon">
-			<label class="control-label col-lg-3">{l s='Use icon' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				<select id="type_icon" name="type_icon" class="form-control fixed-width-xl" data-default="0">
-	                <option value="0" {if $menu->type_icon == 0}selected="selected" {/if}>{l s='No' mod='vecmegamenu'}</option>
-	                <option value="1" {if $menu->type_icon == 1}selected="selected" {/if}>{l s='Font-Awesome Icon' mod='vecmegamenu'}</option>
-	                <option value="2" {if $menu->type_icon == 2}selected="selected" {/if}>{l s='Image Icon' mod='vecmegamenu'}</option>
-	            </select>
-			</div>
-		</div>
-		
-		<div class="form-group lab-fw-icon">
-			<label class="control-label col-lg-3">{l s='Font-Awesome Icon' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-				<input type="text" class="icon_class fixed-width-xl" id="icon_class" name="icon_class" value="{$menu->icon_class|escape:'html':'UTF-8'}"/>
-				<p>{l s='Put class icon of Font-Awesome at :' mod='vecmegamenu'} <a href="http://fortawesome.github.io/Font-Awesome/3.2.1/icons/">http://fortawesome.github.io/Font-Awesome/3.2.1/icons/.</a> ex: <span>&lt;i class="</span>fab fa-angellist<span>"&gt;&lt;/i&gt;</span></p> 
-			</div>
-		</div>
-		<div class="form-group lab-img-icon">
-			<label class="control-label col-lg-3">{l s='Image Icon' mod='vecmegamenu'}</label>
-			<div class="col-lg-9">
-                <div class="col-lg-7">
-                    <input type="text" id="icon_img" name="icon_img" value="{if $menu->icon}{$menu->icon}{/if}"/>
-                    <a href="filemanager/dialog.php?type=1&field_id=icon_img" class="btn btn-default iframe-column-upload"  data-input-name="icon_img" type="button">{l s='Select image' mod='vecmegamenu'} <i class="icon-angle-right"></i></a>
-                    {if $menu->icon}<img src="{$menu->icon}" style="display: block; max-width: 200px;"/>{/if}
-                </div>
-            </div>
+				{/if}
+			{/foreach}
+			<p class="help-block" style="clear:both;">{l s='Note: If use Prestashop link and want to use Prestashop title, leave it empty.' mod='vecmegamenu'}</p>
 		</div>
 	</div>
+	<div class="form-group lab-type-link">
+		<label class="control-label col-lg-3">{l s='Type Link' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			<select id="type_link" name="type_link" class="form-control fixed-width-xl" data-default="0">
+                <option value="0" {if $menu->type_link == 0}selected="selected" {/if}>{l s='PrestaShop Link' mod='vecmegamenu'}</option>
+                <option value="1" {if $menu->type_link == 1}selected="selected" {/if}>{l s='Custom Link' mod='vecmegamenu'}</option>
+                <option value="2" {if $menu->type_link == 2}selected="selected" {/if}>{l s='None' mod='vecmegamenu'}</option>
+            </select>
+		</div>
+	</div>
+	
+	<div class="form-group custom_link">
+		<label class="control-label col-lg-3">{l s='Custom link' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			{foreach from=$languages item=language}
+				{if $languages|count > 1}
+					<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
+				{/if}
+				<div class="col-lg-6">
+				<input type="text" id="custom_link_{$language.id_lang|intval}" name="custom_link_{$language.id_lang|intval}" value="{if isset($menu->custom_link[$language.id_lang|intval])}{$menu->custom_link[$language.id_lang|intval]}{else}#{/if}"/>
+				</div>
+				{if $languages|count > 1}
+					<div class="col-lg-2">
+						<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
+							{$language.iso_code|escape:'html':'UTF-8'}
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							{foreach from=$languages item=lang}
+							<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
+							{/foreach}
+						</ul>
+					</div>
+				{/if}
+				{if $languages|count > 1}
+					</div>
+				{/if}
+			{/foreach}
+		</div>
+	</div>
+	<div class="form-group ps_link">
+		<label class="control-label col-lg-3">{l s='PrestaShop Link' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			<select class="form-control fixed-width-xl" name="link" id="link">
+				{$all_options|escape:'quotes':'UTF-8'}
+			</select>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#link").val('{$menu->link}');
+				});
+			</script>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-lg-3">{l s='Sub Title' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			{foreach from=$languages item=language}
+				{if $languages|count > 1}
+					<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
+				{/if}
+				<div class="col-lg-6">
+				<input type="text" class="subtitle" id="subtitle_{$language.id_lang|intval}" name="subtitle_{$language.id_lang|intval}" value="{if isset($menu->subtitle[$language.id_lang]) && $menu->subtitle[$language.id_lang]}{$menu->subtitle[$language.id_lang|intval]}{/if}"/>
+				</div>
+				{if $languages|count > 1}
+					<div class="col-lg-2">
+						<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
+							{$language.iso_code|escape:'html':'UTF-8'}
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							{foreach from=$languages item=lang}
+							<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
+							{/foreach}
+						</ul>
+					</div>
+				{/if}
+				{if $languages|count > 1}
+					</div>
+				{/if}
+			{/foreach}
+		</div>
+	</div>
+	<div class="form-group lab-type-icon">
+		<label class="control-label col-lg-3">{l s='Use icon' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			<select id="type_icon" name="type_icon" class="form-control fixed-width-xl" data-default="0">
+                <option value="0" {if $menu->type_icon == 0}selected="selected" {/if}>{l s='No' mod='vecmegamenu'}</option>
+                <option value="1" {if $menu->type_icon == 1}selected="selected" {/if}>{l s='Font-Awesome Icon' mod='vecmegamenu'}</option>
+                <option value="2" {if $menu->type_icon == 2}selected="selected" {/if}>{l s='Image Icon' mod='vecmegamenu'}</option>
+            </select>
+		</div>
+	</div>
+	
+	<div class="form-group lab-fw-icon">
+		<label class="control-label col-lg-3">{l s='Font-Awesome Icon' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+			<input type="text" class="icon_class fixed-width-xl" id="icon_class" name="icon_class" value="{$menu->icon_class|escape:'html':'UTF-8'}"/>
+			<p>{l s='Put class icon of Font-Awesome at :' mod='vecmegamenu'} <a href="http://fortawesome.github.io/Font-Awesome/3.2.1/icons/">http://fortawesome.github.io/Font-Awesome/3.2.1/icons/.</a> ex: <span>&lt;i class="</span>fab fa-angellist<span>"&gt;&lt;/i&gt;</span></p> 
+		</div>
+	</div>
+	<div class="form-group lab-img-icon">
+		<label class="control-label col-lg-3">{l s='Image Icon' mod='vecmegamenu'}</label>
+		<div class="col-lg-9">
+            <div class="col-lg-7">
+                <input type="text" id="icon_img" name="icon_img" value="{if $menu->icon}{$menu->icon}{/if}"/>
+                <a href="filemanager/dialog.php?type=1&field_id=icon_img" class="btn btn-default iframe-column-upload"  data-input-name="icon_img" type="button">{l s='Select image' mod='vecmegamenu'} <i class="icon-angle-right"></i></a>
+                {if $menu->icon}<img src="{$menu->icon}" style="display: block; max-width: 200px;"/>{/if}
+            </div>
+        </div>
+	</div>
+	
 	<div style="clear:both;"></div>
 	<div class="form-group">
 		<label class="control-label col-lg-3" for="">{l s='Subtitle style' mod='vecmegamenu'}</label>

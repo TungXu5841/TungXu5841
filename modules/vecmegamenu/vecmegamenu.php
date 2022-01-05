@@ -248,6 +248,7 @@ class VecMegamenu extends Module
 						Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules', true).'&conf=1&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name);
 					}
 					$this->generateCss();
+					$this->html .= $this->displayConfirmation($this->l('Your configuration is saved.'));
 				}
 			}
 			return $errors;
@@ -280,7 +281,7 @@ class VecMegamenu extends Module
 			$submenu_item = new VecMegamenuSubmenuClass((int)Tools::getValue('id_vecmegamenu_item'));	
 			
 			$submenu_item->id_vecmegamenu_item = (int)Tools::getValue('id_vecmegamenu_item');
-			$submenu_item->submenu_width = (int)Tools::getValue('submenu_width');
+			$submenu_item->submenu_width = Tools::getValue('submenu_width');
 			$submenu_item->submenu_class = Tools::getValue('submenu_class');
 			$submenu_item->submenu_bg = Tools::getValue('submenu_bg');
 			$submenu_item->submenu_bg_color = Tools::getValue('submenu_bg_color');
@@ -292,6 +293,7 @@ class VecMegamenu extends Module
 			{
 				$submenu_item->update();
 				$this->generateCss();
+				$this->html .= $this->displayConfirmation($this->l('Your configuration is saved.'));
 			}
 			return $errors;
 		}
@@ -482,7 +484,7 @@ class VecMegamenu extends Module
 						        $sub_menu_infos[$key1]['title'] = 'HTML content';
 						        break;
 						    case 7: // manufacturer
-						        $sub_menu_infos[$key1]['title'] = 'Manufacturer logo - ID: '.(int)$sub_menu_info['id_manufacturer'];
+						        $sub_menu_infos[$key1]['title'] = 'Brand - ID: '.(int)$sub_menu_info['id_manufacturer'];
 						        $sub_menu_infos[$key1]['manufacturer_logo'] = $this->context->link->getManufacturerImageLink((int)$sub_menu_info['id_manufacturer']);
 						        $sub_menu_infos[$key1]['link'] = $this->context->link->getManufacturerLink((int)$sub_menu_info['id_manufacturer']);
 
@@ -684,7 +686,6 @@ class VecMegamenu extends Module
 
 	public function hookDisplayMegamenu()
 	{
-		$test = $this->generateCss();
 		$id_lang = (int)$this->context->language->id;
 		$id_shop = (int)Context::getContext()->shop->id;
 
@@ -791,6 +792,9 @@ class VecMegamenu extends Module
 				}
 				break;
 			case 'PAG':
+				if($key == 'homepage'){
+					$key = 'index';
+				}
 				$pag = Meta::getMetaByPage($key, $id_lang);
 				$link = $this->context->link->getPageLink($pag['page'], true, $id_lang);
 				if ($page_name == $pag['page']) $selected_item = true;
@@ -1130,16 +1134,20 @@ class VecMegamenu extends Module
 				}';
 			}
 		}
-		//Custom CSS
-		$css .= Configuration::get('vecmegamenu_css');
-
 		$css  = trim(preg_replace('/\s+/', ' ', $css));
 		if (Shop::getContext() == Shop::CONTEXT_SHOP)
 			$my_file = $this->local_path.'views/css/vecmegamenu_s_'.(int)$this->context->shop->getContextShopID().'.css';
 		
-		$fh = fopen($my_file, 'w') or die("can't open file");
-		fwrite($fh, $css);
-		fclose($fh);
+		if($css){ 
+			$fh = fopen($my_file, 'w') or die("can't open file");
+			fwrite($fh, $css);
+			fclose($fh);
+        }else{
+            if(file_exists($my_file)){
+                unlink($my_file);
+            }
+        } 
+		
 	}
 	public function convertTransform($value) {
 			switch($value) {

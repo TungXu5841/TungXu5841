@@ -40,7 +40,7 @@ class VecMegamenuSubmenuClass extends ObjectModel
 		'primary' => 'id_submenu',
 		'fields' => array(
 			'id_vecmegamenu_item' =>	array('type' => self::TYPE_INT, 'validate' => 'isunsignedInt', 'required' => true),
-			'submenu_width' =>	array('type' => self::TYPE_INT, 'validate' => 'isunsignedInt', 'size' => 255),
+			'submenu_width' =>	array('type' => self::TYPE_STRING, 'validate' => 'isString'),
 			'submenu_class' =>	array('type' => self::TYPE_STRING, 'validate' => 'isString', 'size' => 255),
 			'submenu_bg' =>	array('type' => self::TYPE_INT, 'validate' => 'isunsignedInt'),
 			'submenu_bg_color' =>	array('type' => self::TYPE_STRING, 'validate' => 'isString'),

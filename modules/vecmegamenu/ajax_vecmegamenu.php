@@ -28,7 +28,7 @@ include_once('../../config/config.inc.php');
 include_once('../../init.php');
 include_once('vecmegamenu.php');
 
-$home_menu = new Vec_Megamenu();
+$home_menu = new VecMegamenu();
 $menus = array();
 
 if (!Tools::isSubmit('secure_key') || Tools::getValue('secure_key') != $home_menu->secure_key || !Tools::getValue('action'))

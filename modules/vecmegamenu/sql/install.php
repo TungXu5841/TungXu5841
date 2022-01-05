@@ -66,7 +66,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'vecmegamenu_submenu` (
 	  `id_vecmegamenu_item` int(10) unsigned NOT NULL,
 	  `submenu_class` varchar(64) NULL,
 	  `active` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
-	  `submenu_width` tinyint(1) unsigned NULL,
+	  `submenu_width` varchar(64) NULL,
 	  `submenu_bg` varchar(64) NULL,
 	  `submenu_bg_color` varchar(64) NULL,
 	  `submenu_bg_image` varchar(255) NULL,

@@ -112,9 +112,6 @@ margin-top:10px; background: #fff;border-left: 3px solid #9ed0ec; padding-left: 
 	margin: 15px -15px;
 }
 
-
-
-
 .ar-blocked{
     position: relative;
 }
@@ -160,6 +157,14 @@ margin-top:10px; background: #fff;border-left: 3px solid #9ed0ec; padding-left: 
 }
 
 /* Menu config */
+.bootstrap .themevec-module .form-control,
+.bootstrap .themevec-module input[type="text"], 
+.bootstrap .themevec-module input[type="search"], 
+.bootstrap .themevec-module input[type="password"], 
+.bootstrap .themevec-module textarea, 
+.bootstrap .themevec-module select{
+	border-radius: 0;
+}
 #vecmegamenu-config .panel-content {
 	display: flex;
 }
@@ -247,4 +252,13 @@ margin-top:10px; background: #fff;border-left: 3px solid #9ed0ec; padding-left: 
 	border: solid 1px #ccc;
 	padding: 0 5px;
 	background: #f1f1f1;
+}
+
+#vecmegamenu-submenu a.btn {
+	padding: 6px 8px;
+	line-height: 1;
+}
+.submenu-settings input[type="text"],
+.submenu-settings .form-control {
+	border-radius: 0;
 }

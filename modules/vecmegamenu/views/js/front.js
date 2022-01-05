@@ -54,6 +54,7 @@ function vecInitHorizontalMegamenu() {
     var $list = $menuHorizontal.find('li.hasChild');
 
     $list.hover(function() {
+
         setOffset($(this))
     });
     var setOffset = function($li) {

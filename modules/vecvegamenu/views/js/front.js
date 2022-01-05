@@ -43,13 +43,13 @@ $(document).ready(function()
 		}	
 	});
 
-	vecInitHorizontalMegamenu(); 
+	vecInitHorizontalVegamenu(); 
 
 	$('#_desktop_megamenu img').parent('a').addClass("img_desktop"); 
 	$('#_mobile_megamenu img').parent('a').addClass("img_banner");
 });
 
-function vecInitHorizontalMegamenu() {
+function vecInitHorizontalVegamenu() {
     var $menuHorizontal = $('.vec-menu-vertical');
     var $list = $menuHorizontal.find('li.hasChild');
 

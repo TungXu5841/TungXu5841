@@ -119,6 +119,10 @@ themes/*/
 !themes/classic
 !themes/_core
 !themes/_libraries
+modules/vecmegamenu/views/css/vecmegamenu_s_1.css
+modules/vecvegamenu/views/css/vecvegamenu_s_1.css
+modules/posthemeoptions/views/css/posthemeoptions_s_1.css
+modules/creativeelements/views/css/ce/*
 
 # Vendors and dependencies
 

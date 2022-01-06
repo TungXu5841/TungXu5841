@@ -1,456 +1,285 @@
 <?php
-/**
- * Creative Elements - live PageBuilder
- *
- * @author    WebshopWorks
- * @copyright 2019-2021 WebshopWorks.com
- * @license   One domain support license
- */
 
 namespace CE;
 
 defined('_PS_VERSION_') or die;
 
-/**
- * Sing in widget
- *
- * @since 2.5.0
- */
-class WidgetSignIn extends WidgetBase
-{
-    use NavTrait;
+use Context;
 
-    /**
-     * Get widget name.
-     *
-     * @since 2.5.0
-     * @access public
-     *
-     * @return string Widget name.
-     */
-    public function getName()
+class WidgetSignIn extends WidgetBase { 
+
+	public function getName() 
     {
-        return 'sign-in';
-    }
-
-    /**
-     * Get widget title.
-     *
-     * @since 2.5.0
-     * @access public
-     *
-     * @return string Widget title.
-     */
-    public function getTitle()
+		return 'sign-in';
+	}
+	public function getTitle() 
     {
-        return __('Sign in');
-    }
+		return __('Sign in');
+	}
 
-    /**
-     * Get widget icon.
-     *
-     * @since 2.5.0
-     * @access public
-     *
-     * @return string Widget icon.
-     */
-    public function getIcon()
+	public function getIcon() 
     {
-        return 'eicon-lock-user';
-    }
+		return 'eicon-lock-user';
+	}
 
-    /**
-     * Get widget categories.
-     *
-     * @since 2.5.0
-     * @access public
-     *
-     * @return array Widget categories.
-     */
-    public function getCategories()
+	public function getCategories() 
     {
-        return ['theme-elements'];
-    }
+		return ['theme-elements'];
+	}
 
-    /**
-     * Get widget keywords.
-     *
-     * @since 2.5.0
-     * @access public
-     *
-     * @return array Widget keywords.
-     */
-    public function getKeywords()
-    {
-        return ['login', 'user', 'account', 'logout'];
-    }
+	protected function _registerControls() {
+		$this->startControlsSection(
+			'content_section',
+			[
+				'label' => __( 'Content' ),
+				'tab' => ControlsManager::TAB_CONTENT,
+			]
+		);
+			
+			$this->addControl(
+				'button_layout',
+				[
+					'label' => __( 'Button layout'),
+					'type' => ControlsManager::SELECT,
+					'default' => 'icon',
+					'options' => [
+						'icon' => __( 'Icon'),
+						'text' => __( 'Text'),
+						'icon_text' => __( 'Icon & Text'),
+					],
+					'prefix_class' => 'button-layout-'
+				]
+			);
+			$this->addControl(
+				'account_icon',
+				[
+					'label' => __( 'Account icon'),
+					'type' => ControlsManager::SELECT,
+					'default' => 'icon-rt-user',
+					'options' => [
+						'icon-rt-user' => __( 'Icon 1'),
+						'icon-rt-person-circle-outline' => __( 'Icon 2'),
+						'icon-rt-person-outline' => __( 'Icon 3')
+					],
+					'condition' => array(
+	                    'button_layout!' => 'text',
+	                ),
+				]	
+			);
+		$this->endControlsSection();
+		// Start for style
+		$this->startControlsSection(
+			'style_section',
+			[
+				'label' => __( 'Style' ),
+				'tab' => ControlsManager::TAB_STYLE,
+			]
+		);
+			$this->addControl(
+            	'icon_size',
+	            [
+	                'label' => __('Icon size'),
+	                'type' => ControlsManager::SLIDER,
+	                'default' => [
+	                    'size' => 14,
+	                ],
+	                'selectors' => [
+	                    '{{WRAPPER}} .pos-account i' => 'font-size: {{SIZE}}{{UNIT}}',
+	                ],
+	                'condition' => [
+	                    'button_layout!' => 'text' 
+	                ]
+	            ]
+	        );
+			$this->addGroupControl(
+				GroupControlTypography::getType(),
+				[
+					'name' 			=> 'text_typo',
+					'selector' 		=> '{{WRAPPER}} .pos-account > a',
+				]
+			);
+	        $this->startControlsTabs('tabs_button_style');
 
-    public function getLinkToOptions()
-    {
-        return [
-            'my-account' => __('My account'),
-            'identity' => __('Personal info'),
-            'address' => __('New Address'),
-            'addresses' => __('Addresses'),
-            'history' => __('Order history'),
-            'order-slip' => __('Credit slip'),
-            'discount' => __('My vouchers'),
-            'logout' => __('Sign out'),
-            'custom' => __('Custom URL'),
-        ];
-    }
+	        $this->startControlsTab(
+	            'tab_button_normal',
+	            array(
+	                'label' => __('Normal'),
+	            )
+	        );
 
-    /**
-     * Register sign in widget controls.
-     *
-     * Adds different input fields to allow the user to change and customize the widget settings.
-     *
-     * @since 2.5.0
-     * @access protected
-     */
-    protected function _registerControls()
-    {
-        $this->startControlsSection(
-            'section_selector',
-            [
-                'label' => $this->getTitle(),
-            ]
-        );
+	        $this->addControl(
+	            'button_text_color',
+	            array(
+	                'label' => __('Text Color'),
+	                'type' => ControlsManager::COLOR,
+	                'default' => '',
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a' => 'color: {{VALUE}};',
+	                )
+	            )
+	        );
 
-        $this->startControlsTabs('tabs_label_content');
+	        $this->addControl(
+	            'background_color',
+	            array(
+	                'label' => __('Background Color'),
+	                'type' => ControlsManager::COLOR,	                
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a' => 'background-color: {{VALUE}};',
+	                )
+	            )
+	        );
 
-        $this->startControlsTab(
-            'tab_label_sign_in',
-            [
-                'label' => __('Sign in'),
-            ]
-        );
+	        $this->endControlsTab();
 
-        $icon_options = [
-            'fa fa-user' => 'user',
-            'fa fa-user-o' => 'user-o',
-            'fa fa-user-circle' => 'user-circle',
-            'fa fa-user-circle-o' => 'user-circle-o',
-            'ceicon-user-simple' => 'user-simple',
-            'ceicon-user-minimal' => 'user-minimal',
-        ];
+	        $this->startControlsTab(
+	            'tab_button_hover',
+	            array(
+	                'label' => __('Hover'),
+	            )
+	        );
 
-        $this->addControl(
-            'icon',
-            [
-                'label' => __('Icon'),
-                'type' => ControlsManager::ICON,
-                'label_block' => false,
-                'default' => 'fa fa-user',
-                'options' => $icon_options,
-                'include' => array_keys($icon_options),
-            ]
-        );
+	        $this->addControl(
+	            'hover_color',
+	            array(
+	                'label' => __('Color'),
+	                'type' => ControlsManager::COLOR,
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a:hover' => 'color: {{VALUE}};',
+	                )
+	            )
+	        );
 
-        $this->addControl(
-            'label',
-            [
-                'label' => __('Label'),
-                'type' => ControlsManager::TEXT,
-                'default' => __('Sign in'),
-            ]
-        );
+	        $this->addControl(
+	            'button_background_hover_color',
+	            array(
+	                'label' => __('Background Color'),
+	                'type' => ControlsManager::COLOR,
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a:hover' => 'background-color: {{VALUE}};',
+	                )
+	            )
+	        );
 
-        $this->endControlsTab();
+	        $this->addControl(
+	            'button_hover_border_color',
+	            array(
+	                'label' => __('Border Color'),
+	                'type' => ControlsManager::COLOR,
+	                'condition' => array(
+	                    'border_border!' => '',
+	                ),
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a:hover' => 'border-color: {{VALUE}};',
+	                )
+	            )
+	        );
 
-        $this->startControlsTab(
-            'tab_label_signed_in',
-            [
-                'label' => __('Signed in'),
-            ]
-        );
+	        $this->endControlsTab();
 
-        $this->addControl(
-            'account',
-            [
-                'label' => __('Label'),
-                'label_block' => true,
-                'type' => ControlsManager::SELECT2,
-                'default' => ['icon', 'firstname'],
-                'multiple' => true,
-                'options' => [
-                    'icon' => __('Icon'),
-                    'before' => __('Before'),
-                    'firstname' => __('First Name'),
-                    'lastname' => __('Last Name'),
-                    'after' => __('After'),
-                ],
-            ]
-        );
+	        $this->endControlsTabs();
 
-        $this->addControl(
-            'before',
-            [
-                'label' => __('Before'),
-                'type' => ControlsManager::TEXT,
-                'conditions' => [
-                    'terms' => [
-                        [
-                            'name' => 'account',
-                            'operator' => 'contains',
-                            'value' => 'before',
-                        ],
-                    ],
-                ],
-            ]
-        );
+	        $this->addGroupControl(
+	            GroupControlBorder::getType(),
+	            array(
+	                'name' => 'border',
+	                'label' => __('Border'),
+	                'placeholder' => '1px',
+	                'default' => '1px',
+	                'selector' => '{{WRAPPER}} .pos-account > a'
+	            )
+	        );
 
-        $this->addControl(
-            'after',
-            [
-                'label' => __('After'),
-                'type' => ControlsManager::TEXT,
-                'conditions' => [
-                    'terms' => [
-                        [
-                            'name' => 'account',
-                            'operator' => 'contains',
-                            'value' => 'after',
-                        ],
-                    ],
-                ],
-            ]
-        );
+	        $this->addControl(
+	            'border_radius',
+	            array(
+	                'label' => __('Border Radius'),
+	                'type' => ControlsManager::DIMENSIONS,
+	                'size_units' => array('px', '%'),
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                ),
+	                'separator' => 'none'
+	            )
+	        );
+			$this->addControl(
+	            'padding',
+	            array(
+	                'label' => __('Padding'),
+	                'type' => ControlsManager::DIMENSIONS,
+	                'size_units' => array('px', 'em', '%'),
+	                'selectors' => array(
+	                    '{{WRAPPER}} .pos-account > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                ),
+	            )
+	        );
+	        $this->addGroupControl(
+	            GroupControlBoxShadow::getType(),
+	            array(
+	                'name' => 'button_box_shadow',
+	                'selector' => '{{WRAPPER}} .pos-account > a'
+	            )
+	        );
+		$this->endControlsSection();
+		$this->startControlsSection(
+			'dropdown_section',
+			[
+				'label' => __( 'Dropdown style' ),
+				'tab' => ControlsManager::TAB_STYLE,
+			]
+		);
+			$this->addControl(
+				'dropdown_position',
+				[
+					'label' => __( 'Dropdown Position'),
+					'type' => ControlsManager::SELECT,
+					'default' => 'left',
+					'options' => [
+						'left' => __( 'Left'),
+						'right' => __( 'Right'),
+					],
+					'prefix_class' => 'pos-dropdown-',
+				]
+			);
+			$this->addControl(
+            	'dropdown_width',
+	            [
+	                'label' => __('Dropdown width'),
+	                'type' => ControlsManager::SLIDER,
+	                'range' => [
+						'px' => [
+							'min' => 100,
+							'max' => 200, 
+						],
+					],
+					'default' => [
+						'size' => 130,
+						'unit' => 'px',
+					], 
+	                'selectors' => [
+	                    '{{WRAPPER}} .pos-account .pos-dropdown-menu' => 'width: {{SIZE}}{{UNIT}}',
+	                ],
+	            ]
+	        );
+		$this->endControlsSection();
+	}
 
-        $this->endControlsTab();
-
-        $this->endControlsTabs();
-
-        $this->registerNavContentControls();
-
-        $this->addControl(
-            'heading_usermenu',
-            [
-                'label' => __('Usermenu'),
-                'type' => ControlsManager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $repeater = new Repeater();
-
-        $repeater->addControl(
-            'link_to',
-            [
-                'label' => __('Link'),
-                'type' => ControlsManager::SELECT,
-                'default' => 'identity',
-                'options' => $this->getLinkToOptions(),
-            ]
-        );
-
-        $repeater->addControl(
-            'link',
-            [
-                'label_block' => true,
-                'type' => ControlsManager::URL,
-                'placeholder' => __('http://your-link.com'),
-                'classes' => 'ce-hide-link-options',
-                'condition' => [
-                    'link_to' => 'custom',
-                ],
-            ]
-        );
-
-        $repeater->addControl(
-            'text',
-            [
-                'label' => __('Text'),
-                'type' => ControlsManager::TEXT,
-            ]
-        );
-
-        $repeater->addControl(
-            'icon',
-            [
-                'label' => __('Icon'),
-                'type' => ControlsManager::ICON,
-                'label_block' => false,
-                'default' => 'fa fa-user',
-                'options' => $icon_options,
-            ]
-        );
-
-        $this->addControl(
-            'usermenu',
-            [
-                'type' => ControlsManager::REPEATER,
-                'fields' => $repeater->getControls(),
-                'default' => [
-                    [
-                        'link_to' => 'my-account',
-                        'icon' => 'fa fa-user-o',
-                    ],
-                    [
-                        'link_to' => 'addresses',
-                        'icon' => 'fa fa-address-book-o',
-                    ],
-                    [
-                        'link_to' => 'history',
-                        'icon' => 'fa fa-list',
-                    ],
-                    [
-                        'link_to' => 'logout',
-                        'icon' => 'fa fa-sign-out',
-                    ],
-                ],
-                'title_field' => '<i class="{{ icon }}"></i> {{{ text || ' .
-                    'elementor.panel.currentView.currentPageView.model.attributes.settings.controls.' .
-                    'usermenu.fields.link_to.options[link_to] }}}',
-            ]
-        );
-
-        $this->endControlsSection();
-
-        $this->registerNavStyleSection([
-            'show_icon' => true,
-            'active_condition' => [
-                'hide!' => '',
-            ],
-            'space_between_condition' => [
-                'hide!' => '',
-            ],
-        ]);
-
-        $this->registerDropdownStyleSection([
-            'active_condition' => [
-                'hide!' => '',
-            ],
-        ]);
-    }
-
-    public function getUrl(&$item)
-    {
-        if ('custom' === $item['link_to']) {
-            return $item['link']['url'];
-        }
-        if ('logout' === $item['link_to']) {
-            return $this->context->link->getPageLink('index', true, null, 'mylogout');
-        }
-        return $this->context->link->getPageLink($item['link_to'], true);
-    }
-
-    /**
-     * Render sing in widget output on the frontend.
-     *
-     * Written in PHP and used to generate the final HTML.
-     *
-     * @since 2.5.0
-     * @access protected
-     * @codingStandardsIgnoreStart Generic.Files.LineLength
-     */
-    protected function render()
-    {
-        if (is_admin()) {
+	/**
+	 * Render widget output on the frontend. 
+  
+	 */
+	protected function render() {
+		if (is_admin()){
             return print '<div class="ce-remote-render"></div>';
         }
-        $settings = $this->getActiveSettings();
-        $customer = $this->context->customer;
-        $this->indicator = $settings['indicator'];
 
-        if ($customer->isLogged()) {
-            $options = $this->getLinkToOptions();
-            $account = &$settings['account'];
-            $menu = [
-                '0' => [
-                    'id' => 0,
-                    'icon' => in_array('icon', $account) ? $settings['icon'] : '',
-                    'label' => call_user_func(function () use ($settings, $account, $customer) {
-                        $label = '';
-
-                        in_array('before', $account) && $label .= $settings['before'];
-                        in_array('firstname', $account) && $label .= " {$customer->firstname}";
-                        in_array('lastname', $account) && $label .= " {$customer->lastname}";
-                        in_array('after', $account) && $label .= $settings['after'];
-
-                        return trim($label);
-                    }),
-                    'url' => $this->context->link->getPageLink('my-account', true),
-                    'children' => [],
-                ]
-            ];
-            foreach ($settings['usermenu'] as $i => &$item) {
-                $menu[0]['children'][] = [
-                    'id' => $i + 1,
-                    'icon' => $item['icon'],
-                    'label' => $item['text'] ? $item['text'] : $options[$item['link_to']],
-                    'url' => $this->getUrl($item),
-                ];
-            }
-        } else {
-            $menu = [
-                '0' => [
-                    'id' => 0,
-                    'icon' => $settings['icon'],
-                    'label' => $settings['label'],
-                    'url' => $this->context->link->getPageLink('my-account', true),
-                    'children' => [],
-                ]
-            ];
+        if( \Module::isEnabled('veccustomersignin') ) {
+            $settings = $this->getSettings();
+            $icon = $settings['account_icon'];
+            $module = \Module::getInstanceByName( 'veccustomersignin' );
+            echo $module->renderWidget( null, [ 'icon' => $icon ] );
         }
-        $ul_class = 'elementor-nav';
-
-        // General Menu.
-        ob_start();
-        $this->accountList($menu, 0, $ul_class);
-        $menu_html = ob_get_clean();
-
-        $this->addRenderAttribute('main-menu', 'class', [
-            'elementor-sign-in',
-            'elementor-nav--main',
-            'elementor-nav__container',
-            'elementor-nav--layout-horizontal',
-        ]);
-
-        if ($settings['pointer']) {
-            $this->addRenderAttribute('main-menu', 'class', 'e--pointer-' . $settings['pointer']);
-
-            foreach ($settings as $key => $value) {
-                if (0 === stripos($key, 'animation') && $value) {
-                    $this->addRenderAttribute('main-menu', 'class', 'e--animation-' . $value);
-
-                    break;
-                }
-            }
-        }
-        ?>
-        <nav <?= $this->getRenderAttributeString('main-menu') ?>><?= $menu_html ?></nav>
-        <?php
-    }
-
-    protected function accountList(array &$nodes, $depth = 0, $ul_class = '')
-    {
-        ?>
-        <ul <?= $depth ? 'class="sub-menu elementor-nav--dropdown"' : 'id="usermenu-' . $this->getId() . '" class="' . $ul_class . '"' ?>>
-        <?php foreach ($nodes as &$node) : ?>
-            <li class="<?= sprintf(self::$li_class, 'account', "account-{$node['id']}", '', !empty($node['children']) ? ' menu-item-has-children' : '') ?>">
-                <a class="<?= $depth ? 'elementor-sub-item' : 'elementor-item' ?>" href="<?= esc_attr($node['url']) ?>">
-                <?php if ($node['icon']) : ?>
-                    <i class="<?= $node['icon'] ?>"></i>
-                <?php endif ?>
-                <?php if ($node['label']) : ?>
-                    <span><?= $node['label'] ?></span>
-                <?php endif ?>
-                <?php if ($this->indicator && !empty($node['children'])) : ?>
-                    <span class="sub-arrow <?= esc_attr($this->indicator) ?>"></span>
-                <?php endif ?>
-                </a>
-                <?php empty($node['children']) or $this->accountList($node['children'], $depth + 1) ?>
-            </li>
-        <?php endforeach ?>
-        </ul>
-        <?php
-    }
-
-    public function __construct($data = [], $args = [])
-    {
-        $this->context = \Context::getContext();
-
-        parent::__construct($data, $args);
-    }
+		
+	} 
+	
 }

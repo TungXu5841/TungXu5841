@@ -5,7 +5,7 @@ use PrestaShop\PrestaShop\Adapter\Product\PriceFormatter;
 use PrestaShop\PrestaShop\Core\Product\ProductListingPresenter;
 use PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever;
 
-class PosCompareComparePageModuleFrontController extends ModuleFrontController
+class VecCompareComparatorModuleFrontController extends ModuleFrontController
 {
     public function init()
     {
@@ -23,7 +23,7 @@ class PosCompareComparePageModuleFrontController extends ModuleFrontController
 
         $idLang = (int)$this->context->language->id;
         $idShop = (int)$this->context->shop->id;
-        $productsIds = $this->context->cookie->posCompare;
+        $productsIds = $this->context->cookie->vecCompare;
 
         if ($productsIds) {
             $productsIds = json_decode($productsIds, true);

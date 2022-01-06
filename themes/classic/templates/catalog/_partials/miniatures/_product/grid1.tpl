@@ -82,16 +82,7 @@
 					<li class="cart">
 						{include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
 					</li>
-					<li>
-						{hook h='displayProductListFunctionalButtons' product=$product}
-					</li>
-					{assign var='displayProductListCompare' value={hook h='displayProductListCompare'} }
-					{if $displayProductListCompare} 
-					<li class="compare">	
-						 <a href="#" class="poscompare-add compare-button js-poscompare-add"  data-id_product="{$product.id_product|intval}"   onclick="posCompare.addCompare($(this),{$product.id_product|intval},'{$product.name}','{$product.cover.bySize.home_default.url}'); return false;" title="{l s='Add to compare' d='Shop.Theme.Actions'}"><span>{l s='compare' d='Shop.Theme.Actions'}</span></a>
-					</li>
-					 {/if}
-					
+					{hook h='displayProductListFunctionalButtons' product=$product}
 				</ul>
 			</div>	
 			

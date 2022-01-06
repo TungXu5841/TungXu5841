@@ -1,5 +1,5 @@
 <?php
-class PosCompareActionsModuleFrontController extends ModuleFrontController
+class VecCompareActionsModuleFrontController extends ModuleFrontController
 {
 
     public $id_product;
@@ -34,20 +34,20 @@ class PosCompareActionsModuleFrontController extends ModuleFrontController
 
         $idProduct = (int)Tools::getValue('id');
 
-        $productsIds = $this->context->cookie->posCompare;
+        $productsIds = $this->context->cookie->vecCompare;
         $productsIds = json_decode($productsIds, true);
-
+        
         if (!isset($productsIds[$idProduct])) {
-            $productsIds[$idProduct] = $idProduct;
+            $productsIds[] = $idProduct;
             $productsIds = json_encode($productsIds, true);
 
-            $this->context->cookie->__set('posCompare', $productsIds);
-            $this->context->cookie->__set('posCompareNb', (int) $this->context->cookie->posCompareNb + 1);
+            $this->context->cookie->__set('vecCompare', $productsIds);
+            $this->context->cookie->__set('vecCompareNb', (int) $this->context->cookie->vecCompareNb + 1);
 
             $this->ajaxDie(json_encode(array(
                 'success' => true,
                 'data' => [
-                    'message' => $this->l('Product added to comparator'),
+                    'message' => $this->l('Product added to compare'),
                     'type' => 'added'
                 ]
             )));
@@ -63,7 +63,7 @@ class PosCompareActionsModuleFrontController extends ModuleFrontController
 
         $idProduct = (int)Tools::getValue('id');
 
-        $productsIds = $this->context->cookie->posCompare;
+        $productsIds = $this->context->cookie->vecCompare;
         $productsIds = json_decode($productsIds, true);
 
         if (isset($productsIds[$idProduct])) {
@@ -82,12 +82,12 @@ class PosCompareActionsModuleFrontController extends ModuleFrontController
         header('Content-Type: application/json');
 
         $idProduct = (int)Tools::getValue('id');
-        $productsIds = $this->context->cookie->posCompare;
+        $productsIds = $this->context->cookie->vecCompare;
         $productsIds = json_decode($productsIds, true);
         unset($productsIds[$idProduct]);
         $productsIds = json_encode($productsIds, true);
-        $this->context->cookie->__set('posCompare', $productsIds);
-        $this->context->cookie->__set('posCompareNb', (int) $this->context->cookie->posCompareNb - 1);
+        $this->context->cookie->__set('vecCompare', $productsIds);
+        $this->context->cookie->__set('vecCompareNb', (int) $this->context->cookie->vecCompareNb - 1);
 
         $this->ajaxDie(json_encode(array(
             'success' => true,
@@ -107,8 +107,8 @@ class PosCompareActionsModuleFrontController extends ModuleFrontController
 
         $productsIds = array();
         $productsIds = json_encode($productsIds, true);
-        $this->context->cookie->__set('posCompare', $productsIds);
-        $this->context->cookie->__set('posCompareNb', 0);
+        $this->context->cookie->__set('vecCompare', $productsIds);
+        $this->context->cookie->__set('vecCompareNb', 0);
 
         $this->ajaxDie(json_encode(array(
             'success' => true,

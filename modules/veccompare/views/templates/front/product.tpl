@@ -52,9 +52,9 @@
 			  {/if}
 			{/block}
 			<div class="cart">
-				{include file='catalog/_partials/customize/button-cart.tpl' product=$product}
+				{include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
 			</div>	
 		</div>			
 	</div>
-	<a href="#" class="js-veccompare-remove veccompare-remove" onclick="posCompare.removeCompare({$product.id_product|intval}); return false;">{l s='Remove' mod='veccompare'}</a>
+	<a href="#" class="js-veccompare-remove veccompare-remove" onclick="vecCompare.removeCompare({$product.id_product|intval}); return false;">{l s='Remove' mod='veccompare'}</a>
 </article>

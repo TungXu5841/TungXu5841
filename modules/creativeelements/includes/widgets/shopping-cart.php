@@ -24,7 +24,7 @@ class WidgetShoppingCart extends WidgetBase{
 		return 'shopping-cart';
 	}
 	public function getTitle() {
-		return $this->l( 'Shopping Cart' );
+		return __('Shopping Cart' );
 	}
 
 	public function getIcon() {
@@ -39,19 +39,19 @@ class WidgetShoppingCart extends WidgetBase{
 		$this->startControlsSection(
 			'content_section',
 			[
-				'label' => $this->l( 'Content' ),
+				'label' => __('Content' ),
 				'tab' => ControlsManager::TAB_CONTENT,
 			]
 		);
 			$this->addControl(
 				'button_layout',
 				[
-					'label' => $this->l( 'Button Layout'),
+					'label' => __('Button Layout'),
 					'type' => ControlsManager::SELECT,
 					'default' => 'icon',
 					'options' => [
-						'icon' => $this->l( 'Icon'),
-						'icon_text' => $this->l( 'Icon & Text'),
+						'icon' => __('Icon'),
+						'icon_text' => __('Icon & Text'),
 					],
 					'prefix_class' => 'button-layout-',
 				]
@@ -59,15 +59,15 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 				'cart_icon',
 				[
-					'label' => $this->l( 'Cart icon'),
+					'label' => __('Cart icon'),
 					'type' => ControlsManager::SELECT,
 					'default' => 'icon-rt-FullShoppingCart',
 					'options' => [
-						'icon-rt-cart-outline' => $this->l( 'Icon 1'),
-						'icon-rt-FullShoppingCart' => $this->l( 'Icon 2'),
-						'icon-rt-bag2' => $this->l( 'Icon 3'),
-						'icon-rt-shopping-cart' => $this->l( 'Icon 4'),
-						'icon-rt-basket-outline' => $this->l( 'Icon 5'),
+						'icon-rt-cart-outline' => __('Icon 1'),
+						'icon-rt-FullShoppingCart' => __('Icon 2'),
+						'icon-rt-bag2' => __('Icon 3'),
+						'icon-rt-shopping-cart' => __('Icon 4'),
+						'icon-rt-basket-outline' => __('Icon 5'),
 					],
 					'condition' => array(
 	                    'button_layout!' => 'text',
@@ -79,14 +79,14 @@ class WidgetShoppingCart extends WidgetBase{
 		$this->startControlsSection(
 			'style_section',
 			[
-				'label' => $this->l( 'Style' ),
+				'label' => __('Style' ),
 				'tab' => ControlsManager::TAB_STYLE,
 			]
 		);
 			$this->addControl(
             	'icon_size',
 	            [
-	                'label' => $this->l('Icon size'),
+	                'label' => __('Icon size'),
 	                'type' => ControlsManager::SLIDER,
 	                'default' => [
 	                    'size' => 28,
@@ -111,14 +111,14 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->startControlsTab(
 	            'tab_button_normal',
 	            array(
-	                'label' => $this->l('Normal'),
+	                'label' => __('Normal'),
 	            )
 	        );
 
 	        $this->addControl(
 	            'button_text_color',
 	            array(
-	                'label' => $this->l('Text Color'),
+	                'label' => __('Text Color'),
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
@@ -130,7 +130,7 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->addControl(
 	            'background_color',
 	            array(
-	                'label' => $this->l('Background Color'),
+	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
 	                    '{{WRAPPER}} .blockcart > a' => 'background-color: {{VALUE}};',
@@ -143,14 +143,14 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->startControlsTab(
 	            'tab_button_hover',
 	            array(
-	                'label' => $this->l('Hover'),
+	                'label' => __('Hover'),
 	            )
 	        );
 
 	        $this->addControl(
 	            'hover_color',
 	            array(
-	                'label' => $this->l('Color'),
+	                'label' => __('Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
 	                    '{{WRAPPER}} .blockcart > a:hover' => 'color: {{VALUE}};',
@@ -161,7 +161,7 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->addControl(
 	            'button_background_hover_color',
 	            array(
-	                'label' => $this->l('Background Color'),
+	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
 	                    '{{WRAPPER}} .blockcart > a:hover' => 'background-color: {{VALUE}};',
@@ -172,7 +172,7 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->addControl(
 	            'button_hover_border_color',
 	            array(
-	                'label' => $this->l('Border Color'),
+	                'label' => __('Border Color'),
 	                'type' => ControlsManager::COLOR,
 	                'condition' => array(
 	                    'border_border!' => '',
@@ -191,7 +191,7 @@ class WidgetShoppingCart extends WidgetBase{
 	            GroupControlBorder::getType(),
 	            array(
 	                'name' => 'border',
-	                'label' => $this->l('Border'),
+	                'label' => __('Border'),
 	                'placeholder' => '1px',
 	                'default' => '1px',
 	                'selector' => '{{WRAPPER}} .blockcart > a',
@@ -201,7 +201,7 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->addControl(
 	            'border_radius',
 	            array(
-	                'label' => $this->l('Border Radius'),
+	                'label' => __('Border Radius'),
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', '%'),
 	                'selectors' => array(
@@ -213,7 +213,7 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 	            'padding',
 	            array(
-	                'label' => $this->l('Padding'),
+	                'label' => __('Padding'),
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', 'em', '%'),
 	                'selectors' => array(
@@ -232,14 +232,14 @@ class WidgetShoppingCart extends WidgetBase{
 	        $this->addControl(
 	            'heading_cart_count',
 	            [
-	                'label' => $this->l('Count style'),
+	                'label' => __('Count style'),
 	                'type' => ControlsManager::HEADING,
 	            ]
 	        );
 	        $this->addControl(
 				'count_top',
 				[
-					'label' => $this->l( 'Count Position Top'),
+					'label' => __('Count Position Top'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -258,7 +258,7 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 				'count_right',
 				[
-					'label' => $this->l( 'Count Position Left'),
+					'label' => __('Count Position Left'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -277,7 +277,7 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 				'count_size',
 				[
-					'label' => $this->l( 'Count Size'),
+					'label' => __('Count Size'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -300,7 +300,7 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 				'count_font_size',
 				[
-					'label' => $this->l( 'Count Font Size'),
+					'label' => __('Count Font Size'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -319,7 +319,7 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 				'count_text_color',
 				[
-					'label' => $this->l( 'Count Text Color'),
+					'label' => __('Count Text Color'),
 					'type' => ControlsManager::COLOR,
 					'default' => '',
 					'selectors' => [
@@ -332,7 +332,7 @@ class WidgetShoppingCart extends WidgetBase{
 			$this->addControl(
 				'count_background_color',
 				[
-					'label' => $this->l( 'Count Background Color'),
+					'label' => __('Count Background Color'),
 					'type' => ControlsManager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}} .blockcart .cart-products-count' => 'background-color: {{VALUE}};',
@@ -361,17 +361,5 @@ class WidgetShoppingCart extends WidgetBase{
 			echo $module->renderWidget( null, [ 'icon' => $icon ] );
 		}
 	} 
-	/**
-     * Get translation for a given widget text
-     *
-     * @access protected
-     *
-     * @param string $string    String to translate
-     *
-     * @return string Translation
-     */
-    protected function l($string)
-    {
-        return translate($string, 'poselements', basename(__FILE__, '.php'));
-    }
+	
 }

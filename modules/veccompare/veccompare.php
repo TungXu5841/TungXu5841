@@ -19,7 +19,7 @@ class VecCompare extends Module implements WidgetInterface
         $this->need_instance = 0;
         $this->bootstrap = true;
         $this->tab = 'front_office_features';
-        $this->controllers = array('comparePage');
+        $this->controllers = array('comparator');
 
         parent::__construct();
         $this->displayName = $this->l('Vec - Compare');
@@ -36,10 +36,9 @@ class VecCompare extends Module implements WidgetInterface
         return (parent::install()
             && $this->setDefaults()
             && $this->registerHook('header')
-            && $this->registerHook('displayNav')
             && $this->registerHook('displayProductAdditionalInfo')
             && $this->registerHook('displayAfterButtonCart')
-            && $this->registerHook('displayProductListCompare')
+            && $this->registerHook('displayProductListFunctionalButtons')
         );
     }
 
@@ -65,12 +64,24 @@ class VecCompare extends Module implements WidgetInterface
         $this->context->controller->registerStylesheet('modules-poscompate-style', 'modules/'.$this->name.'/views/css/front.css', ['media' => 'all', 'priority' => 150]);
         $this->context->controller->registerJavascript('modules-veccompare-script', 'modules/'.$this->name.'/views/js/front.js', ['position' => 'bottom', 'priority' => 150]);
 
+        $useSSL = ((isset($this->ssl) && $this->ssl && Configuration::get('PS_SSL_ENABLED')) || Tools::usingSecureMode()) ? true : false;
+        $protocol_content = ($useSSL) ? 'https://' : 'http://';
+
+        $productsIds = $this->context->cookie->vecCompare;
+        
+        if($productsIds) {
+            $productsIds = json_decode($productsIds, true);
+        }else{
+            $productsIds = array();
+        }
+
         Media::addJsDef(array('veccompare' => [
-            'nbProducts' =>  (int) $this->context->cookie->posCompareNb,
-            'IdProducts' =>  json_decode($this->context->cookie->posCompare),
+            'nbProducts' =>  (int) $this->context->cookie->vecCompareNb,
+            'idProducts' =>  $productsIds,
             'success_text' => $this->l('Product added to compare.'),
-            'compare_url' => $this->context->link->getModuleLink('veccompare', 'comparePage'),
+            'compare_url' => $this->context->link->getModuleLink('veccompare', 'comparator'),
             'compare_text' => $this->l('View compare products'),
+            'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__
         ]));
     }
 
@@ -79,11 +90,12 @@ class VecCompare extends Module implements WidgetInterface
         if ($hookName == null && isset($configuration['hook'])) {
             $hookName = $configuration['hook'];
         }
+
         $templateFile = 'compare_top.tpl';
-        if (preg_match('/^displayNav\d*$/', $hookName)) {
-            $templateFile = 'compare_top.tpl';
-        } elseif (preg_match('/^displayProductAdditionalInfo\d*$/', $hookName) || preg_match('/^displayAfterButtonCart\d*$/', $hookName)) { 
-            $templateFile = 'product-page.tpl';
+        if (preg_match('/^displayProductAdditionalInfo\d*$/', $hookName) || preg_match('/^displayAfterButtonCart\d*$/', $hookName)) { 
+            $templateFile = 'btn-product-page.tpl';
+        }elseif(preg_match('/^displayProductListFunctionalButtons\d*$/', $hookName)){
+            $templateFile = 'btn-product-miniature.tpl';
         }
         $assign = $this->getWidgetVariables($hookName, $configuration);
         $this->smarty->assign($assign);
@@ -95,27 +107,11 @@ class VecCompare extends Module implements WidgetInterface
         if ($hookName == null && isset($configuration['hook'])) {
             $hookName = $configuration['hook'];
         }
-
-        $useSSL = ((isset($this->ssl) && $this->ssl && Configuration::get('PS_SSL_ENABLED')) || Tools::usingSecureMode()) ? true : false;
-        $protocol_content = ($useSSL) ? 'https://' : 'http://';
-
-        if (preg_match('/^displayProductListCompare\d*$/', $hookName)) {
-            return array(
-                'id_product' => $configuration['smarty']->tpl_vars['product']->value['id_product'],
-				'content_dir'=> $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
-            );
-        }
-        if (preg_match('/^displayNav2\d*$/', $hookName) || preg_match('/^displayNav\d*$/', $hookName) || preg_match('/^displayTop\d*$/', $hookName)) {
-            return array(
-                'content_dir'=> $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
-                'icon' => isset($configuration['icon']) ? $configuration['icon'] : '',
-            );
-        }else{
-            return array(
-                'content_dir'=> $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
-                'icon' => isset($configuration['icon']) ? $configuration['icon'] : '',
-            );
-        }
+        return array(
+            'id_product' => $configuration['smarty']->tpl_vars['product']->value['id_product'],
+            'name' => $configuration['smarty']->tpl_vars['product']->value['name'],
+            'image' => $configuration['smarty']->tpl_vars['product']->value['cover']['bySize']['home_default']['url'],
+        );
     }
 
     public function getFeaturesForComparison($idsArray, $idLang)

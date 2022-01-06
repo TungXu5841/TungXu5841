@@ -1,8 +1,8 @@
-var posCompare = {
+var vecCompare = {
     addCompare: function(obj, id, product_name, product_image){
         $.ajax({
             type: 'POST',
-            url: baseDir + 'module/veccompare/actions',
+            url: veccompare.baseDir + 'module/veccompare/actions',
             dataType: 'json',
             data: {
                 action : 'add',
@@ -30,6 +30,7 @@ var posCompare = {
                 $('#compareModal').on('hidden.bs.modal', function () {
                     $('#compareModal').remove();
                 });
+                obj.addClass('cmp_added');
             },
             error: function (jqXHR, status, err) {
                  obj.addClass('cmp_added');
@@ -37,10 +38,10 @@ var posCompare = {
         })
     },
     removeCompare: function(id){
-        posCompare.blockUI('#veccompare-table');
+        vecCompare.blockUI('#veccompare-table');
         $.ajax({
             type: 'POST',
-            url: baseDir + 'module/veccompare/actions',
+            url: veccompare.baseDir + 'module/veccompare/actions',
             dataType: 'json',
             data: {
                 action : 'remove',
@@ -58,15 +59,15 @@ var posCompare = {
                     $('#veccompare-table').remove();
                     $('#veccompare-warning').removeClass('hidden-xs-up');
                 }
-                posCompare.unblockUI('#veccompare-table');
+                vecCompare.unblockUI('#veccompare-table');
             }
         })
     },
     removeAllCompare: function(){
-        posCompare.blockUI('#content');
+        vecCompare.blockUI('#content');
         $.ajax({
             type: 'POST',
-            url: baseDir + 'module/veccompare/actions',
+            url: veccompare.baseDir + 'module/veccompare/actions',
             dataType: 'json',
             data: {
                 action : 'removeAll',
@@ -78,16 +79,16 @@ var posCompare = {
                 $('#veccompare-nb, #qmcompare-count').text(0);
                 $('#veccompare-table').remove();
                 $('#veccompare-warning').removeClass('hidden-xs-up');
-                posCompare.unblockUI('#content');
+                vecCompare.unblockUI('#content');
             }
         })
     },
 
     checkCompare : function (){
-        var target = $('.compare .veccompare-add');
-        var compareList = veccompare.IdProducts;
+        var target = $('.veccompare-add');
+        var compareList = veccompare.idProducts;
         target.each(function(){
-            var $id = $(this).data('id_product');
+            var $id = $(this).data('id-product');
             var flag = false;
             $.each( compareList, function( key, value ) {
               if($id == value) {
@@ -111,16 +112,20 @@ var posCompare = {
 };
 
 $(document).ready(function () { 
+    vecCompare.checkCompare();
+    
     $('#veccompare-nb, #qmcompare-count').text(veccompare.nbProducts);
-    $('.cmp_added').css('background-color','red');
-    posCompare.checkCompare();
     $('body').on('click', '.js-veccompare-remove-all', function (event) {
-        posCompare.removeAllCompare();
+        vecCompare.removeAllCompare();
         event.preventDefault();
     });
-     $(".compare .veccompare-add").click(function(e) {
+    $(".veccompare-add").click(function(e) {
         e.preventDefault();
-        $(this).addClass('cmp_added');
+        var id = $(this).data('id-product'),
+            product_name = $(this).data('product-name'),
+            product_image = $(this).data('product-image');
+        vecCompare.addCompare($(this), id, product_name, product_image);
     }); 
+    
 });
 

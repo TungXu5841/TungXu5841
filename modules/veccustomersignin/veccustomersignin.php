@@ -54,13 +54,20 @@ class VecCustomerSignIn extends Module implements WidgetInterface
 
     public function install()
     {
+        Configuration::updateValue('VEC_CUSTOMER_SIGNIN_AJAX', 1);
+        Configuration::updateValue('VEC_CUSTOMER_SIGNIN_REDIRECT', 1);
         return parent::install() 
         && $this->registerHook('header')
         && $this->registerHook('displayBeforeBodyClosingTag');
     }
 
-    public function initContent(){
+    public function uninstall()
+    {
+        // Configuration
+        Configuration::deleteByName('VEC_CUSTOMER_SIGNIN_AJAX');
+        Configuration::deleteByName('VEC_CUSTOMER_SIGNIN_REDIRECT');
 
+        return parent::uninstall(); 
     }
 
     public function getWidgetVariables($hookName, array $configuration)
@@ -80,19 +87,10 @@ class VecCustomerSignIn extends Module implements WidgetInterface
             $customerName = '';
         }
 
-        $link = $this->context->link;
-
         return [
             'logged' => $logged,
             'customerName' => $customerName,
-            /*
-            * @deprecated
-            */
-            'logout_url' => $link->getPageLink('index', true, null, 'mylogout'),
-            /*
-            * @deprecated
-            */
-            'my_account_url' => $link->getPageLink('my-account', true),
+            'icon' => isset($configuration['icon']) ? $configuration['icon'] : '',
         ];
     }
 
@@ -105,13 +103,18 @@ class VecCustomerSignIn extends Module implements WidgetInterface
 
     public function hookHeader()
     {
+        if(! Configuration::get('VEC_CUSTOMER_SIGNIN_AJAX')) return;
+
         $this->context->controller->registerJavascript('modules-veccustomersignin', 'modules/' . $this->name . '/js/customersignin.js', ['position' => 'bottom', 'priority' => 150]);
         Media::addJsDef(array(
-            'customersignin_ajax_url' => $this->context->link->getModuleLink('veccustomersignin', 'customersignin'),
-            'customersignin_redirect' => Configuration::get('VEC_CUSTOMER_SIGNIN_REDIRECT'),
+            'csi_ajax_url' => $this->context->link->getModuleLink('veccustomersignin', 'customersignin'),
+            'csi_redirect' => Configuration::get('VEC_CUSTOMER_SIGNIN_REDIRECT'),
+            'csi_myaccount_url' => $this->context->link->getPageLink('my-account', true),
         ));
     }
     public function hookDisplayBeforeBodyClosingTag(){
+        if(! Configuration::get('VEC_CUSTOMER_SIGNIN_AJAX')) return;
+
         $output = $this->fetch('module:veccustomersignin/modal.tpl');
 
         return $output;
@@ -120,6 +123,7 @@ class VecCustomerSignIn extends Module implements WidgetInterface
     {
         $output = '';
         if (Tools::isSubmit('submitVecCustomerSignin')) {
+            Configuration::updateValue('VEC_CUSTOMER_SIGNIN_AJAX', Tools::getValue('VEC_CUSTOMER_SIGNIN_AJAX'));
             Configuration::updateValue('VEC_CUSTOMER_SIGNIN_REDIRECT', Tools::getValue('VEC_CUSTOMER_SIGNIN_REDIRECT'));
         }
 
@@ -135,6 +139,25 @@ class VecCustomerSignIn extends Module implements WidgetInterface
                     'icon' => 'icon-cogs',
                 ),
                 'input' => array(
+                    array(
+                        'type' => 'switch',
+                        'label' => $this->l('Ajax login'),
+                        'name' => 'VEC_CUSTOMER_SIGNIN_AJAX',
+                        'is_bool' => true,
+                        'desc' => $this->l('Activate Ajax mode for login.'),
+                        'values' => array(
+                            array(
+                                'id' => 'active_on',
+                                'value' => 1,
+                                'label' => $this->l('Enabled'),
+                            ),
+                            array(
+                                'id' => 'active_off',
+                                'value' => 0,
+                                'label' => $this->l('Disabled'),
+                            ),
+                        ),
+                    ),
                     array(
                         'type' => 'select',
                         'label' => $this->l('Redirect after login'),
@@ -180,6 +203,7 @@ class VecCustomerSignIn extends Module implements WidgetInterface
     public function getConfigFieldsValues()
     {
         return array(
+            'VEC_CUSTOMER_SIGNIN_AJAX' => Tools::getValue('VEC_CUSTOMER_SIGNIN_AJAX', Configuration::get('VEC_CUSTOMER_SIGNIN_AJAX')),
             'VEC_CUSTOMER_SIGNIN_REDIRECT' => Tools::getValue('VEC_CUSTOMER_SIGNIN_REDIRECT', Configuration::get('VEC_CUSTOMER_SIGNIN_REDIRECT')),
         );
     }

@@ -24,9 +24,33 @@
  *}
 <div class="vec-customersignin">
   {if $logged}
-    <a class="logout"  href="{$urls.actions.logout}" rel="nofollow" title="{l s='Log me out' d='Shop.Theme.Customeraccount'}">{l s='Sign out' d='Shop.Theme.Actions'}</a>
-    <a class="account" href="{$urls.pages.my_account}" title="{l s='View my customer account' d='Shop.Theme.Customeraccount'}" rel="nofollow"><span>{$customerName}</span></a>
+  	<div class="currency-selector localiz_block dropdown js-dropdown">
+		<button data-target="#" data-toggle="dropdown" class="btn-unstyle hidden-md-down">
+			{if $icon}<i class="{$icon}"></i>{/if}
+		  	<span class="expand-more">{l s='My account' d='Shop.Theme.Customeraccount'}</span>
+		</button>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{$customerName}</a>
+			</li>
+			<li>
+				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' d='Shop.Theme.Customeraccount'}</a>
+			</li>
+			<li>
+				<a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' d='Shop.Theme.Customeraccount'}</a>
+			</li>
+			<li>
+				<a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' d='Shop.Theme.Customeraccount'}</a>
+			</li>
+			<li>
+				<a class="logout dropdown-item" href="{$urls.actions.logout}" rel="nofollow">
+					{l s='Sign out' d='Shop.Theme.Actions'}
+				</a>
+			</li>
+		</ul>
+	</div>
   {else}
+  	{if $icon}<i class="{$icon}"></i>{/if}
     <a class="login" href="{$urls.pages.my_account}" rel="nofollow" title="{l s='Log in to your customer account' d='Shop.Theme.Customeraccount'}">{l s='Sign in' d='Shop.Theme.Actions'}</a>
   {/if}
 </div>

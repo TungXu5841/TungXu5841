@@ -12,7 +12,7 @@ var vecCustomerSignin = {
 		$.ajax({
 			type: 'POST',
 			headers: {"cache-control": "no-cache"},
-			url: customersignin_ajax_url,
+			url: csi_ajax_url,
 			async: true,
 			cache: false,
 			data: {
@@ -23,7 +23,7 @@ var vecCustomerSignin = {
 			},
 			success: function (result)
 			{
-				loginForm.find('.vec-form-msg').empty();
+				loginForm.find('.vec-form-msg').removeClass('has-danger').empty();
 
 				var object_result = $.parseJSON(result);
 
@@ -40,9 +40,9 @@ var vecCustomerSignin = {
 					loginForm.find('.lql-form-content-element').slideUp(function(){
 						$(this).remove();
 					});
-					if (customersignin_redirect == '2')
+					if (csi_redirect == '2')
 					{
-						window.location.replace(lql_myaccount_url);
+						window.location.replace(csi_myaccount_url);
 					}
 					else
 					{
@@ -61,7 +61,7 @@ var vecCustomerSignin = {
 		$.ajax({
 			type: 'POST',
 			headers: {"cache-control": "no-cache"},
-			url: customersignin_ajax_url,
+			url: csi_ajax_url,
 			async: true,
 			cache: false,
 			data: {
@@ -71,7 +71,7 @@ var vecCustomerSignin = {
 			},
 			success: function (result)
 			{
-				loginForm.find('.vec-form-msg').empty();
+				loginForm.find('.vec-form-msg').removeClass('has-danger').empty();
 				var object_result = $.parseJSON(result);
 				
 				if (object_result.errors.length)
@@ -83,7 +83,6 @@ var vecCustomerSignin = {
 				}
 				else
 				{
-					console.log('12312');
 					loginForm.find('.vec-form-msg').addClass('has-success').append('<label class="form-control-label">'+object_result.success[0]+'<strong>'+ email +'</strong></label>');
 				}											
 			},

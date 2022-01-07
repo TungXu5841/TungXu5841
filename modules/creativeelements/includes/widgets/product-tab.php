@@ -14,6 +14,7 @@ defined('_PS_VERSION_') or die;
 
 class WidgetProductTab extends WidgetProductBase
 {
+	use CarouselTrait;
 	public function getName() {
 		return 'product-tab';
 	}
@@ -29,6 +30,7 @@ class WidgetProductTab extends WidgetProductBase
     }
  
 	protected function _registerControls() {
+
 		$this->startControlsSection(
 			'tab_products_section',
 			[
@@ -503,6 +505,12 @@ class WidgetProductTab extends WidgetProductBase
 			);
 			
 		$this->endControlsSection();
+		$this->registerCarouselSection([
+            'default_slides_desktop' => 4,
+            'default_slides_tablet' => 3,
+            'default_slides_mobile' => 2,
+        ]);
+        $this->registerNavigationStyleSection();
 	}
 	protected function render() {
 		if (is_admin()){
@@ -512,67 +520,62 @@ class WidgetProductTab extends WidgetProductBase
             return;
         }
 		$settings = $this->getSettingsForDisplay();
+		//echo '<pre>'; print_r($settings); echo '</pre>'; die('x_x');
+		$tpl = "catalog/_partials/miniatures/product.tpl";
 
-		// if($settings['enable_slider']){
-		// 	$this->context->smarty->assign(
-		// 		array(
-		// 			'slick_options' => json_encode($slick_options) ,
-		// 			'slick_responsive' => json_encode($slick_responsive),
-		// 		)
-		// 	);
-		// }else{
-		// 	$context->smarty->assign(
-		// 		array(
-		// 			'columns_desktop' => ($settings['columns']['size'] == 5) ? '2-4' : (12/$settings['columns']['size']),
-		// 			'columns_tablet' => ($settings['columns_tablet']['size'] == 5) ? '2-4' : (12/$settings['columns_tablet']['size']),
-		// 			'columns_mobile' => ($settings['columns_mobile']['size'] == 5) ? '2-4' : (12/$settings['columns_mobile']['size']),
-		// 		)
-		// 	);
-		// }
+        if (!file_exists(_PS_THEME_DIR_ . "templates/$tpl") &&
+            !file_exists(_PS_ALL_THEMES_DIR_ . "{$this->parentTheme}/templates/$tpl")
+        ) {
+            return;
+        }
 
-		// $tab_titles = array();
-		// $tab_contents = array();
+		?>
+		<div class="product-tabs-widget">
+			<div class="tab-title-wrapper">
+				<ul>
+					<?php foreach ( $settings['tabs'] as $index => $tab ) : ?>
+						<li>
+							<a href="#<?= $tab['_id'] ?>" class="nav-link"><?= $tab['tab_title'] ?></a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+			<div class="tab-content-wrapper">
+				<?php foreach ( $settings['tabs'] as $index => $tab ) :
+					if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
+			            $tab['order_by'] = 'rand';
+			        }
 
-		// foreach ( $settings['tab_list'] as $index => $tab ){
-		// 	$tab_titles[] = array(
-		// 		'id' => $tab['_id'],
-		// 		'title' => $tab['tab_title']
-		// 	);
+			        $products = $this->getProducts(
+			            $tab['listing'],
+			            $tab['order_by'],
+			            $tab['order_dir'],
+			            $tab['limit'],
+			            $tab['category_id'],
+			            $tab['products']
+			        );
+					?>
+					<div class="tab-pane" id="<?= $tab['_id'] ?>">
+						<div class="">
+							<?php 
+								// Store product temporary if exists
+						        isset($this->context->smarty->tpl_vars['product']) && $tmp = $this->context->smarty->tpl_vars['product'];
 
-		// 	if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
-	 //            $tab['order_by'] = 'rand';
-	 //        }
+						        foreach ($products as &$product) {
+						            $this->context->smarty->assign('product', $product);
+						            $slides[] = '<div class="slick-slide-inner">' . $this->context->smarty->fetch($tpl) . '</div>';
+						        }
+						        // Restore product if exists
+						        isset($tmp) && $this->context->smarty->tpl_vars['product'] = $tmp;
 
-	 //        $products = $this->getProducts(
-	 //            $tab['listing'],
-	 //            $tab['order_by'],
-	 //            $tab['order_dir'],
-	 //            $tab['limit'],
-	 //            $tab['category_id'],
-	 //            $tab['products']
-	 //        );
-		// 	$tab_contents[] = array(
-		// 		'id' => $tab['_id'],
-		// 		'products' => $products,
-		// 	);
-		// }
-
-		// $this->context->smarty->assign(
-		// 	array(
-		// 		'tab_titles'         => $tab_titles,
-		// 		'tab_contents'       => $tab_contents,
-		// 		'elementprefix'       => 'single-product',
-		// 		'theme_template_path' => $display,
-		// 		'carousel_active' => $settings['enable_slider'],
-		// 		'name_length' => $name_length ,
-		// 	)
-		// );
-		
-		// $template_file_name = _PS_MODULE_DIR_ . 'poselements/views/templates/front/producttabs.tpl';
-		
-		// $out_put .= $context->smarty->fetch( $template_file_name );
-
-		// echo $out_put;
+						        $this->renderCarousel($settings, $slides);
+							?>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+		<?php
 	}
 
 }

@@ -30,6 +30,9 @@ trait CarouselTrait
             'section_additional_options',
             [
                 'label' => __('Carousel'),
+                'condition' => [
+                    'enable_slider' => 'yes'
+                ]
             ]
         );
 

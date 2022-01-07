@@ -82,6 +82,7 @@ class WidgetsManager
             'product-grid',
             'product-carousel',
             'product-box',
+            'product-tab',
             'layer-slider',
             'call-to-action',
             'flip-box',

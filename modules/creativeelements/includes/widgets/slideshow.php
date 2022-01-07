@@ -691,7 +691,7 @@ class WidgetSlideshow extends WidgetBase {
 				<?php foreach (  $settings['slideshow_list'] as $item ) :
 					$image = Tools::safeOutput(Helper::getMediaLink($item['slideshow_image']['url']));
 
-					$this->addRenderAttribute('class_item', 'class', ['slideshow-item','elementor-repeater-item-' . $item['_id']]); ?>
+					$this->addRenderAttribute('class-item', 'class', ['slideshow-item','elementor-repeater-item-' . $item['_id']]); ?>
 					<div <?php echo $this->getRenderAttributeString('class-item'); ?>>
 
 						<div class="slider-item" style="background:url(<?= $image ?>);background-size: cover; background-position: center;">

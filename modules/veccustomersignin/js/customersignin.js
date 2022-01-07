@@ -84,6 +84,8 @@ var vecCustomerSignin = {
 				else
 				{
 					loginForm.find('.vec-form-msg').addClass('has-success').append('<label class="form-control-label">'+object_result.success[0]+'<strong>'+ email +'</strong></label>');
+					loginForm.find('.form-group').hide();
+					loginForm.find('.back-login-btn').show();
 				}											
 			},
 			error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -109,5 +111,10 @@ $(document).ready(function(){
 	$('.vec-reset-btn').on('click', function(e){
 		e.preventDefault();
 		vecCustomerSignin.resetPassword();
+	})
+	$('.back-login-btn').on('click', function(e){
+		e.preventDefault();
+		$('.vec-login-form').show();
+		$('.vec-resetpass-form').hide();
 	})
 })

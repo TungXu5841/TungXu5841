@@ -79,7 +79,9 @@ class WidgetProductCarousel extends WidgetProductBase
         $this->endControlsSection();
 
         $this->registerCarouselSection([
-            'default_slides_count' => 4,
+            'default_slides_desktop' => 4,
+            'default_slides_tablet' => 3,
+            'default_slides_mobile' => 2,
         ]);
 
         $this->registerNavigationStyleSection();

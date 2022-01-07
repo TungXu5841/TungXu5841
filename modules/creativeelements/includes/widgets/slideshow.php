@@ -25,7 +25,7 @@ class WidgetSlideshow extends WidgetBase {
 	
 	protected function _registerControls() {
 		$animations = array(
-			'' => $this->l('Default' ), 
+			'' => __('Default' ), 
 			'bounceIn' => 'bounceIn',
 			'bounceInDown' => 'bounceInDown',
 			'bounceInLeft' => 'bounceInLeft',
@@ -55,14 +55,14 @@ class WidgetSlideshow extends WidgetBase {
 		$this->startControlsSection(
 			'content_section',
 			[
-				'label' => $this->l( 'Content'),
+				'label' => __('Content'),
 				'tab' => ControlsManager::TAB_CONTENT,
 			]
 		);
 			$this->addResponsiveControl( 
 				'height_slideshow',
 				[
-					'label' => $this->l( 'Height slideshow' ),
+					'label' => __('Height slideshow' ),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -76,7 +76,7 @@ class WidgetSlideshow extends WidgetBase {
 						'size' => 500,
 					],
 					'selectors' => [
-						'{{WRAPPER}} .pos-slideshow .slider-item' => 'height: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .elementor-slideshow .slider-item' => 'height: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -90,7 +90,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'slideshow_image', 
 					[
-						'label' => $this->l('Add Image'),
+						'label' => __('Add Image'),
 	                    'type' => ControlsManager::MEDIA,
 	                    'seo' => 'true',
 	                    'default' => [
@@ -110,7 +110,7 @@ class WidgetSlideshow extends WidgetBase {
 	                        ],
 	                    ],
 	                    'selectors' => [
-	                        '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner' => 'left: {{SIZE}}{{UNIT}};',
+	                        '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner' => 'left: {{SIZE}}%;',
 	                    ],
 					]
 				);
@@ -126,7 +126,7 @@ class WidgetSlideshow extends WidgetBase {
 	                        ],
 	                    ],
 	                    'selectors' => [ 
-	                        '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner' => 'top: {{SIZE}}{{UNIT}}',
+	                        '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner' => 'top: {{SIZE}}%',
 	                    ],
 					]
 				);
@@ -173,9 +173,9 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'link', 
 					[
-	                    'label' => $this->l('Link'),
+	                    'label' => __('Link'),
 	                    'type' => ControlsManager::URL,
-	                    'placeholder' => $this->l('https://your-link.com'),
+	                    'placeholder' => __('https://your-link.com'),
 					]
 				);
 			$repeater->endControlsTab();
@@ -187,24 +187,24 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addResponsiveControl(
 					'alignment', 
 					[
-						'label' => $this->l('Alignment', 'elementor'),
+						'label' => __('Alignment', 'elementor'),
 		                'type' => ControlsManager::CHOOSE,
 		                'options' => array(
 		                    'left' => array(
-		                        'title' => $this->l('Left', 'elementor'),
+		                        'title' => __('Left', 'elementor'),
 		                        'icon' => 'fa fa-align-left',
 		                    ),
 		                    'center' => array(
-		                        'title' => $this->l('Center', 'elementor'),
+		                        'title' => __('Center', 'elementor'),
 		                        'icon' => 'fa fa-align-center',
 		                    ),
 		                    'right' => array(
-		                        'title' => $this->l('Right', 'elementor'),
+		                        'title' => __('Right', 'elementor'),
 		                        'icon' => 'fa fa-align-right',
 		                    ),
 		                ),
 		                'selectors' => array(
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner' => 'text-align: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner' => 'text-align: {{VALUE}};',
 		                ),
 		                'separator' => 'after'
 					]
@@ -213,7 +213,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'heading1', 
 					[
-	                	'label' => $this->l('Title 1'),
+	                	'label' => __('Title 1'),
 	                	'type' => ControlsManager::HEADING,
 	                	'separator' => 'before'
 					]
@@ -221,10 +221,10 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'title1_color', 
 					[
-		            	'label' => $this->l('Color'),
+		            	'label' => __('Color'),
 		                'type' => ControlsManager::COLOR,
 		                'selectors' => [
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title1' => 'color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title1' => 'color: {{VALUE}};',
 		                ],
 					]
 				);
@@ -232,7 +232,7 @@ class WidgetSlideshow extends WidgetBase {
 					GroupControlTypography::getType(),
 					[
 						'name' => 'title1_typography',
-						'selector' => '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title1',
+						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title1',
 						'separator' => 'none',
 					]
 				);
@@ -240,7 +240,7 @@ class WidgetSlideshow extends WidgetBase {
 	        	$repeater->addResponsiveControl(
 	            	'title1_space',
 	    			[
-	                    'label' => $this->l('Space'),
+	                    'label' => __('Space'),
 	                    'type' => ControlsManager::SLIDER,
 	                    'default' => [
 	                        'size' => 10,
@@ -253,7 +253,7 @@ class WidgetSlideshow extends WidgetBase {
 	                        ],
 	                    ],
 	                    'selectors' => [
-	                        '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title1' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+	                        '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title1' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 	                    ],
 	                    'separator' => 'none',
 	                ]
@@ -261,7 +261,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'title1_animation', 
 					[
-	                	'label' => $this->l('Animation'),
+	                	'label' => __('Animation'),
 		                'type' => ControlsManager::ANIMATION,
 		                'separator' => 'after'
 					]
@@ -270,7 +270,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'heading2', 
 					[
-	                	'label' => $this->l('Title 2'),
+	                	'label' => __('Title 2'),
 	                	'type' => ControlsManager::HEADING,
 	                	'separator' => 'before'
 					]
@@ -278,10 +278,10 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'title2_color', 
 					[
-		            	'label' => $this->l('Color'),
+		            	'label' => __('Color'),
 		                'type' => ControlsManager::COLOR,
 		                'selectors' => [
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title2' => 'color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title2' => 'color: {{VALUE}};',
 		                ],
 					]
 				);
@@ -289,7 +289,7 @@ class WidgetSlideshow extends WidgetBase {
 					GroupControlTypography::getType(),
 					[
 						'name' => 'title2_typography',
-						'selector' => '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title2',
+						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title2',
 						'separator' => 'none',
 					]
 				);
@@ -297,7 +297,7 @@ class WidgetSlideshow extends WidgetBase {
 	        	$repeater->addResponsiveControl(
 	            	'title2_space',
 	    			[
-	                    'label' => $this->l('Space'),
+	                    'label' => __('Space'),
 	                    'type' => ControlsManager::SLIDER,
 	                    'default' => [
 	                        'size' => 10,
@@ -310,7 +310,7 @@ class WidgetSlideshow extends WidgetBase {
 	                        ],
 	                    ],
 	                    'selectors' => [
-	                        '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title2' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+	                        '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title2' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 	                    ],
 	                    'separator' => 'none',
 	                ]
@@ -318,7 +318,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'title2_animation', 
 					[
-	                	'label' => $this->l('Animation'),
+	                	'label' => __('Animation'),
 		                'type' => ControlsManager::ANIMATION,
 		                'separator' => 'after'
 					]
@@ -327,7 +327,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'heading3', 
 					[
-	                	'label' => $this->l('Title 3'),
+	                	'label' => __('Title 3'),
 	                	'type' => ControlsManager::HEADING,
 	                	'separator' => 'before'
 					]
@@ -335,10 +335,10 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'title3_color', 
 					[
-		            	'label' => $this->l('Color'),
+		            	'label' => __('Color'),
 		                'type' => ControlsManager::COLOR,
 		                'selectors' => [
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title3' => 'color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title3' => 'color: {{VALUE}};',
 		                ],
 					]
 				);
@@ -346,7 +346,7 @@ class WidgetSlideshow extends WidgetBase {
 					GroupControlTypography::getType(),
 					[
 						'name' => 'title3_typography',
-						'selector' => '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title3',
+						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title3',
 						'separator' => 'none',
 					]
 				);
@@ -354,7 +354,7 @@ class WidgetSlideshow extends WidgetBase {
 	        	$repeater->addResponsiveControl(
 	            	'title3_space',
 	    			[
-	                    'label' => $this->l('Space'),
+	                    'label' => __('Space'),
 	                    'type' => ControlsManager::SLIDER,
 	                    'default' => [
 	                        'size' => 10,
@@ -367,7 +367,7 @@ class WidgetSlideshow extends WidgetBase {
 	                        ],
 	                    ],
 	                    'selectors' => [
-	                        '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .title3' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+	                        '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .title3' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 	                    ],
 	                    'separator' => 'none',
 	                ]
@@ -375,7 +375,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'title3_animation', 
 					[
-	                	'label' => $this->l('Animation'),
+	                	'label' => __('Animation'),
 		                'type' => ControlsManager::ANIMATION,
 		                'separator' => 'after'
 					]
@@ -384,7 +384,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'heading4', 
 					[
-	                	'label' => $this->l('Subtitle'),
+	                	'label' => __('Subtitle'),
 	                	'type' => ControlsManager::HEADING,
 	                	'separator' => 'before'
 					]
@@ -392,10 +392,10 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'subtitle_color', 
 					[
-		            	'label' => $this->l('Color'),
+		            	'label' => __('Color'),
 		                'type' => ControlsManager::COLOR,
 		                'selectors' => [
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .subtitle' => 'color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .subtitle' => 'color: {{VALUE}};',
 		                ],
 					]
 				);
@@ -403,7 +403,7 @@ class WidgetSlideshow extends WidgetBase {
 					GroupControlTypography::getType(),
 					[
 						'name' => 'subtitle_typography',
-						'selector' => '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .subtitle',
+						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .subtitle',
 						'separator' => 'none',
 					]
 				);
@@ -411,7 +411,7 @@ class WidgetSlideshow extends WidgetBase {
 	        	$repeater->addResponsiveControl(
 	            	'subtitle_space',
 	    			[
-	                    'label' => $this->l('Space'),
+	                    'label' => __('Space'),
 	                    'type' => ControlsManager::SLIDER,
 	                    'default' => [
 	                        'size' => 10,
@@ -424,7 +424,7 @@ class WidgetSlideshow extends WidgetBase {
 	                        ],
 	                    ],
 	                    'selectors' => [
-	                        '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .subtitle' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+	                        '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .subtitle' => 'margin-bottom: {{SIZE}}{{UNIT}}',
 	                    ],
 	                    'separator' => 'none',
 	                ]
@@ -432,7 +432,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'subtitle_animation', 
 					[
-	                	'label' => $this->l('Animation'),
+	                	'label' => __('Animation'),
 		                'type' => ControlsManager::ANIMATION,
 		                'separator' => 'after'
 					]
@@ -441,7 +441,7 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'heading5', 
 					[
-	                	'label' => $this->l('Button'),
+	                	'label' => __('Button'),
 	                	'type' => ControlsManager::HEADING,
 	                	'separator' => 'before'
 					]
@@ -450,21 +450,21 @@ class WidgetSlideshow extends WidgetBase {
 					GroupControlTypography::getType(),
 					[
 						'name' => 'button_typography',
-						'selector' => '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} .button',
+						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .button',
 						'separator' => 'none',
 					]
 				);
 				$repeater->addControl(
 					'button_color', 
 					[
-		            	'label' => $this->l('Color'),
+		            	'label' => __('Color'),
 		                'type' => ControlsManager::COLOR,
 		                'scheme' => [
 		                    'type' => SchemeColor::getType(),
 		                    'value' => SchemeColor::COLOR_1,
 		                ],
 		                'selectors' => [
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}}  a.slideshow-button' => 'color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}}  a.slideshow-button' => 'color: {{VALUE}};',
 		                ],
 					]
 				);
@@ -478,21 +478,21 @@ class WidgetSlideshow extends WidgetBase {
 		                    'value' => SchemeColor::COLOR_4,
 		                ),
 		                'selectors' => array(
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button' => 'background-color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button' => 'background-color: {{VALUE}};',
 		                ),
 		            )
 		        );
 		        $repeater->addControl(
 					'button_colorh', 
 					[
-		            	'label' => $this->l('Hover Color'),
+		            	'label' => __('Hover Color'),
 		                'type' => ControlsManager::COLOR,
 		                'scheme' => [
 		                    'type' => SchemeColor::getType(),
 		                    'value' => SchemeColor::COLOR_1,
 		                ],
 		                'selectors' => [
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button:hover' => 'color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button:hover' => 'color: {{VALUE}};',
 		                ],
 					]
 				);
@@ -506,7 +506,7 @@ class WidgetSlideshow extends WidgetBase {
 		                    'value' => SchemeColor::COLOR_4,
 		                ),
 		                'selectors' => array(
-		                    '{{WRAPPER}} .pos-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button:hover' => 'background-color: {{VALUE}};',
+		                    '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button:hover' => 'background-color: {{VALUE}};',
 		                ),
 		            )
 		        );
@@ -556,12 +556,12 @@ class WidgetSlideshow extends WidgetBase {
 				$repeater->addControl(
 					'button_animation', 
 					[
-	                	'label' => $this->l('Animation'),
+	                	'label' => __('Animation'),
 		                'type' => ControlsManager::ANIMATION,
 					]
 				);
 			$repeater->endControlsTab();
-			
+			$repeater->endControlsTabs();
 			$this->addControl(
 	            'slideshow_list',
 	            [
@@ -578,78 +578,94 @@ class WidgetSlideshow extends WidgetBase {
 		$this->startControlsSection(
 			'setting_section',
 			[
-				'label' => $this->l( 'Slider'),
+				'label' => __('Slider'),
 				'tab' => ControlsManager::TAB_SETTINGS,
 			]
 		);
 			$this->addControl(
-				'arrows',
-				[
-					'label' 		=> $this->l('Arrows', [], 'Admin.Global'),
-					'type' 			=> ControlsManager::SWITCHER,
-					'default' 		=> 'yes',
-					'label_on'      => $this->l('Yes'),
-                    'label_off'     => $this->l('No'),
-				]
-			);
-
-			$this->addControl(
-				'dots',
-				[
-					'label' 		=> $this->l('Dots', [], 'Admin.Global'),
-					'type' 			=> ControlsManager::SWITCHER,
-					'default' 		=> 'no',
-					'label_on'      => $this->l('Yes'),
-                    'label_off'     => $this->l('No'),
-				]
-			);
+	            'navigation',
+	            [
+	                'label' => __('Navigation'),
+	                'type' => ControlsManager::SELECT,
+	                'default' => 'both',
+	                'options' => [
+	                    'both' => __('Arrows and Dots'),
+	                    'arrows' => __('Arrows'),
+	                    'dots' => __('Dots'),
+	                    'none' => __('None'),
+	                ],
+	                'frontend_available' => true,
+	            ]
+	        );
 			$this->addControl(
 				'autoplay',
 				[
-					'label' => $this->l( 'Autoplay'),
+					'label' => __('Autoplay'),
 					'type' 			=> ControlsManager::SWITCHER,
 					'default' => 'false',  
-					'label_on'      => $this->l('Yes'),
-                    'label_off'     => $this->l('No'),
+					'label_on'      => __('Yes'),
+                    'label_off'     => __('No'),
+                    'frontend_available' => true,
 				]
 			);
 			$this->addControl(
 				'autoplay_speed',
 				[
-					'label'     	=> $this->l('AutoPlay Transition Speed (ms)', [], 'Admin.Global'),
+					'label'     	=> __('AutoPlay Transition Speed (ms)'),
 					'type'      	=> ControlsManager::NUMBER,
 					'default'  	 	=> 3000,
+					'frontend_available' => true,
 				]
 			);
 			$this->addControl(
 				'pause_on_hover',
 				[
-					'label' 		=> $this->l('Pause on Hover', [], 'Admin.Global'),
+					'label' 		=> __('Pause on Hover'),
 					'type' 			=> ControlsManager::SWITCHER,
 					'default' 		=> 'yes',
-					'label_on'      => $this->l('Yes'),
-                    'label_off'     => $this->l('No'),
+					'label_on'      => __('Yes'),
+                    'label_off'     => __('No'),
+                    'frontend_available' => true,
 				]
 			);
 
 			$this->addControl(
 				'infinite',
 				[
-					'label'        	=> $this->l('Infinite Loop', [], 'Admin.Global'),
+					'label'        	=> __('Infinite Loop'),
 					'type'         	=> ControlsManager::SWITCHER,
 					'default'      	=> 'no',
-					'label_on'      => $this->l('Yes'),
-                    'label_off'     => $this->l('No'),
+					'label_on'      => __('Yes'),
+                    'label_off'     => __('No'),
+                    'frontend_available' => true,
 				]
 			);
 			$this->addControl(
 				'transition_speed',
 				[
-					'label'     	=> $this->l('Transition Speed (ms)', [], 'Admin.Global'),
+					'label'     	=> __('Transition Speed (ms)'),
 					'type'      	=> ControlsManager::NUMBER,
 					'default'  	 	=> 500,
+					'frontend_available' => true,
 				]
 			);
+			$this->addControl(
+	            'effect',
+	            [
+	                'label' => __('Effect'),
+	                'type' => ControlsManager::SELECT,
+	                'default' => 'slide',
+	                'options' => [
+	                    'slide' => __('Slide'),
+	                    'fade' => __('Fade'),
+	                ],
+	                'condition' => [
+	                    'slides_to_show' => '1',
+	                    'center_mode' => '',
+	                ],
+	                'frontend_available' => true,
+	            ]
+	        );
 		
 		$this->endControlsSection();
 	}
@@ -661,49 +677,21 @@ class WidgetSlideshow extends WidgetBase {
 	 
 	protected function render() {
 
-		$settings = $this->getSettings(); 
-
-		// Data settings
-        $slick_options = [
-			'slidesToShow'   => 1,
-			'slidesToScroll' => 1,
-			'autoplay'       => ($settings['autoplay'] == 'yes') ? true : false,
-			'autoplaySpeed'  => (int)$settings['autoplay_speed'] ? (int)$settings['autoplay_speed'] : 5000,
-			'infinite'       => ($settings['infinite'] == 'yes') ? true : false,
-			'pauseOnHover'   => ($settings['pause_on_hover'] == 'yes') ? true : false,
-			'speed'          => (int)$settings['transition_speed'] ? (int)$settings['transition_speed'] : 500,
-			'arrows'         => ($settings['arrows'] == 'yes') ? true : false,
-			'dots'           => ($settings['dots'] == 'yes') ? true : false, 
-			'fade'			 => true,
-		]; 
-		
-		$slick_responsive = [
-			'items_laptop'            => 1,
-            'items_landscape_tablet'  => 1,
-            'items_portrait_tablet'   => 1,
-            'items_landscape_mobile'  => 1,
-            'items_portrait_mobile'   => 1,
-            'items_small_mobile'      => 1,
-		];
-	 
-		
+		$settings = $this->getSettingsForDisplay(); 	
 		$this->addRenderAttribute(
 			'slideshow', 
 			[
-				'class' => ['pos-slideshow', 'slick-slider-block', 'column-desktop-1', 'column-tablet-1', 'column-mobile-1'],
-				'data-slider_responsive' => json_encode($slick_responsive),
-				'data-slider_options' => json_encode($slick_options),
+				'class' => ['elementor-slideshow', 'column-desktop-1', 'column-tablet-1', 'column-mobile-1'],
 			]
-			
 		);
 
 		if ( $settings['slideshow_list'] ) { ?>
-			<div class="pos-slideshow-wrapper">
+			<div class="elementor-slideshow-wrapper">
 				<div <?php echo $this->getRenderAttributeString('slideshow'); ?>>
 				<?php foreach (  $settings['slideshow_list'] as $item ) :
 					$image = Tools::safeOutput(Helper::getMediaLink($item['slideshow_image']['url']));
 
-					$this->addRenderAttribute('class-item', 'class', ['slideshow-item','elementor-repeater-item-' . $item['_id']]); ?>
+					$this->addRenderAttribute('class_item', 'class', ['slideshow-item','elementor-repeater-item-' . $item['_id']]); ?>
 					<div <?php echo $this->getRenderAttributeString('class-item'); ?>>
 
 						<div class="slider-item" style="background:url(<?= $image ?>);background-size: cover; background-position: center;">
@@ -749,21 +737,53 @@ class WidgetSlideshow extends WidgetBase {
 
 	} 
 
-
 	protected function _contentTemplate() {
-		
+		?>
+		<#
+			
+		#>
+		<div class="elementor-slideshow-wrapper">
+			<div class="elementor-slideshow">
+				<# _.each( settings.slideshow_list, function( slide ) { #>
+					<div class="slideshow-item elementor-repeater-item-{{{slide._id}}}">
+						<div class="slider-item" style="background: url(http://localhost/framework/{{{ slide.slideshow_image.url }}});background-size: cover; background-position: center;">
+							<div class="desc-banner">
+								<div class="container">
+									<div class="slideshow-content">
+										<# console.log(slide); #>
+											<div class="title1" data-animation="animated {{{ slide.title1_animation }}}">
+												{{{ slide.title1 }}}
+											</div>
+										<# 
+										if ( slide.title2 ) { #>
+											<div class="title2" data-animation="animated {{{ slide.title2_animation }}}">
+												{{{ slide.title2 }}}
+											</div>
+										<# }
+										if ( slide.title3 ) { #>
+											<div class="title3" data-animation="animated {{{ slide.title3_animation }}}">
+												{{{ slide.title3 }}}
+											</div>
+										<# }
+										if ( slide.subtitle ) { #>
+											<div class="subtitle" data-animation="animated {{{ slide.subtitle_animation }}}">
+												{{{ slide.subtitle }}}
+											</div>
+										<# }
+										if ( slide.button && slide.link ) { #>
+											<a class="slideshow-button" href="{{{ slide.link.url }}}" data-animation="animated {{{ slide.button_animation }}}">
+												{{{ slide.button }}}
+											</a>
+										<# } #>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<# }) #>
+			</div>
+		</div>
+		<?php
 	}
-	/**
-     * Get translation for a given widget text
-     *
-     * @access protected
-     *
-     * @param string $string    String to translate
-     *
-     * @return string Translation
-     */
-    protected function l($string)
-    {
-        return translate($string, 'poselements', basename(__FILE__, '.php'));
-    }
+	
 }

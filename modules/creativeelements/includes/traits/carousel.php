@@ -21,7 +21,9 @@ trait CarouselTrait
     protected function registerCarouselSection(array $args = [])
     {
         $self = ${'this'};
-        $default_slides_count = isset($args['default_slides_count']) ? $args['default_slides_count'] : 3;
+        $default_slides_desktop = isset($args['default_slides_desktop']) ? $args['default_slides_desktop'] : 4;
+        $default_slides_tablet = isset($args['default_slides_tablet']) ? $args['default_slides_tablet'] : 3;
+        $default_slides_mobile = isset($args['default_slides_mobile']) ? $args['default_slides_mobile'] : 2;
         $variable_width = isset($args['variable_width']) ? ['variable_width' => ''] : [];
 
         $self->startControlsSection(
@@ -32,10 +34,26 @@ trait CarouselTrait
         );
 
         $self->addControl(
-            'default_slides_count',
+            'default_slides_desktop',
             [
                 'type' => ControlsManager::HIDDEN,
-                'default' => (int) $default_slides_count,
+                'default' => (int) $default_slides_desktop,
+                'frontend_available' => true,
+            ]
+        );
+        $self->addControl(
+            'default_slides_tablet',
+            [
+                'type' => ControlsManager::HIDDEN,
+                'default' => (int) $default_slides_tablet,
+                'frontend_available' => true,
+            ]
+        );
+        $self->addControl(
+            'default_slides_mobile',
+            [
+                'type' => ControlsManager::HIDDEN,
+                'default' => (int) $default_slides_mobile,
                 'frontend_available' => true,
             ]
         );
@@ -374,7 +392,19 @@ trait CarouselTrait
         }
         $self = ${'this'};
 
-        $self->addRenderAttribute('carousel', 'class', 'elementor-image-carousel');
+        $item_desktop = $settings['default_slides_desktop'];
+        $item_tablet = $settings['default_slides_tablet'];
+        $item_mobile = $settings['default_slides_mobile'];
+        if($settings['slides_to_show']){
+            $item_desktop = $settings['slides_to_show'];
+        }
+        if($settings['slides_to_show_tablet']){
+            $item_tablet = $settings['slides_to_show_tablet'];
+        }
+        if($settings['slides_to_show_tablet']){
+            $item_mobile = $settings['slides_to_show_mobile'];
+        }
+        $self->addRenderAttribute('carousel', 'class', 'elementor-image-carousel items-desktop-'. $item_desktop . ' items-tablet-' . $item_tablet . ' items-mobile-'. $item_mobile);
 
         if ('none' !== $settings['navigation']) {
             if ('dots' !== $settings['navigation']) {

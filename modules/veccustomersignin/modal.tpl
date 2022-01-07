@@ -50,7 +50,7 @@
 										{l s='Reset Password' mod='veccustomersignin'}
 								</button>
 							</div>
-							
+							<button class="back-login-btn" style="display: none;">{l s='Back to login' mod='veccustomersignin'}</button>
 						</form>
 					</div>
 				</div>

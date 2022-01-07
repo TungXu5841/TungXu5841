@@ -2880,6 +2880,7 @@ module.exports = function ($) {
 		'text-editor.default': __webpack_require__(194),
 		'contact-form.default': __webpack_require__(200),
 		'email-subscription.default': __webpack_require__(200),
+		'slideshow.default': __webpack_require__(201),
 	};
 
 	var handlersInstances = {};
@@ -3583,7 +3584,7 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 	getDefaultSettings: function getDefaultSettings() {
 		return {
 			selectors: {
-				carousel: '.elementor-image-carousel'
+				carousel: '.elementor-image-carousel , .elementor-block-carousel'
 			}
 		};
 	},
@@ -3600,12 +3601,11 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 
 		var elementSettings = this.getElementSettings(),
-			slidesToShow = +elementSettings.slides_to_show || elementSettings.default_slides_count,
+			slidesToShow = +elementSettings.slides_to_show || elementSettings.default_slides_desktop,
 			isSingleSlide = 1 === slidesToShow,
 			centerPadding = elementSettings.center_padding && elementSettings.center_padding.size + '',
 			centerPaddingTablet = elementSettings.center_padding_tablet && elementSettings.center_padding_tablet.size + '',
 			centerPaddingMobile = elementSettings.center_padding_mobile && elementSettings.center_padding_mobile.size + '',
-			defaultLGDevicesSlidesCount = isSingleSlide ? 1 : elementSettings.default_slides_count - 1 || 1,
 			breakpoints = ceFrontend.config.breakpoints;
 
 		var slickOptions = {
@@ -3628,7 +3628,7 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 				breakpoint: breakpoints.lg,
 				settings: {
 					centerPadding: centerPaddingTablet ? centerPaddingTablet + elementSettings.center_padding_tablet.unit : void 0,
-					slidesToShow: +elementSettings.slides_to_show_tablet || defaultLGDevicesSlidesCount,
+					slidesToShow: +elementSettings.slides_to_show_tablet || elementSettings.default_slides_tablet,
 					slidesToScroll: +elementSettings.slides_to_scroll_tablet || 1,
 					swipeToSlide: !elementSettings.slides_to_scroll_tablet,
 					autoplay: 'yes' === elementSettings.autoplay_tablet,
@@ -3640,8 +3640,20 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 					centerPadding: centerPaddingMobile ? centerPaddingMobile + elementSettings.center_padding_mobile.unit : (
 						centerPaddingTablet ? centerPaddingTablet + elementSettings.center_padding_tablet.unit : void 0
 					),
-					slidesToShow: +elementSettings.slides_to_show_mobile || 1,
+					slidesToShow: +elementSettings.slides_to_show_mobile || elementSettings.default_slides_mobile,
 					slidesToScroll: +elementSettings.slides_to_scroll_mobile || 1,
+					swipeToSlide: !elementSettings.slides_to_scroll_mobile,
+					autoplay: 'yes' === elementSettings.autoplay_mobile,
+					infinite: elementSettings.infinite_mobile ? 'yes' === elementSettings.infinite_mobile : void 0
+				}
+			}, {
+				breakpoint: 320,
+				settings: {
+					centerPadding: centerPaddingMobile ? centerPaddingMobile + elementSettings.center_padding_mobile.unit : (
+						centerPaddingTablet ? centerPaddingTablet + elementSettings.center_padding_tablet.unit : void 0
+					),
+					slidesToShow: 1,
+					slidesToScroll: 1,
 					swipeToSlide: !elementSettings.slides_to_scroll_mobile,
 					autoplay: 'yes' === elementSettings.autoplay_mobile,
 					infinite: elementSettings.infinite_mobile ? 'yes' === elementSettings.infinite_mobile : void 0
@@ -4545,7 +4557,68 @@ module.exports = function( $scope, $ ) {
 	new WidgetAjaxForm( $scope );
 };
 
-/***/ })
+/***/ }),
+
+/***/ 201:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var SlideshowCarouselHandler = elementorModules.frontend.handlers.Base.extend({
+	getDefaultSettings: function getDefaultSettings() {
+		return {
+			selectors: {
+				carousel: '.elementor-slideshow'
+			}
+		};
+	},
+
+	getDefaultElements: function getDefaultElements() {
+		var selectors = this.getSettings('selectors');
+
+		return {
+			$carousel: this.$element.find(selectors.carousel)
+		};
+	},
+
+	onInit: function onInit() {
+		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
+
+		var elementSettings = this.getElementSettings(),
+			centerPadding = elementSettings.center_padding && elementSettings.center_padding.size + '',
+			centerPaddingTablet = elementSettings.center_padding_tablet && elementSettings.center_padding_tablet.size + '',
+			centerPaddingMobile = elementSettings.center_padding_mobile && elementSettings.center_padding_mobile.size + '',
+			breakpoints = ceFrontend.config.breakpoints;
+
+		var slickOptions = {
+			touchThreshold: 100,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			swipeToSlide: 1,
+			variableWidth: 'yes' === elementSettings.variable_width,
+			centerMode: 'yes' === elementSettings.center_mode,
+			centerPadding: centerPadding ? centerPadding + elementSettings.center_padding.unit : void 0,
+			autoplay: 'yes' === elementSettings.autoplay,
+			autoplaySpeed: elementSettings.autoplay_speed,
+			infinite: 'yes' === elementSettings.infinite,
+			pauseOnHover: 'yes' === elementSettings.pause_on_hover,
+			speed: elementSettings.speed,
+			arrows: -1 !== ['arrows', 'both'].indexOf(elementSettings.navigation),
+			dots: -1 !== ['dots', 'both'].indexOf(elementSettings.navigation),
+			rtl: 'rtl' === elementSettings.direction,
+			fade: true,
+		};
+
+		this.elements.$carousel.slick(slickOptions);
+	}
+});
+
+module.exports = function ($scope) {
+	ceFrontend.elementsHandler.addHandler(SlideshowCarouselHandler, { $element: $scope });
+};
+
+/***/ }),
 
 /******/ });
 

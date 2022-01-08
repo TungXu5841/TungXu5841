@@ -24,16 +24,15 @@
  *}
 {extends file='customer/page.tpl'}
 
-{block name='page_title'}
-  {if $editing}
-    {l s='Update your address' d='Shop.Theme.Customeraccount'}
-  {else}
-    {l s='New address' d='Shop.Theme.Customeraccount'}
-  {/if}
+{block name='page_content_title'}
+	<h4>
+	  	{if $editing}
+		    {l s='Update your address' d='Shop.Theme.Customeraccount'}
+		{else}
+		    {l s='New address' d='Shop.Theme.Customeraccount'}
+		{/if}
+	</h4>
 {/block}
-
-{block name='page_content'}
-  <div class="address-form">
-    {render template="customer/_partials/address-form.tpl" ui=$address_form}
-  </div>
+{block name='page_content_content'}
+	{render template="customer/_partials/address-form.tpl" ui=$address_form}
 {/block}

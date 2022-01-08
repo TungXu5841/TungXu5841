@@ -24,10 +24,9 @@
  *}
 {extends 'customer/page.tpl'}
 
-{block name='page_title'}
-  {l s='Your personal information' d='Shop.Theme.Customeraccount'}
+{block name='page_content_title'}
+	<h4>{l s='Your personal information' d='Shop.Theme.Customeraccount'}</h4>
 {/block}
-
-{block name='page_content'}
-  {render file='customer/_partials/customer-form.tpl' ui=$customer_form}
+{block name='page_content_content'}
+	{render file='customer/_partials/customer-form.tpl' ui=$customer_form}
 {/block}

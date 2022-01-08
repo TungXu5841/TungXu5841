@@ -2,26 +2,32 @@
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
+		  	<h3 class="login-title">			
+				{l s='Login to your account' mod='veccustomersignin'}		
+			</h3>
+			<h3 class="reset-title" style="display: none;">
+				{l s='Reset Password' mod='veccustomersignin'}
+			</h3>
+			<h3 class="wishlist-title" style="display: none;">
+				{l s='You have to login to use Wishlist' mod='veccustomersignin'}
+			</h3>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
 		  </div>
 		  <div class="modal-body">
-			<div class="vec-quicklogin-form row">
+			<div class="vec-quicklogin-form">
 					<!-- Login -->
 					<div class="vec-login-form">
-						<h3 class="login-title">			
-							<span class="title-only">
-								{l s='Login to your account' mod='veccustomersignin'}
-							</span>		
-						</h3>
 						<form class="login-form-content" action="#" method="post">
 							<div class="vec-form-msg"></div>			
 
 							<div class="form-group">
+								<label for="vec-pass-login">{l s='Email' mod='veccustomersignin'}</label>
 								<input type="email" class="form-control vec-email-login" name="vec-email-login" required="" placeholder="{l s='Email Address' mod='veccustomersignin'}">
 							</div>
 							<div class="form-group">
+								<label for="vec-pass-login">{l s='Password' mod='veccustomersignin'}</label>
 								<input type="password" class="form-control vec-pass-login" name="vec-pass-login" required="" placeholder="{l s='Password' mod='veccustomersignin'}">
 							</div>
 							<div class="vec-forgot-password">				
@@ -39,10 +45,11 @@
 					</div>
 					<!-- Reset password -->
 					<div class="vec-resetpass-form" style="display: none;">
-						<h3>{l s='Reset Password' mod='veccustomersignin'}</h3>
 						<form class="vcs-form-content vec-resetpass-form-content" action="#" method="post">
-							<div class="vec-form-msg"></div>			
+							<div class="vec-form-msg"></div>	
+							<p class="send-renew-password-link">{l s='Please enter the email address you used to register. You will receive a temporary link to reset your password.' d='Shop.Theme.Customeraccount'}</p>
 							<div class="form-group">
+								<label for="vec-pass-reset">{l s='Email' mod='veccustomersignin'}</label>
 								<input type="email" class="form-control vec-email-reset" name="vec-email-reset" required="" placeholder="{l s='Email Address' mod='veccustomersignin'}">
 							</div>
 							<div class="form-group">					
@@ -50,7 +57,7 @@
 										{l s='Reset Password' mod='veccustomersignin'}
 								</button>
 							</div>
-							<button class="back-login-btn" style="display: none;">{l s='Back to login' mod='veccustomersignin'}</button>
+							<button class="back-login-btn">{l s='Back to login' mod='veccustomersignin'}</button>
 						</form>
 					</div>
 				</div>

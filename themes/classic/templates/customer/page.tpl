@@ -26,15 +26,29 @@
 
 {block name='notifications'}{/block}
 
+{block name='page_title'}
+  {l s='Your account' d='Shop.Theme.Customeraccount'}
+{/block}
+
 {block name='page_content_container'}
   <section id="content" class="page-content">
-    {block name='page_content_top'}
-      {block name='customer_notifications'}
-        {include file='_partials/notifications.tpl'}
-      {/block}
-    {/block}
     {block name='page_content'}
-      <!-- Page content -->
+        <div class="row">
+          <div class="col-md-3">
+            {include file="customer/_partials/account-menu.tpl"}
+          </div>
+          <div class="col-md-9">
+            <div class="customer-account-content">
+              {block name='page_content_title'}{/block}
+              {block name='page_content_top'}
+                {block name='customer_notifications'}
+                  {include file='_partials/notifications.tpl'}
+                {/block}
+              {/block}
+              {block name='page_content_content'}{/block}
+            </div>
+          </div>
+        </div>
     {/block}
   </section>
 {/block}

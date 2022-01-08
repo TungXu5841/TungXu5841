@@ -1,0 +1,9 @@
+.group-link-infomation{
+	width: 250px;
+}
+.group-link-infomation > a {
+	display: block;
+	width: 100%;
+	line-height: 35px;
+	padding: 0;
+}

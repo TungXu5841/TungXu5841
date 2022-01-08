@@ -24,12 +24,12 @@
  *}
 {extends file='customer/page.tpl'}
 
-{block name='page_title'}
-  {l s='Credit slips' d='Shop.Theme.Customeraccount'}
+{block name='page_content_title'}
+  <h4>{l s='Credit slips' d='Shop.Theme.Customeraccount'}</h4>
+  <h6>{l s='Credit slips you have received after canceled orders.' d='Shop.Theme.Customeraccount'}</h6>
 {/block}
 
-{block name='page_content'}
-  <h6>{l s='Credit slips you have received after canceled orders.' d='Shop.Theme.Customeraccount'}</h6>
+{block name='page_content_content'}
   {if $credit_slips}
     <table class="table table-striped table-bordered hidden-sm-down">
       <thead class="thead-default">
@@ -78,3 +78,4 @@
     </div>
   {/if}
 {/block}
+

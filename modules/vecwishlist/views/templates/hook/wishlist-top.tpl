@@ -1,0 +1,1 @@
+<a class="btn-canvas btn-canvas-wishlist sb-item" href="{url entity='module' name='vecwishlist' controller='view'}" title="{l s='My Wishlist' mod='vecwishlist'}">{if isset($icon) && $icon}{$icon nofilter}{else}<i class="lar la-heart"></i>{/if}<span class="btn-canvas-text">{l s='My Wishlist' mod='vecwishlist'}</span><span class="js-wishlist-nb wishlist-nbr">0</span></a>

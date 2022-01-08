@@ -24,11 +24,12 @@
  *}
 {extends file='customer/page.tpl'}
 
-{block name='page_title'}
-  {l s='Your addresses' d='Shop.Theme.Customeraccount'}
+{block name='page_content_title'}
+  <h4>
+    {l s='Your addresses' d='Shop.Theme.Customeraccount'}
+  </h4>
 {/block}
-
-{block name='page_content'}
+{block name='page_content_content'}
   {foreach $customer.addresses as $address}
     <div class="col-lg-4 col-md-6 col-sm-6">
     {block name='customer_address'}

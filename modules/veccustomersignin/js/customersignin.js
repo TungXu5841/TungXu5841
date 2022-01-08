@@ -4,6 +4,13 @@ var vecCustomerSignin = {
 		$('.vec-quicklogin-modal').on('hidden.bs.modal', function () {
             $('.vec-quicklogin-modal').modal('hide');
         });
+
+        $('.vec-quicklogin-modal').on('hidden.bs.modal', function () {
+			$('.vec-quicklogin-modal .modal-header').find('h3').hide();
+			$('.login-title').show();
+			$('.vec-quicklogin-form .vec-login-form').show();
+			$('.vec-quicklogin-form .vec-resetpass-form').hide();
+		})
 	},
 	ajaxLogin: function(){
 		var email 	  = $('.vec-email-login').val(),
@@ -105,8 +112,10 @@ $(document).ready(function(){
 		vecCustomerSignin.ajaxLogin();
 	})
 	$('.vec-forgot-password').on('click', function(e){
+		e.preventDefault();
+		$('.vec-quicklogin-modal .modal-header').find('h3').hide();
 		$('.vec-login-form').hide();
-		$('.vec-resetpass-form').show();
+		$('.vec-resetpass-form, .reset-title').show();
 	})
 	$('.vec-reset-btn').on('click', function(e){
 		e.preventDefault();
@@ -114,7 +123,7 @@ $(document).ready(function(){
 	})
 	$('.back-login-btn').on('click', function(e){
 		e.preventDefault();
-		$('.vec-login-form').show();
-		$('.vec-resetpass-form').hide();
+		$('.vec-login-form, .login-title').show();
+		$('.vec-resetpass-form, .reset-title').hide();
 	})
 })

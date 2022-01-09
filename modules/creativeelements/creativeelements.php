@@ -14,7 +14,6 @@ define('_CE_PATH_', _PS_MODULE_DIR_ . 'creativeelements/');
 define('_CE_URL_', defined('_PS_BO_ALL_THEMES_DIR_') ? _MODULE_DIR_ . 'creativeelements/' : 'modules/creativeelements/');
 define('_CE_ASSETS_URL_', _CE_URL_ . 'views/');
 define('_CE_TEMPLATES_', _CE_PATH_ . 'views/templates/');
-define('_CE_PS16_', version_compare(_PS_VERSION_, '1.7', '<'));
 
 require_once _CE_PATH_ . 'classes/CETheme.php';
 require_once _CE_PATH_ . 'classes/CEContent.php';
@@ -375,7 +374,7 @@ class CreativeElements extends Module
                 $model = class_exists('CMS') ? 'CMS' : 'CMSCategory';
                 $key = $model::${'definition'}['table'];
 
-                if (!_CE_PS16_ && isset($tpl_vars[$key]->value['id'])) {
+                if (isset($tpl_vars[$key]->value['id'])) {
                     $id = $tpl_vars[$key]->value['id'];
                     $desc = ['description' => &$tpl_vars[$key]->value['content']];
 
@@ -383,7 +382,7 @@ class CreativeElements extends Module
                 } elseif (isset($controller->cms->id)) {
                     $id = $controller->cms->id;
                     $desc = ['description' => &$controller->cms->content];
-                } elseif (!_CE_PS16_ && isset($tpl_vars['cms_category']->value['id'])) {
+                } elseif (isset($tpl_vars['cms_category']->value['id'])) {
                     $model = 'CMSCategory';
                     $id = $tpl_vars['cms_category']->value['id'];
                     $desc = &$tpl_vars['cms_category']->value;
@@ -399,7 +398,7 @@ class CreativeElements extends Module
             case 'supplier':
                 $model = $front;
 
-                if (!_CE_PS16_ && isset($tpl_vars[$model]->value['id'])) {
+                if (isset($tpl_vars[$model]->value['id'])) {
                     $id = $tpl_vars[$model]->value['id'];
                     $desc = &$tpl_vars[$model]->value;
                 } elseif (method_exists($controller, "get$model") && Validate::isLoadedObject($obj = $controller->{"get$model"}())) {
@@ -423,7 +422,7 @@ class CreativeElements extends Module
             case 'xipblogsingle':
                 $model = 'XipPostsClass';
 
-                if (!_CE_PS16_ && isset($tpl_vars['xipblogpost']->value['id_xipposts'])) {
+                if (isset($tpl_vars['xipblogpost']->value['id_xipposts'])) {
                     $id = $tpl_vars['xipblogpost']->value['id_xipposts'];
                     $desc = ['description' => &$tpl_vars['xipblogpost']->value['post_content']];
                 } elseif (isset($controller->blogpost['id_xipposts'])) {
@@ -474,11 +473,6 @@ class CreativeElements extends Module
                 break;
             case 'ph_simpleblogsingle':
                 $model = 'SimpleBlogPost';
-
-                if (_CE_PS16_ && isset($controller->SimpleBlogPost->id)) {
-                    $id = $controller->SimpleBlogPost->id;
-                    $desc = ['description' => &$controller->SimpleBlogPost->content];
-                }
                 break;
             case 'tvcmsblogsingle':
                 $model = 'TvcmsPostsClass';

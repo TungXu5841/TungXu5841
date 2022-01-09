@@ -106,12 +106,10 @@ class WidgetsManager
             'language-selector',
             'currency-selector',
         ];
-        if (!_CE_PS16_) {
-            $build_widgets_filename[] = 'image-slider';
-            $build_widgets_filename[] = 'category-tree';
-        } elseif (file_exists(_PS_MODULE_DIR_ . 'blockcategories/blockcategories.tpl')) {
-            $build_widgets_filename[] = 'category-tree';
-        }
+        
+        $build_widgets_filename[] = 'image-slider';
+        $build_widgets_filename[] = 'category-tree';
+        
         $build_widgets_filename[] = 'module';
 
         $this->_widget_types = [];

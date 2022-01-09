@@ -16,9 +16,7 @@ $.fn.wrapfix = function() {
 		if (!$(el).find('.elementor-product-miniature:first').length) {
 			if (ce.wrapfix) {
 				$(el).addClass(ce.wrapfix);
-			} else if (ce.PS16) {
-				$(el).addClass('wrapfix');
-			}
+			} 
 		}
 	});
 };

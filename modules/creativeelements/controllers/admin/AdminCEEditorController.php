@@ -125,7 +125,6 @@ class AdminCEEditorController extends ModuleAdminController
         CE\wp_enqueue_style('ce-editor', _CE_ASSETS_URL_ . 'css/editor-ce.css', [], _CE_VERSION_);
         CE\wp_register_script('ce-editor', _CE_ASSETS_URL_ . 'js/editor-ce.js', [], _CE_VERSION_, true);
         CE\wp_localize_script('ce-editor', 'ce', [
-            'PS16' => _CE_PS16_,
             'wrapfix' => CE\Helper::getWrapfix(),
         ]);
         CE\wp_localize_script('ce-editor', 'baseDir', __PS_BASE_URI__);

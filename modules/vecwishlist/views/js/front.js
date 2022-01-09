@@ -43,51 +43,31 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 
-	prestashop.on('clickWishListAdd', function (elm) {
+	prestashop.on('clickWishListAdd', function (el) {
 		
-		if($('.js-wishlist-btn-' + elm.dataset.idProduct + '-' + elm.dataset.idProductAttribute).hasClass("loading")){
+		if($('.js-wishlist-btn-' + el.dataset.idProduct + '-' + el.dataset.idProductAttribute).hasClass("loading")){
 			return;
 		}
 		
 		var data = {
 			'process': 'add',
 			'ajax': 1,
-			'idProduct': elm.dataset.idProduct,
-			'idProductAttribute': elm.dataset.idProductAttribute
+			'idProduct': el.dataset.idProduct,
+			'idProductAttribute': el.dataset.idProductAttribute
 		};
 		
-		$('.js-wishlist-btn-' + elm.dataset.idProduct + '-' + elm.dataset.idProductAttribute).addClass('loading');
+		$('.js-wishlist-btn-' + el.dataset.idProduct + '-' + el.dataset.idProductAttribute).addClass('loading');
 		
-		$.post(opWishList.actions, data, null, 'json').then(function (resp) {
+		$.post(wishListVar.actions, data, null, 'json').then(function (resp) {
 			if(!resp.is_logged){
 				if($('.vec-quicklogin-modal').length > 0){
 					$('.vec-quicklogin-modal .modal-header').find('h3').hide();
 					$('.wishlist-title').show();
 					$('.vec-quicklogin-modal').modal('show');
-				}else{
-					//Need to check
 				}
 			}else{
-				opWishList.ids = resp.productsIds;
-				var html = '<p>asdasdas adadas dasdasdasdasdasdadsadsad</p>';
-								
-				$("#wishlist_content").html(html);
-
-				if($('.quickview').length > 0){
-					$('.quickview').modal('hide')
-					$('.quickview').on('hidden.bs.modal', function () {
-			        	$('.quickview').remove();
-			        	$('#modal_wishlist').modal('show');
-			      	});	
-				}else{
-					console.log('131231321');
-					$('#modal_wishlist').modal('show');
-				}
-
-				$('#modal_wishlist').on('hidden.bs.modal', function () {
-		        	$('#wishlist_content').empty();
-		      	});
-				$('.js-wishlist-btn-' + elm.dataset.idProduct + '-' + elm.dataset.idProductAttribute).removeClass('loading');
+				wishListVar.ids = resp.productsIds;
+				$('.js-wishlist-btn-' + el.dataset.idProduct + '-' + el.dataset.idProductAttribute).removeClass('loading');
 				wishlistRefreshStatus();	
 			}
 			
@@ -96,30 +76,30 @@ $(document).ready(function() {
 		});
 	});
 
-	prestashop.on('clickWishListRemove', function (elm) {
+	prestashop.on('clickWishListRemove', function (el) {
 
-		if($('.js-wishlist-remove-' + elm.dataset.idProduct + '-' + elm.dataset.idProductAttribute).hasClass("loading")){
+		if($('.js-wishlist-remove-' + el.dataset.idProduct + '-' + el.dataset.idProductAttribute).hasClass("loading")){
 			return;
 		}
 		
 		var data = {
 			'process': 'remove',
 			'ajax': 1,
-			'idProduct': elm.dataset.idProduct,
-			'idProductAttribute': elm.dataset.idProductAttribute
+			'idProduct': el.dataset.idProduct,
+			'idProductAttribute': el.dataset.idProductAttribute
 		};
 		
-		$('.js-wishlist-remove-' + elm.dataset.idProduct + '-' + elm.dataset.idProductAttribute).addClass('loading');
+		$('.js-wishlist-remove-' + el.dataset.idProduct + '-' + el.dataset.idProductAttribute).addClass('loading');
 		
-		$.post(opWishList.actions, data, null, 'json').then(function (resp) {		
+		$.post(wishListVar.actions, data, null, 'json').then(function (resp) {		
 			
 			if(!resp.is_logged){
-				wishlistShowLogin(elm.dataset.idProduct, elm.dataset.idProductAttribute);
+				wishlistShowLogin(el.dataset.idProduct, el.dataset.idProductAttribute);
 			}else{
-				$('.js-wishlist-' + elm.dataset.idProduct + '-' + elm.dataset.idProductAttribute).remove();
-				opWishList.ids = resp.productsIds;
+				$('.js-wishlist-' + el.dataset.idProduct + '-' + el.dataset.idProductAttribute).remove();
+				wishListVar.ids = resp.productsIds;
 				wishlistRefreshStatus();
-				if (opWishList.ids.length == 0) {
+				if (wishListVar.ids.length == 0) {
 					$('#js-wishlist-table').remove();
 					$('#js-wishlist-warning').show();
 				}
@@ -130,7 +110,7 @@ $(document).ready(function() {
 		});
 	});
 
-	prestashop.on('clickWishListRemoveAll', function (elm) {
+	prestashop.on('clickWishListRemoveAll', function (el) {
 		
 		if($('.js-wishlist-remove-all').hasClass('loading')){
 			return;
@@ -143,9 +123,9 @@ $(document).ready(function() {
 		
 		$('.js-wishlist-remove-all').addClass('loading');
 		
-		$.post(opWishList.actions, data, null, 'json').then(function (resp) {
+		$.post(wishListVar.actions, data, null, 'json').then(function (resp) {
 			
-			opWishList.ids = resp.productsIds;
+			wishListVar.ids = resp.productsIds;
 			wishlistRefreshStatus();
 			
 			$('#js-wishlist-table').remove();
@@ -163,7 +143,7 @@ $(document).ready(function() {
 			'current_url': prestashop.urls.current_url
 		};
 		
-		$.post(opWishList.login, data, null, 'json').then(function (resp) {
+		$.post(wishListVar.login, data, null, 'json').then(function (resp) {
 			$('#wishlist_login').html(resp.html);
 			$('#wishlist_login').find('input[name=email]').focus();
 			setTimeout(function(){
@@ -187,22 +167,22 @@ $(document).ready(function() {
 			var $idProduct = $el.data('id-product');
 			var $idProductAttribute = $el.data('id-product-attribute');		
 			
-			if (opWishList.ids.includes($idProduct + '-' + $idProductAttribute)){
+			if (wishListVar.ids.includes($idProduct + '-' + $idProductAttribute)){
 				$el.removeClass('js-wishlist-add').addClass('added');
-				$el.attr('href', opWishList.url);
-				$el.find('.text').text(opWishList.alert.view);
+				$el.attr('href', wishListVar.url);
+				$el.find('.text').text(wishListVar.alert.view);
 				if (typeof $(this).attr('data-original-title') !== typeof undefined && $(this).attr('data-original-title') !== false) {
-					$el.attr('data-original-title', opWishList.alert.view);
+					$el.attr('data-original-title', wishListVar.alert.view);
 				}else{
-					$el.attr('title', opWishList.alert.view);
+					$el.attr('title', wishListVar.alert.view);
 				}
 			}else{
 				$el.addClass('js-wishlist-add').removeClass('added');
-				$el.find('.text').text(opWishList.alert.add);
+				$el.find('.text').text(wishListVar.alert.add);
 				if (typeof $(this).attr('data-original-title') !== typeof undefined && $(this).attr('data-original-title') !== false) {
-					$el.attr('data-original-title', opWishList.alert.add);
+					$el.attr('data-original-title', wishListVar.alert.add);
 				}else{
-					$el.attr('title', opWishList.alert.add);
+					$el.attr('title', wishListVar.alert.add);
 				}
 			}
 			
@@ -210,7 +190,7 @@ $(document).ready(function() {
 			
 		});
 		
-		$('.js-wishlist-nb').text(opWishList.ids.length);
+		$('.js-wishlist-nb').text(wishListVar.ids.length);
 						
 	}
 	

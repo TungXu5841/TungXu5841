@@ -83,6 +83,7 @@
 						{include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
 					</li>
 					{hook h='displayProductListFunctionalButtons' product=$product}
+					{hook h='displayWishlistButton' product=$product}
 				</ul>
 			</div>	
 			

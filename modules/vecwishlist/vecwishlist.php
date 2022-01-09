@@ -102,13 +102,13 @@ class VecWishlist extends Module implements WidgetInterface
         $productsIds = VecWishlistProduct::getWishlistProductsIds((int)$this->context->customer->id);
 
         Media::addJsDef(array(
-			'opWishList' => array(
+			'wishListVar' => array(
 					'url' => $this->context->link->getModuleLink('vecwishlist', 'view', array(), null, null, null, true),
 					'actions' => $this->context->link->getModuleLink('vecwishlist', 'actions', array(), null, null, null, true),
 					'login' => $this->context->link->getModuleLink('vecwishlist', 'login', array(), null, null, null, true),
 					'ids' =>  $productsIds,
 					'alert' => ['add' => $this->l('Add to Wishlist'),
-								'view' => $this->l('Go to Wishlist')]
+								'view' => $this->l('Go to Wishlist')],
         )));
 		
     }

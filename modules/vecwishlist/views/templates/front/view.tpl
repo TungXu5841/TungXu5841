@@ -25,23 +25,13 @@
 
 {extends file='customer/page.tpl'}
 	 
-{$title_page = {l s='Wishlist' mod='vecwishlist'}}
-	 
-{block name='page_header_title'}
-	{if $readOnly}
-		{$title_page}
-	{else}
-		{$smarty.block.parent}
-	{/if}
-{/block}
-	 
-{block name='page_title'}
-    {if !$readOnly}
-        {$title_page}
-    {/if}
+{block name='page_content_title'}
+	<h4>
+	  	{l s='Wishlist' mod='vecwishlist'}
+	</h4>
 {/block}
 
-{block name='page_content'}
+{block name='page_content_content'}
     {if isset($wlProducts) && $wlProducts}
 	 
 		{$imageType	= 'home_default'}
@@ -90,7 +80,7 @@
 										<img
 											class="img-loader lazy-load" 
 											data-src="{$image.bySize.{$imageType}.url}"
-											src="{if isset($opThemect.placeholder)}{$opThemect.placeholder}{/if}" 
+											src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
 											alt="{if !empty($image.legend)}{$image.legend}{else}{$product.name}{/if}"
 											title="{if !empty($image.legend)}{$image.legend}{else}{$product.name}{/if}" 
 											width="{$image.bySize.{$imageType}.width}"

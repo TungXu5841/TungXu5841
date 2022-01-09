@@ -17,17 +17,6 @@
 
 {capture ce_action_link}<a href="%s" target="%s"><i class="icon-%s"></i> %s</a>{/capture}
 
-{capture ce_modal_license_status}{ce__('License Status:')} <span class="text-success">{ce__('Active')}</span>{/capture}
-
-{capture ce_modal_license}
-	<form name="activate" action="%s" method="post">
-		<div class="modal-body">%s</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-primary"><i class="icon-file-text"></i> %s</button>
-		</div>
-	</form>
-{/capture}
-
 {capture ce_modal_replace_url}
 	<form name="replace_url" class="form-horizontal">
 		<div class="modal-body">

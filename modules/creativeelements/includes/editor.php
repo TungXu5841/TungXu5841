@@ -526,7 +526,7 @@ class Editor
             'system_schemes' => $plugin->schemes_manager->getSystemSchemes(),
             'wp_editor' => $this->getWpEditorConfig(),
             'settings_page_link' => Helper::getSettingsLink(),
-            'is_active' => \Configuration::getGlobalValue('CE_LICENSE'),
+            'is_active' => true,
             'elementor_site' => __('https://addons.prestashop.com/administrative-tools/44064-creative-elements-elementor-based-pagebuilder.html'),
             'docs_elementor_site' => __('http://docs.webshopworks.com/creative-elements'),
             'help_the_content_url' => 'http://docs.webshopworks.com/creative-elements/the-content-missing',

@@ -155,13 +155,6 @@ defined('_PS_VERSION_') or die;
     </a>
 </script>
 
-<script type="text/template" id="tmpl-elementor-template-library-get-pro-button">
-    <a class="elementor-template-library-template-action elementor-button elementor-button-go-pro" href="<?= esc_attr(Helper::getSettingsLink()) ?>#license">
-        <i class="fa fa-external-link-square" aria-hidden="true"></i>
-        <span class="elementor-button-title"><?= __('Activate License') ?></span>
-    </a>
-</script>
-
 <script type="text/template" id="tmpl-elementor-template-library-save-template">
     <div class="elementor-template-library-blank-icon">
         <i class="eicon-library-save" aria-hidden="true"></i>

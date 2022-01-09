@@ -347,33 +347,6 @@ class AdminCEEditorController extends ModuleAdminController
         return $results;
     }
 
-    public function filterApiGetTemplateArgs($body_args)
-    {
-        $id_shop = Configuration::getGlobalValue('PS_SHOP_DEFAULT');
-        $license_key = Configuration::getGlobalValue('CE_LICENSE');
-
-        if ($license_key) {
-            $body_args['license'] = $license_key;
-            $body_args['domain'] = Tools::getShopProtocol() === 'http://'
-                ? ShopUrl::getMainShopDomain($id_shop)
-                : ShopUrl::getMainShopDomainSSL($id_shop)
-            ;
-        }
-
-        return $body_args;
-    }
-
-    public function filterApiGetTemplateContent($content)
-    {
-        if (isset($content['error'])) {
-            if (isset($content['code']) && 419 == $content['code']) {
-                Configuration::updateGlobalValue('CE_LICENSE', '');
-            }
-            CE\wp_send_json_error($content['error']);
-        }
-        return $content;
-    }
-
     public function onAfterSaveDocument($document)
     {
         // Set edit mode to builder only at save

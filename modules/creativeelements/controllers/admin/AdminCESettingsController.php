@@ -11,8 +11,6 @@ defined('_PS_VERSION_') or die;
 
 class AdminCESettingsController extends ModuleAdminController
 {
-    protected $activate_url = 'https://pagebuilder.webshopworks.com/?connect=activate';
-
     protected $clearCss = false;
 
     public function __construct()
@@ -65,11 +63,6 @@ class AdminCESettingsController extends ModuleAdminController
 
     public function initPageHeaderToolbar()
     {
-        $this->page_header_toolbar_btn['license'] = [
-            'icon' => 'process-icon-file icon-file-text',
-            'desc' => $this->l('License'),
-            'js' => "$('#modal_license').modal()",
-        ];
         $this->page_header_toolbar_btn['regenerate-css'] = [
             'icon' => 'process-icon-reload icon-rotate-right',
             'desc' => $this->l('Regenerate CSS'),
@@ -90,27 +83,6 @@ class AdminCESettingsController extends ModuleAdminController
 
     public function initModal()
     {
-        $ce_license = Configuration::getGlobalValue('CE_LICENSE');
-
-        $this->modals[] = [
-            'modal_id' => 'modal_license',
-            'modal_class' => 'modal-md',
-            'modal_title' => $ce_license
-                ? CESmarty::get(_CE_TEMPLATES_ . 'admin/admin.tpl', 'ce_modal_license_status')
-                : $this->l('Activate License')
-            ,
-            'modal_content' => CESmarty::sprintf(
-                _CE_TEMPLATES_ . 'admin/admin.tpl',
-                'ce_modal_license',
-                Tools::safeOutput($this->context->link->getAdminLink('AdminCESettings') . '&action=activate'),
-                $this->l(
-                    $ce_license
-                    ? 'Your website is activated. Want to activate this website by a different license?'
-                    : 'Please activate your license to get unlimited access to the template library.'
-                ),
-                $this->l($ce_license ? 'Switch License' : 'Activate')
-            ),
-        ];
         $this->modals[] = [
             'modal_id' => 'modal_replace_url',
             'modal_class' => 'modal-md',
@@ -125,27 +97,6 @@ class AdminCESettingsController extends ModuleAdminController
                 $this->l('Replace URL')
             ),
         ];
-    }
-
-    protected function processActivate()
-    {
-        $url = $this->context->link->getAdminLink('AdminCESettings');
-
-        if (Tools::getIsset('license')) {
-            Configuration::updateGlobalValue('CE_LICENSE', Tools::getValue('license'));
-            $url .= '#license';
-        } else {
-            list($p, $r) = explode('://', CE\wp_referer());
-            $encode = 'base64_encode';
-            $url = $this->activate_url . '&' . http_build_query([
-                'response_type' => 'code',
-                'client_id' => Tools::substr($encode(_COOKIE_KEY_), 0, 32),
-                'auth_secret' => rtrim($encode("$r?" . Tools::passwdGen(23 - Tools::strlen($r))), '='),
-                'state' => Tools::substr($encode($this->module->module_key), 0, 12),
-                'redirect_uri' => urlencode($url),
-            ]);
-        }
-        Tools::redirectAdmin($url);
     }
 
     public function setMedia($isNewTheme = false)

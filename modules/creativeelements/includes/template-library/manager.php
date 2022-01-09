@@ -239,11 +239,8 @@ class TemplateLibraryXManager
      */
     public function getLibraryData(array $args)
     {
-        $library_data = Api::getLibraryData(!empty($args['sync']));
-
         return [
             'templates' => $this->getTemplates(),
-            'config' => $library_data['types_data'],
         ];
     }
 
@@ -531,7 +528,6 @@ class TemplateLibraryXManager
     {
         $sources = [
             'local',
-            'remote',
         ];
 
         foreach ($sources as $source_filename) {

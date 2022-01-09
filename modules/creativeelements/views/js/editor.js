@@ -9240,16 +9240,6 @@ TemplateLibraryManager = function TemplateLibraryManager() {
 
 	var registerDefaultScreens = function registerDefaultScreens() {
 		screens = [{
-			name: 'blocks',
-			source: 'remote',
-			title: elementor.translate('blocks'),
-			type: 'block'
-		}, {
-			name: 'pages',
-			source: 'remote',
-			title: elementor.translate('pages'),
-			type: 'page'
-		}, {
 			name: 'my-templates',
 			source: 'local',
 			title: elementor.translate('my_templates')
@@ -9515,9 +9505,7 @@ TemplateLibraryManager = function TemplateLibraryManager() {
 
 				startIntent = jQuery.extend({
 					filters: {
-						source: 'remote',
-						type: remoteLibraryConfig.type,
-						subtype: 'page' === remoteLibraryConfig.type ? null : remoteLibraryConfig.category
+						source: 'local',
 					},
 					onReady: self.showTemplates
 				}, customStartIntent);

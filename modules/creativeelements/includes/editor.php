@@ -613,9 +613,7 @@ class Editor
                 'templates_no_results_title' => __('No Results Found'),
                 'templates_request_error' => __('The following error(s) occurred while processing the request:'),
                 'yes' => __('Yes'),
-                'blocks' => __('Blocks'),
-                'pages' => __('Pages'),
-                'my_templates' => __('My Templates'),
+                'my_templates' => __('Saved Templates'),
 
                 // Incompatible Device.
                 'device_incompatible_header' => __('Your browser isn\'t compatible'),

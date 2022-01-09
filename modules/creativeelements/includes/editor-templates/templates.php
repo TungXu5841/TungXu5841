@@ -61,50 +61,9 @@ defined('_PS_VERSION_') or die;
 <script type="text/template" id="tmpl-elementor-template-library-templates">
     <# var activeSource = elementor.templates.getFilter('source'); #>
     <div id="elementor-template-library-toolbar">
-        <# if ( 'remote' === activeSource ) {
-            var activeType = elementor.templates.getFilter('type');
-            #>
-            <div id="elementor-template-library-filter-toolbar-remote" class="elementor-template-library-filter-toolbar">
-                <# if ( 'page' === activeType ) { #>
-                    <div id="elementor-template-library-order">
-                        <input type="radio" id="elementor-template-library-order-new" class="elementor-template-library-order-input" name="elementor-template-library-order" value="date">
-                        <label for="elementor-template-library-order-new" class="elementor-template-library-order-label"><?= __('New') ?></label>
-                        <input type="radio" id="elementor-template-library-order-trend" class="elementor-template-library-order-input" name="elementor-template-library-order" value="trendIndex">
-                        <label for="elementor-template-library-order-trend" class="elementor-template-library-order-label"><?= __('Trend') ?></label>
-                        <input type="radio" id="elementor-template-library-order-popular" class="elementor-template-library-order-input" name="elementor-template-library-order" value="popularityIndex">
-                        <label for="elementor-template-library-order-popular" class="elementor-template-library-order-label"><?= __('Popular') ?></label>
-                    </div>
-                <# } else {
-                    var config = elementor.templates.getConfig( activeType );
-                    if ( config.categories ) { #>
-                        <div id="elementor-template-library-filter">
-                            <select id="elementor-template-library-filter-subtype" class="elementor-template-library-filter-select" data-elementor-filter="subtype">
-                                <option></option>
-                                <# config.categories.forEach( function( category ) {
-                                    var selected = category === elementor.templates.getFilter( 'subtype' ) ? ' selected' : '';
-                                    #>
-                                    <option value="{{ category }}"{{{ selected }}}>{{{ category }}}</option>
-                                <# } ); #>
-                            </select>
-                        </div>
-                    <# }
-                } #>
-                <div id="elementor-template-library-my-favorites">
-                    <# var checked = elementor.templates.getFilter( 'favorite' ) ? ' checked' : ''; #>
-                    <input id="elementor-template-library-filter-my-favorites" type="checkbox"{{{ checked }}}>
-                    <label id="elementor-template-library-filter-my-favorites-label" for="elementor-template-library-filter-my-favorites">
-                        <i class="fa" aria-hidden="true"></i>
-                        <?= __('My Favorites') ?>
-                    </label>
-                </div>
-            </div>
-        <# } else { #>
-            <div id="elementor-template-library-filter-toolbar-local" class="elementor-template-library-filter-toolbar"></div>
-        <# } #>
-        <div id="elementor-template-library-filter-text-wrapper">
-            <label for="elementor-template-library-filter-text" class="elementor-screen-only"><?= __('Search Templates:') ?></label>
-            <input id="elementor-template-library-filter-text" placeholder="<?= esc_attr__('Search') ?>">
-        </div>
+        
+        <div id="elementor-template-library-filter-toolbar-local" class="elementor-template-library-filter-toolbar"></div>
+
     </div>
     <# if ( 'local' === activeSource ) { #>
         <div id="elementor-template-library-order-toolbar-local">
@@ -130,12 +89,6 @@ defined('_PS_VERSION_') or die;
         </div>
     <# } #>
     <div id="elementor-template-library-templates-container"></div>
-    <# if ( 'remote' === activeSource ) { #>
-        <div id="elementor-template-library-footer-banner">
-            <i class="eicon-nerd" aria-hidden="true"></i>
-            <div class="elementor-excerpt"><?= __('Stay tuned! More awesome templates coming real soon.') ?></div>
-        </div>
-    <# } #>
 </script>
 
 <script type="text/template" id="tmpl-elementor-template-library-template-remote">

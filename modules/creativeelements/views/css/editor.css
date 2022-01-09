@@ -2866,8 +2866,10 @@ body.elementor-editor-preview #elementor-mode-switcher {
 .elementor-template-library-menu-item {
   display: inline-block;
   padding: 17px 0;
-  width: 115px;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 18px;
+  background-image: none !important;
+  border-bottom: none !important; }
   .elementor-template-library-menu-item.elementor-active {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#fff));
     background-image: -webkit-linear-gradient(top, #f3f3f3, #fff);

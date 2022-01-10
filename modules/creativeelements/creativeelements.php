@@ -811,4 +811,157 @@ class CreativeElements extends Module
         return !Configuration::get('PS_SHOP_ENABLE') &&
             !in_array(Tools::getRemoteAddr(), explode(',', Configuration::get('PS_MAINTENANCE_IP')));
     }
+
+    public function _getProductsPath($items_type)
+    {       
+        $items_type_path = [];
+
+        for( $i = 1; $i <= 30; $i++ ){
+            $items_type_path[$i] = 'catalog/_partials/miniatures/_partials/_product/product-' . $i . '.tpl';
+        }
+
+        $items_type_path = Wp_Helper::apply_filters( 'axoncreator_products_type_path', $items_type_path );  
+        
+        return $items_type_path[$items_type];
+    }
+    
+    public function _prepProductsSelected($settings)
+    {   
+        $content = array();
+        $data = array();
+        
+        $content['products'] = $this->execProducts('s', $settings, 0, null, null, 1);   
+        $content['lastPage'] = true;
+        
+        $content['items_type_path'] = $this->_getProductsPath($settings['items_type']);
+        
+        return $content;
+    }
+        
+    public function _prepProducts($settings)
+    {   
+        $content = array();
+        
+        $source = $settings['source'];
+        $limit = (int)$settings['limit'] <= 0 ? 10 : (int)$settings['limit'];
+        $order_by = $settings['order_by'];
+        $order_way = $settings['order_way'];
+        
+        if($source == 'c'){
+            $source = $settings['category'];
+            if ($settings['randomize']) {
+                $order_by = 'rand';
+            }
+        }
+                
+        $page = $settings['paged'];
+                
+        $content['products'] = $this->execProducts($source,  $settings, $limit, $order_by, $order_way, $page);
+        
+        $content['lastPage'] = true;
+        
+        if( $page > 1 ){
+            $content['lastPage'] = !(bool)$this->execProducts($source,  $settings, $limit, $order_by, $order_way, $page + 1);
+        }
+        
+        $content['items_type_path'] = $this->_getProductsPath($settings['items_type']);
+        
+        return $content;
+    }
+
+    protected function getProduct($id)
+    {
+        $presenter = new \PrestaShop\PrestaShop\Core\Product\ProductListingPresenter(
+            new \PrestaShop\PrestaShop\Adapter\Image\ImageRetriever($this->context->link),
+            $this->context->link,
+            new \PrestaShop\PrestaShop\Adapter\Product\PriceFormatter(),
+            new \PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever(),
+            $this->context->getTranslator()
+        );
+        $presenterFactory = new \ProductPresenterFactory($this->context);
+        $assembler = new \ProductAssembler($this->context);
+        $result = ['id_product' => $id];
+
+        try {
+            if (!$assembledProduct = $assembler->assembleProduct($result)) {
+                return false;
+            }
+            return $presenter->present(
+                $presenterFactory->getPresentationSettings(),
+                $assembledProduct,
+                $this->context->language
+            );
+        } catch (\Exception $ex) {
+            return false;
+        }
+    }
+    
+    public function getProducts($listing, $order_by, $order_dir, $limit, $id_category = 2, $products = [])
+    {                       
+        $tpls = [];
+
+        if ('products' === $listing) {
+            // Custom Products
+            if ('rand' === $order_by) {
+                shuffle($products);
+            }
+            foreach ($products as &$product) {
+                if ($product['id']) {
+                    $tpls[] = $this->getProduct($product['id']);
+                }
+            }
+            return $tpls;
+        }
+
+        $translator = $this->context->getTranslator();
+        $query = new \PrestaShop\PrestaShop\Core\Product\Search\ProductSearchQuery();
+        $query->setResultsPerPage($limit <= 0 ? 8 : (int) $limit);
+        $query->setQueryType($listing);
+
+        switch ($listing) {
+            case 'category':
+                $category = new \Category((int) $id_category);
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\Category\CategoryProductSearchProvider($translator, $category);
+                $query->setSortOrder(
+                    'rand' == $order_by
+                    ? \PrestaShop\PrestaShop\Core\Product\Search\SortOrder::random()
+                    : new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir)
+                );
+                break;
+            case 'prices-drop':
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\PricesDrop\PricesDropProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+                break;
+            case 'new-products':
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\NewProducts\NewProductsProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+                break;
+            case 'best-sales':
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\BestSales\BestSalesProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+                break;
+        }
+        $result = $searchProvider->runQuery(new \PrestaShop\PrestaShop\Core\Product\Search\ProductSearchContext($this->context), $query);
+
+        $assembler = new \ProductAssembler($this->context);
+        $presenterFactory = new \ProductPresenterFactory($this->context);
+        $presentationSettings = $presenterFactory->getPresentationSettings();
+        $presenter = new \PrestaShop\PrestaShop\Core\Product\ProductListingPresenter(
+            new \PrestaShop\PrestaShop\Adapter\Image\ImageRetriever($this->context->link),
+            $this->context->link,
+            new \PrestaShop\PrestaShop\Adapter\Product\PriceFormatter(),
+            new \PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever(),
+            $translator
+        );
+
+        foreach ($result->getProducts() as $rawProduct) {
+            $tpls[] = $presenter->present(
+                $presentationSettings,
+                $assembler->assembleProduct($rawProduct),
+                $this->context->language
+            );
+        }
+        return $tpls;
+    }
+    
 }

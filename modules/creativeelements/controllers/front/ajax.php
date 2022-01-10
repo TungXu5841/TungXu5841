@@ -92,6 +92,32 @@ class CreativeElementsAjaxModuleFrontController extends ModuleFrontController
         ]);
     }
 
+    public function ajaxProcessTabProducts()
+    {
+        $tab_data = Tools::getValue('tab_data');
+        $listing = $tab_data['listing'];
+        $order_by = $tab_data['order_by'];
+        $order_dir = $tab_data['order_dir'];
+        $limit = $tab_data['limit'];
+        $id_category = $tab_data['category_id'];
+        $products = $tab_data['products'];
+
+        $products = $this->module->getProducts($listing, $order_by, $order_dir, $limit, $id_category, $products);
+        $this->context->smarty->assign(array(
+            'products' => $products,
+        ));
+        $template = _CE_TEMPLATES_ . 'front/widgets/products.tpl';
+
+        if (!$template){
+            $template = $this->module->l('No template found', 'ajax');
+        }
+
+        $this->ajaxDie(array(
+            'html' => $this->context->smarty->fetch($template)
+        ));
+
+    }
+
     protected function ajaxDie($value = null, $controller = null, $method = null)
     {
         if (null === $controller) {

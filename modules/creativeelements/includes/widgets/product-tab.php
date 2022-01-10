@@ -184,7 +184,8 @@ class WidgetProductTab extends WidgetProductBase
                         'tab_title' => __('Tab #2'),
                         'listing' => 'new-products',
                         'order_by' => 'position',
-                        'order_dir' => 8,
+                        'order_dir' => 'asc',
+                        'limit' => 8,
                     ],
                 ],
                 'title_field' => '{{{ tab_title }}}',
@@ -201,6 +202,15 @@ class WidgetProductTab extends WidgetProductBase
 			]
 		);
 			
+			$this->addControl(
+				'enable_ajax',
+				[
+					'label' 		=> __('Enable ajax tab'),
+					'type' 			=> ControlsManager::SWITCHER,
+					'return_value' 	=> 'yes',
+					'default' 		=> 'yes', 
+				]
+			);
 			$this->addControl(
 				'enable_slider',
 				[
@@ -528,20 +538,36 @@ class WidgetProductTab extends WidgetProductBase
         ) {
             return;
         }
-
+        $ajaxtab = false;
+        if($settings['enable_ajax']){
+        	$ajaxtab = true;
+        }
 		?>
-		<div class="product-tabs-widget">
-			<div class="tab-title-wrapper">
+		<div class="product-tabs-widget" data-ajax="<?= $ajaxtab; ?>">
+			<div class="tab-titles-wrapper">
 				<ul>
-					<?php foreach ( $settings['tabs'] as $index => $tab ) : ?>
-						<li>
-							<a href="#<?= $tab['_id'] ?>" class="nav-link"><?= $tab['tab_title'] ?></a>
+					<?php foreach ( $settings['tabs'] as $index => $tab ) : 
+						$tab_data = array();
+						if($settings['enable_ajax']){
+							$tab_data = array(
+								'listing' => $tab['listing'],
+								'order_by' => $tab['order_by'],
+								'order_dir' => $tab['order_dir'],
+								'limit' => $tab['limit'],
+								'category_id' => $tab['category_id'],
+								'products' => $tab['products'],
+							);
+						}
+						?>
+						<li data-id="<?= $tab['_id'] ?>" class="tab-title" <?php if($settings['enable_ajax']){ ?> data-tab_data='<?= json_encode($tab_data)?>' <?php } ?>>
+							<?= $tab['tab_title'] ?>
 						</li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
-			<div class="tab-content-wrapper">
+			<div class="tab-contents-wrapper">
 				<?php foreach ( $settings['tabs'] as $index => $tab ) :
+
 					if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
 			            $tab['order_by'] = 'rand';
 			        }
@@ -555,9 +581,12 @@ class WidgetProductTab extends WidgetProductBase
 			            $tab['products']
 			        );
 					?>
-					<div class="tab-pane" id="<?= $tab['_id'] ?>">
+					<div class="tab-pane" id="tab-pane-<?= $tab['_id'] ?>">
 						<div class="">
 							<?php 
+
+								if($settings['enable_ajax']) continue;
+
 								// Store product temporary if exists
 						        isset($this->context->smarty->tpl_vars['product']) && $tmp = $this->context->smarty->tpl_vars['product'];
 

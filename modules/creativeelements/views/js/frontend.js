@@ -2881,6 +2881,7 @@ module.exports = function ($) {
 		'contact-form.default': __webpack_require__(200),
 		'email-subscription.default': __webpack_require__(200),
 		'slideshow.default': __webpack_require__(201),
+		'product-tab.default': __webpack_require__(202),
 	};
 
 	var handlersInstances = {};
@@ -4620,6 +4621,78 @@ module.exports = function ($scope) {
 
 /***/ }),
 
+/***/ 202:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
+	onInit: function onInit() {
+		var _this = this;
+		var tabWidget = this.$element.find('.product-tabs-widget');
+		console.log(tabWidget.data('ajax')); 
+		//if(!tabWidget.data(ajax)) return;
+
+		var cache = [];	
+		if( tabWidget.find('.tab-pane').length = 1 ) {
+			var first_tab_id = $(this).find('.tab-title').eq(0).data('id');
+	        cache[first_tab_id] = $(this).find('.tab-pane').html()
+	    }
+	    var height = $(this).find('.tab-pane').eq(0).height();
+		tabWidget.find('.tab-title').on('click' , function(e){
+			e.preventDefault();
+	        var $this = $(this),
+	            tab_data = $this.data('tab_data'),
+	            id_tab = $this.data('id');
+	        tabWidget.find('.rt-tabs li').removeClass('active');
+	        tabWidget.find('.tab-pane').removeClass('opened');
+	        $this.parent().addClass('active');
+	        _this.loadTab(tab_data , $this, id_tab, tabWidget.find('.tab-contents-wrapper') , cache, height, function(data) {
+	            if( data ) {
+	                tabWidget.append(data);
+	            }
+	        });
+			
+		})
+			
+	},
+	loadTab: function loadTab(tab_data, $this, id_tab, tabs, cache , height, callback){
+		if( cache[id_tab] ) {
+			tabs.find('.tab-pane').removeClass('opened');
+			$('#tab-pane--'+ id_tab).addClass('opened');
+	        return;
+	    } else {
+	        tabs.append('<div class="tab-loading" style="height:'+ height +'px"></div>');
+	    };
+		$.ajax({
+	        url: 'http://localhost/framework/en/module/creativeelements/ajax',
+	        data: {
+	            'action': 'tabProducts',
+				'tab_data' : tab_data,
+				'id_tab' : id_tab,
+	        },
+	        dataType: 'json',
+	        method: 'POST',
+	        success: function(data) {
+	        	cache[id_tab] = data;
+	        	callback(data);
+	        },
+	        error: function(data) {
+	            console.log('Ajax error');
+	        },
+	        complete: function() {
+	            tabs.find('.tab-loading').remove();
+	        },
+	    });
+	}
+});
+
+module.exports = function ($scope) {
+	ceFrontend.elementsHandler.addHandler(AjaxTabHandler, { $element: $scope });
+};
+
+/***/ }),
 /******/ });
 
 // Quick View
@@ -4639,3 +4712,6 @@ $(function ceReady() {
 	// Fix for category description
 	$('#js-product-list-header').attr('id', 'product-list-header');
 });
+
+
+

@@ -15,6 +15,7 @@ class CreativeElementsAjaxModuleFrontController extends ModuleFrontController
 
     public function postProcess()
     {
+        parent::initContent();
         $this->action = Tools::getValue('action');
 
         Tools::getValue('submitMessage') && $this->ajaxProcessSubmitMessage();

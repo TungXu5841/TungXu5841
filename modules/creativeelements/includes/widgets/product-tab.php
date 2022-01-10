@@ -585,19 +585,19 @@ class WidgetProductTab extends WidgetProductBase
 						<div class="">
 							<?php 
 
-								if($settings['enable_ajax']) continue;
+								if($settings['enable_ajax']){
+									// Store product temporary if exists
+							        isset($this->context->smarty->tpl_vars['product']) && $tmp = $this->context->smarty->tpl_vars['product'];
 
-								// Store product temporary if exists
-						        isset($this->context->smarty->tpl_vars['product']) && $tmp = $this->context->smarty->tpl_vars['product'];
+							        foreach ($products as &$product) {
+							            $this->context->smarty->assign('product', $product);
+							            $slides[] = '<div class="slick-slide-inner">' . $this->context->smarty->fetch($tpl) . '</div>';
+							        }
+							        // Restore product if exists
+							        isset($tmp) && $this->context->smarty->tpl_vars['product'] = $tmp;
 
-						        foreach ($products as &$product) {
-						            $this->context->smarty->assign('product', $product);
-						            $slides[] = '<div class="slick-slide-inner">' . $this->context->smarty->fetch($tpl) . '</div>';
-						        }
-						        // Restore product if exists
-						        isset($tmp) && $this->context->smarty->tpl_vars['product'] = $tmp;
-
-						        $this->renderCarousel($settings, $slides);
+							        $this->renderCarousel($settings, $slides);
+								}
 							?>
 						</div>
 					</div>

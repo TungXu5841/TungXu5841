@@ -544,11 +544,19 @@ class WidgetProductTab extends WidgetProductBase
         }
 		?>
 		<div class="product-tabs-widget" data-ajax="<?= $ajaxtab; ?>">
-			<div class="tab-titles-wrapper">
-				<ul>
-					<?php foreach ( $settings['tabs'] as $index => $tab ) : 
-						$tab_data = array();
-						if($settings['enable_ajax']){
+			<ul class="nav nav-tabs">
+				<?php foreach ( $settings['tabs'] as $index => $tab ) : ?>
+					<li data-id="<?= $tab['_id'] ?>" class="nav-item">
+						<a class="nav-link  <?php if(!$index) { ?>active<?php } ?>" href="#<?= $tab['_id'] ?>" data-toggle="tab" role="tab"><?= $tab['tab_title'] ?></a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<div class="tab-content">
+				<?php foreach ( $settings['tabs'] as $index => $tab ) :
+					$products = array();
+					$tab_data = array();
+					if($settings['enable_ajax']){
+						if($index){
 							$tab_data = array(
 								'listing' => $tab['listing'],
 								'order_by' => $tab['order_by'],
@@ -557,49 +565,29 @@ class WidgetProductTab extends WidgetProductBase
 								'category_id' => $tab['category_id'],
 								'products' => $tab['products'],
 							);
-						}
-						?>
-						<li data-id="<?= $tab['_id'] ?>" class="tab-title" <?php if($settings['enable_ajax']){ ?> data-tab_data='<?= json_encode($tab_data)?>' <?php } ?>>
-							<?= $tab['tab_title'] ?>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
-			<div class="tab-contents-wrapper">
-				<?php foreach ( $settings['tabs'] as $index => $tab ) :
+						}else{
+							if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
+					            $tab['order_by'] = 'rand';
+					        }
 
-					if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
-			            $tab['order_by'] = 'rand';
-			        }
-
-			        $products = $this->getProducts(
-			            $tab['listing'],
-			            $tab['order_by'],
-			            $tab['order_dir'],
-			            $tab['limit'],
-			            $tab['category_id'],
-			            $tab['products']
-			        );
+					        $products = $this->getProducts(
+					            $tab['listing'],
+					            $tab['order_by'],
+					            $tab['order_dir'],
+					            $tab['limit'],
+					            $tab['category_id'],
+					            $tab['products']
+					        );
+						}					
+						
+					}
 					?>
-					<div class="tab-pane" id="tab-pane-<?= $tab['_id'] ?>">
-						<div class="">
-							<?php 
-
-								if($settings['enable_ajax']){
-									// Store product temporary if exists
-							        isset($this->context->smarty->tpl_vars['product']) && $tmp = $this->context->smarty->tpl_vars['product'];
-
-							        foreach ($products as &$product) {
-							            $this->context->smarty->assign('product', $product);
-							            $slides[] = '<div class="slick-slide-inner">' . $this->context->smarty->fetch($tpl) . '</div>';
-							        }
-							        // Restore product if exists
-							        isset($tmp) && $this->context->smarty->tpl_vars['product'] = $tmp;
-
-							        $this->renderCarousel($settings, $slides);
-								}
-							?>
-						</div>
+					<div class="tab-pane <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $tab['_id'] ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
+						<?php 
+							if($products){
+								echo $this->context->smarty->fetch( _CE_PATH_ . 'views/templates/front/widgets/products.tpl', ['products' => $products] );
+							}
+						?>
 					</div>
 				<?php endforeach; ?>
 			</div>

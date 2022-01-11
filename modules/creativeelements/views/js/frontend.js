@@ -1146,7 +1146,7 @@ module.exports = elementorModules.frontend.handlers.Base.extend({
 	getDefaultSettings: function getDefaultSettings() {
 		return {
 			selectors: {
-				tabTitle: '.elementor-tab-title',
+				tabTitle: '.elementor-nav-item',
 				tabContent: '.elementor-tab-content'
 			},
 			classes: {
@@ -4630,39 +4630,39 @@ module.exports = function ($scope) {
 var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	onInit: function onInit() {
 		var _this = this;
-		var tabWidget = this.$element.find('.product-tabs-widget');
+		var tabWidget = this.$element.find('.product-tabs-widget'),
+			tabTitle = tabWidget.find('.nav-tabs'),
+			tabContent = tabWidget.find('.tab-content');
 
 		if(!tabWidget.data('ajax')) return;
 
 		var cache = [];	
-		if( tabWidget.find('.tab-pane').length = 1 ) {
-			var first_tab_id = $(this).find('.tab-title').eq(0).data('id');
-	        cache[first_tab_id] = $(this).find('.tab-pane').html()
+		if( tabContent.find('.tab-pane').length = 1 ) {
+			var first_tab_id = tabTitle.find('.nav-item').eq(0).data('id');
+	        cache[first_tab_id] = tabContent.find('.tab-pane').html()
 	    }
-	    var height = $(this).find('.tab-pane').eq(0).height();
-		tabWidget.find('.tab-title').on('click' , function(e){
+	    var height = tabContent.find('.tab-pane').eq(0).height();
+		tabTitle.find('.nav-item').on('click' , function(e){
 			e.preventDefault();
 	        var $this = $(this),
-	        	tabContent = tabWidget.find('.tab-contents-wrapper'),
-	            tab_data = $this.data('tab_data'),
-	            id_tab = $this.data('id');
-	        tabWidget.find('.rt-tabs li').removeClass('active');
-	        tabWidget.find('.tab-pane').removeClass('opened');
-	        $this.parent().addClass('active');
-	        _this.loadTab(tab_data , $this, id_tab, tabContent , cache, height, function(data) {
-	        	console.log(data);
+	            idTab = $this.data('id'),
+	            tabData = $('#tab-pane-' + idTab).data('tab_content');
+
+	        tabTitle.find('.nav-item .nav-link').removeClass('active');
+	        tabContent.find('.tab-pane').removeClass('active');
+	        $('#tab-pane-'+ idTab).addClass('active');
+	        $this.find('.nav-link').addClass('active');
+	        _this.loadTab(tabData , $this, idTab, tabContent , cache, height, function(data) {
 	            if( data ) {
-	                tabContent.append(data);
+	                tabContent.find('#tab-pane-' + idTab).append(data.html);
 	            }
 	        });
 			
 		})
 			
 	},
-	loadTab: function loadTab(tab_data, $this, id_tab, tabs, cache , height, callback){
-		if( cache[id_tab] ) {
-			tabs.find('.tab-pane').removeClass('opened');
-			$('#tab-pane--'+ id_tab).addClass('opened');
+	loadTab: function loadTab(tabData, $this, idTab, tabs, cache , height, callback){
+		if( cache[idTab] ) {
 	        return;
 	    } else {
 	        tabs.append('<div class="tab-loading" style="height:'+ height +'px"></div>');
@@ -4671,13 +4671,13 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	        url: 'http://localhost/framework/module/creativeelements/ajax',
 	        data: {
 	            'action': 'tabProducts',
-				'tab_data' : tab_data,
-				'id_tab' : id_tab,
+				'tabData' : tabData,
+				'idTab' : idTab,
 	        },
 	        dataType: 'json',
 	        method: 'POST',
 	        success: function(data) {
-	        	cache[id_tab] = data;
+	        	cache[idTab] = data;
 	        	callback(data);
 	        },
 	        error: function(data) {

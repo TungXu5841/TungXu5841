@@ -95,7 +95,7 @@ class CreativeElementsAjaxModuleFrontController extends ModuleFrontController
 
     public function ajaxProcessTabProducts()
     {
-        $tab_data = Tools::getValue('tab_data');
+        $tab_data = Tools::getValue('tabData');
         $listing = $tab_data['listing'];
         $order_by = $tab_data['order_by'];
         $order_dir = $tab_data['order_dir'];

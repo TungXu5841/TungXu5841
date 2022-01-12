@@ -942,6 +942,7 @@ class Frontend extends App
             'version' => _CE_VERSION_,
             'urls' => [
                 'assets' => _MODULE_DIR_ . 'creativeelements/views/',
+                'front_ajax' => \Context::getContext()->link->getModuleLink('creativeelements', 'ajax')
             ],
         ];
 

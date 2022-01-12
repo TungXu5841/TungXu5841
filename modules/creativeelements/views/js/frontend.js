@@ -4628,13 +4628,30 @@ module.exports = function ($scope) {
 
 
 var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
+	getDefaultSettings: function getDefaultSettings() {
+		return {
+			selectors: {
+				carousel: '.elementor-block-carousel'
+			}
+		};
+	},
+
+	getDefaultElements: function getDefaultElements() {
+		var selectors = this.getSettings('selectors');
+
+		return {
+			$carousel: this.$element.find(selectors.carousel)
+		};
+	},
+
 	onInit: function onInit() {
 		var _this = this;
+		
 		var tabWidget = this.$element.find('.product-tabs-widget'),
 			tabTitle = tabWidget.find('.nav-tabs'),
 			tabContent = tabWidget.find('.tab-content');
 
-		if(!tabWidget.data('ajax')) return;
+		_this.initSlider(tabWidget.find('.elementor-block-carousel'));	
 
 		var cache = [];	
 		if( tabContent.find('.tab-pane').length = 1 ) {
@@ -4652,14 +4669,88 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	        tabContent.find('.tab-pane').removeClass('active');
 	        $('#tab-pane-'+ idTab).addClass('active');
 	        $this.find('.nav-link').addClass('active');
+
+	        if(!tabWidget.data('ajax')){
+	        	return;
+	        }
 	        _this.loadTab(tabData , $this, idTab, tabContent , cache, height, function(data) {
 	            if( data ) {
 	                tabContent.find('#tab-pane-' + idTab).append(data.html);
+	                _this.initSlider($('#tab-pane-'+ idTab));
 	            }
 	        });
 			
-		})
-			
+		})	
+	},
+	initSlider: function initSlider($target){
+		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
+
+		var elementSettings = this.getElementSettings(),
+			slidesToShow = +elementSettings.slides_to_show || elementSettings.default_slides_desktop,
+			isSingleSlide = 1 === slidesToShow,
+			centerPadding = elementSettings.center_padding && elementSettings.center_padding.size + '',
+			centerPaddingTablet = elementSettings.center_padding_tablet && elementSettings.center_padding_tablet.size + '',
+			centerPaddingMobile = elementSettings.center_padding_mobile && elementSettings.center_padding_mobile.size + '',
+			breakpoints = ceFrontend.config.breakpoints;
+
+		var slickOptions = {
+			touchThreshold: 100,
+			slidesToShow: slidesToShow,
+			slidesToScroll: +elementSettings.slides_to_scroll || 1,
+			swipeToSlide: !elementSettings.slides_to_scroll,
+			variableWidth: 'yes' === elementSettings.variable_width,
+			centerMode: 'yes' === elementSettings.center_mode,
+			centerPadding: centerPadding ? centerPadding + elementSettings.center_padding.unit : void 0,
+			autoplay: 'yes' === elementSettings.autoplay,
+			autoplaySpeed: elementSettings.autoplay_speed,
+			infinite: 'yes' === elementSettings.infinite,
+			pauseOnHover: 'yes' === elementSettings.pause_on_hover,
+			speed: elementSettings.speed,
+			arrows: -1 !== ['arrows', 'both'].indexOf(elementSettings.navigation),
+			dots: -1 !== ['dots', 'both'].indexOf(elementSettings.navigation),
+			rtl: 'rtl' === elementSettings.direction,
+			responsive: [{
+				breakpoint: breakpoints.lg,
+				settings: {
+					centerPadding: centerPaddingTablet ? centerPaddingTablet + elementSettings.center_padding_tablet.unit : void 0,
+					slidesToShow: +elementSettings.slides_to_show_tablet || elementSettings.default_slides_tablet,
+					slidesToScroll: +elementSettings.slides_to_scroll_tablet || 1,
+					swipeToSlide: !elementSettings.slides_to_scroll_tablet,
+					autoplay: 'yes' === elementSettings.autoplay_tablet,
+					infinite: elementSettings.infinite_tablet ? 'yes' === elementSettings.infinite_tablet : void 0
+				}
+			}, {
+				breakpoint: breakpoints.md,
+				settings: {
+					centerPadding: centerPaddingMobile ? centerPaddingMobile + elementSettings.center_padding_mobile.unit : (
+						centerPaddingTablet ? centerPaddingTablet + elementSettings.center_padding_tablet.unit : void 0
+					),
+					slidesToShow: +elementSettings.slides_to_show_mobile || elementSettings.default_slides_mobile,
+					slidesToScroll: +elementSettings.slides_to_scroll_mobile || 1,
+					swipeToSlide: !elementSettings.slides_to_scroll_mobile,
+					autoplay: 'yes' === elementSettings.autoplay_mobile,
+					infinite: elementSettings.infinite_mobile ? 'yes' === elementSettings.infinite_mobile : void 0
+				}
+			}, {
+				breakpoint: 320,
+				settings: {
+					centerPadding: centerPaddingMobile ? centerPaddingMobile + elementSettings.center_padding_mobile.unit : (
+						centerPaddingTablet ? centerPaddingTablet + elementSettings.center_padding_tablet.unit : void 0
+					),
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					swipeToSlide: !elementSettings.slides_to_scroll_mobile,
+					autoplay: 'yes' === elementSettings.autoplay_mobile,
+					infinite: elementSettings.infinite_mobile ? 'yes' === elementSettings.infinite_mobile : void 0
+				}
+			}]
+		};
+
+		if (isSingleSlide) {
+			slickOptions.fade = 'fade' === elementSettings.effect;
+		}
+
+		$target.slick(slickOptions);
 	},
 	loadTab: function loadTab(tabData, $this, idTab, tabs, cache , height, callback){
 		if( cache[idTab] ) {
@@ -4668,7 +4759,7 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	        tabs.append('<div class="tab-loading" style="height:'+ height +'px"></div>');
 	    };
 		$.ajax({
-	        url: 'http://localhost/framework/module/creativeelements/ajax',
+	        url: ceFrontend.config.urls.front_ajax,
 	        data: {
 	            'action': 'tabProducts',
 				'tabData' : tabData,

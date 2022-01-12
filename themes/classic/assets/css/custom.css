@@ -7,3 +7,10 @@
 	line-height: 35px;
 	padding: 0;
 }
+
+.tab-content>.tab-pane:not(.active){
+	display: block;
+    height: 0;
+    overflow-y: hidden;
+    min-height: 0;
+}

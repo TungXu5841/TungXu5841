@@ -530,18 +530,18 @@ class WidgetProductTab extends WidgetProductBase
             return;
         }
 		$settings = $this->getSettingsForDisplay();
-		//echo '<pre>'; print_r($settings); echo '</pre>'; die('x_x');
-		$tpl = "catalog/_partials/miniatures/product.tpl";
-
-        if (!file_exists(_PS_THEME_DIR_ . "templates/$tpl") &&
-            !file_exists(_PS_ALL_THEMES_DIR_ . "{$this->parentTheme}/templates/$tpl")
-        ) {
-            return;
-        }
+		
         $ajaxtab = false;
         if($settings['enable_ajax']){
         	$ajaxtab = true;
         }
+        $class_tab = [];
+        if($settings['enable_slider']){
+        	$class_tab[]= 'elementor-block-carousel';
+        }
+        $class_tab[] = 'items-desktop-'. ($settings['slides_to_show'] ? $settings['slides_to_show'] : $settings['default_slides_desktop']);
+        $class_tab[] = 'items-tablet-'. ($settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : $settings['default_slides_tablet']);
+        $class_tab[] = 'items-mobile-'. ($settings['slides_to_show_mobile'] ? $settings['slides_to_show_mobile'] : $settings['default_slides_mobile']);
 		?>
 		<div class="product-tabs-widget" data-ajax="<?= $ajaxtab; ?>">
 			<ul class="nav nav-tabs">
@@ -555,38 +555,39 @@ class WidgetProductTab extends WidgetProductBase
 				<?php foreach ( $settings['tabs'] as $index => $tab ) :
 					$products = array();
 					$tab_data = array();
-					if($settings['enable_ajax']){
-						if($index){
-							$tab_data = array(
-								'listing' => $tab['listing'],
-								'order_by' => $tab['order_by'],
-								'order_dir' => $tab['order_dir'],
-								'limit' => $tab['limit'],
-								'category_id' => $tab['category_id'],
-								'products' => $tab['products'],
-							);
-						}else{
-							if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
-					            $tab['order_by'] = 'rand';
-					        }
+					
+					if($settings['enable_ajax'] && $index){
+						$tab_data = array(
+							'listing' => $tab['listing'],
+							'order_by' => $tab['order_by'],
+							'order_dir' => $tab['order_dir'],
+							'limit' => $tab['limit'],
+							'category_id' => $tab['category_id'],
+							'products' => $tab['products'],
+						);
+					}else{
+						if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
+				            $tab['order_by'] = 'rand';
+				        }
 
-					        $products = $this->getProducts(
-					            $tab['listing'],
-					            $tab['order_by'],
-					            $tab['order_dir'],
-					            $tab['limit'],
-					            $tab['category_id'],
-					            $tab['products']
-					        );
-						}					
-						
-					}
+				        $products = $this->getProducts(
+				            $tab['listing'],
+				            $tab['order_by'],
+				            $tab['order_dir'],
+				            $tab['limit'],
+				            $tab['category_id'],
+				            $tab['products']
+				        );
+					}					
+
 					?>
 					<div class="tab-pane <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $tab['_id'] ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
 						<?php 
-							if($products){
-								echo $this->context->smarty->fetch( _CE_PATH_ . 'views/templates/front/widgets/products.tpl', ['products' => $products] );
-							}
+							if($products): ?>
+							<div class="<?= implode(' ', $class_tab)?>">
+								<?php echo $this->context->smarty->fetch( _CE_PATH_ . 'views/templates/front/widgets/products.tpl', ['products' => $products] ); ?>
+							</div>	
+							<?php endif;
 						?>
 					</div>
 				<?php endforeach; ?>

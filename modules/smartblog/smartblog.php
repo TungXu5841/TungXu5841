@@ -294,7 +294,7 @@ class smartblog extends Module
 	protected function CreateSmartBlogTabs()
 	{
 
-		$postabID = Tab::getIdFromClassName('PosThemeMenu');
+		$postabID = Tab::getIdFromClassName('VecThemeMenu');
 		$langs                = Language::getLanguages();
 		$smarttab             = new Tab();
 		$smarttab->class_name = 'SMARTBLOG';
@@ -347,7 +347,7 @@ class smartblog extends Module
 			);
 		}
 
-		for ($i = 1; $i <= 3; $i++) {
+		for ($i = 1; $i <= 2; $i++) {
 			if ($i == 1) :
 				$type_name = 'home-default';
 				$width     = '470';
@@ -358,11 +358,6 @@ class smartblog extends Module
 				$width     = '1050';
 				$height    = '646';
 				$type      = 'Category';
-			elseif ($i == 3) :
-				$type_name = 'author-default';
-				$width     = '54';
-				$height    = '54';
-				$type      = 'Author';
 			endif;
 			$damiimgtype = 'INSERT INTO ' . _DB_PREFIX_ . "smart_blog_imagetype (type_name,width,height,type,active) VALUES ('" . $type_name . "','" . $width . "','" . $height . "','" . $type . "',1);";
 			$ret        &= Db::getInstance()->execute($damiimgtype);
@@ -426,7 +421,7 @@ class smartblog extends Module
         VALUES(' . (int) $i . ',' . (int) $this->smart_shop_id . ')'
 			);
 		}
-		for ($i = 1; $i <= 4; $i++) {
+		for ($i = 1; $i <= 3; $i++) {
 			if ($i == 1) :
 				$type_name = 'home-default';
 				$width     = '470';
@@ -442,11 +437,6 @@ class smartblog extends Module
 				$width     = '1410';
 				$height    = '868';
 				$type      = 'post';
-			elseif ($i == 4) :
-				$type_name = 'author-default';
-				$width     = '54';
-				$height    = '54';
-				$type      = 'Author';
 			endif;
 			$damiimgtype = 'INSERT INTO ' . _DB_PREFIX_ . "smart_blog_imagetype (type_name,width,height,type,active) VALUES ('" . $type_name . "','" . $width . "','" . $height . "','" . $type . "',1);";
 			Db::getInstance()->execute($damiimgtype);
@@ -597,6 +587,7 @@ class smartblog extends Module
 			Configuration::updateValue('smartcustomcss', Tools::getvalue('smartcustomcss'), true);
 			Configuration::updateValue('smartshowhomepost', Tools::getvalue('smartshowhomepost'));
 
+			$this->processImageUpload($_FILES);
 			$html   = $this->displayConfirmation($this->trans('The settings have been updated successfully.', [], 'Modules.Smartblog.Smartblog'));
 
 			$helper = $this->SettingForm();
@@ -765,11 +756,46 @@ class smartblog extends Module
 		return $helper;
 	}
 
+	public function processImageUpload($FILES)
+	{
+		if (isset($FILES['avatar']) && isset($FILES['avatar']['tmp_name']) && !empty($FILES['avatar']['tmp_name'])) {
+			if (ImageManager::validateUpload($FILES['avatar'], 4000000)) {
+				return $this->displayError($this->trans('Invalid image', [], 'Modules.Smartblog.Smartblog'));
+			} else {
+				$ext       = Tools::substr($FILES['avatar']['name'], strrpos($FILES['avatar']['name'], '.') + 1);
+				$file_name = 'avatar.' . $ext;
+				$path      = _PS_MODULE_DIR_ . 'smartblog/images/avatar/' . $file_name;
+				if (!move_uploaded_file($FILES['avatar']['tmp_name'], $path)) {
+					return $this->displayError($this->trans('An error occurred while attempting to upload the file.', [], 'Modules.Smartblog.Smartblog'));
+				} else {
+					$author_types = BlogImageType::GetImageAllType('author');
+					foreach ($author_types as $image_type) {
+						$dir = _PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar-' . Tools::stripslashes($image_type['type_name']) . '.jpg';
+						if (file_exists($dir)) {
+							unlink($dir);
+						}
+					}
+					$images_types = BlogImageType::GetImageAllType('author');
+					foreach ($images_types as $image_type) {
+						ImageManager::resize(
+							$path,
+							_PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar-' . Tools::stripslashes($image_type['type_name']) . '.jpg',
+							(int) $image_type['width'],
+							(int) $image_type['height']
+						);
+					}
+				}
+			}
+		}
+	}
 
 	public function SettingForm()
 	{
 		$blog_url                     = self::GetSmartBlogLink('module-smartblog-list');
-		
+		$img_desc                     = '';
+		$img_desc                    .= '' . $this->trans('Upload an Avatar from your computer. N.B : Only jpg image is allowed', [], 'Modules.Smartblog.Smartblog');
+		$img_desc                    .= '<br/><img style="clear:both;border:1px solid black;" alt="" src="' . __PS_BASE_URI__ . 'modules/smartblog/images/avatar/avatar.jpg" height="100" width="100"/><br />';
+
 		$orders = array(
 			array(
 				'id_order' => "ASC", 
@@ -1031,6 +1057,13 @@ class smartblog extends Module
 							'label' => $this->trans('Last Name, First Name', [], 'Modules.Smartblog.Smartblog'),
 						),
 					),
+				),
+				array(
+					'type'          => 'file',
+					'label'         => $this->trans('AVATAR Image:', [], 'Modules.Smartblog.Smartblog'),
+					'name'          => 'avatar',
+					'display_image' => false,
+					'desc'          => $img_desc,
 				),
 				array(
 					'type'     => 'switch',
@@ -1400,6 +1433,7 @@ class smartblog extends Module
 			'smartblog_search'              => array(
 				'controller' => 'search',
 				'rule'       => $alias . '/search',
+				'keywords'   => array(),
 				'params'     => array(
 					'fc'     => 'module',
 					'module' => 'smartblog',

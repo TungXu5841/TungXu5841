@@ -51,7 +51,13 @@
     </nav>
   {/if}
 {/block}
+{block name='page_title'}
+  <header class="page-header">
+    <h1>{l s='Search' d='Modules.Smartblog.Searchresult'}</h1> 
+  </header>
+  {/block}
 {block name='page_content'}
+    <h3>{l s='Results for keyword'  d='Modules.Smartblog.Searchresult'}: "{$smartsearch}"</h3>
     {if $postcategory == ''}
         {include file="module:smartblog/views/templates/front/search-not-found.tpl" postcategory=$postcategory}
     {else}

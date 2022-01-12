@@ -105,6 +105,7 @@ class smartblogsearchModuleFrontController extends smartblogModuleFrontControlle
             'smartshownoimg' => Configuration::get('smartshownoimg'),
             'smartshowauthor' => Configuration::get('smartshowauthor'),
             'smartblogliststyle' => Configuration::get('smartblogliststyle'),
+            'smartblogtitle' => Configuration::get( 'smartblogmetatitle' ),
             'post_per_page' => $posts_per_page,
             'smartsearch' => $keyword,
             'pagenums' => $totalpages - 1,

@@ -31,6 +31,11 @@ class WidgetLinksList extends WidgetBase {
 		return 'eicon-editor-list-ul';
 	}
 
+	public function getCategories() 
+	{
+		return ['premium'];
+	}
+
 	protected function _registerControls() {
 		
 		$this->startControlsSection(

@@ -17,12 +17,14 @@ class WidgetSlideshow extends WidgetBase {
 	{
 		return 'Slideshow';
 	}
-	
 	public function getIcon() 
 	{
 		return 'eicon-slider-album';
 	}
-	
+	public function getCategories() 
+	{
+		return ['premium'];
+	}
 	protected function _registerControls() {
 		$animations = array(
 			'' => __('Default' ), 

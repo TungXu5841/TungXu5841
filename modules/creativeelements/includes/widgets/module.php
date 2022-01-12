@@ -20,7 +20,7 @@ class WidgetModule extends WidgetBase
 
     public function getTitle()
     {
-        return __('Module');
+        return __('PS Module');
     }
 
     public function getIcon()

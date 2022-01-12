@@ -295,7 +295,7 @@ class ElementsManager
                 'icon' => 'eicon-font',
             ],
             'premium' => [
-                'title' => __('Premium'),
+                'title' => __('Advanced'),
                 'icon' => 'fa fa-shopping-bag',
             ],
             'theme-elements' => [

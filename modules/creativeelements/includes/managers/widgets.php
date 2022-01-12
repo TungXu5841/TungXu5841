@@ -83,7 +83,6 @@ class WidgetsManager
             'product-carousel',
             'product-box',
             'product-tab',
-            'layer-slider',
             'call-to-action',
             'flip-box',
             'animated-headline',
@@ -107,7 +106,6 @@ class WidgetsManager
             'currency-selector',
         ];
         
-        $build_widgets_filename[] = 'image-slider';
         $build_widgets_filename[] = 'category-tree';
         
         $build_widgets_filename[] = 'module';

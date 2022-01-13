@@ -58,6 +58,33 @@ $this->fields_form[]['form'] = array(
             ],
         ),
         array(
+            'type'     => 'select',
+            'label'    => $this->trans('Columns', [], 'Modules.Smartblog.Smartblog'),
+            'name'     => 'smartpostperrow',
+            'options' => [
+                'query' => array(
+                    array(
+                        'id' => '1', 
+                        'item' => '1' 
+                    ),
+                    array(
+                        'id' => '2', 
+                        'item' => '2' 
+                    ),
+                    array(
+                        'id' => '3', 
+                        'item' => '3' 
+                    ),
+                    array(
+                        'id' => '4', 
+                        'item' => '4' 
+                    )
+                ),
+                'id' => 'id',
+                'name' => 'item',
+            ],
+        ),
+        array(
             'type' => 'infoheading',
             'label' => $this->l('Blog single'),
             'name'=> 'blog-single'

@@ -204,6 +204,8 @@ class smartblogListModuleFrontController extends smartblogModuleFrontController
 				'post_per_page'        => $posts_per_page,
 				'pagenums'             => $totalpages - 1,
 				'totalpages'           => $totalpages,
+				'columns'			   => Configuration::get('smartpostperrow'),
+				'post_style'		   => Configuration::get('smartstyle')
 			)
 		);
 

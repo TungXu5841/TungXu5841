@@ -18,8 +18,9 @@ defined('_PS_VERSION_') or die;
  *
  * @since 1.0.0
  */
-class WidgetVSmartblog extends WidgetBase
+class WidgetVSmartBlog extends WidgetBase
 {
+    use CarouselTrait;
     /**
      * Get widget name.
      *
@@ -62,7 +63,7 @@ class WidgetVSmartblog extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-commenting-o';
+        return 'eicon-blockquote';
     }
 
     /**
@@ -128,7 +129,6 @@ class WidgetVSmartblog extends WidgetBase
                 'type' => ControlsManager::SELECT,
                 'default' => 'style1',
                 'options' => [
-                    ''       => __('Default'),
                     'style1' => __('Style 1'),
                     'style2' => __('Style 2'),
                     'style3' => __('Style 3'),
@@ -136,8 +136,22 @@ class WidgetVSmartblog extends WidgetBase
                 ],
             ]
         );
+        $this->addControl(
+            'enable_slider',
+            [
+                'type' => ControlsManager::HIDDEN,
+                'default' => 'yes',
+            ]
+        );
 
         $this->endControlsSection();
+        $this->registerCarouselSection([
+            'default_slides_desktop' => 3,
+            'default_slides_tablet' => 2,
+            'default_slides_mobile' => 1,
+        ]);
+
+        $this->registerNavigationStyleSection();
     }
 
     /**
@@ -150,42 +164,51 @@ class WidgetVSmartblog extends WidgetBase
      */
     protected function render()
     {
+        $context = \Context::getContext();
         $settings = $this->getSettingsForDisplay();
-
-        if (empty($settings['title'])) {
-            return;
+        //echo '<pre>'; print_r($settings); echo '</pre>'; die('x_x');
+        $limit =  4;
+        if((int)$settings['limit']){
+            $limit = (int)$settings['limit'];
         }
+        $posts = \SmartBlogPost::GetPostLatestHome($limit);
+        $smart_blog_link = new \SmartBlogLink();
+        $i = 0;
+        $imageType = 'home-default';
+        $images = \BlogImageType::GetImageByType($imageType);
 
-        $this->addRenderAttribute('title', 'class', 'elementor-heading-title');
-
-        if (!empty($settings['size'])) {
-            $this->addRenderAttribute('title', 'class', 'elementor-size-' . $settings['size']);
-        }
-
-        $this->addInlineEditingAttributes('title');
-
-        $title = $settings['title'];
-
-        if (!empty($settings['link']['url'])) {
-            $this->addRenderAttribute('url', 'href', $settings['link']['url']);
-
-            if ($settings['link']['is_external']) {
-                $this->addRenderAttribute('url', 'target', '_blank');
+        foreach ($posts as $post) {
+            $posts[$i]['url']          = $smart_blog_link->getSmartBlogPostLink($posts[$i]['id_post'], $posts[$i]['link_rewrite']);
+            $posts[$i]['image']['url'] = $smart_blog_link->getImageLink($posts[$i]['link_rewrite'], $posts[$i]['id_post'], $imageType);
+            
+            foreach ($images as $image) {
+                if ($image['type'] == 'post') {
+                    $posts[$i]['image']['type']   = 'blog_post_'.$imageType;
+                    $posts[$i]['image']['width']  = $image['width'];
+                    $posts[$i]['image']['height'] = $image['height'];
+                    break;
+                }
             }
-
-            if (!empty($settings['link']['nofollow'])) {
-                $this->addRenderAttribute('url', 'rel', 'nofollow');
-            }
-
-            $title = sprintf('<a %1$s>%2$s</a>', $this->getRenderAttributeString('url'), $title);
+            $i++;
         }
-
-        echo sprintf(
-            '<%1$s %2$s>%3$s</%1$s>',
-            $settings['header_size'],
-            $this->getRenderAttributeString('title'),
-            $title
+        $classes = 'columns-desktop-'. ($settings['slides_to_scroll'] ? $settings['slides_to_scroll'] : $settings['default_slides_desktop']);
+        $classes .= ' columns-tablet-'. ($settings['slides_to_scroll_tablet'] ? $settings['slides_to_scroll_tablet'] : $settings['default_slides_tablet']);
+        $classes .= ' columns-mobile-'. ($settings['slides_to_scroll_mobile'] ? $settings['slides_to_scroll_mobile'] : $settings['default_slides_mobile']);
+        $context->smarty->assign(
+            array(
+                'posts'  => $posts,
+                'smartbloglink' => $smart_blog_link,
+                'smartshowauthor'      => \Configuration::get( 'smartshowauthor' ),
+                'smartshowauthorstyle' => \Configuration::get( 'smartshowauthorstyle' ),
+                'smartshowviewed'      => \Configuration::get( 'smartshowviewed' ),
+                'style' => 'module:smartblog/views/templates/front/post/'. $settings['style'] .'.tpl',
+                'classes' => $classes,
+            )
         );
+        $template_file_name = _CE_TEMPLATES_ . 'front/widgets/v-smartblog.tpl';
+
+        echo $context->smarty->fetch( $template_file_name );
+        
     }
 
     /**
@@ -197,4 +220,5 @@ class WidgetVSmartblog extends WidgetBase
      * @access protected
      */
     protected function _contentTemplate(){}
+
 }

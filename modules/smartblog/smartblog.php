@@ -61,6 +61,7 @@ class smartblog extends Module
 
 		Configuration::updateGlobalValue('smartblogrootcat', '1');
 		Configuration::updateGlobalValue('smartpostperpage', '5');
+		Configuration::updateGlobalValue('smartpostperrow', '2');
 		Configuration::updateGlobalValue('sborderby', 'id_smart_blog_post');
 		Configuration::updateGlobalValue('sborder', 'DESC');
 		Configuration::updateGlobalValue('smartshowauthorstyle', '1');
@@ -497,6 +498,7 @@ class smartblog extends Module
 			|| !Configuration::deleteByName('smartblogmetakeyword')
 			|| !Configuration::deleteByName('smartblogmetadescrip')
 			|| !Configuration::deleteByName('smartpostperpage')
+			|| !Configuration::deleteByName('smartpostperrow')
 			|| !Configuration::deleteByName('sborderby')
 			|| !Configuration::deleteByName('sborder')
 			|| !Configuration::deleteByName('smartblogrootcat')
@@ -567,6 +569,7 @@ class smartblog extends Module
 			Configuration::updateValue('smartblogmetakeyword', Tools::getvalue('smartblogmetakeyword'));
 			Configuration::updateValue('smartblogmetadescrip', Tools::getvalue('smartblogmetadescrip'));
 			Configuration::updateValue('smartpostperpage', Tools::getvalue('smartpostperpage'));
+			Configuration::updateValue('smartpostperrow', Tools::getvalue('smartpostperrow'));
 			Configuration::updateValue('sborderby', Tools::getvalue('sborderby'));
 			Configuration::updateValue('sborder', Tools::getvalue('sborder'));
 			Configuration::updateValue('smartblogrootcat', Tools::getvalue('smartblogrootcat'));
@@ -790,6 +793,7 @@ class smartblog extends Module
 		$helper->toolbar_scroll           = true;
 		$helper->submit_action            = 'save' . $this->name;
 		$helper->fields_value['smartpostperpage']        = Configuration::get('smartpostperpage');
+		$helper->fields_value['smartpostperrow']        = Configuration::get('smartpostperrow');
 		$helper->fields_value['sborderby']        		 = Configuration::get('sborderby');
 		$helper->fields_value['sborder']        		 = Configuration::get('sborder');
 		$helper->fields_value['smartdataformat']         = Configuration::get('smartdataformat');

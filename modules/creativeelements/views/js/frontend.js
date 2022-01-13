@@ -2876,6 +2876,7 @@ module.exports = function ($) {
 		'image-carousel.default': __webpack_require__(193),
 		'testimonial-carousel.default': __webpack_require__(193),
 		'product-carousel.default': __webpack_require__(193),
+		'v-smartblog.default': __webpack_require__(193),
 		'trustedshops-reviews.default': __webpack_require__(193),
 		'text-editor.default': __webpack_require__(194),
 		'contact-form.default': __webpack_require__(200),

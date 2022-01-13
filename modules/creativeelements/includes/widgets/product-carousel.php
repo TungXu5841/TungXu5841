@@ -74,7 +74,7 @@ class WidgetProductCarousel extends WidgetProductBase
                     'description' => __('Default: use setting from theme options module.'),
                 ]
             );
-             $this->addControl(
+            $this->addControl(
                 'enable_slider',
                 [
                     'type' => ControlsManager::HIDDEN,

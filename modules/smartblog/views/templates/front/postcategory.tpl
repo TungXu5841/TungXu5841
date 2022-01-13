@@ -82,7 +82,7 @@
         {/if}
     {else}
       <div id="smartblogcat" class="block">
-			<div class=" row row-sdsarticleCat">
+			<div class="row row-sdsarticleCat">
             {foreach from=$postcategory item=post}
                 {include file="module:smartblog/views/templates/front/category_loop.tpl" postcategory=$postcategory}
             {/foreach}

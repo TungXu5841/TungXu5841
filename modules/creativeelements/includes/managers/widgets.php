@@ -104,6 +104,7 @@ class WidgetsManager
             'sign-in',
             'language-selector',
             'currency-selector',
+            'v-smartblog',
         ];
         
         $build_widgets_filename[] = 'category-tree';

@@ -934,6 +934,7 @@ class SmartBlogPost extends ObjectModel
 	public static function GetPostLatestHome($limit)
 	{
 		$sorting = Configuration::get('latestnews_sort_by');
+		$blogcomment    = new Blogcomment();
 
 		if ($sorting == 'name_ASC') {
 			$orderby  = 'pl.meta_title';
@@ -992,8 +993,10 @@ class SmartBlogPost extends ObjectModel
 					'cat_name'         => $selected_cat[$key]['name'],
 				);
 			}
-			$result[$i]['id']                = $post['id_smart_blog_post'];
-			$result[$i]['title']             = $post['meta_title'];
+
+			
+			$result[$i]['id_post']           = $post['id_smart_blog_post'];
+			$result[$i]['meta_title']             = $post['meta_title'];
 			$result[$i]['meta_description']  = strip_tags($post['meta_description']);
 			$result[$i]['short_description'] = strip_tags($post['short_description']);
 			$result[$i]['content']           = strip_tags($post['content']);
@@ -1002,6 +1005,10 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['viewed']            = $post['viewed'];
 			$result[$i]['is_featured']       = $post['is_featured'];
 			$result[$i]['link_rewrite']      = $post['link_rewrite'];
+			$result[$i]['lastname']       	 = $employee->lastname;
+			$result[$i]['firstname']      	 = $employee->firstname;
+			$result[$i]['totalcomment'] = $blogcomment->getToltalComment( $post['id_smart_blog_post'] );
+			
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
 				$image                    = $post['id_smart_blog_post'];
 				$result[$i]['post_img'] = $image;

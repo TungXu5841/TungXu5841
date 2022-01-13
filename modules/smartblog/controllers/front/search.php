@@ -109,7 +109,9 @@ class smartblogsearchModuleFrontController extends smartblogModuleFrontControlle
             'post_per_page' => $posts_per_page,
             'smartsearch' => $keyword,
             'pagenums' => $totalpages - 1,
-            'totalpages' => $totalpages
+            'totalpages' => $totalpages,
+            'columns'              => Configuration::get('smartpostperrow'),
+            'post_style'           => Configuration::get('smartstyle')
         ));
 
         if ($overridden_template = Hook::exec(

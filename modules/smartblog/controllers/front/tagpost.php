@@ -132,6 +132,8 @@ class smartblogtagpostModuleFrontController extends smartblogModuleFrontControll
 				'pagenums'             => $totalpages - 1,
 				'totalpages'           => $totalpages,
 				'smartbloglink'        => $smartbloglink,
+				'columns'			   => Configuration::get('smartpostperrow'),
+				'post_style'		   => Configuration::get('smartstyle')
 			)
 		);
 

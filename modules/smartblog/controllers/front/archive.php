@@ -103,6 +103,8 @@ class smartblogarchiveModuleFrontController extends smartblogModuleFrontControll
 				'pagenums'             => $totalpages - 1,
 				'smartblogliststyle'   => Configuration::get( 'smartblogliststyle' ),
 				'totalpages'           => $totalpages,
+				'columns'			   => Configuration::get('smartpostperrow'),
+				'post_style'		   => Configuration::get('smartstyle')
 			)
 		);
 		

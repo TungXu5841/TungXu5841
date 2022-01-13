@@ -27,11 +27,6 @@
     <ul class="commentList smart-blog-comment-list-ul">
         <div id="comment-{$comment.id_smart_blog_comment|intval}">
             <li class="even">
-                <div class="smart-blog-comments-avatar-box">
-                  <img class="avatar" alt="Avatar"
-                      src="{$modules_dir|escape:'htmlall':'UTF-8'}/smartblog/images/avatar/avatar-author-default.jpg">
-                </div>
-
                 <div class="name">{$childcommnets.name|escape:'htmlall':'UTF-8'}</div>
                 
                 <p class="smart-blog-comment-text">{$childcommnets.content nofilter}</p>

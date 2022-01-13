@@ -1110,19 +1110,6 @@ form#searchbox .button.button-small i {
 .smart-blog-comment-time-reply-area .reply:hover{
     color: #3CB9D7;
 }
-.smart-blog-comments-avatar-box {
-    left: 10px;
-    position: absolute;
-    top: 20px;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.smart-blog-comments-avatar-box .avatar{
-    width: 100%;
-    height: auto;
-}
 .commentList li .name, .commentList li .name a {
     font-weight: 600;
     color: #333333;

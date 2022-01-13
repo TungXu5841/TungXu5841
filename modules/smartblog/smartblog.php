@@ -27,6 +27,8 @@ class smartblog extends Module
 	public $capl;
 	public $warl;
 	public $sucl;
+	public $blog_url;
+
 
 	public function __construct()
 	{
@@ -51,7 +53,7 @@ class smartblog extends Module
 		$this->description      = $this->trans('The Most Powerfull Prestashop Blog  Module - by smartdatasoft', [], 'Modules.Smartblog.Smartblog');
 		$this->confirmUninstall = $this->trans('Are you sure you want to delete your details ?', [], 'Modules.Smartblog.Smartblog');
 		$this->module_key       = '5679adf718951d4bc63422b616a9d75d';
-
+		$this->blog_url = '';
 	}
 
 	public function install()
@@ -74,14 +76,13 @@ class smartblog extends Module
 		Configuration::updateGlobalValue('smartsearchengine', '1');
 		Configuration::updateGlobalValue('smartshowcolumn', '3');
 		Configuration::updateGlobalValue('smartacceptcomment', '1');
-		Configuration::updateGlobalValue('smartcustomcss', '');
 		Configuration::updateGlobalValue('smartdisablecatimg', '1');
 		Configuration::updateGlobalValue('smartdataformat', 'm/d/Y H:i:s');
 		Configuration::updateGlobalValue('smartblogurlpattern', 1);
 		Configuration::updateGlobalValue('smartblogmetatitle', 'Smart Blog Title');
+		Configuration::updateGlobalValue('smartstyle', '1');
 		Configuration::updateGlobalValue('smartblogmetakeyword', 'smart,blog,smartblog,prestashop blog,prestashop,blog');
 		Configuration::updateGlobalValue('smartblogmetadescrip', 'Prestashop powerfull blog site developing module. It has hundrade of extra plugins. This module developed by SmartDataSoft.com');
-		Configuration::updateGlobalValue('smartshowhomepost', 4);
 
 		$ret  = (bool) parent::install();
 		$ret &= $this->addquickaccess();
@@ -509,12 +510,10 @@ class smartblog extends Module
 			|| !Configuration::deleteByName('smartmainblogurl')
 			|| !Configuration::deleteByName('smartshowcolumn')
 			|| !Configuration::deleteByName('smartshowauthorstyle')
-			|| !Configuration::deleteByName('smartcustomcss')
 			|| !Configuration::deleteByName('smartshownoimg')
 			|| !Configuration::deleteByName('smartsearchengine')
 			|| !Configuration::deleteByName('smartshowauthor')
 			|| !Configuration::deleteByName('smartblogurlpattern')
-			|| !Configuration::deleteByName('smartshowhomepost')
 		) {
 			return false;
 		}
@@ -584,10 +583,8 @@ class smartblog extends Module
 			Configuration::updateValue('smartshownoimg', Tools::getvalue('smartshownoimg'));
 			Configuration::updateValue('smartsearchengine', Tools::getvalue('smartsearchengine'));
 			Configuration::updateValue('smartdataformat', Tools::getvalue('smartdataformat'));
-			Configuration::updateValue('smartcustomcss', Tools::getvalue('smartcustomcss'), true);
-			Configuration::updateValue('smartshowhomepost', Tools::getvalue('smartshowhomepost'));
+			Configuration::updateValue('smartstyle', Tools::getvalue('smartstyle'));
 
-			$this->processImageUpload($_FILES);
 			$html   = $this->displayConfirmation($this->trans('The settings have been updated successfully.', [], 'Modules.Smartblog.Smartblog'));
 
 			$helper = $this->SettingForm();
@@ -704,14 +701,16 @@ class smartblog extends Module
 	protected function regenerateform()
 	{
 		$default_lang                 = (int) Configuration::get('PS_LANG_DEFAULT');
+		$this->fields_form = array();
+		$this->fields_form[0]['type'] = 'normal';
 		$this->fields_form[0]['form'] = array(
 			'legend' => array(
-				'title' => $this->trans('Blog Thumblr Configuration', [], 'Modules.Smartblog.Smartblog'),
+				'title' => $this->trans('Blog Thumblr Configuration', [], 'Modules.Vecblog.Vecblog'),
 			),
 			'input'  => array(
 				array(
 					'type'     => 'switch',
-					'label'    => $this->trans('Delete Old Thumblr', [], 'Modules.Smartblog.Smartblog'),
+					'label'    => $this->trans('Delete Old Thumblr', [], 'Modules.Vecblog.Vecblog'),
 					'name'     => 'isdeleteoldthumblr',
 					'required' => false,
 					'is_bool'  => true,
@@ -719,18 +718,18 @@ class smartblog extends Module
 						array(
 							'id'    => 'active_on',
 							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
+							'label' => $this->trans('Enabled', [], 'Modules.Vecblog.Vecblog'),
 						),
 						array(
 							'id'    => 'active_off',
 							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
+							'label' => $this->trans('Disabled', [], 'Modules.Vecblog.Vecblog'),
 						),
 					),
 				),
 			),
 			'submit' => array(
-				'title' => $this->trans('Re Generate Thumblr', [], 'Modules.Smartblog.Smartblog'),
+				'title' => $this->trans('Re Generate Thumblr', [], 'Modules.Vecblog.Vecblog'),
 			),
 		);
 
@@ -756,387 +755,14 @@ class smartblog extends Module
 		return $helper;
 	}
 
-	public function processImageUpload($FILES)
-	{
-		if (isset($FILES['avatar']) && isset($FILES['avatar']['tmp_name']) && !empty($FILES['avatar']['tmp_name'])) {
-			if (ImageManager::validateUpload($FILES['avatar'], 4000000)) {
-				return $this->displayError($this->trans('Invalid image', [], 'Modules.Smartblog.Smartblog'));
-			} else {
-				$ext       = Tools::substr($FILES['avatar']['name'], strrpos($FILES['avatar']['name'], '.') + 1);
-				$file_name = 'avatar.' . $ext;
-				$path      = _PS_MODULE_DIR_ . 'smartblog/images/avatar/' . $file_name;
-				if (!move_uploaded_file($FILES['avatar']['tmp_name'], $path)) {
-					return $this->displayError($this->trans('An error occurred while attempting to upload the file.', [], 'Modules.Smartblog.Smartblog'));
-				} else {
-					$author_types = BlogImageType::GetImageAllType('author');
-					foreach ($author_types as $image_type) {
-						$dir = _PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar-' . Tools::stripslashes($image_type['type_name']) . '.jpg';
-						if (file_exists($dir)) {
-							unlink($dir);
-						}
-					}
-					$images_types = BlogImageType::GetImageAllType('author');
-					foreach ($images_types as $image_type) {
-						ImageManager::resize(
-							$path,
-							_PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar-' . Tools::stripslashes($image_type['type_name']) . '.jpg',
-							(int) $image_type['width'],
-							(int) $image_type['height']
-						);
-					}
-				}
-			}
-		}
-	}
-
 	public function SettingForm()
 	{
-		$blog_url                     = self::GetSmartBlogLink('module-smartblog-list');
-		$img_desc                     = '';
-		$img_desc                    .= '' . $this->trans('Upload an Avatar from your computer. N.B : Only jpg image is allowed', [], 'Modules.Smartblog.Smartblog');
-		$img_desc                    .= '<br/><img style="clear:both;border:1px solid black;" alt="" src="' . __PS_BASE_URI__ . 'modules/smartblog/images/avatar/avatar.jpg" height="100" width="100"/><br />';
-
-		$orders = array(
-			array(
-				'id_order' => "ASC", 
-				'order' => 'Ascending' 
-			),
-			array(
-				'id_order' => "DESC", 
-				'order' => 'Descending' 
-			)
-		);
+		$this->blog_url = self::GetSmartBlogLink('module-smartblog-list');
+		//RENDER FIELDS
+        include_once(dirname(__FILE__) . '/fields_array.php'); 
 
 		$default_lang                 = (int) Configuration::get('PS_LANG_DEFAULT');
-		$this->fields_form[0]['form'] = array(
-			'legend' => array(
-				'title' => $this->trans('Setting', [], 'Modules.Smartblog.Smartblog'),
-			),
-			'input'  => array(
-				array(
-		            'type' => 'block_label',
-		            'label' => $this->l('General'),
-		            'name'=> ''
-		        ),
-				array(
-					'type'     => 'text',
-					'label'    => $this->trans('Meta Title', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartblogmetatitle',
-					'size'     => 70,
-					'required' => true,
-				),
-				array(
-					'type'     => 'text',
-					'label'    => $this->trans('Meta Keyword', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartblogmetakeyword',
-					'size'     => 70,
-					'required' => false,
-				),
-				array(
-					'type'     => 'textarea',
-					'label'    => $this->trans('Meta Description', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartblogmetadescrip',
-					'rows'     => 7,
-					'cols'     => 66,
-					'required' => true,
-				),
-				array(
-					'type'     => 'text',
-					'label'    => $this->trans('Main Blog Url', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartmainblogurl',
-					'size'     => 15,
-					'required' => true,
-					'desc'     => '<p class="alert alert-info"><a href="' . $blog_url . '">' . $blog_url . '</a></p>',
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Use .html with Friendly Url', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartusehtml',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'radio',
-					'label'    => $this->trans('Blog Page Url Pattern', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartblogurlpattern',
-					'required' => false,
-					'class'    => 't',
-					'values'   => array(
-						array(
-							'id'    => 'smartblogurlpattern_a',
-							'value' => 1,
-							'label' => $this->trans('alias/{slug}html ( ex: alias/share-the-love-for-prestashop-1-6.html)', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'smartblogurlpattern_b',
-							'value' => 2,
-							'label' => $this->trans('alias/{id_post}_{slug}html ( ex: alias/1_share-the-love-for-prestashop-1-6.html)', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-		            'type' => 'block_label',
-		            'label' => $this->l('Display settings'),
-		            'name'=> ''
-		        ),
-				array(
-					'type'     => 'text',
-					'label'    => $this->trans('Number of posts per page', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartpostperpage',
-					'size'     => 15,
-					'required' => true,
-				),
-				array(
-					'type'     => 'select',
-					'label'    => $this->trans('Order By', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'sborderby',
-					'options' => [
-						'query' => $this->getOrderBylist(),
-						'id' => 'id_orderby',
-						'name' => 'orderby',
-					],
-				),
-				array(
-					'type'     => 'select',
-					'label'    => $this->trans('Order', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'sborder',
-					'options' => [
-						'query' => $orders,
-						'id' => 'id_order',
-						'name' => 'order',
-					],
-				),
-				array(
-					'type'     => 'text',
-					'label'    => $this->trans('Date format', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartdataformat',
-					'size'     => 15,
-					'required' => true,		
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Auto accepted comment', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartacceptcomment',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Enable Captcha', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartcaptchaoption',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Enable Comment', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartenablecomment',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Allow Guest Comment', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartenableguestcomment',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Show Author Name', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartshowauthor',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Show Post Viewed', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartshowviewed',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Show Author Name Style', [], 'Modules.Smartblog.Smartblog'),
-					'desc'     => 'YES : \'First Name Last Name\'<br> NO : \'Last Name First Name\'',
-					'name'     => 'smartshowauthorstyle',
-					'required' => false,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('First Name, Last Name', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Last Name, First Name', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'          => 'file',
-					'label'         => $this->trans('AVATAR Image:', [], 'Modules.Smartblog.Smartblog'),
-					'name'          => 'avatar',
-					'display_image' => false,
-					'desc'          => $img_desc,
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Show \'No Image\'', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartshownoimg',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Index in Serch Engine', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartsearchengine',
-					'required' => false,
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-				array(
-					'type'     => 'switch',
-					'label'    => $this->trans('Show Category', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartdisablecatimg',
-					'required' => false,
-					'desc'     => 'Show category image and description on category page',
-					'is_bool'  => true,
-					'values'   => array(
-						array(
-							'id'    => 'active_on',
-							'value' => 1,
-							'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-						array(
-							'id'    => 'active_off',
-							'value' => 0,
-							'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-						),
-					),
-				),
-
-				array(
-					'type'     => 'textarea',
-					'label'    => $this->trans('Custom CSS', [], 'Modules.Smartblog.Smartblog'),
-					'name'     => 'smartcustomcss',
-					'rows'     => 7,
-					'cols'     => 66,
-					'required' => false,
-				),
-			),
-			'submit' => array(
-				'title' => $this->trans('Save', [], 'Modules.Smartblog.Smartblog'),
-			),
-		);
+		
 		$helper                  = new HelperForm();
 		$helper->module          = $this;
 		$helper->name_controller = $this->name;
@@ -1164,8 +790,8 @@ class smartblog extends Module
 		$helper->toolbar_scroll           = true;
 		$helper->submit_action            = 'save' . $this->name;
 		$helper->fields_value['smartpostperpage']        = Configuration::get('smartpostperpage');
-		$helper->fields_value['sborderby']        = Configuration::get('sborderby');
-		$helper->fields_value['sborder']        = Configuration::get('sborder');
+		$helper->fields_value['sborderby']        		 = Configuration::get('sborderby');
+		$helper->fields_value['sborder']        		 = Configuration::get('sborder');
 		$helper->fields_value['smartdataformat']         = Configuration::get('smartdataformat');
 		$helper->fields_value['smartacceptcomment']      = Configuration::get('smartacceptcomment');
 		$helper->fields_value['smartshowauthorstyle']    = Configuration::get('smartshowauthorstyle');
@@ -1180,12 +806,11 @@ class smartblog extends Module
 		$helper->fields_value['smartdisablecatimg']      = Configuration::get('smartdisablecatimg');
 		$helper->fields_value['smartenablecomment']      = Configuration::get('smartenablecomment');
 		$helper->fields_value['smartenableguestcomment'] = Configuration::get('smartenableguestcomment');
-		$helper->fields_value['smartcustomcss']          = Configuration::get('smartcustomcss');
 		$helper->fields_value['smartshownoimg']          = Configuration::get('smartshownoimg');
-		$helper->fields_value['smartsearchengine']          = Configuration::get('smartsearchengine');
+		$helper->fields_value['smartsearchengine']       = Configuration::get('smartsearchengine');
 		$helper->fields_value['smartcaptchaoption']      = Configuration::get('smartcaptchaoption');
 		$helper->fields_value['smartblogurlpattern']     = Configuration::get('smartblogurlpattern');
-		$helper->fields_value['smartshowhomepost']       = Configuration::get('smartshowhomepost');
+		$helper->fields_value['smartstyle']     		 = Configuration::get('smartstyle');
 		return $helper;
 	}
 

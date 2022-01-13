@@ -72,7 +72,6 @@ class BlogImageType extends ObjectModel
 
         $get_blog_image = SmartBlogPost::getBlogImage();
         $get_cate_image = BlogCategory::getCatImage();
-        $get_author_image = _PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar.jpg';
         $category_types = BlogImageType::GetImageAllType('Category');
         $posts_types = BlogImageType::GetImageAllType('post');
         $author_types = BlogImageType::GetImageAllType('Author');
@@ -91,10 +90,6 @@ class BlogImageType extends ObjectModel
                 ImageManager::resize($path, _PS_MODULE_DIR_ . 'smartblog/images/' . $blog_img['id_smart_blog_post'] . '-' . Tools::stripslashes($image_type['type_name']) . '.jpg', (int) $image_type['width'], (int) $image_type['height']
                 );
             }
-        }
-        foreach ($author_types as $author_type) {
-            ImageManager::resize($get_author_image, _PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar-' . Tools::stripslashes($author_type['type_name']) . '.jpg', (int) $author_type['width'], (int) $author_type['height']
-            );
         }
     }
 
@@ -121,11 +116,6 @@ class BlogImageType extends ObjectModel
                 if (file_exists($dir))
                     unlink($dir);
             }
-        }
-        foreach ($author_types as $image_type) {
-            $dir = _PS_MODULE_DIR_ . 'smartblog/images/avatar/avatar-' . Tools::stripslashes($image_type['type_name']) . '.jpg';
-            if (file_exists($dir))
-                unlink($dir);
         }
     }
 

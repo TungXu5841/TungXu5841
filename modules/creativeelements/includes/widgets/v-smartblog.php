@@ -173,23 +173,21 @@ class WidgetVSmartBlog extends WidgetBase
         }
         $posts = \SmartBlogPost::GetPostLatestHome($limit);
         $smart_blog_link = new \SmartBlogLink();
-        $i = 0;
         $imageType = 'home-default';
         $images = \BlogImageType::GetImageByType($imageType);
 
         foreach ($posts as $post) {
-            $posts[$i]['url']          = $smart_blog_link->getSmartBlogPostLink($posts[$i]['id_post'], $posts[$i]['link_rewrite']);
-            $posts[$i]['image']['url'] = $smart_blog_link->getImageLink($posts[$i]['link_rewrite'], $posts[$i]['id_post'], $imageType);
+            $post['url']          = $smart_blog_link->getSmartBlogPostLink($post['id_post'], $post['link_rewrite']);
+            $post['image']['url'] = $smart_blog_link->getImageLink($post['link_rewrite'], $post['id_post'], $imageType);
             
             foreach ($images as $image) {
                 if ($image['type'] == 'post') {
-                    $posts[$i]['image']['type']   = 'blog_post_'.$imageType;
-                    $posts[$i]['image']['width']  = $image['width'];
-                    $posts[$i]['image']['height'] = $image['height'];
+                    $post['image']['type']   = 'blog_post_'.$imageType;
+                    $post['image']['width']  = $image['width'];
+                    $post['image']['height'] = $image['height'];
                     break;
                 }
             }
-            $i++;
         }
         $classes = 'columns-desktop-'. ($settings['slides_to_scroll'] ? $settings['slides_to_scroll'] : $settings['default_slides_desktop']);
         $classes .= ' columns-tablet-'. ($settings['slides_to_scroll_tablet'] ? $settings['slides_to_scroll_tablet'] : $settings['default_slides_tablet']);

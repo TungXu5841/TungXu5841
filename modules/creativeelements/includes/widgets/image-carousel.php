@@ -245,11 +245,22 @@ class WidgetImageCarousel extends WidgetBase
                 'default' => 'traditional',
             ]
         );
+        $this->addControl(
+            'enable_slider',
+            [
+                'label' => __('View'),
+                'type' => ControlsManager::HIDDEN,
+                'default' => 'yes',
+            ]
+        );
 
         $this->endControlsSection();
 
         $this->registerCarouselSection([
             'variable_width' => true,
+            'default_slides_desktop' => 1,
+            'default_slides_tablet' => 1,
+            'default_slides_mobile' => 1,
         ]);
 
         $this->startControlsSection(

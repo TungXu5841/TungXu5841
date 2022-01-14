@@ -63,6 +63,7 @@ class WidgetsManager
             'icon-box',
             'image-gallery',
             'image-carousel',
+            'banner',
             'star-rating',
             'icon-list',
             'counter',

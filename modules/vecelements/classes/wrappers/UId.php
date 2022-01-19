@@ -24,17 +24,8 @@ class UId
     const SUPPLIER = 6;
     const CMS = 7;
     const CMS_CATEGORY = 8;
-    const YBC_BLOG_POST = 9;
-    const XIPBLOG_POST = 10;
-    const STBLOG_POST = 11;
-    const ADVANCEBLOG_POST = 12;
-    const PRESTABLOG_POST = 13;
-    const SIMPLEBLOG_POST = 14;
-    const PSBLOG_POST = 15;
-    const HIBLOG_POST = 16;
-    const THEME = 17;
-    const TVCMSBLOG_POST = 18;
-    const SMARTBLOG_POST = 19;
+    const THEME = 9;
+    const SMARTBLOG_POST = 10;
 
     public $id;
     public $id_type;
@@ -51,16 +42,7 @@ class UId
         'Supplier',
         'CMS',
         'CMSCategory',
-        'Ybc_blog_post_class',
-        'XipPostsClass',
-        'StBlogClass',
-        'BlogPosts',
-        'NewsClass',
-        'SimpleBlogPost',
-        'PsBlogBlog',
-        'HiBlogPost',
         'VECTheme',
-        'TvcmsPostsClass',
         'SmartBlogPost',
     ];
     private static $admins = [
@@ -73,30 +55,12 @@ class UId
         'AdminSuppliers',
         'AdminCmsContent',
         'AdminCmsContent',
-        'AdminModules',
-        'AdminXipPost',
-        'AdminStBlog',
-        'AdminBlogPosts',
-        'AdminModules',
-        'AdminSimpleBlogPosts',
-        'AdminPsblogBlogs',
-        'AdminModules',
         'AdminVECHeader',
         'AdminVECHome',
         'AdminVECFooter',
-        'AdminTvcmsPost',
         'AdminBlogPost',
     ];
     private static $modules = [
-        self::YBC_BLOG_POST => 'ybc_blog',
-        self::XIPBLOG_POST => 'xipblog',
-        self::STBLOG_POST => 'stblog',
-        self::ADVANCEBLOG_POST => 'advanceblog',
-        self::PRESTABLOG_POST => 'prestablog',
-        self::SIMPLEBLOG_POST => 'ph_simpleblog',
-        self::PSBLOG_POST => 'psblog',
-        self::HIBLOG_POST => 'hiblog',
-        self::TVCMSBLOG_POST => 'tvcmsblog',
         self::SMARTBLOG_POST => 'smartblog',
     ];
     private static $shop_ids = [];
@@ -423,71 +387,10 @@ function get_preview_post_link($post = null, array $args = [], $relative = true)
         case UId::CMS:
             $link = $ctx->link->getCmsLink($uid->id, null, null, $uid->id_lang, $id_shop, $relative);
             break;
-        case UId::YBC_BLOG_POST:
-            $link = \Module::getInstanceByName('ybc_blog')->getLink('blog', ['id_post' => $uid->id], $uid->id_lang);
-            break;
-        case UID::XIPBLOG_POST:
-            $link = call_user_func('XipBlog::xipBlogPostLink', ['id' => $uid->id]);
-            break;
         case UId::SMARTBLOG_POST:
             $post = new \SmartBlogPost($uid->id, $uid->id_lang);
             $smartblog_link = new \SmartBlogLink();
             $link = $smartblog_link->getSmartBlogPostLink($post, null, null, $uid->id_lang, null, $relative);
-            break;
-        case UId::STBLOG_POST:
-            $post = new \StBlogClass($uid->id, $uid->id_lang);
-
-            $link = $ctx->link->getModuleLink('stblog', 'article', [
-                'id_st_blog' => $uid->id,
-                'id_blog' => $uid->id,
-                'rewrite' => $post->link_rewrite,
-            ], null, $uid->id_lang, null, $relative);
-            break;
-        case UId::ADVANCEBLOG_POST:
-            $post = new \BlogPosts($uid->id, $uid->id_lang);
-            $args['blogtoken'] = $args['adtoken'];
-            unset($args['adtoken']);
-
-            $link = $ctx->link->getModuleLink('advanceblog', 'detail', [
-                'id' => $uid->id,
-                'post' => $post->link_rewrite,
-            ], null, $uid->id_lang, null, $relative);
-            break;
-        case UId::PRESTABLOG_POST:
-            $post = new \NewsClass($uid->id, $uid->id_lang);
-            empty($post->actif) && $args['preview'] = \Module::getInstanceByName('prestablog')->generateToken($uid->id);
-
-            $link = call_user_func('PrestaBlog::prestablogUrl', [
-                'id' => $uid->id,
-                'seo' => $post->link_rewrite,
-                'titre' => $post->title,
-                'id_lang' => $uid->id_lang,
-            ]);
-            break;
-        case UId::SIMPLEBLOG_POST:
-            $post = new \SimpleBlogPost($uid->id, $uid->id_lang, $uid->id_shop);
-            $cat = new \SimpleBlogCategory($post->id_simpleblog_category, $uid->id_lang, $uid->id_shop);
-
-            $link = call_user_func('SimpleBlogPost::getLink', $post->link_rewrite, $cat->link_rewrite);
-            break;
-        case UId::PSBLOG_POST:
-            $post = new \PsBlogBlog($uid->id, $uid->id_lang, $uid->id_shop);
-
-            $link = call_user_func('PsBlogHelper::getInstance')->getBlogLink([
-                'id_psblog_blog' => $post->id,
-                'link_rewrite' => $post->link_rewrite,
-            ]);
-            break;
-        case UId::HIBLOG_POST:
-            $post = new \HiBlogPost($uid->id, $uid->id_lang, $uid->id_shop);
-
-            $link = \Module::getInstanceByName('hiblog')->returnBlogFrontUrl($post->id, $post->friendly_url, 'post');
-            break;
-        case UID::TVCMSBLOG_POST:
-            $link = call_user_func('TvcmsBlog::tvcmsBlogPostLink', [
-                'id' => $uid->id,
-                'rewrite' => call_user_func('TvcmsPostsClass::getTheRewrite', $uid->id),
-            ]);
             break;
         default:
             $method = "get{$uid->getModel()}Link";
@@ -529,18 +432,6 @@ function get_edit_post_link($post_id)
     switch ($uid->id_type) {
         case UId::REVISION:
             throw new \RuntimeException('TODO');
-        case UId::YBC_BLOG_POST:
-            $link = $ctx->link->getAdminLink($admin) . '&' . http_build_query([
-                'configure' => 'ybc_blog',
-                'tab_module' => 'front_office_features',
-                'module_name' => 'ybc_blog',
-                'control' => 'post',
-                'id_post' => $id,
-            ]);
-            break;
-        case UId::PRESTABLOG_POST:
-            $link = $ctx->link->getAdminLink($admin) . "&configure=prestablog&editNews&idN=$id";
-            break;
         case UId::CONTENT:
             if (\Tools::getIsset('footerProduct')) {
                 $id = (int) \Tools::getValue('footerProduct');

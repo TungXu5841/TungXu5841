@@ -187,51 +187,9 @@ class VecElements extends Module
                 $id_type = VEC\UId::SUPPLIER;
                 $id = (int) Tools::getValue('id_supplier', $req ? $req[2] : 0);
                 break;
-            case 'adminxippost':
-                $id_type = VEC\UId::XIPBLOG_POST;
-                $id = (int) Tools::getValue('id_xipposts');
-                break;
             case 'adminblogpost':
                 $id_type = VEC\UId::SMARTBLOG_POST;
                 $id = (int) Tools::getValue('id_smart_blog_post');
-                break;
-            case 'adminstblog':
-                $id_type = VEC\UId::STBLOG_POST;
-                $id = (int) Tools::getValue('id_st_blog');
-                break;
-            case 'adminblogposts':
-                if ('advanceblog' === $this->context->controller->module->name) {
-                    $id_type = VEC\UId::ADVANCEBLOG_POST;
-                    $id = (int) Tools::getValue('id_post');
-                }
-                break;
-            case 'adminpsblogblogs':
-                $id_type = VEC\UId::PSBLOG_POST;
-                $id = (int) Tools::getValue('id_psblog_blog');
-                break;
-            case 'admintvcmspost':
-                $id_type = VEC\UId::TVCMSBLOG_POST;
-                $id = (int) Tools::getValue('id_tvcmsposts');
-                break;
-            case 'adminmodules':
-                $configure = Tools::strtolower(Tools::getValue('configure'));
-
-                if ('ybc_blog' == $configure && Tools::getValue('control') == 'post') {
-                    $id_type = VEC\UId::YBC_BLOG_POST;
-                    $id = (int) Tools::getValue('id_post');
-                    break;
-                }
-                if ('prestablog' == $configure && Tools::getIsset('editNews')) {
-                    $id_type = VEC\UId::PRESTABLOG_POST;
-                    $id = (int) Tools::getValue('idN');
-                    break;
-                }
-                if ('hiblog' == $configure) {
-                    $id_type = VEC\UId::HIBLOG_POST;
-                    $id = 0;
-                    $hideEditor = [];
-                    break;
-                }
                 break;
             case 'adminmaintenance':
                 $id_type = VEC\UId::CONTENT;
@@ -409,88 +367,12 @@ class VecElements extends Module
                     $desc = ['description' => &$obj->description];
                 }
                 break;
-            case 'ybc_blogblog':
-                $model = 'Ybc_blog_post_class';
-
-                if (isset($tpl_vars['blog_post']->value['id_post'])) {
-                    $id = $tpl_vars['blog_post']->value['id_post'];
-                    $desc = &$tpl_vars['blog_post']->value;
-
-                    if (Tools::getIsset('adtoken') && self::hasAdminToken('AdminModules')) {
-                        // override post status for preview
-                        $tpl_vars['blog_post']->value['enabled'] = 1;
-                    }
-                }
-                break;
-            case 'xipblogsingle':
-                $model = 'XipPostsClass';
-
-                if (isset($tpl_vars['xipblogpost']->value['id_xipposts'])) {
-                    $id = $tpl_vars['xipblogpost']->value['id_xipposts'];
-                    $desc = ['description' => &$tpl_vars['xipblogpost']->value['post_content']];
-                } elseif (isset($controller->blogpost['id_xipposts'])) {
-                    $id = $controller->blogpost['id_xipposts'];
-                    $desc = ['description' => &$controller->blogpost['post_content']];
-                }
-                break;
-            case 'stblogarticle':
-                $model = 'StBlogClass';
-
-                if (isset($tpl_vars['blog']->value['id'])) {
-                    $id = $tpl_vars['blog']->value['id'];
-                    $desc = ['description' => &$tpl_vars['blog']->value['content']];
-                    break;
-                }
-                $blogProp = new ReflectionProperty($controller, 'blog');
-                $blogProp->setAccessible(true);
-                $blog = $blogProp->getValue($controller);
-
-                if (isset($blog->id)) {
-                    $id = $blog->id;
-                    $desc = ['description' => &$blog->content];
-                }
-                break;
             case 'smartblogdetails':
                 $model = 'SmartBlogPost';
 
                 if (isset($tpl_vars['post']->value['id_post'])) {
                     $id = $tpl_vars['post']->value['id_post'];
                     $desc = ['description' => &$tpl_vars['post']->value['content']];
-                }
-                break;
-            case 'advanceblogdetail':
-                $model = 'BlogPosts';
-
-                if (isset($tpl_vars['postData']->value['id_post'])) {
-                    $id = $tpl_vars['postData']->value['id_post'];
-                    $desc = ['description' => &$tpl_vars['postData']->value['post_content']];
-                }
-                break;
-            case 'prestablogblog':
-                $model = 'NewsClass';
-                $newsProp = new ReflectionProperty($controller, 'news');
-                $newsProp->setAccessible(true);
-                $news = $newsProp->getValue($controller);
-
-                if (isset($news->id)) {
-                    $id = $news->id;
-
-                    if (isset($tpl_vars['tpl_unique'])) {
-                        $desc = ['description' => &$tpl_vars['tpl_unique']->value];
-                    } else {
-                        $desc = ['description' => &$news->content];
-                    }
-                }
-                break;
-            case 'ph_simpleblogsingle':
-                $model = 'SimpleBlogPost';
-                break;
-            case 'tvcmsblogsingle':
-                $model = 'TvcmsPostsClass';
-
-                if (isset($tpl_vars['tvcmsblogpost']->value['id_tvcmsposts'])) {
-                    $id = $tpl_vars['tvcmsblogpost']->value['id_tvcmsposts'];
-                    $desc = ['description' => &$tpl_vars['tvcmsblogpost']->value['post_content']];
                 }
                 break;
         }

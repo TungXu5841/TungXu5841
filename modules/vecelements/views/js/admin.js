@@ -21,41 +21,6 @@ window.ceAdmin && document.addEventListener('DOMContentLoaded', function() {
 		.removeClass('pointer')
 	;
 
-	// Fix for after ajax save new ybc_blog post update links
-	history.pushState = (function(parent) {
-		return function(data, title, url) {
-			var id = url.match(/&id_post=(\d+)/);
-
-			id && $('.btn-edit-with-ce').each(function() {
-				this.href = this.href.replace('&id_page=0', '&id_page=' + id[1]);
-			});
-			return parent.apply(this, arguments);
-		};
-	})(history.pushState);
-
-	// HiBlog compatibility
-	~location.href.indexOf('configure=hiblog') && $(document).on('ajaxSuccess', function onAjaxSuccess(e, xhr, args) {
-		var idPost = $('#id_post').val();
-
-		idPost && (args.data.get && args.data.get('action') == 'savePost' || ~args.data.indexOf('action=displayPostForm')) && $.post(
-			$('a[href*=AdminVECContent]').prop('href'),
-			{
-				action: 'hideEditor',
-				ajax: true,
-				id: idPost,
-				idType: 16,
-			},
-			function onSuccessHideEditor(data) {
-				ceAdmin.hideEditor = data;
-				ceAdmin.uid = idPost + ceAdmin.uid.slice(-6);
-				ceAdmin.$contents = ceAdmin.getContents('textarea[name^=blog_description_]');
-
-				$('.wrapper-edit-with-ce').prevAll('.mce-tinymce').hide(0);
-			},
-			'json'
-		);
-	});
-
 	// Minor CSS fix
 	$('.btn-group-action a.product-edit.tooltip-link').addClass('dropdown-item');
 

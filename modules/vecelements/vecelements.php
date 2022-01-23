@@ -1,0 +1,860 @@
+<?php
+/**
+ * V-Elements - Live page builder
+ *
+ * @author    ThemeVec
+ * @copyright 2020-2022 themevec.com
+ */
+
+defined('_PS_VERSION_') or die;
+
+define('_VEC_VERSION_', '1.5.5');
+define('_VEC_PATH_', _PS_MODULE_DIR_ . 'vecelements/');
+define('_VEC_URL_', defined('_PS_BO_ALL_THEMES_DIR_') ? _MODULE_DIR_ . 'vecelements/' : 'modules/vecelements/');
+define('_VEC_ASSETS_URL_', _VEC_URL_ . 'views/');
+define('_VEC_TEMPLATES_', _VEC_PATH_ . 'views/templates/');
+
+require_once _VEC_PATH_ . 'classes/VECTheme.php';
+require_once _VEC_PATH_ . 'classes/VECContent.php';
+require_once _VEC_PATH_ . 'classes/VECTemplate.php';
+require_once _VEC_PATH_ . 'classes/VECSmarty.php';
+require_once _VEC_PATH_ . 'includes/plugin.php';
+
+class VecElements extends Module
+{
+    protected static $controller;
+
+    public $controllers = [
+        'ajax',
+        'preview',
+    ];
+
+    protected $overrides = [
+        'Category',
+        'CmsCategory',
+        'Manufacturer',
+        'Supplier',
+    ];
+    protected $tplOverride = false;
+
+    public function __construct($name = null, Context $context = null)
+    {
+        $this->name = 'vecelements';
+        $this->tab = 'content_management';
+        $this->version = '1.5.5';
+        $this->author = 'ThemeVec';
+        $this->module_key = '7a5ebcc21c1764675f1db5d0f0eacfe5';
+        $this->ps_versions_compliancy = ['min' => '1.7.0', 'max' => '1.7'];
+        $this->bootstrap = true;
+        $this->displayName = $this->l('V-Elements - Live page builder');
+        $this->description = $this->l('The frontend drag & drop page builder. Based on Elementor WP plugin.');
+        parent::__construct($this->name, null);
+
+        $this->checkThemeChange();
+
+        Shop::addTableAssociation(VECTheme::$definition['table'], ['type' => 'shop']);
+        Shop::addTableAssociation(VECTheme::$definition['table'] . '_lang', ['type' => 'fk_shop']);
+        Shop::addTableAssociation(VECContent::$definition['table'], ['type' => 'shop']);
+        Shop::addTableAssociation(VECContent::$definition['table'] . '_lang', ['type' => 'fk_shop']);
+    }
+
+    public function install()
+    {
+        require_once _VEC_PATH_ . 'classes/VECDatabase.php';
+
+        if (Shop::isFeatureActive()) {
+            Shop::setContext(Shop::CONTEXT_ALL);
+        }
+        VECDatabase::initConfigs();
+
+        if (!VECDatabase::createTables()) {
+            $this->_errors[] = Db::getInstance()->getMsgError();
+            return false;
+        }
+
+        if ($res = parent::install() && VECDatabase::updateTabs()) {
+            foreach (VECDatabase::getHooks() as $hook) {
+                $res = $res && $this->registerHook($hook, null, 1);
+            }
+        }
+
+        return $res;
+    }
+
+    public function uninstall()
+    {
+        foreach (Tab::getCollectionFromModule($this->name) as $tab) {
+            $tab->delete();
+        }
+
+        return parent::uninstall();
+    }
+
+    public function enable($force_all = false)
+    {
+        return parent::enable($force_all) && Db::getInstance()->update(
+            'tab',
+            ['active' => 1],
+            "module = 'vecelements' AND class_name != 'AdminVECEditor'"
+        );
+    }
+
+    public function disable($force_all = false)
+    {
+        return Db::getInstance()->update(
+            'tab',
+            ['active' => 0],
+            "module = 'vecelements'"
+        ) && parent::disable($force_all);
+    }
+
+    public function addOverride($classname)
+    {
+        try {
+            return parent::addOverride($classname);
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+
+    public function getContent()
+    {
+        Tools::redirectAdmin($this->context->link->getAdminLink('AdminVECSettings'));
+    }
+
+    public function hookDisplayBackOfficeHeader($params)
+    {
+        if (!Configuration::get("PS_ALLOW_HTML_\x49FRAME")) {
+            Configuration::updateValue("PS_ALLOW_HTML_\x49FRAME", 1);
+        }
+
+        // Handle migrate
+        if ((Configuration::getGlobalValue('ce_migrate') || Tools::getIsset('VECMigrate')) &&
+            Db::getInstance()->executeS("SHOW TABLES LIKE '%_vec_meta'")
+        ) {
+            require_once _VEC_PATH_ . 'classes/VECMigrate.php';
+            VECMigrate::registerJavascripts();
+        }
+
+        $footer_product = '';
+        preg_match('~/([^/]+)/(\d+)/edit\b~', $_SERVER['REQUEST_URI'], $req);
+        $controller = Tools::strtolower(Tools::getValue('controller'));
+
+        switch ($controller) {
+            case 'adminvectemplates':
+                $id_type = VEC\UId::TEMPLATE;
+                $id = (int) Tools::getValue('id_vec_template');
+                break;
+            case 'adminvecheader':
+                $id_type = VEC\UId::THEME;
+                $id = (int) Tools::getValue('id_vec_theme');
+                break;
+            case 'adminvechome':
+                $id_type = VEC\UId::THEME;
+                $id = (int) Tools::getValue('id_vec_theme');
+                break;
+            case 'adminvecfooter':
+                $id_type = VEC\UId::THEME;
+                $id = (int) Tools::getValue('id_vec_theme');
+                break;
+            case 'adminveccontent':
+                $id_type = VEC\UId::CONTENT;
+                $id = (int) Tools::getValue('id_vec_content');
+                break;
+            case 'admincmscontent':
+                if ($req && $req[1] == 'category' || Tools::getIsset('addcms_category') || Tools::getIsset('updatecms_category')) {
+                    $id_type = VEC\UId::CMS_CATEGORY;
+                    $id = (int) Tools::getValue('id_cms_category', $req ? $req[2] : 0);
+                    break;
+                }
+                $id_type = VEC\UId::CMS;
+                $id = (int) Tools::getValue('id_cms', $req ? $req[2] : 0);
+                break;
+            case 'adminproducts':
+                $id_type = VEC\UId::PRODUCT;
+                $id = (int) Tools::getValue('id_product', basename(explode('?', $_SERVER['REQUEST_URI'])[0]));
+                $footer_product = new VEC\UId(VECContent::getFooterProductId($id), VEC\UId::CONTENT, 0, $this->context->shop->id);
+                break;
+            case 'admincategories':
+                $id_type = VEC\UId::CATEGORY;
+                $id = (int) Tools::getValue('id_category', $req ? $req[2] : 0);
+                break;
+            case 'adminmanufacturers':
+                $id_type = VEC\UId::MANUFACTURER;
+                $id = (int) Tools::getValue('id_manufacturer', $req ? $req[2] : 0);
+                break;
+            case 'adminsuppliers':
+                $id_type = VEC\UId::SUPPLIER;
+                $id = (int) Tools::getValue('id_supplier', $req ? $req[2] : 0);
+                break;
+            case 'adminblogpost':
+                $id_type = VEC\UId::SMARTBLOG_POST;
+                $id = (int) Tools::getValue('id_smart_blog_post');
+                break;
+            case 'adminmaintenance':
+                $id_type = VEC\UId::CONTENT;
+                $id = VECContent::getMaintenanceId();
+
+                $uids = VEC\UId::getBuiltList($id, $id_type, $this->context->shop->id);
+                $hideEditor = empty($uids) ? $uids : array_keys($uids[$this->context->shop->id]);
+                break;
+        }
+
+        if (isset($id)) {
+            self::$controller = $this->context->controller;
+            self::$controller->addJQuery();
+            self::$controller->js_files[] = $this->_path . 'views/js/admin.js?v=' . _VEC_VERSION_;
+            self::$controller->css_files[$this->_path . 'views/css/admin.css?v=' . _VEC_VERSION_] = 'all';
+
+            $uid = new VEC\UId($id, $id_type, 0, Shop::getContext() === Shop::CONTEXT_SHOP ? $this->context->shop->id : 0);
+
+            isset($hideEditor) or $hideEditor = $uid->getBuiltLangIdList();
+
+            Media::addJsDef([
+                'ceAdmin' => [
+                    'uid' => "$uid",
+                    'hideEditor' => $hideEditor,
+                    'footerProduct' => "$footer_product",
+                    'i18n' => [
+                        'edit' => str_replace("'", "’", $this->l('Edit with V-Elements')),
+                        'save' => str_replace("'", "’", $this->l('Please save the form before editing with V-Elements')),
+                        'error' => str_replace("'", "’", $this->getErrorMsg()),
+                    ],
+                    'editorUrl' => Tools::safeOutput($this->context->link->getAdminLink('AdminVECEditor') . '&uid='),
+                    'languages' => Language::getLanguages(true, $uid->id_shop),
+                ],
+            ]);
+            $this->context->smarty->assign('edit_width_ce', $this->context->link->getAdminLink('AdminVECEditor'));
+        }
+        return $this->context->smarty->fetch(_VEC_TEMPLATES_ . 'hook/backoffice_header.tpl');
+    }
+
+    protected function getErrorMsg()
+    {
+        if (!Configuration::get('PS_SHOP_ENABLE', null, null, $this->context->shop->id)) {
+            $ips = explode(',', Configuration::get('PS_MAINTENANCE_IP', null, null, $this->context->shop->id));
+
+            if (!in_array(Tools::getRemoteAddr(), $ips)) {
+                return $this->l('The shop is in maintenance mode, please whitelist your IP');
+            }
+        }
+
+        $id_tab = Tab::getIdFromClassName('AdminVECEditor');
+        $access = Profile::getProfileAccess($this->context->employee->id_profile, $id_tab);
+
+        if ('1' !== $access['view']) {
+            return VEC\Helper::transError('You do not have permission to view this.');
+        }
+
+        $class = isset(self::$controller->className) ? self::$controller->className : '';
+
+        if (in_array($class, $this->overrides)) {
+            $loadObject = new ReflectionMethod(self::$controller, 'loadObject');
+            $loadObject->setAccessible(true);
+
+            if (empty($loadObject->invoke(self::$controller, true)->active) && !defined("$class::CE_OVERRIDE")) {
+                return $this->l('You can not edit items which are not displayed, because an override file is missing. Please contact us on https://addons.prestashop.com');
+            }
+        }
+        return '';
+    }
+
+    public function hookHeader()
+    {
+        // Compatibility fix for PS 1.7.7.x upgrade
+        return $this->hookDisplayHeader();
+    }
+
+    public function hookDisplayHeader()
+    {
+        self::$controller = $this->context->controller;
+
+        $plugin = VEC\Plugin::instance();
+        VEC\did_action('template_redirect') or VEC\do_action('template_redirect');
+
+        if (self::getPreviewUId()) {
+            if ('widget' === Tools::getValue('render') && Tools::getIsset('actions')) {
+                $this->tplOverride = '';
+
+                $request = json_decode(${'_POST'}['actions'], true);
+                VEC\setup_postdata($request['editor_post_id']);
+                $response = $plugin->widgets_manager->ajaxRenderWidget($request);
+                empty($response) or http_response_code(200);
+                die(json_encode($response));
+            }
+            header_register_callback(function () {
+                header_remove('Content-Security-Policy');
+                header_remove('X-Content-Type-Options');
+                header_remove('X-Frame-Options');
+                header_remove('X-Xss-Protection');
+            });
+            if (Tools::getValue('ctx') > Shop::CONTEXT_SHOP) {
+                self::$controller->warning[] = VECSmarty::get(_VEC_TEMPLATES_ . 'admin/admin.tpl', 'ce_warning_multistore');
+            }
+        }
+        
+        require_once _VEC_PATH_ . 'classes/assets/CEAssetManager.php';
+        
+        CEAssetManager::instance();
+
+        $uid_preview = self::getPreviewUId(false);
+
+        if ($uid_preview && VEC\UId::CONTENT === $uid_preview->id_type) {
+            Tools::getIsset('maintenance') && $this->displayMaintenancePage();
+        }
+    }
+
+    public function hookOverrideLayoutTemplate($params)
+    {
+        if (false !== $this->tplOverride || !self::$controller) {
+            return $this->tplOverride;
+        }
+        $this->tplOverride = '';
+
+        if (self::isMaintenance()) {
+            return $this->tplOverride;
+        }
+        // Page Content
+        $controller = self::$controller;
+        $tpl_vars = &$this->context->smarty->tpl_vars;
+        $front = Tools::strtolower(preg_replace('/(ModuleFront)?Controller(Override)?$/i', '', get_class($controller)));
+        // PrestaBlog fix for non-default blog URL
+        stripos($front, 'prestablog') === 0 && 'prestablog' . Configuration::get('prestablog_urlblog') === $front && $front = 'prestablogblog';
+
+        switch ($front) {
+            case 'vecelementspreview':
+                $model = self::getPreviewUId(false)->getModel();
+                $key = $model::${'definition'}['table'];
+
+                if (isset($tpl_vars[$key]->value['id'])) {
+                    $id = $tpl_vars[$key]->value['id'];
+                    $desc = ['description' => &$tpl_vars[$key]->value['content']];
+                }
+                break;
+            case 'cms':
+                $model = class_exists('CMS') ? 'CMS' : 'CMSCategory';
+                $key = $model::${'definition'}['table'];
+
+                if (isset($tpl_vars[$key]->value['id'])) {
+                    $id = $tpl_vars[$key]->value['id'];
+                    $desc = ['description' => &$tpl_vars[$key]->value['content']];
+
+                    VEC\add_action('wp_head', 'print_og_image');
+                } elseif (isset($controller->cms->id)) {
+                    $id = $controller->cms->id;
+                    $desc = ['description' => &$controller->cms->content];
+                } elseif (isset($tpl_vars['cms_category']->value['id'])) {
+                    $model = 'CMSCategory';
+                    $id = $tpl_vars['cms_category']->value['id'];
+                    $desc = &$tpl_vars['cms_category']->value;
+                } elseif (isset($controller->cms_category->id)) {
+                    $model = 'CMSCategory';
+                    $id = $controller->cms_category->id;
+                    $desc = ['description' => &$controller->cms_category->description];
+                }
+                break;
+            case 'product':
+            case 'category':
+            case 'manufacturer':
+            case 'supplier':
+                $model = $front;
+
+                if (isset($tpl_vars[$model]->value['id'])) {
+                    $id = $tpl_vars[$model]->value['id'];
+                    $desc = &$tpl_vars[$model]->value;
+                } elseif (method_exists($controller, "get$model") && Validate::isLoadedObject($obj = $controller->{"get$model"}())) {
+                    $id = $obj->id;
+                    $desc = ['description' => &$obj->description];
+                }
+                break;
+            case 'smartblogdetails':
+                $model = 'SmartBlogPost';
+
+                if (isset($tpl_vars['post']->value['id_post'])) {
+                    $id = $tpl_vars['post']->value['id_post'];
+                    $desc = ['description' => &$tpl_vars['post']->value['content']];
+                }
+                break;
+        }
+
+        if (isset($id)) {
+            $uid_preview = self::getPreviewUId();
+
+            if ($uid_preview && $uid_preview->id === (int) $id && $uid_preview->id_type === VEC\UId::getTypeId($model)) {
+                VEC\UId::$_ID = $uid_preview;
+            } elseif (!VEC\UId::$_ID) {
+                VEC\UId::$_ID = new VEC\UId($id, VEC\UId::getTypeId($model), $this->context->language->id, $this->context->shop->id);
+            }
+
+            if (VEC\UId::$_ID) {
+                $this->filterBodyClasses();
+
+                $desc['description'] = VEC\apply_filters('the_content', $desc['description']);
+            }
+        }
+
+        // Theme Builder
+        $themes = [
+            'header' => Configuration::get('CE_HEADER'),
+            'footer' => Configuration::get('CE_FOOTER'),
+        ];
+        $pages = [
+            'index' => 'page-index',
+            'contact' => 'page-contact',
+            'pagenotfound' => 'page-not-found',
+        ];
+        foreach ($pages as $page_type => $theme_type) {
+            if ($front === $page_type) {
+                $themes[$theme_type] = Configuration::get(self::getThemeVarName($theme_type));
+                break;
+            }
+        }
+        $uid_preview = self::getPreviewUId(false);
+
+        if ($uid_preview && VEC\UId::THEME === $uid_preview->id_type) {
+            $preview = $this->renderTheme($uid_preview);
+
+            $document = VEC\Plugin::$instance->documents->getDocForFrontend($uid_preview);
+            $type_preview = $document->getTemplateType();
+            $this->context->smarty->assign(self::getThemeVarName($type_preview), $preview);
+
+            if (stripos($type_preview, 'page-') === 0) {
+                VEC\UId::$_ID = $uid_preview;
+                $desc = ['description' => &$preview];
+                $this->filterBodyClasses();
+                VEC\add_action('wp_head', 'print_og_image');
+            }
+            unset($themes[$type_preview]);
+        }
+        if (isset($pages[$front]) && !empty($themes[$pages[$front]])) {
+            $theme_type = $pages[$front];
+            VEC\UId::$_ID = new VEC\UId($themes[$theme_type], VEC\UId::THEME, $this->context->language->id, $this->context->shop->id);
+            $desc = ['description' => $this->renderTheme(VEC\UId::$_ID)];
+            $this->context->smarty->assign(self::getThemeVarName($theme_type), $desc['description']);
+            $this->filterBodyClasses();
+            VEC\add_action('wp_head', 'print_og_image');
+
+            unset($themes[$theme_type]);
+        }
+
+        $this->tplOverride = VEC\apply_filters('template_include', $this->tplOverride);
+
+        if (strrpos($this->tplOverride, 'layout-canvas') !== false) {
+            empty($desc) or $this->context->smarty->assign('ce_desc', $desc);
+        } else {
+            foreach ($themes as $theme_type => $id_vec_theme) {
+                empty($id_vec_theme) or $this->context->smarty->assign(
+                    self::getThemeVarName($theme_type),
+                    $this->renderTheme(new VEC\UId($id_vec_theme, VEC\UId::THEME, $this->context->language->id, $this->context->shop->id))
+                );
+            }
+        }
+
+        return $this->tplOverride;
+    }
+
+    public function hookDisplayOverrideTemplate($params)
+    {
+        
+    }
+
+    protected function filterBodyClasses()
+    {
+        $tpl_vars = &$this->context->smarty->tpl_vars;
+
+        $body_classes = &$tpl_vars['page']->value['body_classes'];
+        $body_classes['elementor-page'] = 1;
+        $body_classes['elementor-page-' . VEC\get_the_ID()->toDefault()] = 1;
+        
+    }
+
+    protected function displayMaintenancePage()
+    {
+        Configuration::set('PS_SHOP_ENABLE', false);
+        Configuration::set('PS_MAINTENANCE_IP', '');
+
+        $displayMaintenancePage = new ReflectionMethod($this->context->controller, 'displayMaintenancePage');
+        $displayMaintenancePage->setAccessible(true);
+        $displayMaintenancePage->invoke($this->context->controller);
+    }
+
+    public function hookDisplayMaintenance($params)
+    {
+        if (self::getPreviewUId(false)) {
+            http_response_code(200);
+            header_remove('Retry-After');
+        } else {
+            $this->hookDisplayHeader();
+        }
+
+        VEC\add_filter('the_content', function () {
+            $uid = VEC\get_the_ID();
+            ${'this'}->context->smarty->assign('vec_content', new VECContent($uid->id, $uid->id_lang, $uid->id_shop));
+
+            VEC\remove_all_filters('the_content');
+        }, 0);
+
+        if (!$maintenance = $this->renderContent('displayMaintenance', $params)) {
+            return;
+        }
+        
+        self::$controller->registerJavascript('jquery', 'js/jquery/jquery-1.11.0.min.js');
+
+        $this->unshiftTemplateDir(_VEC_TEMPLATES_ . 'front/theme/');
+
+        $this->context->smarty->assign([
+            'iso_code' => $this->context->language->iso_code,
+            'favicon' => Configuration::get('PS_FAVICON'),
+            'favicon_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
+        ]);
+        return $maintenance;
+    }
+
+    public function hookDisplayFooterProduct($params)
+    {
+        return $this->renderContent('displayFooterProduct', $params);
+    }
+
+    public function __call($method, $args)
+    {
+        if (stripos($method, 'hookActionObject') === 0 && stripos($method, 'DeleteAfter') !== false) {
+            call_user_func_array([$this, 'hookActionObjectDeleteAfter'], $args);
+        } elseif (stripos($method, 'hook') === 0) {
+            // render hook only after Header init or if it's Home
+            if (false !== $this->tplOverride || !strcasecmp($method, 'hookDisplayHome')) {
+                return $this->renderContent(Tools::substr($method, 4), $args);
+            }
+        } else {
+            throw new Exception('Can not find method: ' . $method);
+        }
+    }
+
+    public function renderContent($hook_name = null)
+    {
+        if (!$hook_name) {
+            return;
+        }
+        $out = '';
+        $rows = VECContent::getIdsByHook(
+            $hook_name,
+            $id_lang = $this->context->language->id,
+            $id_shop = $this->context->shop->id,
+            Tools::getValue('id_product', 0),
+            self::getPreviewUId()
+        );
+        if ($rows) {
+            $uid = VEC\UId::$_ID;
+
+            foreach ($rows as $row) {
+                VEC\UId::$_ID = new VEC\UId($row['id'], VEC\UId::CONTENT, $id_lang, $id_shop);
+
+                $out .= VEC\apply_filters('the_content', '');
+            }
+            VEC\UId::$_ID = $uid;
+        }
+        return $out;
+    }
+
+    public function renderTheme($uid)
+    {
+        static $unshift;
+        is_null($unshift) && $unshift = $this->unshiftTemplateDir(_VEC_TEMPLATES_ . 'front/theme/');
+
+        $tmp = VEC\UId::$_ID;
+        VEC\UId::$_ID = $uid;
+        $out = VEC\apply_filters('the_content', '');
+        VEC\UId::$_ID = $tmp;
+
+        return $out;
+    }
+
+    protected function unshiftTemplateDir($path)
+    {
+        $tpl_dir = $this->context->smarty->getTemplateDir();
+        $res = array_unshift($tpl_dir, $path);
+        $this->context->smarty->setTemplateDir($tpl_dir);
+
+        return $res;
+    }
+
+    public function registerHook($hook_name, $shop_list = null, $position = null)
+    {
+        $res = parent::registerHook($hook_name, $shop_list);
+
+        if ($res && is_numeric($position)) {
+            $this->updatePosition(Hook::getIdByName($hook_name), 0, $position);
+        }
+        return $res;
+    }
+
+    public function hookVECTemplate($params)
+    {
+        if (empty($params['id']) || !Validate::isLoadedObject($tpl = new VECTemplate($params['id'])) || !$tpl->active) {
+            return;
+        }
+        $uid = VEC\UId::$_ID;
+        VEC\UId::$_ID = new VEC\UId($params['id'], VEC\UId::TEMPLATE);
+        $out = VEC\apply_filters('the_content', '');
+        VEC\UId::$_ID = $uid;
+
+        return $out;
+    }
+
+    public function hookActionObjectDeleteAfter($params)
+    {
+        $model = get_class($params['object']);
+        $id_type = VEC\UId::getTypeId($model);
+        $id_half = sprintf('%d%02d', $params['object']->id, $id_type);
+
+        // Delete meta data
+        Db::getInstance()->delete('vec_meta', "id LIKE '{$id_half}____'");
+
+        // Delete CSS files
+        $css_files = glob(_VEC_PATH_ . "views/css/ce/$id_half????.css", GLOB_NOSORT);
+
+        foreach ($css_files as $css_file) {
+            Tools::deleteFile($css_file);
+        }
+    }
+
+    public function hookActionObjectProductDeleteAfter($params)
+    {
+        $this->hookActionObjectDeleteAfter($params);
+
+        // Delete displayFooterProduct content
+        if ($id = VECContent::getFooterProductId($params['object']->id)) {
+            $content = new VECContent($id);
+            Validate::isLoadedObject($content) && $content->delete();
+        }
+    }
+
+    public function hookActionProductAdd($params)
+    {
+        if (isset($params['request']) && $params['request']->attributes->get('action') === 'duplicate') {
+            $id_product_duplicate = (int) $params['request']->attributes->get('id');
+        } elseif (Tools::getIsset('duplicateproduct')) {
+            $id_product_duplicate = (int) Tools::getValue('id_product');
+        }
+
+        if (isset($id_product_duplicate, $params['id_product']) &&
+            $built_list = VEC\UId::getBuiltList($id_product_duplicate, VEC\UId::PRODUCT)
+        ) {
+            $db = VEC\Plugin::instance()->db;
+            $uid = new VEC\UId($params['id_product'], VEC\UId::PRODUCT, 0);
+
+            foreach ($built_list as $id_shop => &$langs) {
+                foreach ($langs as $id_lang => $uid_from) {
+                    $uid->id_lang = $id_lang;
+                    $uid->id_shop = $id_shop;
+
+                    $db->copyElementorMeta($uid_from, $uid);
+                }
+            }
+        }
+    }
+
+    protected function checkThemeChange()
+    {
+        if (!empty($this->context->shop->theme)) {
+            $theme = $this->context->shop->theme->get('name');
+            $vec_theme = Configuration::get('CE_THEME');
+
+            if (empty($vec_theme)) {
+                Configuration::updateValue('CE_THEME', $theme);
+            } elseif ($vec_theme != $theme) {
+                require_once _VEC_PATH_ . 'classes/VECDatabase.php';
+
+                // register missing hooks after changing theme
+                foreach (VECDatabase::getHooks() as $hook) {
+                    $this->registerHook($hook, null, 1);
+                }
+                Configuration::updateValue('CE_THEME', $theme);
+            }
+        }
+    }
+
+    public static function getPreviewUId($embed = true)
+    {
+        static $res = null;
+
+        if (null === $res && $res = Tools::getIsset('preview_id') &&
+            $uid = VEC\UId::parse(Tools::getValue('preview_id'))
+        ) {
+            $admin = $uid->getAdminController();
+            $key = 'AdminBlogPosts' === $admin ? 'blogtoken' : 'adtoken';
+            $res = self::hasAdminToken($admin, $key) ? $uid : false;
+        }
+        return !$embed || Tools::getIsset('ver') ? $res : false;
+    }
+
+    public static function hasAdminToken($tab, $key = 'adtoken')
+    {
+        $adtoken = Tools::getAdminToken($tab . (int) Tab::getIdFromClassName($tab) . (int) Tools::getValue('id_employee'));
+
+        return Tools::getValue($key) == $adtoken;
+    }
+
+    public static function getThemeVarName($theme_type)
+    {
+        return 'CE_' . Tools::strtoupper(str_replace('-', '_', $theme_type));
+    }
+
+    public static function isMaintenance()
+    {
+        return !Configuration::get('PS_SHOP_ENABLE') &&
+            !in_array(Tools::getRemoteAddr(), explode(',', Configuration::get('PS_MAINTENANCE_IP')));
+    }
+
+    public function _getProductsPath($items_type)
+    {       
+        $items_type_path = [];
+
+        for( $i = 1; $i <= 30; $i++ ){
+            $items_type_path[$i] = 'catalog/_partials/miniatures/_partials/_product/product-' . $i . '.tpl';
+        }
+
+        $items_type_path = Wp_Helper::apply_filters( 'axoncreator_products_type_path', $items_type_path );  
+        
+        return $items_type_path[$items_type];
+    }
+    
+    public function _prepProductsSelected($settings)
+    {   
+        $content = array();
+        $data = array();
+        
+        $content['products'] = $this->execProducts('s', $settings, 0, null, null, 1);   
+        $content['lastPage'] = true;
+        
+        $content['items_type_path'] = $this->_getProductsPath($settings['items_type']);
+        
+        return $content;
+    }
+        
+    public function _prepProducts($settings)
+    {   
+        $content = array();
+        
+        $source = $settings['source'];
+        $limit = (int)$settings['limit'] <= 0 ? 10 : (int)$settings['limit'];
+        $order_by = $settings['order_by'];
+        $order_way = $settings['order_way'];
+        
+        if($source == 'c'){
+            $source = $settings['category'];
+            if ($settings['randomize']) {
+                $order_by = 'rand';
+            }
+        }
+                
+        $page = $settings['paged'];
+                
+        $content['products'] = $this->execProducts($source,  $settings, $limit, $order_by, $order_way, $page);
+        
+        $content['lastPage'] = true;
+        
+        if( $page > 1 ){
+            $content['lastPage'] = !(bool)$this->execProducts($source,  $settings, $limit, $order_by, $order_way, $page + 1);
+        }
+        
+        $content['items_type_path'] = $this->_getProductsPath($settings['items_type']);
+        
+        return $content;
+    }
+
+    protected function getProduct($id)
+    {
+        $presenter = new \PrestaShop\PrestaShop\Core\Product\ProductListingPresenter(
+            new \PrestaShop\PrestaShop\Adapter\Image\ImageRetriever($this->context->link),
+            $this->context->link,
+            new \PrestaShop\PrestaShop\Adapter\Product\PriceFormatter(),
+            new \PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever(),
+            $this->context->getTranslator()
+        );
+        $presenterFactory = new \ProductPresenterFactory($this->context);
+        $assembler = new \ProductAssembler($this->context);
+        $result = ['id_product' => $id];
+
+        try {
+            if (!$assembledProduct = $assembler->assembleProduct($result)) {
+                return false;
+            }
+            return $presenter->present(
+                $presenterFactory->getPresentationSettings(),
+                $assembledProduct,
+                $this->context->language
+            );
+        } catch (\Exception $ex) {
+            return false;
+        }
+    }
+    
+    public function getProducts($listing, $order_by, $order_dir, $limit, $id_category = 2, $products = [])
+    {                       
+        $tpls = [];
+
+        if ('products' === $listing) {
+            // Custom Products
+            if ('rand' === $order_by) {
+                shuffle($products);
+            }
+            foreach ($products as &$product) {
+                if ($product['id']) {
+                    $tpls[] = $this->getProduct($product['id']);
+                }
+            }
+            return $tpls;
+        }
+
+        $translator = $this->context->getTranslator();
+        $query = new \PrestaShop\PrestaShop\Core\Product\Search\ProductSearchQuery();
+        $query->setResultsPerPage($limit <= 0 ? 8 : (int) $limit);
+        $query->setQueryType($listing);
+
+        switch ($listing) {
+            case 'category':
+                $category = new \Category((int) $id_category);
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\Category\CategoryProductSearchProvider($translator, $category);
+                $query->setSortOrder(
+                    'rand' == $order_by
+                    ? \PrestaShop\PrestaShop\Core\Product\Search\SortOrder::random()
+                    : new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir)
+                );
+                break;
+            case 'prices-drop':
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\PricesDrop\PricesDropProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+                break;
+            case 'new-products':
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\NewProducts\NewProductsProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+                break;
+            case 'best-sales':
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\BestSales\BestSalesProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+                break;
+        }
+        $result = $searchProvider->runQuery(new \PrestaShop\PrestaShop\Core\Product\Search\ProductSearchContext($this->context), $query);
+
+        $assembler = new \ProductAssembler($this->context);
+        $presenterFactory = new \ProductPresenterFactory($this->context);
+        $presentationSettings = $presenterFactory->getPresentationSettings();
+        $presenter = new \PrestaShop\PrestaShop\Core\Product\ProductListingPresenter(
+            new \PrestaShop\PrestaShop\Adapter\Image\ImageRetriever($this->context->link),
+            $this->context->link,
+            new \PrestaShop\PrestaShop\Adapter\Product\PriceFormatter(),
+            new \PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever(),
+            $translator
+        );
+
+        foreach ($result->getProducts() as $rawProduct) {
+            $tpls[] = $presenter->present(
+                $presentationSettings,
+                $assembler->assembleProduct($rawProduct),
+                $this->context->language
+            );
+        }
+        return $tpls;
+    }
+    
+}

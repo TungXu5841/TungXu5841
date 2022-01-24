@@ -1573,260 +1573,6 @@ module.exports = function ($scope) {
 
 /***/ }),
 
-/***/ 122:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var AjaxSearchHandler = elementorModules.frontend.handlers.Base.extend({
-
-	getDefaultSettings: function getDefaultSettings() {
-		return {
-			selectors: {
-				wrapper: '.elementor-search',
-				container: '.elementor-search__container',
-				icon: '.elementor-search__icon',
-				input: '.elementor-search__input',
-				clear: '.elementor-search__clear',
-				toggle: '.elementor-search__toggle',
-				submit: '.elementor-search__submit',
-				closeButton: '.dialog-close-button'
-			},
-			classes: {
-				isFocus: 'elementor-search--focus',
-				isTopbar: 'elementor-search--topbar',
-				lightbox: 'elementor-lightbox'
-			}
-		};
-	},
-
-	getDefaultElements: function getDefaultElements() {
-		var selectors = this.getSettings('selectors'),
-			elements = {};
-
-		elements.$wrapper = this.$element.find(selectors.wrapper);
-		elements.$container = this.$element.find(selectors.container);
-		elements.$input = this.$element.find(selectors.input);
-		elements.$clear = this.$element.find(selectors.clear);
-		elements.$icon = this.$element.find(selectors.icon);
-		elements.$toggle = this.$element.find(selectors.toggle);
-		elements.$submit = this.$element.find(selectors.submit);
-		elements.$closeButton = this.$element.find(selectors.closeButton);
-
-		return elements;
-	},
-
-	bindEvents: function bindEvents() {
-		var self = this,
-			$container = self.elements.$container,
-			$closeButton = self.elements.$closeButton,
-			$input = self.elements.$input,
-			$clear = self.elements.$clear,
-			$wrapper = self.elements.$wrapper,
-			$icon = self.elements.$icon,
-			skin = this.getElementSettings('skin'),
-			classes = this.getSettings('classes');
-
-		$input.one('focus', $.proxy(this, 'loadAutocomplete'));
-
-		$clear.on('click', function () {
-			$input.val('').triggerHandler('keydown');
-			$clear.css({
-				visibility: '',
-				pointerEvents: '',
-			});
-		});
-
-		$input.on('input', function () {
-			var empty = !$input.val();
-
-			$clear.css({
-				visibility: empty ? '' : 'visible',
-				pointerEvents: empty ? '' : 'all',
-			});
-		});
-
-		if ('topbar' === skin) {
-			// Activate topbar mode on click
-			self.elements.$toggle.on('click', function () {
-				$container.toggleClass(classes.isTopbar).toggleClass(classes.lightbox);
-				$input.focus();
-			});
-
-			$closeButton.on('click', function () {
-				$container.removeClass(classes.isTopbar).removeClass(classes.lightbox);
-			});
-			// Deactivate topbar mode on click or on esc.
-			ceFrontend.elements.$document.keyup(function (event) {
-				var ESC_KEY = 27;
-
-				if (ESC_KEY === event.keyCode) {
-					if ($container.hasClass(classes.isTopbar)) {
-						$container.click();
-					}
-				}
-			}).on('click', function (event) {
-				if ($container.hasClass(classes.isTopbar) && !$(event.target).closest($wrapper).length) {
-					$container.removeClass(classes.isTopbar).removeClass(classes.lightbox);
-				}
-			});
-		} else {
-			// Apply focus style on wrapper element when input is focused
-			$input.on({
-				focus: function focus() {
-					$wrapper.addClass(classes.isFocus);
-				},
-				blur: function blur() {
-					$wrapper.removeClass(classes.isFocus);
-				}
-			});
-		}
-
-		if ('minimal' === skin) {
-			// Apply focus style on wrapper element when icon is clicked in minimal skin
-			$icon.on('click', function () {
-				$wrapper.addClass(classes.isFocus);
-				$input.focus();
-			});
-		}
-	},
-
-	loadAutocomplete: function loadAutocomplete() {
-		var baseDir = window.baseDir || prestashop.urls.base_url,
-			include = $.ui ? ($.ui.autocomplete ? '' : 'jquery.ui.autocomplete') : 'jquery-ui';
-
-		if (include) {
-			$('<link rel="stylesheet">').attr({
-				href: baseDir + 'js/jquery/ui/themes/base/minified/' + include + '.min.css'
-			}).appendTo(document.head);
-
-			if ('jquery-ui' === include) {
-				$('<link rel="stylesheet">').attr({
-					href: baseDir + 'js/jquery/ui/themes/base/minified/jquery.ui.theme.min.css'
-				}).appendTo(document.head);
-			}
-			$.ajax({
-				url: baseDir + 'js/jquery/ui/' + include + '.min.js',
-				cache: true,
-				dataType: 'script',
-				success: $.proxy(this, 'initAutocomplete')
-			});
-		} else {
-			this.initAutocomplete();
-		}
-	},
-
-	initAutocomplete: function initAutocomplete() {
-		$.fn.ceAjaxSearch || $.widget('ww.ceAjaxSearch', $.ui.autocomplete, {
-			_create: function () {
-				this._super();
-				this.menu.element.addClass('elementor-search__products');
-				this.element.on('focus' + this.eventNamespace, $.proxy(this, '_openOnFocus'))
-				$(document).on('click' + this.eventNamespace, $.proxy(this, '_closeOnDocumentClick'));
-
-				// Don't close on blur
-				this._off(this.element, 'blur');
-				// Trick for disable auto-scrolling on hover
-				this.menu.element.outerHeight = function() {
-					if (window.event && 'mouseover' === event.type) {
-						return Infinity;
-					}
-					return $.fn.outerHeight.apply(this, arguments);
-				};
-			},
-
-			_openOnFocus: function (event) {
-				this.menu.element.show();
-				this._resizeMenu();
-				this.menu.element.position(
-					$.extend({of: this.element}, this.options.position)
-				);
-			},
-
-			_closeOnDocumentClick: function (event) {
-				$(event.target).closest(this.options.appendTo).length || this._close();
-			},
-
-			search: function (value, event) {
-				value = value != null ? value : this._value();
-				this._super(value, event);
-
-				if (value.length < this.options.minLength) {
-					// Clear previous results
-					this.menu.element.empty();
-				}
-			},
-
-			_renderItem: function (ul, prod) {
-				var es = this.options.elementSettings;
-
-				return $('<li class="elementor-search__product">').html(
-					'<a class="elementor-search__product-link" href="' + encodeURI(prod.url) + '">' +
-						(es.show_image ? '<img class="elementor-search__product-image" src="' + encodeURI(prod.cover.small.url) + '" alt="' + prod.name.replace(/"/g, '&quot;') + '">' : '') +
-						'<div class="elementor-search__product-details">' +
-							'<div class="elementor-search__product-name">' + prod.name + '</div>' +
-							(es.show_category ? '<div class="elementor-search__product-category">' + prod.category_name + '</div>' : '') +
-							(es.show_description ? '<div class="elementor-search__product-description">' + prod.description_short.replace(/<\/?\w+.*?>/g, '') + '</div>' : '') +
-							(es.show_price ? '<div class="elementor-search__product-price">' + (prod.has_discount ? '<del>' + prod.regular_price + '</del> ' : '') + prod.price + '</div>' : '') +
-						'</div>' +
-					'</a>'
-				).appendTo(ul);
-			},
-
-			_resizeMenu: function () {
-				this._super();
-				this.options.position.my = 'left top+' + this.menu.element.css('margin-top');
-
-				setTimeout(function () {
-					this.menu.element.css({
-						maxHeight: 'calc(100vh - ' + (this.menu.element.offset().top - $(window).scrollTop())  + 'px)',
-						overflowY: 'auto',
-						WebkitOverflowScrolling: 'touch',
-					});
-				}.bind(this), 1);
-			},
-		});
-		var action = this.elements.$wrapper.prop('action'),
-			searchName = this.elements.$input.prop('name');
-
-		this.elements.$input.ceAjaxSearch({
-			appendTo: 'topbar' === this.getElementSettings('skin')
-				? this.elements.$container
-				: this.elements.$wrapper
-			,
-			minLength: 3,
-			elementSettings: this.getElementSettings(),
-
-			source: function (query, response) {
-				var data = {
-					ajax: true,
-					resultsPerPage: this.options.elementSettings.list_limit || 10,
-				};
-				data[searchName] = query.term;
-
-				$.post(action, data, null, 'json')
-					.then(function (resp) {
-						response(resp.products);
-					})
-					.fail(response)
-				;
-			},
-
-			select: function (event, ui) {
-				if (location.href !== ui.item.url && !ceFrontend.isEditMode()) {
-					location.href = ui.item.url;
-				};
-			},
-		});
-	}
-});
-
-module.exports = function ($scope) {
-	new AjaxSearchHandler({ $element: $scope });
-};
-
-/***/ }),
 /***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2866,7 +2612,6 @@ module.exports = function ($) {
 		'language-selector.default': __webpack_require__(108),
 		'currency-selector.default': __webpack_require__(108),
 		'sign-in.default': __webpack_require__(108),
-		'ajax-search.default': __webpack_require__(122),
 		'animated-headline.default': __webpack_require__(123),
 		'shopping-cart.default': __webpack_require__(124),
 		'progress.default': __webpack_require__(189),
@@ -2883,6 +2628,7 @@ module.exports = function ($) {
 		'email-subscription.default': __webpack_require__(200),
 		'slideshow.default': __webpack_require__(201),
 		'product-tab.default': __webpack_require__(202),
+		'promo.default': __webpack_require__(203),
 	};
 
 	var handlersInstances = {};
@@ -4784,6 +4530,71 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 
 module.exports = function ($scope) {
 	ceFrontend.elementsHandler.addHandler(AjaxTabHandler, { $element: $scope });
+};
+
+/***/ }),
+/***/ 203:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var PromoHandler = elementorModules.frontend.handlers.Base.extend({
+	getDefaultSettings: function getDefaultSettings() {
+		return {
+			selectors: {
+				carousel: '.promo-widget'
+			}
+		};
+	},
+
+	getDefaultElements: function getDefaultElements() {
+		var selectors = this.getSettings('selectors');
+
+		return {
+			$carousel: this.$element.find(selectors.carousel)
+		};
+	},
+	onInit: function onInit() {
+		var _this = this,
+			promo = this.$element.find('.promo-widget'),
+			id = 'promo-' + this.$element.data('id'),
+			closeBtn = this.$element.find('.promo-close-btn'),
+			cookieTime = closeBtn.data('close_time');
+		_this.initSlider(promo.find('.elementor-block-carousel'));
+		closeBtn.on('click', function(){
+			promo.slideUp();
+			_this.setCookie(id, 1, cookieTime)
+		})
+	},
+	setCookie: function setCookie(key, value, expiry) {
+        var expires = new Date();
+        expires.setTime(expires.getTime() + (expiry * 60 * 1000));
+        document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+    },
+	initSlider: function initSlider($target){
+		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
+
+		var elementSettings = this.getElementSettings();
+
+		var slickOptions = {
+			touchThreshold: 100,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			autoplay: 'yes' === elementSettings.autoplay,
+			autoplaySpeed: elementSettings.autoplay_speed,
+			infinite: true,
+			pauseOnHover: true,
+			speed: elementSettings.speed,
+			arrows: -1 !== ['arrows', 'both'].indexOf(elementSettings.navigation),
+			dots: -1 !== ['dots', 'both'].indexOf(elementSettings.navigation),
+		};
+
+		$target.slick(slickOptions);
+	},
+});
+
+module.exports = function ($scope) {
+	ceFrontend.elementsHandler.addHandler(PromoHandler, { $element: $scope });
 };
 
 /***/ }),

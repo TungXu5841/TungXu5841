@@ -118,7 +118,7 @@ var ajaxSearch = function(){
 
 var ajaxSuggestProducts = function(){
     var ids = $('.search-suggest-products').data('id_products');
-    var baseDir = 'http://localhost/framework/'; //Need to check
+    var baseDir = vectheme.baseDir;
     $.ajax({
         type: 'POST',
         url: baseDir + 'module/vecsearchbar/suggestProducts',

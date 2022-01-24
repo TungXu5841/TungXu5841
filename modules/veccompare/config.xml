@@ -2,7 +2,7 @@
 <module>
     <name>veccompare</name>
     <displayName><![CDATA[Vec - Compare]]></displayName>
-    <version><![CDATA[1.0.0]]></version>
+    <version><![CDATA[1.1.0]]></version>
     <description><![CDATA[Allow customers to compare products]]></description>
     <author><![CDATA[ThemeVec]]></author>
     <tab><![CDATA[front_office_features]]></tab>

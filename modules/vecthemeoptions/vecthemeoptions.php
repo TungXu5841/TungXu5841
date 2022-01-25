@@ -540,9 +540,16 @@ class VecThemeoptions extends Module implements WidgetInterface
             //Page title
             'ptitle_size' => Configuration::get($this->name . 'ptitle_size'),
 		);
-		$this->context->smarty->assign('postheme', $smart_vals);
+		$this->context->smarty->assign('vectheme', $smart_vals);
 
 		$this->context->smarty->assign('name_length', Configuration::get($this->name . 'p_name_length'));
+        
+        $useSSL = ((isset($this->ssl) && $this->ssl && Configuration::get('PS_SSL_ENABLED')) || Tools::usingSecureMode()) ? true : false;
+        $protocol_content = ($useSSL) ? 'https://' : 'http://';
+        Media::addJsDef(array(
+            'vectheme' => array(
+                    'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
+        )));
 	}
 	protected function getWarningMultishopHtml()
     {

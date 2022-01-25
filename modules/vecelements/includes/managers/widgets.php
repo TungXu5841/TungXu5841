@@ -106,6 +106,7 @@ class WidgetsManager
             'language-selector',
             'currency-selector',
             'v-smartblog',
+            'promo'
         ];
         
         $build_widgets_filename[] = 'category-tree';

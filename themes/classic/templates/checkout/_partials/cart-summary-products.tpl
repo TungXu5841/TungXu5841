@@ -24,15 +24,13 @@
  *}
 
  <div class="cart-summary-products js-cart-summary-products">
-  <p>{$cart.summary_string}</p>
-
-  <p>
-    <a href="#" data-toggle="collapse" data-target="#cart-summary-product-list" class="js-show-details">
+  <div class="summary-details">
+  <strong>{$cart.summary_string}</strong>
+  <a href="#" data-toggle="collapse" data-target="#cart-summary-product-list" class="js-show-details">
       {l s='show details' d='Shop.Theme.Actions'}
       <i class="material-icons">expand_more</i>
-    </a>
-  </p>
-
+   </a>
+   </div>
   {block name='cart_summary_product_list'}
     <div class="collapse" id="cart-summary-product-list">
       <ul class="media-list">

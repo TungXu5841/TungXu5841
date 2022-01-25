@@ -12,10 +12,8 @@
       &:focus {
         color: $gray-darker;
         background: $white;
-        outline: 3px $brand-primary solid;
-
         + button .search {
-          color: $brand-primary;
+          color: $brand-primary; 
         }
       }
     }
@@ -41,4 +39,26 @@
 
 @mixin box-shadow-light {
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+@mixin vec-transition($number) {
+    -webkit-transition: all $number linear;
+    -moz-transition: all $number linear;
+    -ms-transition: all $number linear;
+    -o-transition: all $number linear;
+    transition: all $number linear;
+}
+@mixin vec-transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    transform: $transform;
+}
+
+@mixin flex {
+    flex-wrap: wrap;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }

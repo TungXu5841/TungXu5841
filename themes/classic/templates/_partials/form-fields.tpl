@@ -31,12 +31,12 @@
 {else}
 
   <div class="form-group row {if !empty($field.errors)}has-error{/if}">
-    <label class="col-md-3 form-control-label{if $field.required} required{/if}" for="field-{$field.name}">
+    <label class="col-md-2 form-control-label{if $field.required} required{/if}" for="field-{$field.name}">
       {if $field.type !== 'checkbox'}
         {$field.label}
       {/if}
     </label>
-    <div class="col-md-6{if ($field.type === 'radio-buttons')} form-control-valign{/if}">
+    <div class="col-md-8{if ($field.type === 'radio-buttons')} form-control-valign{/if}">
 
       {if $field.type === 'select'}
 
@@ -190,7 +190,7 @@
 
     </div>
 
-    <div class="col-md-3 form-control-comment">
+    <div class="col-md-2 form-control-comment">
       {block name='form_field_comment'}
         {if (!$field.required && !in_array($field.type, ['radio-buttons', 'checkbox']))}
          {l s='Optional' d='Shop.Forms.Labels'}

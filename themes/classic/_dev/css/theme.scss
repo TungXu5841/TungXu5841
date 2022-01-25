@@ -36,3 +36,53 @@
 @import "components/main";
 @import "components/notifications";
 /* stylelint-enable */
+button.continue,
+.ps-shown-by-js button {
+	width: 100%;
+}
+#js-checkout-summary {
+	background: transparent;
+	.summary-details {
+		@include flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.9375rem;
+		> strong {
+			font-size: 1.125rem;
+			text-transform: capitalize;
+		}
+	}
+	#cart-summary-product-list {
+		img {
+			max-width: none; 
+		}
+	}
+}
+#checkout {
+	#content {
+		> .row {
+			display: -ms-flexbox;
+			display: flex;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			.cart-grid-right {
+				&:after {
+					content: "";
+					display: block;
+					width: 300%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					background: #fafafa;
+					z-index: -1;
+					-webkit-box-shadow: 0 -1px 0 #e1e1e1 inset;
+					box-shadow: 0 -1px 0 #e1e1e1 inset;
+					background-position: left top;
+					-webkit-box-shadow: 1px 0 0 #e1e1e1 inset;
+					box-shadow: 1px 0 0 #e1e1e1 inset;
+				}
+			}
+		}
+	}
+}

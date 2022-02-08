@@ -34,8 +34,8 @@ class VECContent extends ObjectModel
             'active' => ['type' => self::TYPE_INT, 'shop' => true, 'validate' => 'isBool'],
             'date_add' => ['type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDate'],
             'date_upd' => ['type' => self::TYPE_DATE, 'shop' => true, 'validate' => 'isDate'],
+            'title' => ['type' => self::TYPE_STRING, 'validate' => 'isGenericName', 'size' => 128],
             // Lang fields
-            'title' => ['type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 128],
             'content' => ['type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isCleanHtml'],
         ],
     ];
@@ -50,7 +50,6 @@ class VECContent extends ObjectModel
                 'id_vec_content' => (int) $id,
                 'id_lang' => (int) $id_lang,
                 'id_shop' => (int) $id_shop,
-                'title' => '',
                 'content' => '',
             ]);
             empty($res) or parent::__construct($id, $id_lang, $id_shop, $translator);

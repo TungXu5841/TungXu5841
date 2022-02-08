@@ -96,7 +96,7 @@
   {else}
 	  {if (!$too_early AND ($logged OR $allow_guests))}
 	  <p class="align_center">
-		 <a id="new_comment_tab_btn" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">{l s='Be the first to write your review' mod='vecproductcomments'} !</a>
+		 <a id="new_comment_tab_btn" class="btn btn-secondary" data-toggle="modal" data-target="#pos-product-comment-modal">{l s='Be the first to write your review' mod='vecproductcomments'} !</a>
 	  </p>
 	  {else}
 	  <p class="align_center">{l s='No customer reviews for the moment.' mod='vecproductcomments'}</p>

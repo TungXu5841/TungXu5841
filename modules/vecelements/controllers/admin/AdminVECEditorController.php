@@ -161,12 +161,9 @@ class AdminVECEditorController extends ModuleAdminController
         $content->hook = 'displayFooterProduct';
         $content->id_product = $this->uid->id;
         $content->active = true;
-        $content->title = [];
+        $content->title = 'Product Footer #' . $this->uid->id;;
         $content->content = [];
 
-        foreach (Language::getLanguages(false) as $lang) {
-            $content->title[$lang['id_lang']] = 'Product Footer #' . $this->uid->id;
-        }
         $content->save();
 
         $uid = new VEC\UId($content->id, VEC\UId::CONTENT, $this->uid->id_lang, $this->uid->id_shop);
@@ -185,13 +182,12 @@ class AdminVECEditorController extends ModuleAdminController
         $content = new VECContent();
         $content->hook = 'displayMaintenance';
         $content->active = true;
-        $content->title = [];
+        $content->title = 'Maintenance';
         $content->content = [];
 
         foreach (Language::getLanguages(false) as $lang) {
             $id_lang = $lang['id_lang'];
 
-            $content->title[$id_lang] = 'Maintenance';
             $content->content[$id_lang] = (string) Configuration::get('PS_MAINTENANCE_TEXT', $id_lang);
         }
         $content->save();

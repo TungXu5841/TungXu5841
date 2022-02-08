@@ -35,7 +35,11 @@
 @import "components/wrapper";
 @import "components/main";
 @import "components/notifications";
+@import "partials/vecthemes-icon";
 /* stylelint-enable */
+.testtest{
+	background-color: red;
+}
 button.continue,
 .ps-shown-by-js button {
 	width: 100%;

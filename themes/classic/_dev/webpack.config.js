@@ -60,7 +60,7 @@ let config = {
           {
             loader: 'file-loader',
             options: {
-              name: '../css/[hash].[ext]',
+              name: '../css/fonts/[hash].[ext]',
             },
           },
         ],

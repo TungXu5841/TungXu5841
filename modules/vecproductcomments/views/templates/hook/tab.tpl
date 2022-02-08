@@ -22,7 +22,7 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-{if $postheme.productp_tab == '0' || $postheme.productp_tab == '1'}
+{if $vectheme.productp_tab == '0' || $vectheme.productp_tab == '1'}
 <a class="nav-link" data-toggle="tab" href="#product_comments_block_tab">{l s='Reviews' mod='vecproductcomments'}</a>
 {else}
 <a class="collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" href="#product_comments_block_tab">{l s='Reviews' mod='vecproductcomments'}</a>

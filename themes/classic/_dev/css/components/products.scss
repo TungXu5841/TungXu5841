@@ -69,6 +69,7 @@
   height: 1.25rem;
   cursor: pointer;
   opacity: 0;
+  @include vec-transition(.3s);
 }
 
 .input-container {
@@ -82,36 +83,40 @@
   height: 100%;
   cursor: pointer;
   opacity: 0;
+  @include vec-transition(.3s);
 }
 
 .input-color,
 .input-radio {
   &:checked + span,
   &:hover + span {
-    border: 2px solid $gray-darker;
+    background: var(--hovercolor);
+    color: $white;
   }
 }
 
 .radio-label {
   display: inline-block;
-  padding: 0.125rem $small-space;
-  font-weight: 600;
-  background: $white;
-  border: 2px solid $white;
+  padding: .1875rem 1.25rem;
+  font-weight: 400;
+  color: #4e4c4c;
+  background: #f6f6f6;
 }
 
 .product-actions {
   .control-label {
     display: block;
     width: 100%;
+    font-weight: 500;
     margin-bottom: 0.375rem;
   }
 
   .add-to-cart {
-    height: 2.75rem;
-    padding-top: 0.625rem;
     line-height: inherit;
-
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: .625rem 2.8125rem;
+    width: 100%;
     .material-icons {
       line-height: inherit;
     }
@@ -119,8 +124,43 @@
 }
 
 .product-quantity {
-  display: flex;
-
+  @include flex;
+  align-items: center;
+  .input-group-btn-vertical {
+    position: static;
+    .btn-touchspin {
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1.875rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        border: none;
+        &:hover {
+            color: $white;
+            background: $gray-dark;
+        }
+        &.bootstrap-touchspin-up {
+            right: 0;
+            i:after {
+                content: '\e145';
+            }
+        }
+        &.bootstrap-touchspin-down {
+            left: 0;
+            i:after {
+                content: '\e15b';
+            }
+        }
+        i {
+            position: static;
+            font-size: .9375rem; 
+        }
+    }
+  }
   .qty,
   .add {
     display: inline-flex;
@@ -129,15 +169,40 @@
   }
 
   .qty {
-    margin-right: 0.4rem;
+    margin-right: 1.25rem;
+    .bootstrap-touchspin {
+      padding: 0 1.875rem;
+      position: relative;
+      border: 1px solid $gray-dark;
+    }
   }
-
+  .add {
+    flex: 1;
+    margin-right: 1.25rem;
+  }
+  .buy-cart {
+    width: 100%;
+    margin-top: 0.75rem;
+    .buy-now {
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 0.625rem 2.8125rem;
+      line-height: inherit;
+      width: 100%;
+      &:not(:hover){
+        background: $gray-dark;
+        color: $white;
+      }
+    }
+  }
   #quantity_wanted {
     width: 3rem;
-    height: 2.75rem;
+    height: 3.0888rem;
     padding: 0.175rem 0.5rem;
     color: $gray-darker;
     background-color: $white;
+    border: none;
+    text-align: center;
   }
 
   .input-group-btn-vertical {
@@ -193,12 +258,15 @@
 }
 
 .product-prices {
-  margin-top: $medium-space;
-
-  div {
+  margin: $medium-space 0;
+  > div {
     margin-bottom: 0.625rem;
   }
-
+  div {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
   .tax-shipping-delivery-label {
     font-size: 0.8125rem;
     color: $gray;
@@ -220,7 +288,9 @@
 
   .regular-price {
     margin-right: $small-space;
-    font-weight: 500;
+    font-weight: 400;
+    color: #a2a2a2;
+    font-size: 1.25rem;
     text-decoration: line-through;
   }
 }
@@ -235,11 +305,11 @@
     display: inline-block;
     padding: 0.3125rem $small-space;
     margin-left: $small-space;
-    font-size: $font-size-base;
-    font-weight: 600;
-    color: $white;
+    font-size: .8125rem;
+    font-weight: 500;
+    color: $gray-dark;
     text-transform: uppercase;
-    background: $brand-secondary;
+    background: $brand-primary;
   }
 }
 
@@ -291,32 +361,6 @@
 
   img {
     background: $white;
-  }
-
-  .layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    cursor: pointer;
-    background: $black;
-    background: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    @include transition(opacity 0.7s ease-in-out);
-
-    &:hover {
-      opacity: 1;
-    }
-
-    .zoom-in {
-      font-size: 3.125rem;
-      color: $btn-primary-color;
-    }
   }
 }
 
@@ -530,23 +574,7 @@
 }
 
 .product-images {
-  > li.thumb-container {
-    display: inline;
-
-    > .thumb {
-      margin-bottom: $small-space;
-      cursor: pointer;
-
-      .images-container & {
-        margin-right: 0.8125rem;
-      }
-
-      &.selected,
-      &:hover {
-        border: $brand-primary 3px solid;
-      }
-    }
-  }
+  
 }
 
 #main {
@@ -662,6 +690,33 @@
     .color {
       margin-top: 0;
       margin-left: 0;
+      height: 1.25rem;
+      width: 1.25rem;
+      border-radius: 50%;
+      margin: .3125rem .625rem 0 0;
+      box-shadow: none;
+      position: relative; 
+      &.active,
+      &:hover {
+        border: 1px solid $radio-border-color;
+      }
+    }
+    .input-color {
+      &:checked + span,
+      &:hover + span {
+        &:before {
+          content: '';
+          position: absolute;
+          left: -0.3125rem;
+          right: -0.3125rem;
+          top: -0.3125rem;
+          bottom: -0.3125rem;
+          border-radius: 50%;
+          border: 1px solid var(--hovercolor);
+          pointer-events: none;
+          @include vec-transition(.3s);
+        } 
+      }
     }
   }
 }
@@ -821,17 +876,20 @@
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: 1.5rem;
-
+  > span {
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-right: .9375rem;
+  }
   ul {
     margin-bottom: 0;
   }
 
   li {
     display: inline-block;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-left: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    margin-left: .3125rem;
     cursor: pointer;
     background-color: $white;
     background-repeat: no-repeat;
@@ -839,7 +897,19 @@
     background-size: 2rem 2rem;
     border-radius: 50%;
     @include transition(all 0.2s ease-in);
-
+    background-image: none !important;
+    &:before {
+      display: none;
+    }
+    &.facebook {
+      background: #3b5998;
+    }
+    &.twitter  {
+      background: #1da1f2;
+    }
+    &.pinterest {
+      background: #e60023;
+    }
     a {
       display: block;
       width: 100%;

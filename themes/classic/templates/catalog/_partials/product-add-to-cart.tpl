@@ -24,8 +24,6 @@
  *}
 <div class="product-add-to-cart js-product-add-to-cart">
   {if !$configuration.is_catalog}
-    <span class="control-label">{l s='Quantity' d='Shop.Theme.Catalog'}</span>
-
     {block name='product_quantity'}
       <div class="product-quantity clearfix">
         <div class="qty">
@@ -56,11 +54,24 @@
               disabled
             {/if}
           >
-            <i class="material-icons shopping-cart">&#xE547;</i>
             {l s='Add to cart' d='Shop.Theme.Actions'}
           </button>
         </div>
-
+		<div class="cart_button">
+			{hook h='displayAfterButtonCart'}
+		</div>
+		<div class="buy-cart">
+          <button
+            class="btn btn-primary buy-now"
+            data-button-action="buy-now"
+            type="submit"
+            {if !$product.add_to_cart_url}
+              disabled
+            {/if}
+          >
+           {l s='Buy now' d='Shop.Theme.Actions'}
+          </button>
+        </div>	
         {hook h='displayProductActions' product=$product}
       </div>
     {/block}

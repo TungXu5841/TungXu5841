@@ -6,7 +6,7 @@ html {
 body {
   font-family: Manrope, sans-serif;
   font-size: $base-font-size;
-  line-height: 1.25em;
+  line-height: 1.71428571429;
   color: $gray-darker;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
@@ -18,9 +18,12 @@ ul {
   list-style: none;
 }
 
-a:hover {
-  color: $brand-primary;
-  text-decoration: none;
+a{
+  @include vec-transition(.3s); 
+  &:hover {
+    color: $brand-primary;
+    text-decoration: none;
+  }
 }
 
 p {

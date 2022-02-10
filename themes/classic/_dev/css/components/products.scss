@@ -320,38 +320,60 @@
 }
 
 .tabs {
-  padding: $medium-space $large-space;
+  padding: 3.75rem 0;
   margin-top: 2rem;
-  background: $white;
+  background: transparent;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -9999rem;
+    right: -9999rem;
+    background: #f8f8f8;
+    z-index: -1;
+  }
 
   .tab-pane {
     padding-top: $medium-space;
   }
-
   .nav-tabs {
     border: none;
-    border-bottom: $gray-light 2px solid;
-
+    border-bottom: $border-gray 1px solid;
     .nav-link {
-      color: $gray;
-      border: 0 solid transparent;
-
+      color: #adadad;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-size: 1.0625rem;
+      text-transform: uppercase;
+      font-weight: $headings-font-weight;
+      padding: 0 0 .625rem 0;
+      background: transparent;
       &.active {
-        color: $brand-primary;
+        color: $gray-dark;
         border: none;
-        border-bottom: $brand-primary 3px solid;
+        background: transparent;
+        border-bottom: $gray-dark 2px solid;
       }
 
       &:hover {
         border: none;
-        border-bottom: $brand-primary 3px solid;
+        border-bottom: $gray-dark 2px solid;
       }
     }
 
     .nav-item {
-      float: left;
-      margin-bottom: -0.125rem;
+      display: inline-block;
+      float: none;
+      &:not(:last-child) {
+        margin-right: 2.5rem;
+      }
     }
+  }
+  .tab-content {
+    padding: 1.875rem;
+    background: $white;
   }
 }
 
@@ -903,24 +925,37 @@
     }
     &.facebook {
       background: #3b5998;
+      a:before {
+        content: '\e93c';
+      }
     }
     &.twitter  {
       background: #1da1f2;
+      a:before {
+        content: '\e932';
+      }
     }
     &.pinterest {
       background: #e60023;
+      a:before {
+        content: '\e93e';
+      }
     }
     a {
-      display: block;
+      display: inline-flex;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      text-indent: 100%;
-      white-space: nowrap;
-
-      &:hover {
-        color: transparent;
+      font-size: 0;
+      color: $white;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      &:before {
+        font-family: $font-icon;
+        font-size: 1.125rem;
       }
+     
     }
   }
 }

@@ -25,7 +25,7 @@
 
 <a class="my-wisht-list col-lg-3 col-md-4 col-sm-6 col-xs-6" href="{url entity='module' name='vecwishlist' controller='view'}" title="{l s='My wishlists' mod='vecwishlist'}">
 	<span class="link-item">
-		<i class="lar la-heart"></i>
+		<i class="icon-rt-heart2"></i> 
 		{l s='My wishlists' mod='vecwishlist'}
 	</span>
 </a>

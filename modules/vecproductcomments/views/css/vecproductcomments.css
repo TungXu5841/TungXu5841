@@ -69,7 +69,7 @@ form#sendComment h3 {
 
 div.star:after {
   content: "\e915";
-  font-family: "roadthemes-icon";
+  font-family: "vecthemes-icon";
   display: inline-block;
   color: #acacac;
   font-weight:400;
@@ -82,7 +82,7 @@ div.star.star_on {
 }
 div.star.star_on:after {
   content: "\e915";
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
   display: inline-block;
   color: #fdd835;
   font-weight:400;
@@ -92,7 +92,7 @@ div.star.star_on:after {
 
 div.star.star_hover:after {
   content: "\e915";
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
   display: inline-block;
   color: #fdd835;
   font-weight:400;
@@ -205,7 +205,7 @@ div.star a:hover {
 }
 #product_comments_block_extra div.star:after {
   content: "\e915";
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
   display: inline-block;
   color: #acacac;
   font-weight:400;
@@ -214,7 +214,7 @@ div.star a:hover {
 }
 #product_comments_block_extra div.star_on:after {
   content: "\e915";
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
   display: inline-block;
   color: #fdd835;
   font-weight:400;
@@ -243,7 +243,7 @@ div.star a:hover {
 }
 .comments_advices a:before {
   display: inline-block;
-  font-family: "roadthemes-icon"; 
+  font-family: "vecthemes-icon"; 
   font-weight: normal;
   margin-right: 5px; 
   vertical-align:-1px;
@@ -277,11 +277,7 @@ div.star a:hover {
   color: #333333;
   text-align: left;
 }
-#new_comment_form h2 {
-  margin-bottom: 10px;
-  border: 0;
-  text-transform: capitalize;
-}
+
 #new_comment_form .title {
   padding: 10px;
   font-size: 13px;
@@ -305,25 +301,7 @@ div.star a:hover {
 #new_comment_form ul.grade_content .cancel {
   margin-right: 5px;
 }
-#new_comment_form .product {
-  padding: 15px;
-}
-#new_comment_form .product img {
-  border: 1px solid #ebebeb;
-}
-#new_comment_form .product .product_desc {
-  line-height: 18px;
-  color: #6f6f6f;
-}
-#new_comment_form .product .product_desc .product_name {
-  padding: 15px 0 0;
-  font-size: 14px;
-  color: #000;
-  text-transform: uppercase;
-}
-#new_comment_form .new_comment_form_content {
-  padding: 15px;
-}
+
 #new_comment_form .new_comment_form_content .intro_form {
   padding-bottom: 10px;
   font-weight: bold;
@@ -416,7 +394,7 @@ div.star a:hover {
     padding: 2px 0 2px;
   }
   #product_comments_block_tab div.comment .comment_details ul li:before {
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
     content: "\e972";
     color: #acacac;
     margin-right: 8px;
@@ -424,7 +402,7 @@ div.star a:hover {
 }
 #product_comments_block_tab div.star:after {
   content: "\e915";
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
   display: inline-block;
   color: #acacac;
   font-weight:400;
@@ -433,7 +411,7 @@ div.star a:hover {
 }
 #product_comments_block_tab div.star_on:after {
   content: "\e915";
-   font-family: "roadthemes-icon";
+   font-family: "vecthemes-icon";
   display: inline-block;
   color: #fdd835;
   font-weight:400;

@@ -96,7 +96,7 @@
   {else}
 	  {if (!$too_early AND ($logged OR $allow_guests))}
 	  <p class="align_center">
-		 <a id="new_comment_tab_btn" class="btn btn-secondary" data-toggle="modal" data-target="#pos-product-comment-modal">{l s='Be the first to write your review' mod='vecproductcomments'} !</a>
+		 <a id="new_comment_tab_btn" class="btn btn-secondary" data-toggle="modal" data-target="#vec-product-comment-modal">{l s='Be the first to write your review' mod='vecproductcomments'} !</a>
 	  </p>
 	  {else}
 	  <p class="align_center">{l s='No customer reviews for the moment.' mod='vecproductcomments'}</p>
@@ -107,7 +107,7 @@
 
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
-<div class="modal fade" id="pos-product-comment-modal" role="dialog">
+<div class="modal fade" id="vec-product-comment-modal" role="dialog">
   <div class="modal-dialog">
      <!-- Modal content-->
      <div class="modal-content">
@@ -115,7 +115,7 @@
             <div id="new_comment_form">
               <form id="id_new_comment_form" action="#">
 					<h2>{l s='Write your review' mod='vecproductcomments'}</h2>
-					<div class="row">
+					<div class="content_comment_form">
 						{if isset($product) && $product}
 						 <div class="product clearfix">
 							<img src="{$productcomment_cover_image}" alt="{$product->name|escape:html:'UTF-8'}" />
@@ -153,7 +153,7 @@
 							{/if}
 	
 							<label for="content">{l s='Your review' mod='vecproductcomments'}<sup class="required">*</sup></label>
-							<textarea id="content" class="form-control" name="content"></textarea> 
+							<textarea class="form-control" name="content"></textarea> 
 							<div id="new_comment_form_footer">
 							   <input id="id_product_comment_send" class="form-control" name="id_product" type="hidden" value='{$id_product_comment_form}' />
 							   <p class=" required" style="margin-bottom:10px;"><sup>*</sup> {l s='Required fields' mod='vecproductcomments'}</p>

@@ -31,6 +31,9 @@ p {
   font-weight: 400;
   color: $gray;
 }
+button:focus{
+  outline:none; 
+}
 .btn:focus, 
 .btn.focus, 
 .btn:active:focus, 

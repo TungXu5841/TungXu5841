@@ -57,7 +57,7 @@
             {l s='Add to cart' d='Shop.Theme.Actions'}
           </button>
         </div>
-		<div class="cart_button">
+		<div class="box_button">
 			{hook h='displayAfterButtonCart'}
 		</div>
 		<div class="buy-cart">

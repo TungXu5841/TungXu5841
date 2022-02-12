@@ -273,24 +273,28 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'image-select',
             'label' => $this->l('Category layout'),
-            'name' => 'cp_layout',
+            'name' => 'category_layout',
             'options' => array(
                 'query' => array(
                     array(
                         'id_option' => 1,
-                        'name' => $this->l('Left column & filter in left column'),
-                        'img' => 'category1.jpg'
+                        'name' => $this->l('Left column'),
+                        'img' => 'layout-left.png'
                     ),
                     array(
                         'id_option' => 2,
-                        'name' => $this->l('No column & filter in top'),
-                        'img' => 'category2.jpg'
+                        'name' => $this->l('Full width'),
+                        'img' => 'layout-full.png'
+                    ),
+                    array(
+                        'id_option' => 3,
+                        'name' => $this->l('Right column'),
+                        'img' => 'layout-right.png'
                     ),
                 ),
                 'id' => 'id_option',
                 'name' => 'name',
             ),
-			'desc' => $this->l('Go to Design > Theme & Logo > Choose Layouts to manage category page layout'),
         ),
         array(
             'type' => 'infoheading',
@@ -298,55 +302,9 @@ $this->fields_form[]['form'] = array(
             'name' => 'heading_category_header'
         ),
         array(
-            'type' => 'image-select',
-            'label' => $this->l('Category header position'),
-            'name' => 'cate_header_layout',
-            'options' => array(
-                'query' => array(
-                    array(
-                        'id_option' => 1,
-                        'name' => $this->l('Default'),
-                        'img' => 'category-header1.jpg'
-                    ),
-                    array(
-                        'id_option' => 2,
-                        'name' => $this->l('Full width'),
-                        'img' => 'category-header2.jpg'
-                    ),
-                ),
-                'id' => 'id_option',
-                'name' => 'name',
-            ),
-            'desc' => $this->l(''),
-        ),
-        array(
-            'type' => 'vec-switch',
-            'label' => $this->l('Align'),
-            'name' => 'cate_align',
-            'class' => 'fixed-width-xs',
-            'multi' => 3,
-            'values' => array(
-                array(
-                    'id' => 'left',
-                    'value' => 'left',
-                    'label' => $this->l('Left'),
-                ),
-                array(
-                    'id' => 'center',
-                    'value' => 'center',
-                    'label' => $this->l('Center'),
-                ),
-                array(
-                    'id' => 'right',
-                    'value' => 'right',
-                    'label' => $this->l('Right'),
-                ),
-            ),
-        ),
-        array(
             'type' => 'switch',
-            'label' => $this->l('Show thumbnail'),
-            'name' => 'cate_thumbnail',
+            'label' => $this->l('Show categorty thumbnail'),
+            'name' => 'category_thumbnail',
             'class' => 'fixed-width-xs',
             'desc' => $this->l(''),
             'values' => array(
@@ -365,7 +323,7 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'vec-switch',
             'label' => $this->l('Description'),
-            'name' => 'cate_description',
+            'name' => 'category_description',
             'class' => 'fixed-width-xs',
             'multi' => 3,
             'values' => array(
@@ -389,17 +347,17 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'switch',
             'label' => $this->l('Show description in bottom'),
-            'name' => 'cate_description_bottom',
+            'name' => 'category_description_bottom',
             'class' => 'fixed-width-xs',
             'desc' => $this->l(''),
             'values' => array(
                 array(
-                    'id' => 'cate_description_bottom_on',
+                    'id' => 'category_description_bottom_on',
                     'value' => 1,
                     'label' => $this->l('Yes')
                     ),
                 array(
-                    'id' => 'cate_description_bottom_off',
+                    'id' => 'category_description_bottom_off',
                     'value' => 0,
                     'label' => $this->l('No')
                 )
@@ -409,39 +367,39 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'switch',
             'label' => $this->l('Show subcategories'),
-            'name' => 'cate_subcategories',
+            'name' => 'category_sub',
             'class' => 'fixed-width-xs',
             'desc' => $this->l(''),
             'values' => array(
                 array(
-                    'id' => 'cate_subcategories_on',
+                    'id' => 'category_sub_on',
                     'value' => 1,
                     'label' => $this->l('Yes')
                     ),
                 array(
-                    'id' => 'cate_subcategories_off',
+                    'id' => 'category_sub_off',
                     'value' => 0,
                     'label' => $this->l('No')
                 )
             )
         ),
         array(
-            'type' => 'vec-switch',
-            'label' => $this->l('Subcategories style'),
-            'name' => 'cate_subcategories_style',
-            'class' => 'fixed-width-xs',
-            'multi' => 2,
-            'values' => array(
-                array(
-                    'id' => 'default',
-                    'value' => 1,
-                    'label' => $this->l('Image'),
+            'type' => 'select',
+            'label' => $this->l('Filters'),
+            'name' => 'category_filter',
+            'options' => array (
+                'query' => array(
+                    array(
+                        'id' => 'top',
+                        'label' => $this->l('Top')
+                    ),
+                    array(
+                        'id' => 'canvas',
+                        'label' => $this->l('Canvas')
+                    )
                 ),
-                array(
-                    'id' => 'bottom',
-                    'value' => 2,
-                    'label' => $this->l('Text'),
-                ),
+                'id' => 'id',
+                'name' => 'label'
             ),
         ),
         array(
@@ -468,7 +426,7 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'vec-switch',
             'label' => $this->l('Pagination type'),
-            'name' => 'cate_pagination',
+            'name' => 'category_pagination',
             'class' => 'fixed-width-xs',
             'multi' => 3,
             'values' => array(
@@ -488,31 +446,7 @@ $this->fields_form[]['form'] = array(
                     'label' => $this->l('Load more'),
                 ),
             ),
-        ),
-        array(
-            'type' => 'vec-switch',
-            'label' => $this->l('Mobile pagination type'),
-            'name' => 'cate_pagination_mobile',
-            'class' => 'fixed-width-xs',
-            'multi' => 3,
-            'values' => array(
-                array(
-                    'id' => 'inherit',
-                    'value' => 1,
-                    'label' => $this->l('Inherit'),
-                ),
-                array(
-                    'id' => 'infinite',
-                    'value' => 2,
-                    'label' => $this->l('Infinite'),
-                ),
-                array(
-                    'id' => 'loadmore',
-                    'value' => 2,
-                    'label' => $this->l('Load more'),
-                ),
-            ),
-        ),
+        ), 
         
     ),
     'submit' => array(

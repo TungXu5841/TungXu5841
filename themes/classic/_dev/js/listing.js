@@ -28,9 +28,46 @@ import prestashop from 'prestashop';
 import "velocity-animate";
 
 import ProductMinitature from './components/product-miniature';
+import infiniteScroll from './components/infinite-scroll';
+import loadMore from './components/load-more';
 
 $(document).ready(() => {
   const history = window.location.href;
+  let $productDiv = $('#products');
+
+  infiniteScroll($productDiv);
+  if($('.widget-productlist-trigger.loadmore').length > 0){
+    loadMore();
+  }
+
+  $('.facet-label').each(function(){
+    if($(this).hasClass('active')){
+      $(this).parents('section.facet').addClass('active');
+    }
+  });
+
+  $('body').on('click', '.filters-top .facet .facet-title', function(e){
+    e.preventDefault();
+    $('.facet-content').not($(this).next('.facet-content')).removeClass('facet-open');
+    $(this).next('.facet-content').toggleClass('facet-open');
+  })
+  $("body").on('click', function(e) {
+      e = $(e.target);
+      if(!e.is(".facet-content") && !e.next(".facet-content").length > 0 && !e.parents(".facet-content").hasClass('facet-open')) {
+          $(".facet-content").removeClass("facet-open");
+      }     
+  })
+
+  $('body').on('click', '.filter-button a', function(e){
+      e.preventDefault();
+      $('.filters-canvas').addClass('filter-open');
+      $('.vec-overlay').addClass('open');
+  })
+
+  $('body').on('click', '.vec-overlay, .filter-close-btn', function(e){
+      $('.filters-canvas').removeClass('filter-open');
+      $('.vec-overlay').removeClass('open');
+  })
 
   prestashop.on('clickQuickView', (elm) => {
     const data = {
@@ -216,14 +253,27 @@ $(document).ready(() => {
 
   prestashop.on('updateProductList', (data) => {
     updateProductListDOM(data);
-    window.scrollTo(0, 0);
+    prestashop.emit('afterUpdateProductListFacets');
+    prestashop.emit('afterUpdateProductList');
+
+    $('.filters-canvas').removeClass('filter-open');
+    $('.vec-overlay').removeClass('open');
+    vecScrollTop($('#vec-use-scroll'));
   });
 });
 
+function vecScrollTop(element){
+  $('html, body').animate({
+    scrollTop: element.offset().top
+  }, 500);
+}
+
 function updateProductListDOM(data) {
+
   $(prestashop.themeSelectors.listing.searchFilters).replaceWith(
     data.rendered_facets,
   );
+  
   $(prestashop.themeSelectors.listing.activeSearchFilters).replaceWith(
     data.rendered_active_filters,
   );
@@ -251,4 +301,11 @@ function updateProductListDOM(data) {
 
   const productMinitature = new ProductMinitature();
   productMinitature.init();
+
+  $('.facet-label').each(function(){
+    if($(this).hasClass('active')){
+      $(this).parents('section.facet').addClass('active');
+    }
+  });
+  
 }

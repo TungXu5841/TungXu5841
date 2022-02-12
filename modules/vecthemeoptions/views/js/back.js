@@ -19,13 +19,11 @@ $(document).ready(function(){
     });
 	//Category desciption
 	var cateDesc = $('input[name="cate_description"]:checked').val();
-	console.log(cateDesc);
 	if(cateDesc == 'hide' || typeof(cateDesc) == 'undefined'){
 		$('.cate_description_bottom').hide();
 	}
 	$('input[name="cate_description"]').change(function() {
 		if($(this).val() == 'hide') {
-        	var value = $(this).val();
         	$('.cate_description_bottom').hide();
 	   	}else{
 	   		$('.cate_description_bottom').show();
@@ -38,10 +36,23 @@ $(document).ready(function(){
 	}
 	$('input[name="cate_subcategories"]').change(function() {
 		if($(this).val() == '0') {
-        	var value = $(this).val();
         	$('.cate_subcategories_style').hide();
 	   	}else{
 	   		$('.cate_subcategories_style').show();
+	   	}     
+    });
+
+	//Category layout
+	var cateLayout = $('input[name="category_layout"]:checked').val();
+	console.log(cateLayout);
+	if(cateLayout != '2'){
+		$('.category_filter').hide();
+	}
+	$('input[name="category_layout"]').change(function() {
+		if($(this).val() == '1' || $(this).val() == '3') {
+        	$('.category_filter').hide();
+	   	}else{
+	   		$('.category_filter').show();
 	   	}     
     });
 

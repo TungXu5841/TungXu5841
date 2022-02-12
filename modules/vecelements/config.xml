@@ -3,7 +3,7 @@
     <name>vecelements</name>
     <displayName><![CDATA[V-Elements - Live page builder]]></displayName>
     <version><![CDATA[1.5.5]]></version>
-    <description><![CDATA[The frontend drag & drop page builder. Based on Elementor WP plugin.]]></description>
+    <description><![CDATA[The frontend drag &amp; drop page builder. Based on Elementor WP plugin.]]></description>
     <author><![CDATA[ThemeVec]]></author>
     <tab><![CDATA[content_management]]></tab>
     <is_configurable>1</is_configurable>

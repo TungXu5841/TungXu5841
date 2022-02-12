@@ -27,3 +27,10 @@
 {block name='product_list_header'}
     {include file='catalog/_partials/category-header.tpl' listing=$listing category=$category}
 {/block}
+{block name='product_list_footer'}
+    <div id="js-product-list-footer">
+        {if $category.description && $vectheme.category_description != 'hide' && $vectheme.category_description_bottom}
+        <div id="category-description" class="text-muted {if $vectheme.category_description == 'part'}show-part{/if}">{$category.description nofilter}</div>
+        {/if}
+    </div>
+{/block}

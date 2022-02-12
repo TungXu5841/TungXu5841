@@ -1,16 +1,59 @@
-.group-link-infomation{
-	width: 250px;
+.filters-top #_desktop_search_filters section.facet {
+	display: inline-block;
+	position: relative;
+	z-index: 2;
 }
-.group-link-infomation > a {
+.filters-top #_desktop_search_filters section.facet .facet-title{
+	width: auto;
+    padding: 10px 20px;
+    background: #eee;
+}
+.filters-top #_desktop_search_filters section.facet .facet-content{
+	display: none;
+	position: absolute;
+	top: 45px;
+	left: 0;
+	width: 200px;
+	border: 1px solid #ccc;
+	background-color: #fefefe;
+}
+.filters-top #_desktop_search_filters section.facet .facet-content.facet-open{
 	display: block;
-	width: 100%;
-	line-height: 35px;
-	padding: 0;
 }
 
-.tab-content>.tab-pane:not(.active){
+/* Filters mobile */
+.filters-canvas {
+	position: fixed;
+	right: 0; 
+	top: 0;
+	bottom: 0;
+	display: none;
+	z-index: 1051;
+	border-left: 1px solid #ccc;
+	width: 400px;
+	background: #fff;
+}
+.filters-canvas.filter-open{
 	display: block;
-    height: 0;
-    overflow-y: hidden;
-    min-height: 0;
+}
+
+/* Vec overlay */
+.vec-overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0; 
+	z-index: 1050;
+	display: none;
+	background: rgba(0,0,0,0.3);
+	cursor: url('close.png'), auto;
+}
+.vec-overlay.open{
+	display: block;
+}
+
+/* Grid/list */
+.shop-view.active{
+	color: red;
 }

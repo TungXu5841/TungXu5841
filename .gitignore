@@ -124,6 +124,8 @@ modules/vecvegamenu/views/css/vecvegamenu_s_*.css
 modules/vecthemeoptions/views/css/vecthemeoptions_s_*.css
 modules/vecelements/views/css/ce/*
 modules/gamification/data/*
+!modules/vec*
+!modules/smartblog
 
 # Vendors and dependencies
 
@@ -139,12 +141,6 @@ translations/*
 mails/*
 !mails/themes/
 !mails/_partials/
-themes/default-bootstrap/lang/*
-themes/default-bootstrap/modules/*/translations/*.php
-themes/default-bootstrap/mails/*
-!themes/default-bootstrap/mails/en/
-themes/default-bootstrap/modules/*/mails/*
-!themes/default-bootstrap/modules/*/mails/en
 
 # MISC
 

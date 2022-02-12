@@ -27,6 +27,10 @@
 
 <div class="products{if !empty($cssClass)} {$cssClass}{/if}">
     {foreach from=$products item="product" key="position"}
-        {include file="catalog/_partials/miniatures/product.tpl" product=$product position=$position productClasses=$productClasses}
+        {if isset($vectheme.shop_view) && $vectheme.shop_view == 'list'}
+        {include file="catalog/_partials/miniatures/product-list-view.tpl" product=$product position=$position productClasses=$productClasses}
+        {else}
+        {include file="catalog/_partials/miniatures/product.tpl" product=$product position=$position productClasses=$productClasses}    
+        {/if}
     {/foreach}
 </div>

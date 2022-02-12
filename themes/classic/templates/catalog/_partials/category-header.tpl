@@ -27,15 +27,20 @@
         <div class="block-category card card-block">
             <h1 class="h1">{$category.name}</h1>
             <div class="block-category-inner">
-                {if $category.description}
-                    <div id="category-description" class="text-muted">{$category.description nofilter}</div>
-                {/if}
-                {if !empty($category.image.large.url)}
+                {if !empty($category.image.large.url) && isset($vectheme.category_thumbnail) && $vectheme.category_thumbnail}
                     <div class="category-cover">
                         <img src="{$category.image.large.url}" alt="{if !empty($category.image.legend)}{$category.image.legend}{else}{$category.name}{/if}" loading="lazy" width="141" height="180">
                     </div>
                 {/if}
+                {if $category.description && $vectheme.category_description != 'hide' && !$vectheme.category_description_bottom}
+                <div id="category-description" class="text-muted {if $vectheme.category_description == 'part'}show-part{/if}">{$category.description nofilter}</div>
+                {/if}
             </div>
         </div>
     {/if}
+    {block name='subcategory_list'}
+        {if isset($subcategories) && $subcategories|@count > 0 && $vectheme.category_sub}
+          {include file='catalog/_partials/subcategories.tpl' subcategories=$subcategories}
+        {/if}
+    {/block}
 </div>

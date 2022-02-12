@@ -83,4 +83,5 @@ $(document).ready(() => {
     },
     allowPageScroll: 'vertical',
   });
+
 });

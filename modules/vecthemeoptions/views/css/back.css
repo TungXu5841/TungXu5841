@@ -58,6 +58,12 @@ a {
     padding: 15px 10px;
     text-transform: uppercase;
 }
+.vecthemeoptions .form-group .col-lg-2{
+    width: 20%;
+}
+.vecthemeoptions .form-group .col-lg-10{
+    width: 80%;
+}
 .image-select input {
     display: none;
 }

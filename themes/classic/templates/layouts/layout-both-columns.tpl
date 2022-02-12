@@ -106,10 +106,11 @@
     {block name='javascript_bottom'}
       {include file="_partials/javascript.tpl" javascript=$javascript.bottom}
     {/block}
-
+    {block name='hook_filter_canvas'}{/block}
     {block name='hook_before_body_closing_tag'}
       {hook h='displayBeforeBodyClosingTag'}
     {/block}
+    <div class="vec-overlay"></div>
   </body>
 
 </html>

@@ -96,10 +96,15 @@ class VecThemeoptions extends Module implements WidgetInterface
         Configuration::updateValue($this->name . 'p_price_color', '#555555');
         Configuration::updateValue($this->name . 'p_price_size', 15);
         // Category page
-        Configuration::updateValue($this->name . 'cp_subcategories', 0);
-        Configuration::updateValue($this->name . 'cp_layout', 1);
+        Configuration::updateValue($this->name . 'category_layout', 1);
+        Configuration::updateValue($this->name . 'category_thumbnail', 0);
+        Configuration::updateValue($this->name . 'category_description', 'hide');
+        Configuration::updateValue($this->name . 'category_description_bottom', 0);
+        Configuration::updateValue($this->name . 'category_pagination', 'default');
+        Configuration::updateValue($this->name . 'category_sub', 0);
         Configuration::updateValue($this->name . 'PS_PRODUCTS_PER_PAGE', 16);
         Configuration::updateValue($this->name . 'cp_perrow', 2);
+        Configuration::updateValue($this->name . 'category_filter', 1);
         // Product page
         Configuration::updateValue($this->name . 'productp_layout', 1);
         Configuration::updateValue($this->name . 'ppl1_thumbnail', 0);
@@ -113,6 +118,8 @@ class VecThemeoptions extends Module implements WidgetInterface
 
         return parent::install()
         && $this->registerHook('header')
+        && $this->registerHook('productSearchProvider')
+        && $this->registerHook('actionProductSearchComplete')
         && $this->_createMenu();
     }
 
@@ -120,6 +127,24 @@ class VecThemeoptions extends Module implements WidgetInterface
     {
         return parent::uninstall()
                && $this->_deleteMenu();
+    }
+
+    protected function createNewHook(){
+        $hooks = array(
+            'displayFilterCanvas'
+        );
+        foreach($hooks as $hook){
+            $id_hook = Hook::getIdByName($hook, false);
+            if(!$id_hook){
+                $new_hook = new Hook();
+                $new_hook->name = pSQL($hook);
+                $new_hook->title = pSQL($hook);
+                $new_hook->position = 1;
+                $new_hook->add();
+            }
+            
+        }
+        return true;
     }
 
     protected function _createMenu() {
@@ -235,9 +260,6 @@ class VecThemeoptions extends Module implements WidgetInterface
                 }
             }
 			
-            if(Configuration::get('vecthemeoptionscp_layout') != $old_categoty){
-                $this->changeCategory(Configuration::get('vecthemeoptionscp_layout'));
-            }
             $helper = $this->SettingForm();
             $html_form = $helper->generateForm($this->fields_form);
             $html .= $this->displayConfirmation($this->l('Successfully Saved All Fields Values.'));
@@ -329,29 +351,7 @@ class VecThemeoptions extends Module implements WidgetInterface
     {
         return $this->_path;
     }
-
-    public function posUnregisterHook($module){
-        $shop_list = array();
-        $shop_list[0] = (int)Context::getContext()->shop->id;
-
-        Hook::unregisterHook($module, 'displayNav', $shop_list);
-        Hook::unregisterHook($module, 'displayNav1', $shop_list);
-        Hook::unregisterHook($module, 'displayNav2', $shop_list);
-        Hook::unregisterHook($module, 'displayTop', $shop_list);
-		Hook::unregisterHook($module, 'displayBanner', $shop_list);
-    }
-   
-    public function changeCategory($category_layout){
-        $faceted_module = Module::getInstanceByName("ps_facetedsearch");
-        if($category_layout == '1'){
-            Hook::registerHook($faceted_module, 'displayLeftColumn');
-            Hook::unregisterHook($faceted_module, 'displayFilterTop');
-        }else{
-            Hook::registerHook($faceted_module, 'displayFilterTop');
-            Hook::unregisterHook($faceted_module, 'displayLeftColumn');
-        }
-    }
-    
+ 
     public function convertTransform($value) {
             switch($value) {
                 case 2 :
@@ -505,6 +505,78 @@ class VecThemeoptions extends Module implements WidgetInterface
         return false;
     }
 
+    public function hookProductSearchProvider()
+    {
+        if (Tools::getIsset('from-xhr')) {
+
+            if (Tools::getIsset('shop_view')) {
+                $view = Tools::getValue('shop_view');
+                if ($view == 'grid') {
+                    $this->context->cookie->__set('shop_view', 'grid');
+                } elseif ($view == 'list') {
+                    $this->context->cookie->__set('shop_view', 'list');
+                }
+                $this->context->cookie->write();
+            }
+
+            $options = $this->getOptions();
+            $configuration['is_catalog'] = (bool) Configuration::isCatalogMode();
+            $this->context->smarty->assign(array(
+                    'vectheme' => $options,
+                    'configuration' => $configuration,
+                ));
+        }
+    }
+    public function hookActionProductSearchComplete($hook_args)
+    {
+        if (isset($hook_args['js_enabled']) && $hook_args['js_enabled']) {
+            if (Tools::getIsset('shop_view')) {
+                $view = Tools::getValue('shop_view');
+                if ($view == 'grid') {
+                    $this->context->cookie->__set('shop_view', 'grid');
+                } elseif ($view == 'list') {
+                    $this->context->cookie->__set('shop_view', 'list');
+                }
+                $this->context->cookie->write();
+            }
+
+            $options = $this->getOptions();
+            $this->context->smarty->assign('vectheme', $options);
+        }
+    }
+
+    public function getOptions(){
+        $options = array(
+            'header_sticky' => Configuration::get($this->name . 'header_sticky'),
+			'grid_type' => isset($_GET['gt']) ? $_GET['gt'] : Configuration::get($this->name . 'p_display'),
+			'name_length' => Configuration::get($this->name . 'p_name_length'),
+			'cate_layout' => isset($_GET['ft']) ? $_GET['ft'] : Configuration::get($this->name . 'cp_layout'),
+            'cate_default_display' => Configuration::get($this->name . 'cp_display'),
+			'cate_product_per_row' => isset($_GET['pr']) ? $_GET['pr'] : Configuration::get($this->name . 'cp_perrow'),
+			'product_thumbnail' => Configuration::get($this->name . 'pp_thumbnail'),
+            'productp_layout' => isset($_GET['pplayout']) ? $_GET['pplayout'] : Configuration::get($this->name . 'productp_layout'),
+            'productp_image_position' => isset($_GET['pt']) ? $_GET['pt'] : Configuration::get($this->name . 'ppl1_thumbnail'),
+            'productp_thumbnail_item' => Configuration::get($this->name . 'ppl1_items'),
+            'productp_thumbnail_item_top' => isset($_GET['pp']) ? $_GET['pp'] : Configuration::get($this->name . 'ppl3_items'),
+            'productp_image_gridcolumn' => isset($_GET['pl']) ? $_GET['pl'] : Configuration::get($this->name . 'ppl2_column'), 
+            'productp_tab' => isset($_GET['tb']) ? $_GET['tb'] : Configuration::get($this->name . 'pp_infortab'),
+            //Page title
+            'ptitle_size' => Configuration::get($this->name . 'ptitle_size'),
+            //Category page
+            'category_layout'               => Configuration::get($this->name . 'category_layout'),
+            'category_thumbnail'            => Configuration::get($this->name . 'category_thumbnail'),
+            'category_description'          => Configuration::get($this->name . 'category_description'),
+            'category_description_bottom'   => Configuration::get($this->name . 'category_description_bottom'),
+            'category_sub'                  => Configuration::get($this->name . 'category_sub'),
+            'category_pagination'           => Configuration::get($this->name . 'category_pagination'),
+            'category_filter'               => Configuration::get($this->name . 'category_filter'),
+		);
+        if (isset($this->context->cookie->shop_view)) {
+            $options['shop_view'] = $this->context->cookie->shop_view;
+        }
+        return $options;
+    }
+
     public function hookHeader($params)
 	{
 		if (Shop::getContext() == Shop::CONTEXT_SHOP){
@@ -520,26 +592,8 @@ class VecThemeoptions extends Module implements WidgetInterface
         if(Module::isInstalled('posquickmenu') && Module::isEnabled('posquickmenu')){
             $body_class  = 'has-quickmenu';
         }
-
-		$smart_vals = array(
-            'body_class' => $body_class,
-            'header_sticky' => Configuration::get($this->name . 'header_sticky'),
-			'grid_type' => isset($_GET['gt']) ? $_GET['gt'] : Configuration::get($this->name . 'p_display'),
-			'name_length' => Configuration::get($this->name . 'p_name_length'),
-			'cate_layout' => isset($_GET['ft']) ? $_GET['ft'] : Configuration::get($this->name . 'cp_layout'),
-            'cate_default_display' => Configuration::get($this->name . 'cp_display'),
-			'cate_show_subcategories' => Configuration::get($this->name . 'cp_subcategories'),
-			'cate_product_per_row' => isset($_GET['pr']) ? $_GET['pr'] : Configuration::get($this->name . 'cp_perrow'),
-			'product_thumbnail' => Configuration::get($this->name . 'pp_thumbnail'),
-            'productp_layout' => isset($_GET['pplayout']) ? $_GET['pplayout'] : Configuration::get($this->name . 'productp_layout'),
-            'productp_image_position' => isset($_GET['pt']) ? $_GET['pt'] : Configuration::get($this->name . 'ppl1_thumbnail'),
-            'productp_thumbnail_item' => Configuration::get($this->name . 'ppl1_items'),
-            'productp_thumbnail_item_top' => isset($_GET['pp']) ? $_GET['pp'] : Configuration::get($this->name . 'ppl3_items'),
-            'productp_image_gridcolumn' => isset($_GET['pl']) ? $_GET['pl'] : Configuration::get($this->name . 'ppl2_column'), 
-            'productp_tab' => isset($_GET['tb']) ? $_GET['tb'] : Configuration::get($this->name . 'pp_infortab'),
-            //Page title
-            'ptitle_size' => Configuration::get($this->name . 'ptitle_size'),
-		);
+        $smart_vals = $this->getOptions();
+		$smart_vals['body_class'] = $body_class;
 		$this->context->smarty->assign('vectheme', $smart_vals);
 
 		$this->context->smarty->assign('name_length', Configuration::get($this->name . 'p_name_length'));
@@ -548,8 +602,9 @@ class VecThemeoptions extends Module implements WidgetInterface
         $protocol_content = ($useSSL) ? 'https://' : 'http://';
         Media::addJsDef(array(
             'vectheme' => array(
-                    'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
-        )));
+                'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
+            )
+        ));
 	}
 	protected function getWarningMultishopHtml()
     {

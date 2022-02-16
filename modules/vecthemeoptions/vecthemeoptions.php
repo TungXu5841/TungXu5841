@@ -70,56 +70,57 @@ class VecThemeoptions extends Module implements WidgetInterface
 
     public function install()
     {
-        //General
-        Configuration::updateValue($this->name . 'g_main_color', '#4fb68d');
-        Configuration::updateValue($this->name . 'g_body_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        Configuration::updateValue($this->name . 'g_body_gfont_name', '"Rubik", sans-serif');
-        Configuration::updateValue($this->name . 'g_body_font_size', 14);
-        Configuration::updateValue($this->name . 'g_body_font_color', '#666666');
-        // Configuration::updateValue($this->name . 'g_a_color', '#555555');
-        // Configuration::updateValue($this->name . 'g_a_colorh', '#253237');
-        Configuration::updateValue($this->name . 'g_title_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        Configuration::updateValue($this->name . 'g_title_gfont_name', '"Rubik", sans-serif');
-        Configuration::updateValue($this->name . 'g_title_font_size', 24);
-        Configuration::updateValue($this->name . 'g_title_font_color', '#253237');
-        Configuration::updateValue($this->name . 'g_title_font_transform', 2);
-        Configuration::updateValue($this->name . 'g_title_font_size_column', 20);
-		//header
-		Configuration::updateValue($this->name . 'header_sticky', 1);
-        // Product
-        Configuration::updateValue($this->name . 'p_display', 1);
-        Configuration::updateValue($this->name . 'p_name_color', '#253237');
-        Configuration::updateValue($this->name . 'p_name_colorh', '#4fb68d');
-        Configuration::updateValue($this->name . 'p_name_size', 14);
-        Configuration::updateValue($this->name . 'p_name_length', 0);
-        Configuration::updateValue($this->name . 'p_name_transform', 1);
-        Configuration::updateValue($this->name . 'p_price_color', '#555555');
-        Configuration::updateValue($this->name . 'p_price_size', 15);
-        // Category page
-        Configuration::updateValue($this->name . 'category_layout', 1);
-        Configuration::updateValue($this->name . 'category_thumbnail', 0);
-        Configuration::updateValue($this->name . 'category_description', 'hide');
-        Configuration::updateValue($this->name . 'category_description_bottom', 0);
-        Configuration::updateValue($this->name . 'category_pagination', 'default');
-        Configuration::updateValue($this->name . 'category_sub', 0);
-        Configuration::updateValue($this->name . 'PS_PRODUCTS_PER_PAGE', 16);
-        Configuration::updateValue($this->name . 'cp_perrow', 2);
-        Configuration::updateValue($this->name . 'category_filter', 1);
-        // Product page
-        Configuration::updateValue($this->name . 'productp_layout', 1);
-        Configuration::updateValue($this->name . 'ppl1_thumbnail', 0);
-        Configuration::updateValue($this->name . 'ppl1_items', 4);
-        Configuration::updateValue($this->name . 'pp_name_color', '#253237');
-        Configuration::updateValue($this->name . 'pp_name_size', 24);
-        Configuration::updateValue($this->name . 'pp_name_transform', 1);
-        Configuration::updateValue($this->name . 'pp_price_color', '#555555');
-        Configuration::updateValue($this->name . 'pp_price_size', 22);
-        Configuration::updateValue($this->name . 'pp_infortab', 0);
+        // //General
+        // Configuration::updateValue($this->name . 'g_main_color', '#4fb68d');
+        // Configuration::updateValue($this->name . 'g_body_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        // Configuration::updateValue($this->name . 'g_body_gfont_name', '"Rubik", sans-serif');
+        // Configuration::updateValue($this->name . 'g_body_font_size', 14);
+        // Configuration::updateValue($this->name . 'g_body_font_color', '#666666');
+        // // Configuration::updateValue($this->name . 'g_a_color', '#555555');
+        // // Configuration::updateValue($this->name . 'g_a_colorh', '#253237');
+        // Configuration::updateValue($this->name . 'g_title_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        // Configuration::updateValue($this->name . 'g_title_gfont_name', '"Rubik", sans-serif');
+        // Configuration::updateValue($this->name . 'g_title_font_size', 24);
+        // Configuration::updateValue($this->name . 'g_title_font_color', '#253237');
+        // Configuration::updateValue($this->name . 'g_title_font_transform', 2);
+        // Configuration::updateValue($this->name . 'g_title_font_size_column', 20);
+		// //header
+		// Configuration::updateValue($this->name . 'header_sticky', 1);
+        // // Product
+        // Configuration::updateValue($this->name . 'p_display', 1);
+        // Configuration::updateValue($this->name . 'p_name_color', '#253237');
+        // Configuration::updateValue($this->name . 'p_name_colorh', '#4fb68d');
+        // Configuration::updateValue($this->name . 'p_name_size', 14);
+        // Configuration::updateValue($this->name . 'p_name_length', 0);
+        // Configuration::updateValue($this->name . 'p_name_transform', 1);
+        // Configuration::updateValue($this->name . 'p_price_color', '#555555');
+        // Configuration::updateValue($this->name . 'p_price_size', 15);
+        // // Category page
+        // Configuration::updateValue($this->name . 'category_layout', 1);
+        // Configuration::updateValue($this->name . 'category_thumbnail', 0);
+        // Configuration::updateValue($this->name . 'category_description', 'hide');
+        // Configuration::updateValue($this->name . 'category_description_bottom', 0);
+        // Configuration::updateValue($this->name . 'category_pagination', 'default');
+        // Configuration::updateValue($this->name . 'category_sub', 0);
+        // Configuration::updateValue($this->name . 'PS_PRODUCTS_PER_PAGE', 16);
+        // Configuration::updateValue($this->name . 'cp_perrow', 2);
+        // Configuration::updateValue($this->name . 'category_filter', 1);
+        // // Product page
+        // Configuration::updateValue($this->name . 'productp_layout', 1);
+        // Configuration::updateValue($this->name . 'ppl1_thumbnail', 0);
+        // Configuration::updateValue($this->name . 'ppl1_items', 4);
+        // Configuration::updateValue($this->name . 'pp_name_color', '#253237');
+        // Configuration::updateValue($this->name . 'pp_name_size', 24);
+        // Configuration::updateValue($this->name . 'pp_name_transform', 1);
+        // Configuration::updateValue($this->name . 'pp_price_color', '#555555');
+        // Configuration::updateValue($this->name . 'pp_price_size', 22);
+        // Configuration::updateValue($this->name . 'pp_infortab', 0);
 
         return parent::install()
         && $this->registerHook('header')
         && $this->registerHook('productSearchProvider')
         && $this->registerHook('actionProductSearchComplete')
+        && $this->createNewHook() 
         && $this->_createMenu();
     }
 
@@ -415,7 +416,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $ptitle_color = Configuration::get($this->name . 'ptitle_color');
         if($ptitle_bg_image){
             $css .= '.page-title-wrapper{  
-                background-image: '.$ptitle_bg_image.';   
+                background-image: url('.$ptitle_bg_image.');   
             }';
         }
         if($ptitle_color){

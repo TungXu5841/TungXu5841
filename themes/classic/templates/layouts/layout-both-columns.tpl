@@ -52,45 +52,63 @@
       </header>
 
       <section id="wrapper">
+        {assign var="background" value=""}
+        {if $page.page_name == 'category' && isset($category.image.large.url)  }
+          {assign var="background" value="{$category.image.large.url}"}
+        {/if}
+        {if $page.page_name != 'index'}
+        {block name='page_header_container'}
+        <div class=" page-title-wrapper {if $vectheme.ptitle_size == 'small'}v_tilte_small{elseif $vectheme.ptitle_size == 'big'}v_tilte_big{/if}" {if $background} style="background: url('{$background}') no-repeat;" {/if}>
+          <div class="container">
+            {block name='page_title'}
+            <header class="page-header">
+              <h1>{$smarty.block.child}</h1> 
+            </header>
+            {/block}
+          {block name='breadcrumb'}
+            {include file='_partials/breadcrumb.tpl'}
+          {/block}
+          </div>
+        </div>
+        {/block}
+        {/if}
         {block name='notifications'}
           {include file='_partials/notifications.tpl'}
         {/block}
 
         {hook h="displayWrapperTop"}
         <div class="container">
-          {block name='breadcrumb'}
-            {include file='_partials/breadcrumb.tpl'}
-          {/block}
+          <div class="row row-wrapper">
+            {block name="left_column"}
+              <div id="left-column" class="col-xs-12 col-sm-4 col-md-3">
+                {if $page.page_name == 'product'}
+                  {hook h='displayLeftColumnProduct'}
+                {else}
+                  {hook h="displayLeftColumn"}
+                {/if}
+              </div>
+            {/block}
 
-          {block name="left_column"}
-            <div id="left-column" class="col-xs-12 col-sm-4 col-md-3">
-              {if $page.page_name == 'product'}
-                {hook h='displayLeftColumnProduct'}
-              {else}
-                {hook h="displayLeftColumn"}
-              {/if}
-            </div>
-          {/block}
+            {block name="content_wrapper"}
+              <div id="content-wrapper" class="js-content-wrapper left-column right-column col-sm-4 col-md-6">
+                {hook h="displayContentWrapperTop"}
+                {block name="content"}
+                  <p>Hello world! This is HTML5 Boilerplate.</p>
+                {/block}
+                {hook h="displayContentWrapperBottom"}
+              </div>
+            {/block}
 
-          {block name="content_wrapper"}
-            <div id="content-wrapper" class="js-content-wrapper left-column right-column col-sm-4 col-md-6">
-              {hook h="displayContentWrapperTop"}
-              {block name="content"}
-                <p>Hello world! This is HTML5 Boilerplate.</p>
-              {/block}
-              {hook h="displayContentWrapperBottom"}
-            </div>
-          {/block}
-
-          {block name="right_column"}
-            <div id="right-column" class="col-xs-12 col-sm-4 col-md-3">
-              {if $page.page_name == 'product'}
-                {hook h='displayRightColumnProduct'}
-              {else}
-                {hook h="displayRightColumn"}
-              {/if}
-            </div>
-          {/block}
+            {block name="right_column"}
+              <div id="right-column" class="col-xs-12 col-sm-4 col-md-3">
+                {if $page.page_name == 'product'}
+                  {hook h='displayRightColumnProduct'}
+                {else}
+                  {hook h="displayRightColumn"}
+                {/if}
+              </div>
+            {/block}
+          </div>
         </div>
         {hook h="displayWrapperBottom"}
       </section>

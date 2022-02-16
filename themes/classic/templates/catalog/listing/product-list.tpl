@@ -22,7 +22,14 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-{extends file=$layout}
+ {extends file=$layout}
+ {block name='page_title'}
+ {if $page.page_name == 'category'}
+  {if $category.name}
+   {$category.name}
+ {/if}
+ {/if}
+ {/block}
 
 {block name='head_microdata_special'}
   {include file='_partials/microdata/product-list-jsonld.tpl' listing=$listing}

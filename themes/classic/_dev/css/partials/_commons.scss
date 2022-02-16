@@ -27,9 +27,9 @@ a{
 }
 
 p {
-  font-size: 0.9375rem;
+  font-size: .875rem;
   font-weight: 400;
-  color: $gray;
+  color: $gray; 
 }
 button:focus{
   outline:none; 
@@ -419,7 +419,7 @@ form {
       display: block;
       width: 12px;
       height: 12px;
-      background-color: $brand-primary;
+      background-color: var(--hovercolor);
       border-radius: 50%;
     }
 

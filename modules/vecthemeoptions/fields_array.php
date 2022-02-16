@@ -171,7 +171,7 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'image-select',
             'label' => $this->l('Product grid display'),
-            'name' => 'p_display',
+            'name' => 'grid_type',
             'default_value' => 1,
             'options' => array(
                 'query' => array(
@@ -203,24 +203,24 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'color2',
             'label' => $this->l('Product name color'),
-            'name' => 'p_name_color',
+            'name' => 'grid_name_color',
         ), 
         array(
             'type' => 'color2',
             'label' => $this->l('Product name color hover'),
-            'name' => 'p_name_colorh',
+            'name' => 'grid_name_colorh',
         ), 
         array(
             'type' => 'text',
             'label' => $this->l('Product name font size'),
-            'name' => 'p_name_size',
+            'name' => 'grid_name_size',
             'class' => 'fixed-width-sm',
             'suffix' => 'px',
         ),
         array(
             'type' => 'radio',
             'label' => $this->l('Product name length'),
-            'name' => 'p_name_length',
+            'name' => 'grid_name_length',
             'default_value' => 0,
             'values' => array(
                 array(
@@ -240,7 +240,7 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'select',
             'label' => $this->l('Product name transform'),
-            'name' => 'p_name_transform',
+            'name' => 'grid_name_transform',
             'options' => array (
                 'query' => self::$text_transform,
                 'id' => 'id',
@@ -250,12 +250,12 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'color2',
             'label' => $this->l('Price color'),
-            'name' => 'p_price_color',
+            'name' => 'grid_price_color',
         ),  
         array(
             'type' => 'text',
             'label' => $this->l('Price font size'),
-            'name' => 'p_price_size',
+            'name' => 'grid_price_size',
             'class' => 'fixed-width-sm',
             'suffix' => 'px',
         ),
@@ -270,6 +270,26 @@ $this->fields_form[]['form'] = array(
         'icon' => 'icon-list-alt'
     ),
     'input' => array(
+        array(
+            'type' => 'select',
+            'label' => $this->l('Category page width'),
+            'name' => 'category_width',
+            'options' => array (
+                'query' => array(
+                	'1' => array('id' => 'inherit' , 'name' => 'Inherit'),
+       				'2' => array('id' => 'custom' , 'name' => 'Custom width'),
+                ),
+                'id' => 'id',
+                'name' => 'name'
+            ),
+        ),
+        array(
+            'type' => 'text',
+            'label' => $this->l('Add custom width'),
+            'name' => 'category_custom_width',
+            'class' => 'fixed-width-sm',
+            'suffix' => 'px',
+        ),
         array(
             'type' => 'image-select',
             'label' => $this->l('Category layout'),
@@ -416,7 +436,7 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'select',
             'label' => $this->l('Number product per row'),
-            'name' => 'cate_perrow',
+            'name' => 'category_column',
             'options' => array (
                 'query' =>self::$product_row,
                 'id' => 'id',
@@ -464,32 +484,113 @@ $this->fields_form[]['form'] = array(
             'label' => $this->l('Product page layout'),
             'name'=> 'ppage'
         ),
-    	array(
+        array(
+            'type' => 'select',
+            'label' => $this->l('Product page width'),
+            'name' => 'product_width',
+            'options' => array (
+                'query' => array(
+                	'1' => array('id' => 'inherit' , 'name' => 'Inherit'),
+       				'2' => array('id' => 'custom' , 'name' => 'Custom width'),
+                ),
+                'id' => 'id',
+                'name' => 'name'
+            ),
+        ),
+        array(
+            'type' => 'text',
+            'label' => $this->l('Add custom width'),
+            'name' => 'product_custom_width',
+            'class' => 'fixed-width-sm',
+            'suffix' => 'px',
+        ),
+        array(
             'type' => 'image-select',
-            'label' => $this->l('Product detail layout'),
-            'name' => 'productp_layout',
-            'direction' => 'vertical',
+            'label' => $this->l('Product page layout'),
+            'name' => 'product_layout',
             'options' => array(
                 'query' => array(
                     array(
                         'id_option' => 1,
-                        'name' => $this->l('Layout 1'),
-                        'img' => 'product1.jpg'
+                        'name' => $this->l('Left column'),
+                        'img' => 'layout-left.png'
                     ),
                     array(
                         'id_option' => 2,
-                        'name' => $this->l('Layout 2'),
-                        'img' => 'product2.jpg'
+                        'name' => $this->l('Full width'),
+                        'img' => 'layout-full.png'
                     ),
                     array(
                         'id_option' => 3,
-                        'name' => $this->l('Layout 3'),
-                        'img' => 'product3.jpg'
+                        'name' => $this->l('Right column'),
+                        'img' => 'layout-right.png'
+                    ),
+                ),
+                'id' => 'id_option',
+                'name' => 'name',
+            ),
+            'desc' => $this->l('Our theme uses "displayLeftColumnProduct" and "displayRightColumnProduct" for column left/right in product page.'),
+        ),
+        array(
+            'type' => 'image-select',
+            'label' => $this->l('Main content layout'),
+            'name' => 'main_layout',
+            'options' => array(
+                'query' => array(
+                    array(
+                        'id_option' => 1,
+                        'name' => $this->l('Basic'),
+                        'img' => 'main-layout-1.png'
                     ),
                     array(
-                        'id_option' => 4,
-                        'name' => $this->l('Layout 4'),
-                        'img' => 'product4.jpg'
+                        'id_option' => 2,
+                        'name' => $this->l('3 columns'),
+                        'img' => 'main-layout-2.png'
+                    ),
+                    array(
+                        'id_option' => 3,
+                        'name' => $this->l('Specific'),
+                        'img' => 'main-layout-3.png'
+                    ),
+                ),
+                'id' => 'id_option',
+                'name' => 'name',
+            ),
+        ),
+        array(
+            'type' => 'select',
+            'label' => $this->l('Image product'),
+            'name' => 'product_image',
+            'options' => array (
+                'query' => array(
+                	'1' => array('id' => 'horizontal' , 'name' => 'Horizontal in bottom'),
+       				'2' => array('id' => 'left' , 'name' => 'Vertical at left'),
+       				'3' => array('id' => 'right' , 'name' => 'Vertical at right'),
+                ),
+                'id' => 'id',
+                'name' => 'name'
+            ),
+        ),
+        array(
+            'type' => 'image-select',
+            'label' => $this->l('Information & reviews layout'),
+            'name' => 'information_layout',
+            'options' => array(
+                'query' => array(
+                    array(
+                        'id_option' => 1,
+                        'name' => $this->l('Show all content'),
+                        'img' => 'information-layout-1.png'
+                    ),
+                    array(
+                        'id_option' => 2,
+                        'name' => $this->l('Tab - horizontal'),
+                        'img' => 'information-layout-2.png'
+                    ),
+                    array(
+                        'id_option' => 3,
+                        'name' => $this->l('Tab - vertical'),
+                        'img' => 'information-layout-3.png'
                     ),
                 ),
                 'id' => 'id_option',
@@ -501,64 +602,11 @@ $this->fields_form[]['form'] = array(
         	'class' => 'productp-layout1 productp-layout3 productp-layout'
         ),
         array(
-            'type' => 'radio',
-            'label' => $this->l('Product thumbnails on desktop devices:'),
-            'name' => 'ppl1_thumbnail',
-            'default_value' => 0,
-            'values' => array(
-                array(
-                    'id' => 'product_thumbnails_0',
-                    'value' => 0,
-                    'label' => $this->l('Default'),
-                    ),
-                array(
-                    'id' => 'product_thumbnails_1',
-                    'value' => 1,
-                    'label' => $this->l('Left side vertical slider'),
-                    ),
-                array(
-                    'id' => 'product_thumbnails_2',
-                    'value' => 2,
-                    'label' => $this->l('Right side vertical slider'),
-                    ),
-            ),
-            'icon_path' => $this->_path,
-            'validation' => 'isUnsignedInt',
-        ),
-        array(
-            'type' => 'select',
-            'label' => $this->l('Number of thumbnails'),
-            'name' => 'ppl1_items',
-            'options' => array (
-                'query' => array(
-                	1 => array('id' =>3 , 'name' => '3'),
-       				2 => array('id' =>4 , 'name' => '4'),
-       				3 => array('id' =>5 , 'name' => '5'),
-       				4 => array('id' =>6 , 'name' => '6'),
-                ),
-                'id' => 'id',
-                'name' => 'name'
-            ),
-        ),
-        array(
         	'type' => 'wrapper_close',
         ),
         array(
         	'type' => 'wrapper_open',
         	'class' => 'productp-layout2 productp-layout'
-        ),
-        array(
-            'type' => 'select',
-            'label' => $this->l('Column'),
-            'name' => 'ppl2_column',
-            'options' => array (
-                'query' => array(
-                	1 => array('id' =>1 , 'name' => '1'),
-       				2 => array('id' =>2 , 'name' => '2'),
-                ),
-                'id' => 'id',
-                'name' => 'name'
-            ),
         ),
         array(
         	'type' => 'wrapper_close',
@@ -568,11 +616,6 @@ $this->fields_form[]['form'] = array(
             'class' => 'productp-layout3 productp-layout'
         ),
         array(
-            'type' => 'color2',
-            'label' => $this->l('Background color'),
-            'name' => 'productp_background',
-        ),
-        array(
             'type' => 'wrapper_close',
         ),
         array(
@@ -580,44 +623,29 @@ $this->fields_form[]['form'] = array(
         	'class' => 'productp-layout4 productp-layout'
         ),
         array(
-            'type' => 'select',
-            'label' => $this->l('Number of image on screen'),
-            'name' => 'ppl3_items',
-            'options' => array (
-                'query' => array(
-                	1 => array('id' =>2 , 'name' => '2'),
-       				2 => array('id' =>3 , 'name' => '3'),
-       				3 => array('id' =>4 , 'name' => '4'),
-       				4 => array('id' =>5 , 'name' => '5'),
-                ),
-                'id' => 'id',
-                'name' => 'name'
-            ),
-        ),
-        array(
         	'type' => 'wrapper_close',
         ),
         array(
             'type' => 'infoheading',
-            'label' => $this->l('Configurations'),
+            'label' => $this->l('Style'),
             'name'=> 'ppagec'
         ),
         array(
             'type' => 'color2',
             'label' => $this->l('Product name color'),
-            'name' => 'pp_name_color',
+            'name' => 'product_name_color',
         ), 
         array(
             'type' => 'text',
             'label' => $this->l('Product name font size'),
-            'name' => 'pp_name_size',
+            'name' => 'product_name_size',
             'class' => 'fixed-width-sm',
             'suffix' => 'px',
         ),
         array(
             'type' => 'select',
             'label' => $this->l('Product name transform'),
-            'name' => 'pp_name_transform',
+            'name' => 'product_name_transform',
             'options' => array (
                 'query' => self::$text_transform,
                 'id' => 'id',
@@ -627,40 +655,16 @@ $this->fields_form[]['form'] = array(
         array(
             'type' => 'color2',
             'label' => $this->l('Price color'),
-            'name' => 'pp_price_color',
+            'name' => 'product_price_color',
         ),  
         array(
             'type' => 'text',
             'label' => $this->l('Price font size'),
-            'name' => 'pp_price_size',
+            'name' => 'product_price_size',
             'class' => 'fixed-width-sm',
             'suffix' => 'px',
         ),
-        array(
-            'type' => 'radio',
-            'label' => $this->l('Product infomation tab display'),
-            'name' => 'pp_infortab',
-            'default_value' => 0,
-            'values' => array(
-                array(
-                    'id' => 'product_thumbnails_0',
-                    'value' => 0,
-                    'label' => $this->l('Horizontal tab'),
-                    ),
-                array(
-                    'id' => 'product_thumbnails_1',
-                    'value' => 1,
-                    'label' => $this->l('Vertical tab'),
-                    ),
-                array(
-                    'id' => 'product_thumbnails_2',
-                    'value' => 2,
-                    'label' => $this->l('Accordion'),
-                    ),
-            ),
-            'icon_path' => $this->_path,
-            'validation' => 'isUnsignedInt',
-        ),
+        
     ),
     'submit' => array(
         'title' => $this->l('Save'),
@@ -707,6 +711,17 @@ $this->fields_form[]['form'] = array(
             'label' => $this->l('Demo setup'),
             'name'=> 'posthemes'
         ),
+    ),
+    
+);
+//Support
+$this->fields_form[]['form'] = array(
+    'legend' => array(
+        'title' => $this->l('Support'),
+        'icon' => 'icon-question-circle'
+    ),
+    'input' => array(
+        
     ),
     
 );

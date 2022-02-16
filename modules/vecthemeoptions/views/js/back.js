@@ -18,33 +18,19 @@ $(document).ready(function(){
 	   };     
     });
 	//Category desciption
-	var cateDesc = $('input[name="cate_description"]:checked').val();
+	var cateDesc = $('input[name="category_description"]:checked').val();
 	if(cateDesc == 'hide' || typeof(cateDesc) == 'undefined'){
-		$('.cate_description_bottom').hide();
+		$('.category_description_bottom').hide();
 	}
-	$('input[name="cate_description"]').change(function() {
+	$('input[name="category_description"]').change(function() {
 		if($(this).val() == 'hide') {
-        	$('.cate_description_bottom').hide();
+        	$('.category_description_bottom').hide();
 	   	}else{
-	   		$('.cate_description_bottom').show();
+	   		$('.category_description_bottom').show();
 	   	}     
     });
-    //Subcategories
-	var subcategories= $('input[name="cate_subcategories"]:checked').val();
-	if(subcategories == '0'){
-		$('.cate_subcategories_style').hide();
-	}
-	$('input[name="cate_subcategories"]').change(function() {
-		if($(this).val() == '0') {
-        	$('.cate_subcategories_style').hide();
-	   	}else{
-	   		$('.cate_subcategories_style').show();
-	   	}     
-    });
-
 	//Category layout
 	var cateLayout = $('input[name="category_layout"]:checked').val();
-	console.log(cateLayout);
 	if(cateLayout != '2'){
 		$('.category_filter').hide();
 	}
@@ -55,6 +41,32 @@ $(document).ready(function(){
 	   		$('.category_filter').show();
 	   	}     
     });
+
+	// category page : width
+	var categoryWidth = $('select[name="category_width"]').val();
+	if(categoryWidth == 'inherit'){
+		$('.category_custom_width').hide();
+	}
+	$('select[name="category_width"]').change(function() {
+		if($(this).val() == 'inherit') {
+        	$('.category_custom_width').hide();
+	   	}else{
+	   		$('.category_custom_width').show();
+	   	}     
+    });
+	// Product page : width
+	var productWidth = $('select[name="product_width"]').val();
+	if(productWidth == 'inherit'){
+		$('.product_custom_width').hide();
+	}
+	$('select[name="product_width"]').change(function() {
+		if($(this).val() == 'inherit') {
+        	$('.product_custom_width').hide();
+	   	}else{
+	   		$('.product_custom_width').show();
+	   	}     
+    });
+
 
     //Color pciker
   
@@ -80,12 +92,11 @@ $(document).ready(function(){
 		'g_title_font_color',
 		'sticky_background',
 		'ptitle_color',
-		'p_name_color',
-		'p_name_colorh',
-		'p_price_color',
-		'productp_background',
-		'pp_name_color',
-		'pp_price_color',
+		'grid_name_color',
+		'grid_name_colorh',
+		'grid_price_color',
+		'product_name_color',
+		'product_price_color',
 		
 	];
 	$.each(parray, function(index, value){

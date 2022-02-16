@@ -69,6 +69,16 @@ $(document).ready(() => {
       $('.vec-overlay').removeClass('open');
   })
 
+  $('body').on('click', 'a.block-expand', function(){
+    var target = $(this).parents('.expand-content');
+    if(target.hasClass('expanded-content')) {
+      target.removeClass('expanded-content');
+    }else{
+      target.addClass('expanded-content');
+    }
+    
+  })
+
   prestashop.on('clickQuickView', (elm) => {
     const data = {
       action: 'quickview',

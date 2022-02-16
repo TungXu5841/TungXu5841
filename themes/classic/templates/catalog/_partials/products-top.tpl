@@ -26,7 +26,7 @@
 <div id="js-product-list-top" class="products-selection">
     <div class="sort-by-row">
       <div class="sort-by-left">	
-        <div class="filter-button {if isset($vectheme.category_filter) && $vectheme.category_filter != 'canvas'}hidden-md-up{/if}">
+        <div class="filter-button {if (isset($vectheme.category_filter) && $vectheme.category_filter != 'canvas') || $vectheme.category_layout != '2'}hidden-md-up{/if}">
           <a href="#">{l s='Filter' d='Shop.Theme.Actions'}</a>
         </div>
         {foreach from=$listing.sort_orders item=sort_order}

@@ -70,57 +70,54 @@ class VecThemeoptions extends Module implements WidgetInterface
 
     public function install()
     {
-        // //General
-        // Configuration::updateValue($this->name . 'g_main_color', '#4fb68d');
-        // Configuration::updateValue($this->name . 'g_body_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        // Configuration::updateValue($this->name . 'g_body_gfont_name', '"Rubik", sans-serif');
-        // Configuration::updateValue($this->name . 'g_body_font_size', 14);
-        // Configuration::updateValue($this->name . 'g_body_font_color', '#666666');
-        // // Configuration::updateValue($this->name . 'g_a_color', '#555555');
-        // // Configuration::updateValue($this->name . 'g_a_colorh', '#253237');
-        // Configuration::updateValue($this->name . 'g_title_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        // Configuration::updateValue($this->name . 'g_title_gfont_name', '"Rubik", sans-serif');
-        // Configuration::updateValue($this->name . 'g_title_font_size', 24);
-        // Configuration::updateValue($this->name . 'g_title_font_color', '#253237');
-        // Configuration::updateValue($this->name . 'g_title_font_transform', 2);
-        // Configuration::updateValue($this->name . 'g_title_font_size_column', 20);
-		// //header
-		// Configuration::updateValue($this->name . 'header_sticky', 1);
-        // // Product
-        // Configuration::updateValue($this->name . 'p_display', 1);
-        // Configuration::updateValue($this->name . 'p_name_color', '#253237');
-        // Configuration::updateValue($this->name . 'p_name_colorh', '#4fb68d');
-        // Configuration::updateValue($this->name . 'p_name_size', 14);
-        // Configuration::updateValue($this->name . 'p_name_length', 0);
-        // Configuration::updateValue($this->name . 'p_name_transform', 1);
-        // Configuration::updateValue($this->name . 'p_price_color', '#555555');
-        // Configuration::updateValue($this->name . 'p_price_size', 15);
-        // // Category page
-        // Configuration::updateValue($this->name . 'category_layout', 1);
-        // Configuration::updateValue($this->name . 'category_thumbnail', 0);
-        // Configuration::updateValue($this->name . 'category_description', 'hide');
-        // Configuration::updateValue($this->name . 'category_description_bottom', 0);
-        // Configuration::updateValue($this->name . 'category_pagination', 'default');
-        // Configuration::updateValue($this->name . 'category_sub', 0);
-        // Configuration::updateValue($this->name . 'PS_PRODUCTS_PER_PAGE', 16);
-        // Configuration::updateValue($this->name . 'cp_perrow', 2);
-        // Configuration::updateValue($this->name . 'category_filter', 1);
-        // // Product page
-        // Configuration::updateValue($this->name . 'productp_layout', 1);
-        // Configuration::updateValue($this->name . 'ppl1_thumbnail', 0);
-        // Configuration::updateValue($this->name . 'ppl1_items', 4);
-        // Configuration::updateValue($this->name . 'pp_name_color', '#253237');
-        // Configuration::updateValue($this->name . 'pp_name_size', 24);
-        // Configuration::updateValue($this->name . 'pp_name_transform', 1);
-        // Configuration::updateValue($this->name . 'pp_price_color', '#555555');
-        // Configuration::updateValue($this->name . 'pp_price_size', 22);
-        // Configuration::updateValue($this->name . 'pp_infortab', 0);
+        //General
+        Configuration::updateValue($this->name . 'g_main_color', '#4fb68d');
+        Configuration::updateValue($this->name . 'g_body_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        Configuration::updateValue($this->name . 'g_body_gfont_name', '"Rubik", sans-serif');
+        Configuration::updateValue($this->name . 'g_body_font_size', 14);
+        Configuration::updateValue($this->name . 'g_body_font_color', '#666666');
+        Configuration::updateValue($this->name . 'g_title_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        Configuration::updateValue($this->name . 'g_title_gfont_name', '"Rubik", sans-serif');
+        Configuration::updateValue($this->name . 'g_title_font_size', 24);
+        Configuration::updateValue($this->name . 'g_title_font_color', '#253237');
+        Configuration::updateValue($this->name . 'g_title_font_transform', 2);
+        Configuration::updateValue($this->name . 'g_title_font_size_column', 20);
+		//header
+		Configuration::updateValue($this->name . 'header_sticky', 1);
+        // Product
+        Configuration::updateValue($this->name . 'p_display', 1);
+        Configuration::updateValue($this->name . 'p_name_color', '#253237');
+        Configuration::updateValue($this->name . 'p_name_colorh', '#4fb68d');
+        Configuration::updateValue($this->name . 'p_name_size', 14);
+        Configuration::updateValue($this->name . 'p_name_length', 0);
+        Configuration::updateValue($this->name . 'p_name_transform', 1);
+        Configuration::updateValue($this->name . 'p_price_color', '#555555');
+        Configuration::updateValue($this->name . 'p_price_size', 15);
+        // Category page
+        Configuration::updateValue($this->name . 'category_layout', 1);
+        Configuration::updateValue($this->name . 'category_thumbnail', 0);
+        Configuration::updateValue($this->name . 'category_description', 'hide');
+        Configuration::updateValue($this->name . 'category_description_bottom', 0);
+        Configuration::updateValue($this->name . 'category_pagination', 'default');
+        Configuration::updateValue($this->name . 'category_sub', 0);
+        Configuration::updateValue($this->name . 'PS_PRODUCTS_PER_PAGE', 16);
+        Configuration::updateValue($this->name . 'cp_perrow', 2);
+        Configuration::updateValue($this->name . 'category_filter', 1);
+        // Product page
+        Configuration::updateValue($this->name . 'productp_layout', 1);
+        Configuration::updateValue($this->name . 'ppl1_thumbnail', 0);
+        Configuration::updateValue($this->name . 'ppl1_items', 4);
+        Configuration::updateValue($this->name . 'pp_name_color', '#253237');
+        Configuration::updateValue($this->name . 'pp_name_size', 24);
+        Configuration::updateValue($this->name . 'pp_name_transform', 1);
+        Configuration::updateValue($this->name . 'pp_price_color', '#555555');
+        Configuration::updateValue($this->name . 'pp_price_size', 22);
+        Configuration::updateValue($this->name . 'pp_infortab', 0);
 
         return parent::install()
         && $this->registerHook('header')
         && $this->registerHook('productSearchProvider')
         && $this->registerHook('actionProductSearchComplete')
-        && $this->createNewHook() 
         && $this->_createMenu();
     }
 
@@ -416,7 +413,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $ptitle_color = Configuration::get($this->name . 'ptitle_color');
         if($ptitle_bg_image){
             $css .= '.page-title-wrapper{  
-                background-image: url('.$ptitle_bg_image.');   
+                background-image: '.$ptitle_bg_image.';   
             }';
         }
         if($ptitle_color){
@@ -427,44 +424,55 @@ class VecThemeoptions extends Module implements WidgetInterface
         
 
         //Product grid
-        $pg_name_color = Configuration::get($this->name . 'p_name_color');
-        $pg_name_colorh = Configuration::get($this->name . 'p_name_colorh');
-        $pg_name_font_size = Configuration::get($this->name . 'p_name_size');
-        $pg_name_font_transform = $this->convertTransform(Configuration::get($this->name . 'p_name_transform'));
-        $pg_price_color = Configuration::get($this->name . 'p_price_color');
-        $pg_price_font_size = Configuration::get($this->name . 'p_price_size');
+        $grid_name_color = Configuration::get($this->name . 'grid_name_color');
+        $grid_name_colorh = Configuration::get($this->name . 'grid_name_colorh');
+        $grid_name_size = Configuration::get($this->name . 'grid_name_size');
+        $grid_name_transform = $this->convertTransform(Configuration::get($this->name . 'grid_name_transform'));
+        $grid_price_color = Configuration::get($this->name . 'grid_price_color');
+        $grid_price_size = Configuration::get($this->name . 'grid_price_size');
         $css .= '.js-product-miniature .product_desc .product_name{
-            color: '.$pg_name_color.';
-            font-size: '.$pg_name_font_size.'px;
-            text-transform: '.$pg_name_font_transform.';
+            color: '.$grid_name_color.';
+            font-size: '.$grid_name_size.'px;
+            text-transform: '.$grid_name_transform.';
         }';
         $css .= '.js-product-miniature .product_desc .product_name:hover{
-            color: '.$pg_name_colorh.';
+            color: '.$grid_name_colorh.';
         }';
         $css .= '.product-price-and-shipping .price{
-            color:'.$pg_price_color.';
-            font-size: '.$pg_price_font_size.'px;
+            color:'.$grid_price_color.';
+            font-size: '.$grid_price_size.'px;
         }';
 
-        $pp_name_color = Configuration::get($this->name . 'pp_name_color');
-        $pp_name_font_size = Configuration::get($this->name . 'pp_name_size');
-        $pp_name_font_transform = $this->convertTransform(Configuration::get($this->name . 'pp_name_transform'));
-        $pp_price_color = Configuration::get($this->name . 'pp_price_color');
-        $pp_price_font_size = Configuration::get($this->name . 'pp_price_size');
+        $product_name_color = Configuration::get($this->name . 'product_name_color');
+        $product_name_size = Configuration::get($this->name . 'product_name_size');
+        $product_name_transform = $this->convertTransform(Configuration::get($this->name . 'product_name_transform'));
+        $product_price_color = Configuration::get($this->name . 'product_price_color');
+        $product_price_size = Configuration::get($this->name . 'product_price_size');
         $css .= '.h1.namne_details, .product_name_h1{
-            color: '.$pp_name_color.';
-            font-size: '.$pp_name_font_size.'px;
-            text-transform: '.$pp_name_font_transform.';
+            color: '.$product_name_color.';
+            font-size: '.$product_name_size.'px;
+            text-transform: '.$product_name_transform.';
         }';
         $css .= '.product-prices .price, .product-prices .current-price span:first-child{
-            color:'.$pp_price_color.';
-            font-size: '.$pp_price_font_size.'px;
+            color:'.$product_price_color.';
+            font-size: '.$product_price_size.'px;
         }';
+        //Category
+        $category_width = Configuration::get($this->name . 'category_width');
+        $category_custom_width = Configuration::get($this->name . 'category_custom_width');
+        if($category_width == 'custom'){
+            $css .= '#product .container{
+                width: '. $category_custom_width .'px;
+            }';
+        }
         //details
-        $case_bg = Configuration::get($this->name . 'productp_background');
-        $css .= '#product.showcase-body #header,.showcase-inner,#product.showcase-body .page-title-wrapper{
-            background-color: '.$case_bg.';
-        }';
+        $product_width = Configuration::get($this->name . 'product_width');
+        $product_custom_width = Configuration::get($this->name . 'product_custom_width');
+        if($product_width == 'custom'){
+            $css .= '#product .container{
+                width: '. $product_custom_width .'px;
+            }';
+        }
         //Custom CSS
         if(Configuration::get($this->name . 'custom_css')){
             $css .= Configuration::get($this->name . 'custom_css');
@@ -548,21 +556,12 @@ class VecThemeoptions extends Module implements WidgetInterface
 
     public function getOptions(){
         $options = array(
-            'header_sticky' => Configuration::get($this->name . 'header_sticky'),
-			'grid_type' => isset($_GET['gt']) ? $_GET['gt'] : Configuration::get($this->name . 'p_display'),
-			'name_length' => Configuration::get($this->name . 'p_name_length'),
-			'cate_layout' => isset($_GET['ft']) ? $_GET['ft'] : Configuration::get($this->name . 'cp_layout'),
-            'cate_default_display' => Configuration::get($this->name . 'cp_display'),
-			'cate_product_per_row' => isset($_GET['pr']) ? $_GET['pr'] : Configuration::get($this->name . 'cp_perrow'),
-			'product_thumbnail' => Configuration::get($this->name . 'pp_thumbnail'),
-            'productp_layout' => isset($_GET['pplayout']) ? $_GET['pplayout'] : Configuration::get($this->name . 'productp_layout'),
-            'productp_image_position' => isset($_GET['pt']) ? $_GET['pt'] : Configuration::get($this->name . 'ppl1_thumbnail'),
-            'productp_thumbnail_item' => Configuration::get($this->name . 'ppl1_items'),
-            'productp_thumbnail_item_top' => isset($_GET['pp']) ? $_GET['pp'] : Configuration::get($this->name . 'ppl3_items'),
-            'productp_image_gridcolumn' => isset($_GET['pl']) ? $_GET['pl'] : Configuration::get($this->name . 'ppl2_column'), 
-            'productp_tab' => isset($_GET['tb']) ? $_GET['tb'] : Configuration::get($this->name . 'pp_infortab'),
+            'header_sticky'                 => Configuration::get($this->name . 'header_sticky'),
+            //Product grid
+			'grid_type'                     => isset($_GET['grid']) ? $_GET['grid'] : Configuration::get($this->name . 'grid_type'),
+			'name_length'                   => Configuration::get($this->name . 'p_name_length'),
             //Page title
-            'ptitle_size' => Configuration::get($this->name . 'ptitle_size'),
+            'ptitle_size'                   => Configuration::get($this->name . 'ptitle_size'),
             //Category page
             'category_layout'               => Configuration::get($this->name . 'category_layout'),
             'category_thumbnail'            => Configuration::get($this->name . 'category_thumbnail'),
@@ -571,6 +570,12 @@ class VecThemeoptions extends Module implements WidgetInterface
             'category_sub'                  => Configuration::get($this->name . 'category_sub'),
             'category_pagination'           => Configuration::get($this->name . 'category_pagination'),
             'category_filter'               => Configuration::get($this->name . 'category_filter'),
+            'category_column'               => isset($_GET['column']) ? $_GET['column'] : Configuration::get($this->name . 'category_column'),
+            //Product page
+            'product_layout'                => Configuration::get($this->name . 'product_layout'),
+            'main_layout'                   => Configuration::get($this->name . 'main_layout'),
+            'product_image'                 => Configuration::get($this->name . 'product_image'),
+            'information_layout'            => Configuration::get($this->name . 'information_layout'),
 		);
         if (isset($this->context->cookie->shop_view)) {
             $options['shop_view'] = $this->context->cookie->shop_view;

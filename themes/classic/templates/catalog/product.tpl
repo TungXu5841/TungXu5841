@@ -50,16 +50,20 @@
 
   <section id="main" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$product.url}">
-
-    {if $vectheme.productp_layout == '1'}
-      {include file="catalog/product_layouts/product_layout1.tpl"}
-    {elseif $vectheme.productp_layout == '2'}
-      {include file="catalog/product_layouts/product_layout2.tpl"}
-    {elseif $vectheme.productp_layout == '3'}
-      {include file="catalog/product_layouts/product_layout3.tpl"}
-    {elseif $vectheme.productp_layout == '4'}
-      {include file="catalog/product_layouts/product_layout4.tpl"}
-    {/if} 
+    <div class="row product-container product-layout-{$vectheme.main_layout}">
+      {if $vectheme.main_layout == '1'}
+        {include file='catalog/detail/product-layout-1.tpl'}
+      {else if $vectheme.main_layout == '2'}
+        {include file='catalog/detail/product-layout-2.tpl'}
+      {else}
+        {include file='catalog/detail/product-layout-3.tpl'}
+      {/if}
+      <div class="col-md-12">
+        {block name='product_tabs'}
+          {include file='catalog/_partials/product-tab.tpl'}
+        {/block}
+      </div>
+    </div>
 
     {block name='product_images_modal'}
       {include file='catalog/_partials/product-images-modal.tpl'}

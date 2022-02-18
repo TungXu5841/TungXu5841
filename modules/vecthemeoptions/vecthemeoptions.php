@@ -461,7 +461,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $category_width = Configuration::get($this->name . 'category_width');
         $category_custom_width = Configuration::get($this->name . 'category_custom_width');
         if($category_width == 'custom'){
-            $css .= '#product .container{
+            $css .= '#product #wrapper .container{
                 width: '. $category_custom_width .'px;
             }';
         }
@@ -469,7 +469,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $product_width = Configuration::get($this->name . 'product_width');
         $product_custom_width = Configuration::get($this->name . 'product_custom_width');
         if($product_width == 'custom'){
-            $css .= '#product .container{
+            $css .= '#product #wrapper .container{
                 width: '. $product_custom_width .'px;
             }';
         }

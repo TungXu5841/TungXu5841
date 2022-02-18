@@ -297,15 +297,15 @@ class Frontend extends App
             true
         );
 
-        wp_register_script(
-            'jquery-slick',
-            $this->getJsAssetsUrl('slick', 'views/lib/slick/'),
-            [
-                'jquery',
-            ],
-            '1.8.1',
-            true
-        );
+        // wp_register_script(
+        //     'jquery-slick',
+        //     $this->getJsAssetsUrl('slick', 'views/lib/slick/'),
+        //     [
+        //         'jquery',
+        //     ],
+        //     '1.8.1',
+        //     true
+        // );
 
         wp_register_script(
             'elementor-dialog',

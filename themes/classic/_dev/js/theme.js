@@ -43,7 +43,7 @@ import DropDown from './components/drop-down';
 import Form from './components/form';
 import ProductMinitature from './components/product-miniature';
 import ProductSelect from './components/product-select';
-import TopMenu from './components/top-menu';
+import './lib/slick.min';
 
 import './lib/bootstrap-filestyle.min';
 import './lib/jquery.scrollbox.min';
@@ -61,14 +61,14 @@ for (const i in EventEmitter.prototype) {
 $(document).ready(() => {
   const dropDownEl = $('.js-dropdown');
   const form = new Form();
-  const topMenuEl = $('.js-top-menu ul[data-depth="0"]');
+  //const topMenuEl = $('.js-top-menu ul[data-depth="0"]');
   const dropDown = new DropDown(dropDownEl);
-  const topMenu = new TopMenu(topMenuEl);
+  //const topMenu = new TopMenu(topMenuEl);
   const productMinitature = new ProductMinitature();
   const productSelect = new ProductSelect();
   dropDown.init();
   form.init();
-  topMenu.init();
+  //topMenu.init();
   productMinitature.init();
   productSelect.init();
 

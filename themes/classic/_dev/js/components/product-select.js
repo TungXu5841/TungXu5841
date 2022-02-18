@@ -31,6 +31,7 @@ export default class ProductSelect {
     const MAX_THUMBS = 5;
     const $arrows = $('.js-modal-arrows');
     const $thumbnails = $('.js-modal-product-images');
+    let $wrapper = $('#wrapper');
 
     $('body')
       .on('click', '.js-modal-thumb', (event) => {
@@ -47,41 +48,14 @@ export default class ProductSelect {
           $('#product-modal').modal('hide');
         }
       });
-
-    if ($('.js-modal-product-images li').length <= MAX_THUMBS) {
-      $arrows.css('opacity', '.2');
-    } else {
-      $arrows.on('click', (event) => {
-        if ($(event.target).hasClass('arrow-up') && $thumbnails.position().top < 0) {
-          this.move('up');
-          $('.js-modal-arrow-down').css('opacity', '1');
-        } else if (
-          $(event.target).hasClass('arrow-down')
-          && $thumbnails.position().top + $thumbnails.height() > $('.js-modal-mask').height()
-        ) {
-          this.move('down');
-          $('.js-modal-arrow-up').css('opacity', '1');
-        }
-      });
-    }
+      $wrapper.on('shown.bs.modal', '#product-modal', function (e) {
+        var $thumbnails_modal = $('.product-images-modal');
+        $thumbnails_modal.slick({
+          slidesToShow: $thumbnails_modal.data('item'),
+        });
+      })
+    
   }
 
-  move(direction) {
-    const THUMB_MARGIN = 10;
-    const $thumbnails = $('.js-modal-product-images');
-    const thumbHeight = $('.js-modal-product-images li img').height() + THUMB_MARGIN;
-    const currentPosition = $thumbnails.position().top;
-    $thumbnails.velocity(
-      {
-        translateY: direction === 'up' ? currentPosition + thumbHeight : currentPosition - thumbHeight,
-      },
-      () => {
-        if ($thumbnails.position().top >= 0) {
-          $('.js-modal-arrow-up').css('opacity', '.2');
-        } else if ($thumbnails.position().top + $thumbnails.height() <= $('.js-modal-mask').height()) {
-          $('.js-modal-arrow-down').css('opacity', '.2');
-        }
-      },
-    );
-  }
+ 
 }

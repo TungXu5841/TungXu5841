@@ -29,13 +29,12 @@ import ProductSelect from './components/product-select';
 $(document).ready(() => {
   createProductSpin();
   createInputFile();
-  coverImage();
-  imageScrollBox();
+  productImageSlider();
   addJsProductTabActiveSelector();
 
   prestashop.on('updatedProduct', (event) => {
     createInputFile();
-    coverImage();
+    productImageSlider();
     if (event && event.product_minimal_quantity) {
       const minimalProductQuantity = parseInt(event.product_minimal_quantity, 10);
       const quantityInputSelector = prestashop.selectors.quantityWanted;
@@ -46,75 +45,75 @@ $(document).ready(() => {
         min: minimalProductQuantity,
       });
     }
-    imageScrollBox();
     $($(prestashop.themeSelectors.product.activeTabs).attr('href')).addClass('active').removeClass('fade');
     $(prestashop.themeSelectors.product.imagesModal).replaceWith(event.product_images_modal);
 
     const productSelect = new ProductSelect();
     productSelect.init();
   });
+  function productImageSlider(){
+		var $imageContainer = $('.images-container'),
+			$images = $('.product-images.slick-block'),
+			$thumbnails = $('.product-thumbs.slick-block');
+    
+		if($imageContainer.hasClass('horizontal-thumb')){
+			var item = $thumbnails.data('item');
+			$images.not('.slick-initialized').slick({
+				infinite: false,
+			});
+			$thumbnails
+				.on('init', function(event, slick) {$('.product-images.slick-block .slick-slide.slick-current').addClass('is-active');})
+				.not('.slick-initialized').slick({
+					slidesToShow: item,
+					infinite: false,
+				});
+		};
+		if($imageContainer.hasClass('vertical-left') || $imageContainer.hasClass('vertical-right')){
+			var item = $thumbnails.data('item');
+			$images.not('.slick-initialized').slick({
+				infinite: false,
+			});
+			$thumbnails
+			.on('init', function(event, slick) {$('.product-images.slick-block .slick-slide.slick-current').addClass('is-active');})
+			.not('.slick-initialized').slick({
+				slidesToShow: item,
+				infinite: false,
+				vertical: true,
+				responsive: [
+					{
+					  breakpoint: 399,
+					  settings: {
+						slidesToShow: 3,
+						slidesToScroll: 1, 
+					  }
+					}
+				]
+			});
+			$('.product-images.slick-block img').load(function() {
+				$thumbnails.slick("setPosition", 0);
+			});
+			
+		};
+	
+		$images.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+		 	$thumbnails.slick('slickGoTo', nextSlide);
+		 	var currrentNavSlideElem = $thumbnails.find('.slick-slide[data-slick-index="' + nextSlide + '"]');
+		 	$thumbnails.find('.slick-slide').removeClass('is-active');
+		 	currrentNavSlideElem.addClass('is-active');
+		});
 
-  function coverImage() {
-    const productCover = $(prestashop.themeSelectors.product.cover);
-    let thumbSelected = $(prestashop.themeSelectors.product.selected);
+		$thumbnails.on('click', '.slick-slide', function(event) {
+		 	event.preventDefault();
+		 	var goToSingleSlide = $(this).data('slick-index');
 
-    const swipe = (selectedThumb, thumbParent) => {
-      const newSelectedThumb = thumbParent.find(prestashop.themeSelectors.product.thumb);
-
-      $(prestashop.themeSelectors.product.modalProductCover).attr('src', newSelectedThumb.data('image-large-src'));
-      selectedThumb.removeClass('selected');
-      newSelectedThumb.addClass('selected');
-      productCover.prop('src', newSelectedThumb.data('image-medium-src'));
-    };
-
-    $(prestashop.themeSelectors.product.thumb).on('click', (event) => {
-      thumbSelected = $(prestashop.themeSelectors.product.selected);
-      swipe(thumbSelected, $(event.target).closest(prestashop.themeSelectors.product.thumbContainer));
-    });
-
-    productCover.swipe({
-      swipe: (event, direction) => {
-        thumbSelected = $(prestashop.themeSelectors.product.selected);
-        const parentThumb = thumbSelected.closest(prestashop.themeSelectors.product.thumbContainer);
-
-        if (direction === 'right') {
-          if (parentThumb.prev().length > 0) {
-            swipe(thumbSelected, parentThumb.prev());
-          } else if (parentThumb.next().length > 0) {
-            swipe(thumbSelected, parentThumb.next());
-          }
-        } else if (direction === 'left') {
-          if (parentThumb.next().length > 0) {
-            swipe(thumbSelected, parentThumb.next());
-          } else if (parentThumb.prev().length > 0) {
-            swipe(thumbSelected, parentThumb.prev());
-          }
-        }
-      },
-      allowPageScroll: 'vertical',
-    });
-  }
-
-  function imageScrollBox() {
-    if ($('#main .js-qv-product-images li').length > 2) {
-      $('#main .js-qv-mask').addClass('scroll');
-      $('.scroll-box-arrows').addClass('scroll');
-      $('#main .js-qv-mask').scrollbox({
-        direction: 'h',
-        distance: 113,
-        autoPlay: false,
-      });
-      $('.scroll-box-arrows .left').click(() => {
-        $('#main .js-qv-mask').trigger('backward');
-      });
-      $('.scroll-box-arrows .right').click(() => {
-        $('#main .js-qv-mask').trigger('forward');
-      });
-    } else {
-      $('#main .js-qv-mask').removeClass('scroll');
-      $('.scroll-box-arrows').removeClass('scroll');
-    }
-  }
+		 	$images.slick('slickGoTo', goToSingleSlide);
+		});
+		// $('.images-container .slick-block').slickLightbox({
+		// 	src: 'src',
+		// 	itemSelector: '.cover-item img'
+		// });
+	 
+	};
 
   function createInputFile() {
     $(prestashop.themeSelectors.fileInput).on('change', (event) => {

@@ -25,6 +25,9 @@
 <div class="modal fade js-product-images-modal" id="product-modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div class="modal-body">
         {assign var=imagesCount value=$product.images|count}
         <figure>
@@ -44,18 +47,12 @@
           {else}
             <img src="{$urls.no_picture_image.bySize.large_default.url}" loading="lazy" width="{$urls.no_picture_image.bySize.large_default.width}" height="{$urls.no_picture_image.bySize.large_default.height}" />
           {/if}
-          <figcaption class="image-caption">
-          {block name='product_description_short'}
-            <div id="product-description-short">{$product.description_short nofilter}</div>
-          {/block}
-        </figcaption>
         </figure>
-        <aside id="thumbnails" class="thumbnails js-thumbnails text-sm-center">
+        <div id="thumbnails" class="thumbnails js-thumbnails text-sm-center">
           {block name='product_images'}
-            <div class="js-modal-mask mask {if $imagesCount <= 5} nomargin {/if}">
-              <ul class="product-images js-modal-product-images">
+              <div class="product-images-modal js-modal-product-images slick-block column-desktop-6 column-tablet-6 column-mobile-4" data-item="6">
                 {foreach from=$product.images item=image}
-                  <li class="thumb-container js-thumb-container">
+                  <div class="thumb-container js-thumb-container">
                     <img
                       data-image-large-src="{$image.large.url}"
                       class="thumb js-modal-thumb"
@@ -69,18 +66,11 @@
                       width="{$image.medium.width}"
                       height="148"
                     >
-                  </li>
+                  </div>
                 {/foreach}
-              </ul>
-            </div>
+              </div>
           {/block}
-          {if $imagesCount > 5}
-            <div class="arrows js-modal-arrows">
-              <i class="material-icons arrow-up js-modal-arrow-up">&#xE5C7;</i>
-              <i class="material-icons arrow-down js-modal-arrow-down">&#xE5C5;</i>
-            </div>
-          {/if}
-        </aside>
+        </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

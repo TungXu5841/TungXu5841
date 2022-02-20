@@ -443,3 +443,21 @@
 .login-form {
   margin-top: 15px;
 }
+//links account
+.group-link-infomation {
+  background: $gray-light;
+  > a {
+    display: block;   
+    padding: .625rem 1.25rem;
+    border-bottom: 3px solid $white;
+    i {
+      font-size: 1.125rem;
+      vertical-align: -1px;
+      margin-right: .4375rem;
+    }
+    &.active,
+    &:hover {
+      background: var(--hovercolor);
+    }
+  }
+}

@@ -23,12 +23,12 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {assign var="grid_type" value="1"}
-{if $grid_type == 1}
+{if $vectheme.grid_type == 1}
   {include file="catalog/_partials/miniatures/_product/grid1.tpl"}
-{elseif $grid_type == 2}
+{elseif $vectheme.grid_type == 2}
   {include file="catalog/_partials/miniatures/_product/grid2.tpl"}
-{elseif $grid_type == 3}
+{elseif $vectheme.grid_type == 3}
   {include file="catalog/_partials/miniatures/_product/grid3.tpl"}
-{else $grid_type == 4}
+{else $vectheme.grid_type == 4}
   {include file="catalog/_partials/miniatures/_product/grid4.tpl"}
 {/if}

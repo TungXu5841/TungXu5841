@@ -29,12 +29,12 @@
    <input type="hidden" name="token" value="{$static_token}">
    <input type="hidden" name="id_product" value="{$product.id}" class="product_page_product_id">
    <input type="hidden" name="qty" value="{$product.minimal_quantity}" min="{$product.minimal_quantity}">
-   <button class="button ajax_add_to_cart_button add-to-cart btn-default" data-button-action="add-to-cart" type="submit" title="{l s='Add to cart' d='Shop.Theme.Actions'}">
+   <button class="button ajax-add-to-cart-button add-to-cart btn-default" data-button-action="add-to-cart" type="submit" title="{l s='Add to cart' d='Shop.Theme.Actions'}">
   		{l s='Add to cart' d='Shop.Theme.Actions'}
    </button>
  </form>
 </div>
 {else}
-	<span class="ajax_add_to_cart_button disabled" title="{l s='Out of stock' d='Shop.Theme.Actions'}" >{l s='Add to cart' d='Shop.Theme.Actions'}</span>
+	<span class="ajax-add-to-cart-button disabled" title="{l s='Out of stock' d='Shop.Theme.Actions'}" >{l s='Add to cart' d='Shop.Theme.Actions'}</span>
 {/if}
 {/if} 

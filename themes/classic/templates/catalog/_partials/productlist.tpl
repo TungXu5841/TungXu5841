@@ -30,7 +30,10 @@
         {if isset($vectheme.shop_view) && $vectheme.shop_view == 'list'}
         {include file="catalog/_partials/miniatures/product-list-view.tpl" product=$product position=$position productClasses=$productClasses}
         {else}
-        {include file="catalog/_partials/miniatures/product.tpl" product=$product position=$position productClasses=$productClasses}    
+        <div class="column-product {if $vectheme.category_column == 1}column_2 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-6 {else if $vectheme.category_column == 2}column_3 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4{else if $vectheme.category_column == 3 }column_4 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3{else if $vectheme.category_column == 4 }column_5 col-xs-12 col-sm-6 col-md-6 col-lg-4{else if $vectheme.category_column == 5 }column_6 col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-2{/if}">   
+            {include file="catalog/_partials/miniatures/product.tpl" product=$product position=$position productClasses=$productClasses}    
+        </div> 
+       
         {/if}
     {/foreach}
 </div>

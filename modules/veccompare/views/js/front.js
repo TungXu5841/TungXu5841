@@ -16,12 +16,12 @@ var vecCompare = {
                 var html = '';
                     html += '<div class="modal fade" id="compareModal">';
                     html += '<div class="modal-dialog"><div class="modal-content">';
-                        html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons close">close</i></button>';
+                        html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>';
                         html += '<div class="modal-body">';
                             html += '<img src="' + product_image + '" alt="' + product_name + '" />';
                             html += '<h4>' + product_name + '</h4>';
                             html += veccompare.success_text;
-                            html += '<a href="' + veccompare.compare_url + '">' + veccompare.compare_text + '</a>';
+                            html += '<a class="btn-primary" href="' + veccompare.compare_url + '">' + veccompare.compare_text + '</a>';
                         html += '</div>';
                     html += '</div></div></div>';
                 $("body").append(html);

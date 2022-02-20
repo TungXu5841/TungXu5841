@@ -12,16 +12,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+main {
+  overflow: hidden; 
+}
 ul {
   padding-left: 0;
   list-style: none;
 }
 
 a{
-  @include vec-transition(.3s); 
+  color: $gray-dark;
+  @include vec-transition(300ms); 
   &:hover {
-    color: $brand-primary;
     text-decoration: none;
   }
 }
@@ -54,8 +56,8 @@ label .color,
 .custom-checkbox input[type="checkbox"] + span.color {
   display: inline-block;
   width: 1.125rem;
-  height: 1.125rem;
-  margin: 0.3125rem;
+  height: 1.125rem; 
+  margin-top: 0.3125rem;
   margin-right: 0.5rem;
   cursor: pointer;
   background-size: contain;
@@ -86,7 +88,10 @@ label .color,
   font-weight: $headings-font-weight;
   color: $gray-darker;
 }
-
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: $gray-darker;
+}
 .btn-primary,
 .btn-secondary {
   padding: 0.625rem 1.25rem; 
@@ -160,7 +165,7 @@ small.value {
   color: $gray;
   background: $gray-light;
   border: $input-btn-border-width solid $input-border-color;
-
+  font-size: .8125rem; 
   &:focus {
     color: $gray-darker;
     background-color: $white; 
@@ -613,7 +618,71 @@ form {
   // 30px corresponds to the default margin size from bootstrap 4.0.0-alpha.5 for modal-dialog class
   min-height: calc(100% - (30px * 2));
 }
-
+.modal-dialog {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100% - (0.5rem * 2));
+  margin: 0 auto;
+  pointer-events: none;
+  .modal-content {
+    pointer-events: auto;
+    width: 100%;
+  }
+  .close {
+    position: absolute;
+    right: -2.5rem;
+    top: -1.25rem;
+    width: 1.875rem;
+    height: 1.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: $white;
+    border: 1px solid $white; 
+    border-radius: 50%;
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+//modal-compare
+#compareModal {
+  text-align: center;
+  .modal-dialog {
+    max-width: 22.5rem;
+  }
+  img {
+    width: 100%;
+  }
+  h4 {
+    color: $gray-dark;
+    margin: 1.25rem 0 0 0;
+  }
+  a {
+    display: block; 
+    width: 100%;
+    margin-top: .9375rem;
+  }
+}
+//modal-login
+.vec-quicklogin-modal {
+  h3 {
+    color: $gray-dark;
+  }
+  .vec-login-btn {
+    margin-top: 0.5rem; 
+    width: 100%; 
+  }
+}
+.close {
+  opacity:1;
+}
 .popover {
   font-family: inherit;
 }

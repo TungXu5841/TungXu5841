@@ -24,12 +24,12 @@
  *}
  {block name='product_miniature_item'}
 	
-	<article class="thumbnail-container style_product_list product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
-		<div class="img_block">
+	<article class="thumbnail-container product-miniature-list product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
+		<div class="img-block">
 		  {block name='product_thumbnail'}
 			<a href="{$product.url}" class="thumbnail product-thumbnail">
 			  <img class="first-image lazyload"
-				data-src = "{$product.cover.bySize.home_default.url}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+				src = "{$product.cover.bySize.home_default.url}" 
 				alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
 				data-full-size-image-url = "{$product.cover.large.url}"
 			  >
@@ -37,7 +37,7 @@
 			</a>
 		  {/block}
 		</div>
-		<div class="product_desc"> 
+		<div class="product-content"> 
 			{if isset($product.id_manufacturer)}
 			 <div class="manufacturer"><a href="{url entity='manufacturer' id=$product.id_manufacturer }">{Manufacturer::getnamebyid($product.id_manufacturer)}</a></div>
 			{/if}
@@ -49,26 +49,63 @@
 				{hook h='displayProductListReviews' product=$product}
 				</div>
 			{/block}
-			{block name='product_price_and_shipping'}
-			  {if $product.show_price}
-				<div class="product-price-and-shipping">
-				  {if $product.has_discount}
-					{hook h='displayProductPriceBlock' product=$product type="old_price"}
+			
+			<div class="availability"> 
+			{if $product.show_availability }
+				{if $product.quantity > 0}
+				<div class="availability-list in-stock">{l s='Availability' d='Shop.Theme.Actions'}: <span>{$product.quantity} {l s='In Stock' d='Shop.Theme.Actions'}</span></div>
 
-					<span class="sr-only">{l s='Regular price' d='Shop.Theme.Catalog'}</span>
-					<span class="regular-price">{$product.regular_price}</span>
-				  {/if}
+				{else}
 
-				  {hook h='displayProductPriceBlock' product=$product type="before_price"}
-
-				  <span class="sr-only">{l s='Price' d='Shop.Theme.Catalog'}</span>
-				  <span itemprop="price" class="price {if $product.has_discount}price-sale{/if}">{$product.price}</span>
-				  {hook h='displayProductPriceBlock' product=$product type='unit_price'}
-
-				  {hook h='displayProductPriceBlock' product=$product type='weight'}
-				</div>
-			  {/if}
+				<div class="availability-list out-of-stock">{l s='Availability' d='Shop.Theme.Actions'}: <span>{l s='Out of stock' d='Shop.Theme.Actions'}</span></div> 
+				{/if}
+			{/if}
+			</div>
+			{block name='product_description_short'}
+				<div class="product-desc" itemprop="description">{$product.description_short nofilter}</div>
+			{/block}
+		
+			<div class="variant-links">
+			{block name='product_variants'}
+			{if $product.main_variants}
+			{include file='catalog/_partials/variant-links.tpl' variants=$product.main_variants}
+			{/if}
 			{/block} 
+			</div>
+			<div class="col-buy">
+			  {block name='product_price_and_shipping'}
+				{if $product.show_price}
+				  <div class="product-price-and-shipping">
+					{if $product.has_discount}
+					  {hook h='displayProductPriceBlock' product=$product type="old_price"}
+  
+					  <span class="sr-only">{l s='Regular price' d='Shop.Theme.Catalog'}</span>
+					  <span class="regular-price">{$product.regular_price}</span>
+					{/if}
+  
+					{hook h='displayProductPriceBlock' product=$product type="before_price"}
+  
+					<span class="sr-only">{l s='Price' d='Shop.Theme.Catalog'}</span>
+					<span itemprop="price" class="price {if $product.has_discount}price-sale{/if}">{$product.price}</span>
+					{hook h='displayProductPriceBlock' product=$product type='unit_price'}
+  
+					{hook h='displayProductPriceBlock' product=$product type='weight'}
+				  </div>
+				{/if}
+			  {/block} 
+			  <div class="product-cart">
+				{include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
+			  </div>
+			  <div class="add-links">
+				{block name='quick_view'}	
+				<a class="quick_view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
+				<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
+				</a>
+				{/block}					
+				{hook h='displayProductListFunctionalButtons' product=$product}
+				{hook h='displayWishlistButton' product=$product}
+			   </div>
+			</div>
 			
 		</div>
 	</article>

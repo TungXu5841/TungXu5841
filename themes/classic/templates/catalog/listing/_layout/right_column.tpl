@@ -24,7 +24,7 @@
  *}
 
 {block name="content_wrapper"}
-  <div id="content-wrapper" class="js-content-wrapper right-column col-xs-12 col-lg-9">
+  <div id="content-wrapper" class="js-content-wrapper right-column col-xs-12 col-md-8 col-lg-9">
   {hook h="displayContentWrapperTop"}
   {block name='content'}
     <section id="main">
@@ -82,7 +82,7 @@
   </div>
 {/block}
 {block name="right_column"}
-  <div id="right-column" class="col-xs-12 col-sm-4 col-md-3">
+  <div id="right-column" class="col-xs-12 col-md-4 col-lg-3">
     {if $page.page_name == 'product'}
       {hook h='displayRightColumnProduct'}
     {else}

@@ -1,5 +1,5 @@
 <div id="vecthemeoptions">
-<div class="productTabs col-lg-2 col-md-3">
+<div class="vec-column col-lg-2 col-md-3">
 	<ul class="tab nav nav-tabs">
 	{$tabk = 0}
 		{foreach $fields as $fkey => $fvalue}
@@ -11,7 +11,7 @@
 		{/foreach}
 	</ul>
 </div>
-<div class="col-lg-10 col-md-9">
+<div class="vec-column vec-main-column col-lg-10 col-md-9">
 {if isset($fields.title)}<h3>{$fields.title}</h3>{/if}
 {if isset($tabs) && $tabs|count}
 <script type="text/javascript">
@@ -895,7 +895,7 @@
 										</select>
 										<a href="http://demo.posthemes.com/pos_ecolifedemo/#section-page" class="pos-demos" target="_blank">View our list demo</a>
 										<div class="import-processing"></div>
-										<button class="btn-import"><span>Import</span></button>
+										<button class="btn-import"><span>Import demo</span></button>
 									</div>
 									<script>
 										$select = $('select.vec-layouts');
@@ -1210,12 +1210,5 @@
     	border-radius: 5px;
     	vertical-align: top;
 	}
-	.btn-import{
-		display: inline-block;
-	    width: 390px;
-	    padding: 7px 0;
-	    margin-top: 15px;
-	    border-color: #bbcdd2;
-	    font-size: 14px !important;
-	}
+	
 </style>

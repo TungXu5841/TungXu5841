@@ -16,7 +16,7 @@ let errorMsg = '';
 function createSpin() {
   $.each($(spinnerSelector), (index, spinner) => {
     $(spinner).TouchSpin({
-      verticalbuttons: true,
+      verticalbuttons: false,
       verticalupclass: 'material-icons touchspin-up',
       verticaldownclass: 'material-icons touchspin-down',
       buttondown_class: 'btn btn-touchspin js-touchspin js-increase-product-quantity',

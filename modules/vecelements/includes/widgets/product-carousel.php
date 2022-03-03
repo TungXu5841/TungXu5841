@@ -60,13 +60,13 @@ class WidgetProductCarousel extends WidgetProductBase
                     'type' => ControlsManager::SELECT,
                     'options' => [
                         '0' => 'Default',
-                        '1' => 'Grid view 1',
-                        '2' => 'Grid view 2',
-                        '3' => 'Grid view 3',
-                        '4' => 'Grid view 4',
-                        '5' => 'Grid view 5',
-                        '6' => 'Grid view 6',
-                        '7' => 'List view',
+                        'grid1' => 'Grid view 1',
+                        'grid2' => 'Grid view 2',
+                        'grid3' => 'Grid view 3',
+                        'grid4' => 'Grid view 4',
+                        'grid5' => 'Grid view 5',
+                        'grid6' => 'Grid view 6',
+                        'list' => 'List view',
                     ],
                     'default' => '0',
                     'separator' => 'before',
@@ -125,7 +125,19 @@ class WidgetProductCarousel extends WidgetProductBase
         $slides = [];
 
         // Theme Skin PS 1.7+
-        $tpl = "catalog/_partials/miniatures/product.tpl";
+        
+        if($settings['product_display']){
+            $tpl = 'catalog/_partials/miniatures/_product/'. $settings['product_display'] .'.tpl';
+        }else{
+            $option_product = \Configuration::get('vecthemeoptionsgrid_type');
+
+            if($option_product){
+                $tpl = 'catalog/_partials/miniatures/_product/grid'. $option_product .'.tpl';
+            }else{
+                $tpl = "catalog/_partials/miniatures/_product/grid1.tpl";
+            }
+        }
+        
 
         if (!file_exists(_PS_THEME_DIR_ . "templates/$tpl") &&
             !file_exists(_PS_ALL_THEMES_DIR_ . "{$this->parentTheme}/templates/$tpl")

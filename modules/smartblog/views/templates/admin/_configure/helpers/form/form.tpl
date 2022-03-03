@@ -882,47 +882,8 @@
                                             .trigger('change.select2')
                                         ;
                                     </script>
-                                {elseif $input.type == 'posthemes'}
-                                <div class="form-group">
-                                    <div class="row">
-                                        <select class="vec-layouts fixed-width-xxl">
-                                            <option value="digital1">Digital 1</option>
-                                            <option value="digital2">Digital 2</option>
-                                            <option value="digital3">Digital 3</option>
-                                            <option value="digital4">Digital 4</option>
-                                            <option value="cosmetic1">Cosmetic 1</option>
-                                            <option value="cosmetic2">Cosmetic 2</option>
-                                            <option value="cosmetic3">Cosmetic 3</option>
-                                            <option value="cosmetic4">Cosmetic 4</option>
-                                        </select>
-                                        <a href="http://demo.posthemes.com/pos_ecolifedemo/#section-page" class="pos-demos" target="_blank">View our list demo</a>
-                                        <div class="import-processing"></div>
-                                        <button class="btn-import"><span>Import</span></button>
-                                    </div>
-                                    <script>
-                                        $select = $('select.vec-layouts');
-                                        $select.select2({
-                                            tags: false,
-                                            createTag: function(params) {
-                                                return {
-                                                    id: params.term,
-                                                    text: params.term,
-                                                    newOption: false
-                                                };
-                                            },
-                                            templateResult: function(data) {
-                                                var $result = $('<span>').text(data.text);
-
-                                                if (data.newOption) {
-                                                    $result.append(" <i>(custom)</i>");
-                                                }
-                                                return $result;
-                                            }
-                                        }).val($select.val())
-                                            .trigger('change.select2')
-                                        ;
-                                    </script>
-                                </div>
+                                {elseif $input.type == 'vecthemes'}
+                                
                                 {elseif $input.type == "chose_image"}
                                     <p> 
                                         <input id="{$input.name}" type="text" name="{$input.name}" value="{$fields_value[$input.name]|escape:'html':'UTF-8'}"> 
@@ -1107,29 +1068,6 @@
 {/block}
 {block name="after"}{/block}
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('body').on('click', '.btn-import', function(e){
-            e.preventDefault();
-            $('.btn-import').addClass('loading');
-            $('.btn-import span').empty();
-            $.ajax({
-                dataType: 'json',
-                url: baseAdminDir,
-                data: {
-                    controller : 'AdminPosThemeoptions',
-                    ajax: 1,
-                    layout: $('.pos-layouts').val(),
-                    token : token,
-                },
-                success: function(resp) {
-                    $('.btn-import').removeClass('loading').addClass('btn-success');
-                    $('.btn-import span').text(resp.data.message);
-                }
-            })
-        });
-    })
-</script>
 <script type="text/javascript">
     function displaythemeeditorTab(tab)
     {

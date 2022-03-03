@@ -25,12 +25,14 @@
 import $ from 'jquery';
 import prestashop from 'prestashop';
 import ProductSelect from './components/product-select';
+import './lib/easyzoom.min';
 
 $(document).ready(() => {
   createProductSpin();
   createInputFile();
   productImageSlider();
   addJsProductTabActiveSelector();
+  productImageZoom();
 
   prestashop.on('updatedProduct', (event) => {
     createInputFile();
@@ -173,4 +175,18 @@ $(document).ready(() => {
       $(target.attr('href')).removeClass(prestashop.themeSelectors.product.activeTabClass);
     });
   }
+  function productImageZoom(){
+		var $easyzoom = $('.easyzoom');
+		$easyzoom.trigger( 'zoom.destroy' );
+	 	if($(window).width() >= 992) 
+		{
+			$easyzoom.easyZoom();
+		}
+		$(window).resize(function(){
+			$easyzoom.trigger( 'zoom.destroy' );
+			if($(window).width() >= 992){
+				$easyzoom.easyZoom();
+			}
+		});
+	}
 });

@@ -94,7 +94,7 @@ $this->fields_form[]['form'] = array(
 $this->fields_form[]['form'] = array(
     'legend' => array(
         'title' => $this->l('Header'),
-        'icon' => 'icon-header'
+        'icon' => 'icon-columns'
     ),
     'input' => array(
         array(
@@ -165,7 +165,7 @@ $this->fields_form[]['form'] = array(
 $this->fields_form[]['form'] = array(
     'legend' => array(
         'title' => $this->l('Product grid settings'),
-        'icon' => 'icon-th'
+        'icon' => 'icon-windows'
     ),
     'input' => array(
         array(
@@ -476,7 +476,7 @@ $this->fields_form[]['form'] = array(
 $this->fields_form[]['form'] = array(
     'legend' => array(
         'title' => $this->l('Product page settings'),
-        'icon' => 'icon-archive'
+        'icon' => 'icon-location-arrow'
     ),
     'input' => array(
     	array(
@@ -674,7 +674,7 @@ $this->fields_form[]['form'] = array(
 $this->fields_form[]['form'] = array(
     'legend' => array(
         'title' => $this->l('Custom CSS/JS'),
-        'icon' => 'icon-pencil-square'
+        'icon' => 'icon-clipboard'
     ),
     'input' => array(
         array(

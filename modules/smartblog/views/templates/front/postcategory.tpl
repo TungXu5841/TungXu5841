@@ -24,7 +24,7 @@
 *}
 {extends file='page.tpl'}
 {block name='page_header_container'}
-  <div class=" page-title-wrapper {if $postheme.ptitle_size == 'small'}p_tilte_small{elseif $postheme.ptitle_size == 'big'}p_tilte_big{/if}" {if $cat_image && $cat_image != "no"}style="background: url({$cat_image}) no-repeat;"{/if}>
+  <div class=" page-title-wrapper {if $vectheme.ptitle_size == 'small'}p_tilte_small{elseif $vectheme.ptitle_size == 'big'}p_tilte_big{/if}" {if $cat_image && $cat_image != "no"}style="background: url({$cat_image}) no-repeat;"{/if}>
       <div class="container">
         {block name='page_title'}
         <header class="page-header">

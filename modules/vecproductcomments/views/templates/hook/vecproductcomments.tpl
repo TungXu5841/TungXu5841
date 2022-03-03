@@ -24,7 +24,6 @@
 *}
 <script type="text/javascript">
    var vecproductcomments_controller_url = '{$vecproductcomments_controller_url}';
-   var confirm_report_message = '{l s='Are you sure that you want to report this comment?' mod='vecproductcomments' js=1}';
    var secure_key = '{$secure_key}';
    var vecproductcomments_url_rewrite = '{$vecproductcomments_url_rewriting_activated}';
    var productcomment_added = '{l s='Your comment has been added!' mod='vecproductcomments' js=1}';
@@ -75,19 +74,6 @@
 		 <div class="comment_details">
 			<h4 class="title_block">{$comment.title}</h4>
 			<p>{$comment.content|escape:'html':'UTF-8'|nl2br}</p>
-			<ul>
-			   {if $comment.total_advice > 0}
-			   <li>{l s='%1$d out of %2$d people found this review useful.' sprintf=[$comment.total_useful,$comment.total_advice] mod='vecproductcomments'}</li>
-			   {/if}
-			   {if $logged}
-			   {if !$comment.customer_advice}
-			   <li class="usefulness">{l s='Was this comment useful to you?' mod='vecproductcomments'}<button class="usefulness_btn btn-secondary" data-is-usefull="1" data-id-product-comment="{$comment.id_product_comment}">{l s='yes' mod='vecproductcomments'}</button><button class="usefulness_btn btn-secondary" data-is-usefull="0" data-id-product-comment="{$comment.id_product_comment}">{l s='no' mod='vecproductcomments'}</button></li>
-			   {/if}
-			   {if !$comment.customer_report}
-			   <li><span class="report_btn" data-id-product-comment="{$comment.id_product_comment}">{l s='Report abuse' mod='vecproductcomments'}</span></li>
-			   {/if}
-			   {/if}
-			</ul>
 		 </div>
 	  </div>
 	  {/if}

@@ -102,12 +102,8 @@ class VecProductComment extends ObjectModel
 		{
 			$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
 			SELECT pc.`id_product_comment`,
-			(SELECT count(*) FROM `'._DB_PREFIX_.'vec_product_comment_usefulness` pcu WHERE pcu.`id_product_comment` = pc.`id_product_comment` AND pcu.`usefulness` = 1) as total_useful,
-			(SELECT count(*) FROM `'._DB_PREFIX_.'vec_product_comment_usefulness` pcu WHERE pcu.`id_product_comment` = pc.`id_product_comment`) as total_advice, '.
-			((int)$id_customer ? '(SELECT count(*) FROM `'._DB_PREFIX_.'vec_product_comment_usefulness` pcuc WHERE pcuc.`id_product_comment` = pc.`id_product_comment` AND pcuc.id_customer = '.(int)$id_customer.') as customer_advice, ' : '').
-			((int)$id_customer ? '(SELECT count(*) FROM `'._DB_PREFIX_.'vec_product_comment_report` pcrc WHERE pcrc.`id_product_comment` = pc.`id_product_comment` AND pcrc.id_customer = '.(int)$id_customer.') as customer_report, ' : '').'
 			IF(c.id_customer, CONCAT(c.`firstname`, \' \',  LEFT(c.`lastname`, 1)), pc.customer_name) customer_name, pc.`content`, pc.`grade`, pc.`date_add`, pc.title
-			  FROM `'._DB_PREFIX_.'vec_product_comment` pc
+			FROM `'._DB_PREFIX_.'vec_product_comment` pc
 			LEFT JOIN `'._DB_PREFIX_.'customer` c ON c.`id_customer` = pc.`id_customer`
 			WHERE pc.`id_product` = '.(int)($id_product).($validate == '1' ? ' AND pc.`validate` = 1' : '').'
 			ORDER BY pc.`date_add` DESC
@@ -324,8 +320,6 @@ class VecProductComment extends ObjectModel
 	{
 		parent::delete();
 		VecProductComment::deleteGrades($this->id);
-		VecProductComment::deleteReports($this->id);
-		VecProductComment::deleteUsefulness($this->id);
 	}
 
 	/**
@@ -340,104 +334,6 @@ class VecProductComment extends ObjectModel
 		return (Db::getInstance()->execute('
 		DELETE FROM `'._DB_PREFIX_.'vec_product_comment_grade`
 		WHERE `id_product_comment` = '.(int)$id_product_comment));
-	}
-
-	/**
-	 * Delete Reports
-	 *
-	 * @return boolean succeed
-	 */
-	public static function deleteReports($id_product_comment)
-	{
-		if (!Validate::isUnsignedId($id_product_comment))
-			return false;
-		return (Db::getInstance()->execute('
-		DELETE FROM `'._DB_PREFIX_.'vec_product_comment_report`
-		WHERE `id_product_comment` = '.(int)$id_product_comment));
-	}
-
-	/**
-	 * Delete usefulness
-	 *
-	 * @return boolean succeed
-	 */
-	public static function deleteUsefulness($id_product_comment)
-	{
-		if (!Validate::isUnsignedId($id_product_comment))
-			return false;
-
-		return (Db::getInstance()->execute('
-		DELETE FROM `'._DB_PREFIX_.'vec_product_comment_usefulness`
-		WHERE `id_product_comment` = '.(int)$id_product_comment));
-	}
-
-	/**
-	 * Report comment
-	 *
-	 * @return boolean
-	 */
-	public static function reportComment($id_product_comment, $id_customer)
-	{
-		return (Db::getInstance()->execute('
-			INSERT INTO `'._DB_PREFIX_.'vec_product_comment_report` (`id_product_comment`, `id_customer`)
-			VALUES ('.(int)$id_product_comment.', '.(int)$id_customer.')'));
-	}
-
-	/**
-	 * Comment already report
-	 *
-	 * @return boolean
-	 */
-	public static function isAlreadyReport($id_product_comment, $id_customer)
-	{
-		return (bool)Db::getInstance()->getValue('
-			SELECT COUNT(*)
-			FROM `'._DB_PREFIX_.'vec_product_comment_report`
-			WHERE `id_customer` = '.(int)$id_customer.'
-			AND `id_product_comment` = '.(int)$id_product_comment);
-	}
-
-	/**
-	 * Set comment usefulness
-	 *
-	 * @return boolean
-	 */
-	public static function setCommentUsefulness($id_product_comment, $usefulness, $id_customer)
-	{
-		return (Db::getInstance()->execute('
-			INSERT INTO `'._DB_PREFIX_.'vec_product_comment_usefulness` (`id_product_comment`, `usefulness`, `id_customer`)
-			VALUES ('.(int)$id_product_comment.', '.(int)$usefulness.', '.(int)$id_customer.')'));
-	}
-
-	/**
-	 * Usefulness already set
-	 *
-	 * @return boolean
-	 */
-	public static function isAlreadyUsefulness($id_product_comment, $id_customer)
-	{
-		return (bool)Db::getInstance()->getValue('
-			SELECT COUNT(*)
-			FROM `'._DB_PREFIX_.'vec_product_comment_usefulness`
-			WHERE `id_customer` = '.(int)$id_customer.'
-			AND `id_product_comment` = '.(int)$id_product_comment);
-	}
-
-	/**
-	 * Get reported comments
-	 *
-	 * @return array Comments
-	 */
-	public static function getReportedComments()
-	{
-		return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
-		SELECT DISTINCT(pc.`id_product_comment`), pc.`id_product`, IF(c.id_customer, CONCAT(c.`firstname`, \' \',  c.`lastname`), pc.customer_name) customer_name, pc.`content`, pc.`grade`, pc.`date_add`, pl.`name`, pc.`title`
-		FROM `'._DB_PREFIX_.'vec_product_comment_report` pcr
-		LEFT JOIN `'._DB_PREFIX_.'vec_product_comment` pc
-			ON pcr.id_product_comment = pc.id_product_comment
-		LEFT JOIN `'._DB_PREFIX_.'customer` c ON (c.`id_customer` = pc.`id_customer`)
-		LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (pl.`id_product` = pc.`id_product` AND pl.`id_lang` = '.(int)Context::getContext()->language->id.' AND pl.`id_lang` = '.(int)Context::getContext()->language->id.Shop::addSqlRestrictionOnLang('pl').')
-		ORDER BY pc.`date_add` DESC');
 	}
 
 };

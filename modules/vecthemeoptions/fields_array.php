@@ -592,6 +592,11 @@ $this->fields_form[]['form'] = array(
                         'name' => $this->l('Tab - vertical'),
                         'img' => 'information-layout-3.png'
                     ),
+                    array(
+                        'id_option' => 4,
+                        'name' => $this->l('Accordion'),
+                        'img' => 'information-layout-4.png'
+                    ),
                 ),
                 'id' => 'id_option',
                 'name' => 'name',

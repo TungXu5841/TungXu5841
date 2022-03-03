@@ -35,23 +35,11 @@
 			</div>
 		</div> <!-- .comments_note -->
 	{/if}
-
-	<ul class="comments_advices">
-		{if $nbComments_extra != 0}
-			<li>
-				<a href="#product_comments_block_tab" class="reviews" >
-					{l s='Read reviews' mod='vecproductcomments'} (<span itemprop="reviewCount">{$nbComments_extra}</span>)
-				</a>
-			</li>
-		{/if}
-		{if ($too_early == false AND ($logged OR $allow_guests))}
-			<li>
-				<a class="open-comment-form">
-					{l s='Write a review' mod='vecproductcomments'}
-				</a>
-			</li>
-		{/if}
-	</ul>
+	{if $nbComments_extra != 0}
+		<a href="#product_comments_block_tab" class="reviews" >
+			{$ratings.avg} | {$nbComments_extra} {l s='Reviews' mod='vecproductcomments'}
+		</a>
+	{/if}
 </div>
 {/if}
 <!--  /Module ProductComments -->

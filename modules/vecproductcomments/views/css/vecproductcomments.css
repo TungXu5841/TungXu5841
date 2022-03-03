@@ -382,9 +382,6 @@ div.star a:hover {
   font-size: 14px;
   color: #000000;
 }
-#product_comments_block_tab div.comment .comment_details .usefulness * {
-  margin-left: 10px;
-}
 @media (max-width: 767px) {
   #product_comments_block_tab div.comment .comment_details ul {
     list-style-type: none;
@@ -434,10 +431,6 @@ div.star a:hover {
 
 #product_comments_block_tab a:hover {
   color: #ffffff;
-}
-#product_comments_block_tab span.report_btn {
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 .fl {

@@ -33,24 +33,7 @@ include_once(dirname(__FILE__).'/vecproductcomments.php');
 
 $productCom = new vecproductcomments();
 
-if (Tools::getValue('action') && Tools::getValue('id_product_comment') && Context::getContext()->cookie->id_customer)
-{
-	if (Tools::getValue('action') == 'report')
-	{
-		if (!VecProductComment::isAlreadyReport(Tools::getValue('id_product_comment'), Context::getContext()->cookie->id_customer) &&
-			VecProductComment::reportComment((int)Tools::getValue('id_product_comment'), (int)Context::getContext()->cookie->id_customer))
-			die('0');
-	}
-	else if (Tools::getValue('action') == 'usefulness' && Tools::getValue('value') && Tools::getValue('value'))
-	{
-		if (!VecProductComment::isAlreadyUsefulness(Tools::getValue('id_product_comment'), Context::getContext()->cookie->id_customer) &&
-			VecProductComment::setCommentUsefulness((int)Tools::getValue('id_product_comment'),
-												 (bool)Tools::getValue('value'),
-												 Context::getContext()->cookie->id_customer))
-			die('0');
-	}
-}
-else if (Tools::getValue('action') && Tools::getValue('secure_key') == $productCom->secure_key)
+if (Tools::getValue('action') && Tools::getValue('secure_key') == $productCom->secure_key)
 {
 		$review = Tools::jsonDecode(Tools::getValue('review'));
 		$id_product = 0;

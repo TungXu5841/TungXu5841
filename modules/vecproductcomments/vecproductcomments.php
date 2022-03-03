@@ -147,9 +147,7 @@ class VecProductComments extends Module implements WidgetInterface
 			`'._DB_PREFIX_.'vec_product_comment_criterion_product`,
 			`'._DB_PREFIX_.'vec_product_comment_criterion_lang`,
 			`'._DB_PREFIX_.'vec_product_comment_criterion_category`,
-			`'._DB_PREFIX_.'vec_product_comment_grade`,
-			`'._DB_PREFIX_.'vec_product_comment_usefulness`,
-			`'._DB_PREFIX_.'vec_product_comment_report`');
+			`'._DB_PREFIX_.'vec_product_comment_grade`');
 	}
 	
 	public function getCacheId($id_product = null)
@@ -173,7 +171,6 @@ class VecProductComments extends Module implements WidgetInterface
 			$id_product_comment = (int)Tools::getValue('id_product_comment');
 			$comment = new VecProductComment($id_product_comment);
 			$comment->validate();
-			VecProductComment::deleteReports($id_product_comment);
 		}
 		elseif (Tools::isSubmit('deletevecproductcomments'))
 		{
@@ -239,10 +236,6 @@ class VecProductComments extends Module implements WidgetInterface
 		{
 			$comment = new VecProductComment($id_product_comment);
 			$comment->validate();
-		}
-		elseif ($id_product_comment = (int)Tools::getValue('noabuseComment'))
-		{
-			VecProductComment::deleteReports($id_product_comment);
 		}
 
 		$this->_clearcache('vecproductcomments_reviews.tpl');
@@ -374,13 +367,8 @@ class VecProductComments extends Module implements WidgetInterface
 
 			$fields_list = $this->getStandardFieldList();
 
-			if (version_compare(_PS_VERSION_, '1.6', '<'))
-			{
-				$return .= "<h1>".$this->l('Reviews waiting for approval')."</h1>";
-				$actions = array('enable', 'delete');
-			}
-			else
-				$actions = array('approve', 'delete');
+			
+			$actions = array('approve', 'delete');
 
 			$helper = new HelperList();
 			$helper->shopLinkType = '';
@@ -398,34 +386,6 @@ class VecProductComments extends Module implements WidgetInterface
 
 			$return .= $helper->generateList($comments, $fields_list);
 		}
-
-		$comments = VecProductComment::getReportedComments();
-
-		$fields_list = $this->getStandardFieldList();
-
-		if (version_compare(_PS_VERSION_, '1.6', '<'))
-		{
-			$return .= "<h1>".$this->l('Reported Reviews')."</h1>";
-			$actions = array('enable', 'delete');
-		}
-		else
-			$actions = array('delete', 'noabuse');
-
-		$helper = new HelperList();
-		$helper->shopLinkType = '';
-		$helper->simple_header = true;
-		$helper->actions = $actions;
-		$helper->show_toolbar = false;
-		$helper->module = $this;
-		$helper->listTotal = count($comments);
-		$helper->identifier = 'id_product_comment';
-		$helper->title = $this->l('Reported Reviews');
-		$helper->table = $this->name;
-		$helper->token = Tools::getAdminTokenLite('AdminModules');
-		$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
-		//$helper->tpl_vars = array('priority' => array($this->l('High'), $this->l('Medium'), $this->l('Low')));
-
-		$return .= $helper->generateList($comments, $fields_list);
 
 		return $return;
 
@@ -801,7 +761,6 @@ class VecProductComments extends Module implements WidgetInterface
 		if($average){
 			$avg_percent = round($average['grade']/5*100, 1);
 		}
-		
 		$this->context->smarty->assign(array(
 			'id_product_comment_form' => (int)Tools::getValue('id_product'),
 			'secure_key' => $this->secure_key,

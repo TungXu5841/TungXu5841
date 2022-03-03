@@ -50,12 +50,6 @@ class VecProductCommentsDefaultModuleFrontController extends ModuleFrontControll
 				case 'add_comment':
 					$this->ajaxProcessAddComment();
 					break;
-				case 'report_abuse':
-					$this->ajaxProcessReportAbuse();
-					break;
-				case 'comment_is_usefull':
-					$this->ajaxProcessCommentIsUsefull();
-					break;
 			}
 		}
 	}
@@ -139,33 +133,5 @@ class VecProductCommentsDefaultModuleFrontController extends ModuleFrontControll
 			'result' => $result,
 			'errors' => $errors
 		)));
-	}
-
-	protected function ajaxProcessReportAbuse()
-	{
-		if (!Tools::isSubmit('id_product_comment'))
-			die('0');
-
-		if (VecProductComment::isAlreadyReport(Tools::getValue('id_product_comment'), $this->context->cookie->id_customer))
-			die('0');
-
-		if (VecProductComment::reportComment((int)Tools::getValue('id_product_comment'), $this->context->cookie->id_customer))
-			die('1');
-
-		die('0');
-	}
-
-	protected function ajaxProcessCommentIsUsefull()
-	{
-		if (!Tools::isSubmit('id_product_comment') || !Tools::isSubmit('value'))
-			die('0');
-
-		if (VecProductComment::isAlreadyUsefulness(Tools::getValue('id_product_comment'), $this->context->cookie->id_customer))
-			die('0');
-
-		if (VecProductComment::setCommentUsefulness((int)Tools::getValue('id_product_comment'), (bool)Tools::getValue('value'), $this->context->cookie->id_customer))
-			die('1');
-
-		die('0');
 	}
 }

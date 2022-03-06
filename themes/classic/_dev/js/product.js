@@ -64,7 +64,7 @@ $(document).ready(() => {
 				infinite: false,
 			});
 			$thumbnails
-				.on('init', function(event, slick) {$('.product-images.slick-block .slick-slide.slick-current').addClass('is-active');})
+				.on('init', function(event, slick) {$('.product-thumbs.slick-block .slick-slide.slick-current').addClass('is-active');})
 				.not('.slick-initialized').slick({
 					slidesToShow: item,
 					infinite: false,
@@ -76,18 +76,24 @@ $(document).ready(() => {
 				infinite: false,
 			});
 			$thumbnails
-			.on('init', function(event, slick) {$('.product-images.slick-block .slick-slide.slick-current').addClass('is-active');})
+			.on('init', function(event, slick) {$('.product-thumbs.slick-block .slick-slide.slick-current').addClass('is-active');})
 			.not('.slick-initialized').slick({
 				slidesToShow: item,
 				infinite: false,
 				vertical: true,
 				responsive: [
+          {
+					  breakpoint: 767,
+					  settings: {
+              vertical: false,
+            }
+					},
 					{
 					  breakpoint: 399,
 					  settings: {
-						slidesToShow: 3,
-						slidesToScroll: 1, 
-					  }
+              slidesToShow: 3,
+              slidesToScroll: 1, 
+            }
 					}
 				]
 			});

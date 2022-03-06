@@ -186,7 +186,7 @@
               @include vec-transition(300ms);
             }
           }
-          &.slick-current,
+          &.slick-current.is-active,
           &.is-active,
           &:hover {
             .thumb-item {

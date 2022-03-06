@@ -1,8 +1,12 @@
+{if $vectheme.information_layout == '1' || $vectheme.information_layout == '4'}
+<div>
+{else}
 <div class="js-product-details tab-pane fade{if !$product.description} in active{/if}"
      id="product-details"
      data-product="{$product.embedded_attributes|json_encode}"
      role="tabpanel"
   >
+{/if} 
   {block name='product_reference'}
     {if isset($product_manufacturer->id)}
       <div class="product-manufacturer">

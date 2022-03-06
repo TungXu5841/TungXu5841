@@ -40,8 +40,8 @@
               </div>
             {/foreach}
         </div>
-        <div class="layer hidden-sm-down" data-toggle="modal" data-target="#product-modal">
-          <i class="material-icons zoom-in">search</i>
+        <div class="icon-zoom hidden-sm-down" data-toggle="modal" data-target="#product-modal">
+          <i class="icon-rt-expand-outline zoom-in"></i>
         </div>
       {else}
         <img
@@ -72,8 +72,6 @@
                 alt="{$product.name}"
               {/if}
               loading="lazy"
-              width="{$product.default_image.bySize.small_default.width}"
-              height="{$product.default_image.bySize.small_default.height}"
             >
           </div>
         {/foreach}

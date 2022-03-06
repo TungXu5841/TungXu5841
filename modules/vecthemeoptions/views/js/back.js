@@ -17,6 +17,24 @@ $(document).ready(function(){
 	     	$('.productp-layout'+value).show();
 	   };     
     });
+	//Button
+	var buttonSelector = $('select[name="button_border"]:selected').val();
+	if(buttonSelector == 'none'){
+		$('.button_border_width').hide();
+		$('.button_border_color').hide();
+		$('.button_border_colorh').hide();
+	}
+	$('select[name="button_border"]').change(function() {
+		if($(this).val() == 'none') {
+        	$('.button_border_width').hide();
+			$('.button_border_color').hide();
+			$('.button_border_colorh').hide();
+	   	}else{
+			$('.button_border_width').show();
+			$('.button_border_color').show();
+			$('.button_border_colorh').show();
+	   	}     
+    });
 	//Category desciption
 	var cateDesc = $('input[name="category_description"]:checked').val();
 	if(cateDesc == 'hide' || typeof(cateDesc) == 'undefined'){
@@ -66,8 +84,6 @@ $(document).ready(function(){
 	   		$('.product_custom_width').show();
 	   	}     
     });
-
-
     //Color pciker
   
     var pickrComponents = {
@@ -89,7 +105,13 @@ $(document).ready(function(){
 	};
 	const parray = [
 		'g_main_color',
-		'g_title_font_color',
+		'g_body_font_color',
+		'button_background',
+		'button_text',
+		'button_border_color',
+		'button_backgroundh',
+		'button_texth',
+		'button_border_colorh',
 		'sticky_background',
 		'ptitle_color',
 		'grid_name_color',

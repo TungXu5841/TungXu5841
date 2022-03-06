@@ -76,12 +76,6 @@ class VecThemeoptions extends Module implements WidgetInterface
         Configuration::updateValue($this->name . 'g_body_gfont_name', '"Rubik", sans-serif');
         Configuration::updateValue($this->name . 'g_body_font_size', 14);
         Configuration::updateValue($this->name . 'g_body_font_color', '#666666');
-        Configuration::updateValue($this->name . 'g_title_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-        Configuration::updateValue($this->name . 'g_title_gfont_name', '"Rubik", sans-serif');
-        Configuration::updateValue($this->name . 'g_title_font_size', 24);
-        Configuration::updateValue($this->name . 'g_title_font_color', '#253237');
-        Configuration::updateValue($this->name . 'g_title_font_transform', 2);
-        Configuration::updateValue($this->name . 'g_title_font_size_column', 20);
 		//header
 		Configuration::updateValue($this->name . 'header_sticky', 1);
         // Product
@@ -374,8 +368,6 @@ class VecThemeoptions extends Module implements WidgetInterface
         $body_font_family = Configuration::get($this->name . 'g_body_gfont_name');
         $body_font_size = Configuration::get($this->name . 'g_body_font_size');
         $body_font_color = Configuration::get($this->name . 'g_body_font_color');
-        $body_link_color = Configuration::get($this->name . 'g_a_color');
-        $body_link_colorh = Configuration::get($this->name . 'g_a_colorh');
         $css .= 'body{
             font-family: '.$body_font_family.';
             font-size: '.$body_font_size.'px;
@@ -384,24 +376,45 @@ class VecThemeoptions extends Module implements WidgetInterface
          $css .= '{
             font-size: '.$body_font_size.'px;
         }';
-        $title_block_font_family = Configuration::get($this->name . 'g_title_gfont_name');
-        $title_block_font_size = Configuration::get($this->name . 'g_title_font_size');
-        $title_block_font_color = Configuration::get($this->name . 'g_title_font_color');
-        $title_block_font_tranform = $this->convertTransform(Configuration::get($this->name . 'g_title_font_transform'));
-        $title_block_font_size_column = Configuration::get($this->name . 'g_title_font_size_column');
-        $css .='.pos_title h2{
-            font-family: '.$title_block_font_family.';
-            font-size: '.$title_block_font_size.'px;
-            color: '.$title_block_font_color.';
-            text-transform: '.$title_block_font_tranform.';
-        }';
-        $css .= '.pos_title_column h2{  
-            font-size: '.$title_block_font_size_column.'px;
-        }';
-        $button_color = Configuration::get($this->name . 'g_button_color');
-        $button_colorh = Configuration::get($this->name . 'g_button_colorh');
-        $button_bgcolor = Configuration::get($this->name . 'g_button_bgcolor');
-        $button_bgcolorh = Configuration::get($this->name . 'g_button_bgcolorh');
+       
+        $button_color = Configuration::get($this->name . 'button_color');
+        $button_colorh = Configuration::get($this->name . 'button_colorh');
+        $button_border = Configuration::get($this->name . 'button_border');
+        $button_border_width = Configuration::get($this->name . 'button_border_width');
+        $button_border_color = Configuration::get($this->name . 'button_border_color');
+        $button_border_colorh = Configuration::get($this->name . 'button_border_colorh');
+        $button_background = Configuration::get($this->name . 'button_background');
+        $button_backgroundh = Configuration::get($this->name . 'button_backgroundh');
+        if($button_color || $button_background || ($button_border != 'none')){
+            $css .= '.btn-primary{';
+                if($button_color){
+                    $css .= 'color: ' . $button_color .';';
+                }
+                if($button_background){
+                    $css .= 'background: ' . $button_background .';';
+                }
+                if($button_border != 'none'){
+                    $css .= 'border-style: ' . $button_border .';';
+                }
+                if($button_border_width){
+                    $css .= 'border-width: ' . $button_border_width .'px;';
+                }
+                if($button_border_color){
+                    $css .= 'border-color: ' . $button_border_color .';';
+                }
+            $css .= '}';
+            $css .= '.btn-primary:hover{';
+                if($button_colorh){
+                    $css .= 'color: ' . $button_colorh .';';
+                }
+                if($button_backgroundh){
+                    $css .= 'background: ' . $button_backgroundh .';';
+                }
+                if($button_border_colorh){
+                    $css .= 'border-color: ' . $button_border_colorh .';';
+                }
+            $css .= '}';
+        }
         //header
         $sticky_header_bg = Configuration::get($this->name . 'sticky_background');
         $css .= '.sticky-inner{  
@@ -592,9 +605,7 @@ class VecThemeoptions extends Module implements WidgetInterface
 		}
         $body_font_family = Configuration::get($this->name . 'g_body_gfont_url');
 		if($body_font_family) $this->context->controller->registerStylesheet('vecthemeoptions-body-fonts', $body_font_family,['server' => 'remote']);
-		$title_font_family = Configuration::get($this->name . 'g_title_gfont_url');
-		if($body_font_family && $title_font_family != $body_font_family)$this->context->controller->registerStylesheet('vecthemeoptions-title-fonts', $title_font_family,['server' => 'remote']);
-        $body_class = '';
+		$body_class = '';
         if(Module::isInstalled('posquickmenu') && Module::isEnabled('posquickmenu')){
             $body_class  = 'has-quickmenu';
         }

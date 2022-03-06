@@ -880,6 +880,10 @@
 											.trigger('change.select2')
 										;
 									</script>
+								{elseif $input.type == 'hr'}
+									<div class="form-group hr-type">
+									<hr></hr>
+									</div>
 								{elseif $input.type == 'posthemes'}
 								<div class="form-group">
 									<div class="row">

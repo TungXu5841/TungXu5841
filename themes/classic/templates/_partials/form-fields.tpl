@@ -22,7 +22,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-{if $field.type == 'hidden'}
+ {if $field.type == 'hidden'}
 
   {block name='form_field_item_hidden'}
     <input type="hidden" name="{$field.name}" value="{$field.value}">
@@ -30,13 +30,18 @@
 
 {else}
 
-  <div class="form-group row {if !empty($field.errors)}has-error{/if}">
-    <label class="col-md-2 form-control-label{if $field.required} required{/if}" for="field-{$field.name}">
+  <div class="form-group {if !empty($field.errors)}has-error{/if} cl-{$field.name}">
+    <label class="form-control-label{if $field.required} required{/if}{if $field.value || $field.type == 'select'} has-value{/if}" for="field-{$field.name}">
       {if $field.type !== 'checkbox'}
         {$field.label}
+        {block name='form_field_comment'}
+          {if $field.required}
+           <span class="field-require">*</span>
+          {/if}
+        {/block}
       {/if}
     </label>
-    <div class="col-md-8{if ($field.type === 'radio-buttons')} form-control-valign{/if}">
+    <div class="{if ($field.type === 'radio-buttons')} form-control-valign{/if}">
 
       {if $field.type === 'select'}
 
@@ -142,7 +147,7 @@
               title="{l s='At least 5 characters long' d='Shop.Forms.Help'}"
               aria-label="{l s='Password input of at least 5 characters' d='Shop.Forms.Help'}"
               type="password"
-              {if $field.autocomplete}autocomplete="{$field.autocomplete}"{/if}
+              autocomplete="new-password"
               value=""
               pattern=".{literal}{{/literal}5,{literal}}{/literal}"
               {if $field.required}required{/if}
@@ -170,7 +175,7 @@
             name="{$field.name}"
             type="{$field.type}"
             value="{$field.value}"
-            {if $field.autocomplete}autocomplete="{$field.autocomplete}"{/if}
+            {if $field.autocomplete}autocomplete="{if $field.type == 'email'}off{else}{$field.autocomplete}{/if}"{/if}
             {if isset($field.availableValues.placeholder)}placeholder="{$field.availableValues.placeholder}"{/if}
             {if $field.maxLength}maxlength="{$field.maxLength}"{/if}
             {if $field.required}required{/if}
@@ -188,14 +193,6 @@
         {include file='_partials/form-errors.tpl' errors=$field.errors}
       {/block}
 
-    </div>
-
-    <div class="col-md-2 form-control-comment">
-      {block name='form_field_comment'}
-        {if (!$field.required && !in_array($field.type, ['radio-buttons', 'checkbox']))}
-         {l s='Optional' d='Shop.Forms.Labels'}
-        {/if}
-      {/block}
     </div>
   </div>
 

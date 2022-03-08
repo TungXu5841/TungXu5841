@@ -107,3 +107,87 @@
 #thumbnails .slick-initialized .slick-slide{
     padding: 0 5px;
 }
+
+/***** Checkout *****/
+/* Form fields */
+.form-group {
+  position: relative;
+  clear: both;
+}
+.form-group .form-control-label {
+  position: absolute;
+  left: 12px;
+  top: 0px;
+  z-index: 10;
+  font-weight: 400;
+  color: #999;
+  transition: 0.3s;
+}
+.form-group .form-control-label.has-value{
+  top: -10px;
+  background-color: #fff;
+  padding: 0 5px;
+  font-size: 10px;
+  color: #333;
+}
+.form-group .form-control {
+  background-color: #fff;
+  line-height: 28px;
+  border-color: #bbb;
+}
+.form-group .form-control:focus{
+  border-color: var(--hovercolor);
+}
+.field-require{
+  color: red;
+}
+/* checkout steps */
+#checkout-personal-information-step ul.nav-inline{
+  text-align: center;
+}
+#customer-form, #login-form, #delivery-address{
+  max-width: 600px;
+  margin: auto;
+}
+.cl-firstname , .cl-lastname{
+  width: 48%;
+  display: inline-block;
+}
+.cl-firstname {
+  margin-right: 4%;
+}
+.cl-lastname{
+  margin-left: -4px;
+}
+.cl-firstname .form-control-comment, .cl-lastname .form-control-comment{
+  display: none;
+}
+.cl-id_gender .form-control-label{
+  position: static;
+}
+
+/* Fix  for birthday field*/
+#field-birthday::-webkit-input-placeholder {
+  color: #fff !important; 
+}
+#field-birthday:-moz-placeholder {
+  color: #fff !important;  
+}
+#field-birthday::-moz-placeholder {
+  color: #fff !important;  
+}
+#field-birthday:-ms-input-placeholder {  
+  color: #fff !important;  
+}
+label.has-value + div > #field-birthday::-webkit-input-placeholder {
+  color: #aaa !important; 
+}
+label.has-value + div > #field-birthday:-moz-placeholder {
+  color: #aaa !important;  
+}
+label.has-value + div > #field-birthday::-moz-placeholder {
+  color: #aaa !important;  
+}
+label.has-value + div > #field-birthday:-ms-input-placeholder {  
+  color: #aaa !important;  
+}

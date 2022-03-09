@@ -23,7 +23,9 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {extends file=$layout}
-
+{block name='page_title'}
+	{l s='Shopping Cart' d='Shop.Theme.Checkout'}
+{/block}
 {block name='content'}
 
   <section id="main">
@@ -34,18 +36,15 @@
 
         <!-- cart products detailed -->
         <div class="card cart-container">
-          <div class="card-block">
-            <h1 class="h1">{l s='Shopping Cart' d='Shop.Theme.Checkout'}</h1>
-          </div>
-          <hr class="separator">
           {block name='cart_overview'}
             {include file='checkout/_partials/cart-detailed.tpl' cart=$cart}
           {/block}
         </div>
 
         {block name='continue_shopping'}
-          <a class="label" href="{$urls.pages.index}">
-            <i class="material-icons">chevron_left</i>{l s='Continue shopping' d='Shop.Theme.Actions'}
+          <a class="label btn btn-primary" href="{$urls.pages.index}">
+            <i class="icon-rt-arrow-left-solid"></i>
+            {l s='Continue shopping' d='Shop.Theme.Actions'}
           </a>
         {/block}
 

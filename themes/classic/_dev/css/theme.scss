@@ -42,9 +42,19 @@
 		width: 1320px;
 	}
 }
-button.continue,
-.ps-shown-by-js button {
+.flex-layout {
+	@include flex;
+}
+.space-between {
+	justify-content: space-between;
+}
+.center-vertical {
+	align-items: center;
+}
+.ps-shown-by-js .btn,
+.btn.float-xs-right {  
 	width: 100%;
+	float: none !important; 
 }
 #js-checkout-summary {
 	background: transparent;
@@ -54,8 +64,12 @@ button.continue,
 		align-items: center;
 		margin-bottom: 0.9375rem;
 		> strong {
-			font-size: 1.125rem;
-			text-transform: capitalize;
+			font-size: .9375rem;
+			text-transform: uppercase;
+			font-weight: $headings-font-weight;
+		}
+		.js-show-details {
+			text-transform: uppercase;
 		}
 	}
 	#cart-summary-product-list {
@@ -64,33 +78,71 @@ button.continue,
 		}
 	}
 }
-#checkout {
+#cart,#checkout {
+	.page-title-wrapper {
+		margin-bottom: 0;
+	}
 	#content {
-		> .row {
-			display: -ms-flexbox;
-			display: flex;
-			-ms-flex-wrap: wrap;
-			flex-wrap: wrap;
-			.cart-grid-right {
-				&:after {
-					content: "";
-					display: block;
-					width: 300%;
-					position: absolute;
-					top: 0;
-					left: 0;
-					bottom: 0;
-					background: #fafafa;
-					z-index: -1;
-					-webkit-box-shadow: 0 -1px 0 #e1e1e1 inset;
-					box-shadow: 0 -1px 0 #e1e1e1 inset;
-					background-position: left top;
-					-webkit-box-shadow: 1px 0 0 #e1e1e1 inset;
-					box-shadow: 1px 0 0 #e1e1e1 inset;
-				}
-			}
+		
+	}
+}
+.row { 
+	.cart-grid-body ,.cart-grid-right {
+		padding-top: 3.75rem; 
+	}
+	.cart-grid-right {
+		&:after {
+			content: "";
+			display: block;
+			width: 300%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			background: #f6f6f6;
+			z-index: -1;
+			-webkit-box-shadow: 0 -1px 0 #e1e1e1 inset;
+			box-shadow: 0 -1px 0 #e1e1e1 inset;
+			background-position: left top;
+			-webkit-box-shadow: 1px 0 0 #e1e1e1 inset;
+			box-shadow: 1px 0 0 #e1e1e1 inset;
+		}
+		.cart-summary {
+			background: transparent;
 		}
 	}
+}
+.customer-account-content {
+	> h4 {
+		font-size: 1.125rem;
+		text-transform: uppercase;
+		border-bottom: 1px solid $border-gray;
+		padding-bottom: .625rem;
+		margin-bottom: 1.875rem;
+	}
+	.container {
+		padding: 0; 
+	}
+	.psgdprinfo17 {
+		margin-top:  0;
+		#exportDataToCsv,
+		#exportDataToPdf {
+			margin-top: .625rem;
+		}
+	}
+	.return-to-home {
+		margin-top: 1.875rem;
+	}
+}
+#order-confirmation {
+	.card {
+		border: 1px solid #ddd;
+	}
+	.order-confirmation-table {
+		border-top: 1px solid $border-gray;
+		padding-top: .625rem;
+	}
+	
 }
 //compare wishlist
 .box_button {
@@ -117,9 +169,11 @@ button.continue,
 }
 //productcoments
 #new_comment_tab_btn {
-	color: $gray-dark;
+	color: var(--buttoncolor);
+	background: var(--buttonbackground);
 	&:hover {
-		color: $white;
+		background: var(--buttonhoverbackground);
+        color: var(--buttonhovercolor);
 	}
 }
 #id_new_comment_form {
@@ -156,4 +210,69 @@ button.continue,
 			text-align: center;
 		}
 	}
+}
+.reviews-header {
+	padding-bottom: .9375rem;
+	.rating_aggregate {
+		@include flex;
+		align-items: center;
+		> * {
+			&:not(:last-child) {
+				margin-right: .9375rem;
+			}
+		}
+	}
+}
+.reviews-content {
+	.comment {
+		border-top: 1px solid $border-gray;
+		padding-top: 1.5625rem;
+	}
+}
+.hook-reviews,
+#product_comments_block_extra,
+.reviews-header {
+    .star_content {
+        display: inline-block;
+        position: relative;
+        line-height: 1;
+		text-align: left; 
+        &::before {
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            -webkit-font-smoothing: antialiased;
+            color: #d0d0d0;
+            font-family: $font-icon;
+            font-size: 16px;
+            letter-spacing: 1px;
+            line-height: 1;
+            content: '\e915''\e915''\e915''\e915''\e915';
+            display: block;
+            font-style: normal;
+            font-weight: 400;
+            speak: none;
+        }
+        .rating_star {
+            display: inline-block;
+            overflow: hidden;
+            &:before {
+                position: relative;
+                z-index: 2;
+                -webkit-font-smoothing: antialiased;
+                color: #f9b223;
+                font-family: $font-icon;
+                font-size: 16px;
+                letter-spacing: 1px;
+                line-height: 1;
+                content: '\e915''\e915''\e915''\e915''\e915';
+                display: block;
+                font-style: normal;
+                font-weight: 400;
+                speak: none;
+            }
+        }
+    }
 }

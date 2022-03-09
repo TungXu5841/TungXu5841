@@ -23,7 +23,9 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {extends file=$layout}
-
+{block name='page_title'}
+	{l s='Checkout' d='Shop.Theme.Checkout'}
+{/block}
 {block name='header'}
   {include file='checkout/_partials/header.tpl'}
 {/block}

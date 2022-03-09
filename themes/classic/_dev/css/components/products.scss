@@ -33,6 +33,13 @@
       padding: 1.25rem;
       margin-bottom: 20px; 
       border: 1px solid $border-gray; 
+      > h3,> h4 {
+        border-bottom: 1px solid $border-gray;
+        font-size: 1.0625rem;
+        text-transform: uppercase;
+        padding-bottom: .625rem;
+        margin-bottom: 1.875rem; 
+      }
     }
     .inner-specific {
       @media (min-width: 992px) {
@@ -42,13 +49,6 @@
       grid-template-columns: auto 28.125rem; 
       }
     }  
-    h3,h4 {
-      border-bottom: 1px solid $border-gray;
-      font-size: 1.0625rem;
-      text-transform: uppercase;
-      padding-bottom: .625rem;
-      margin-bottom: 1.875rem; 
-    }
   }
   #content {
     position: relative;
@@ -186,7 +186,6 @@
               @include vec-transition(300ms);
             }
           }
-          &.slick-current.is-active,
           &.is-active,
           &:hover {
             .thumb-item {
@@ -227,6 +226,10 @@
     z-index: 1;
     opacity: 0;
     visibility: hidden;
+    &:hover {
+      background: var(--buttonbackground);
+      color: var(--buttoncolor);
+    }
     &:before {
       font-family: $font-icon;
       font-size: 12px;
@@ -289,7 +292,7 @@
   ul,
   ol {
     padding-left: 15px;
-    list-style-position: circle;
+    list-style: circle;
 
     li {
       font-size: 0.9375rem;
@@ -492,7 +495,17 @@
     }
   }
 }
-
+.h1.namne_details {
+  margin-bottom: 1rem;
+}
+.top-details {
+  line-height: 1.2;
+  .product-manufacturer {
+    .manufacturer-logo {
+      float: right;
+    }
+  }
+}
 .product-prices {
   margin: $medium-space 0;
   > div {
@@ -543,9 +556,9 @@
     margin-left: $small-space;
     font-size: .8125rem;
     font-weight: 500;
-    color: $gray-dark;
+    background: var(--buttonbackground);
+    color: var(--buttoncolor);
     text-transform: uppercase;
-    background: $brand-primary;
   }
 }
 
@@ -707,6 +720,11 @@
 }
 
 #product-modal {
+  @media (min-width: 576px) {
+    .modal-dialog {
+      max-width: 700px;
+    }
+  }
   .modal-content {
     padding: 0;
     background: transparent;
@@ -714,82 +732,53 @@
 
     .modal-body {
       display: flex;
-      margin-left: -30%;
-
-      .product-cover-modal {
+      padding: 0;
+      > figure {
         background: $white;
+        padding: 1.875rem; 
       }
-
-      .image-caption {
-        width: 800px;
-        padding: 0.625rem 1.25rem;
-        background: $white;
-        border-top: $gray-light 1px solid;
-
-        p {
-          margin-bottom: 0;
+    }
+  }
+  .thumbnails {
+    .product-images-modal {
+      position: relative;
+      &:hover {
+        .slick-arrow {
+          opacity: 1;
+          visibility: visible;
         }
       }
-
-      .thumbnails {
-        position: relative;
-      }
-
-      .mask {
-        position: relative;
-        z-index: 1;
-        max-height: 49.38rem;
-        margin-top: 2.188rem;
-        overflow: hidden;
-
-        &.nomargin {
-          margin-top: 0;
+      .slick-slide {
+        padding: 0 5px;
+        .thumb-container {
+          img {
+            cursor: pointer;
+            border: 2px solid $border-gray;
+            width: 100%;
+            @include vec-transition(300ms);
+          }
         }
-      }
-
-      .product-images {
-        margin-left: $extra-large-space;
-
-        img {
-          width: 9.25rem;
-          cursor: pointer;
-          background: $white;
-
-          &:hover {
-            border: $brand-primary 3px solid;
+        &.slick-current, 
+        &.is-active, 
+        &:hover {
+          .thumb-container {
+            img {
+              border-color: var(--hovercolor);
+            }
           }
         }
       }
-
-      .arrows {
-        position: absolute;
-        top: 0;
-        right: $large-space;
-        z-index: 0;
-        width: 100%;
-        height: 100%;
-        color: $white;
-        text-align: center;
-        cursor: pointer;
-
-        .arrow-up {
-          position: absolute;
-          top: -2rem;
-          opacity: 0.2;
-        }
-
-        .arrow-down {
-          position: absolute;
-          bottom: -2rem;
-        }
-
-        i {
-          display: inline;
-          font-size: 6.25rem;
+      .slick-arrow {
+        width: 1.875rem;
+        height: 1.875rem;
+        &:before {
+          font-family: $font-icon;
+          font-size: 10px;
         }
       }
     }
   }
+  
 }
 
 #blockcart-modal {
@@ -1012,8 +1001,12 @@
       background: $gray-light;
 
       &:nth-of-type(even) {
-        background: $gray-lighter;
+        background: $white;
       }
+    }
+    dd.value {
+      font-weight: 400;
+      color: $gray-dark;
     }
   }
 }

@@ -30,6 +30,7 @@
   </h4>
 {/block}
 {block name='page_content_content'}
+  <div class="row">
   {foreach $customer.addresses as $address}
     <div class="col-lg-4 col-md-6 col-sm-6">
     {block name='customer_address'}
@@ -37,6 +38,7 @@
     {/block}
     </div>
   {/foreach}
+  </div>
   <div class="clearfix"></div>
   <div class="addresses-footer">
     <a href="{$urls.pages.address}" data-link-action="add-address">

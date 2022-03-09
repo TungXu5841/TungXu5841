@@ -38,16 +38,16 @@
 			{if isset($product.id_manufacturer)}
 				<div class="manufacturer"><a href="{url entity='manufacturer' id=$product.id_manufacturer }">{Manufacturer::getnamebyid($product.id_manufacturer)}</a></div>
 			{/if}
+			{block name='product_reviews'}
+				<div class="hook-reviews">
+				{hook h='displayProductListReviews' product=$product}
+				</div>
+			{/block}
 			{block name='product_name'}
 				<h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:50:'...'}</a></h3> 
 			{/block}
 			<div class="inner-content">
 				<div class="left-content">
-				{block name='product_reviews'}
-				<div class="hook-reviews">
-				{hook h='displayProductListReviews' product=$product}
-				</div>
-			   {/block}
 				{block name='product_price_and_shipping'}
 					{if $product.show_price}
 					<div class="product-price-and-shipping">

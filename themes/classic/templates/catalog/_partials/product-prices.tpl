@@ -22,7 +22,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-{if $vectheme.information_layout == '1'}
+  <div class="top-details">
   {block name='product_reference'}
     {if isset($product_manufacturer->id)}
       <div class="product-manufacturer">
@@ -31,7 +31,7 @@
             <img src="{$manufacturer_image_url}" class="img img-thumbnail manufacturer-logo" alt="{$product_manufacturer->name}" loading="lazy" width="98" height="50">
           </a>
         {else}
-          <label class="label">{l s='Brand' d='Shop.Theme.Catalog'}</label>
+          <label class="label">{l s='Brand' d='Shop.Theme.Catalog'}</label>: 
           <span>
             <a href="{$product_brand_url}">{$product_manufacturer->name}</a>
           </span>
@@ -40,7 +40,7 @@
     {/if}
     {if isset($product.reference_to_display) && $product.reference_to_display neq ''}
       <div class="product-reference">
-        <label class="label">{l s='Reference' d='Shop.Theme.Catalog'} </label>
+        <label class="label">{l s='Reference' d='Shop.Theme.Catalog'} </label>: 
         <span>{$product.reference_to_display}</span>
       </div>
     {/if}
@@ -48,7 +48,7 @@
   {block name='product_quantities'}
     {if $product.show_quantities}
       <div class="product-quantities">
-        <label class="label">{l s='In stock' d='Shop.Theme.Catalog'}</label>
+        <label class="label">{l s='In stock' d='Shop.Theme.Catalog'}</label>: 
         <span data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{$product.quantity} {$product.quantity_label}</span>
       </div>
     {/if}
@@ -69,7 +69,7 @@
     </div>
   {/block}
 
-{/if}
+</div>
 {if $product.show_price}
   <div class="product-prices js-product-prices">
     {block name='product_discount'}

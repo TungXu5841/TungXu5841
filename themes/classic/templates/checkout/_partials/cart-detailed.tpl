@@ -30,14 +30,14 @@
 		  <div class="row">
 			<!--  product left content: image-->
 			<div class="product-line-grid-left col-md-5 col-xs-6">
-			  {l s='Item' d='Shop.Theme.Checkout'}
+			  <h4>{l s='Item' d='Shop.Theme.Checkout'}</h4>
 			</div>
 			<!--  product left body: description -->
 			<div class="product-line-grid-right product-line-actions col-md-7 col-xs-6">
 			  <div class="row">
-				<div class="col-md-4">{l s='Price' d='Shop.Theme.Checkout'}</div>
-				<div class="col-md-3">{l s='Qty' d='Shop.Theme.Checkout'}</div>
-				<div class="col-md-4">{l s='Total price' d='Shop.Theme.Checkout'}</div>
+				<div class="col-md-4"><h4>{l s='Price' d='Shop.Theme.Checkout'}</h4></div>
+				<div class="col-md-3"><h4>{l s='Qty' d='Shop.Theme.Checkout'}</h4></div>
+				<div class="col-md-4"><h4>{l s='Total price' d='Shop.Theme.Checkout'}</h4></div>
 				<div class="col-md-1"><i class="fa fa-trash-o invisible" aria-hidden="true"></i></div>
 			  </div>
 			</div>

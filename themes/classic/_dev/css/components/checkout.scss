@@ -33,8 +33,8 @@ body#checkout {
 
       .cart-summary-subtotals-container {
         padding: 1rem 0;
-        border-top: 1px solid $border-gray;
-        border-bottom: 1px solid $border-gray;
+        border-top: 1px solid #afafaf57;
+        border-bottom: 1px solid #afafaf57;
 
         .cart-summary-line {
           margin-bottom: 0;
@@ -46,11 +46,11 @@ body#checkout {
 
           .value {
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: $headings-font-weight;
           }
 
           &:not(:last-child) {
-            margin-bottom: 0.825rem;
+            margin-bottom: .625rem;
           }
         }
       }
@@ -88,24 +88,25 @@ body#checkout {
   section.checkout-step {
     padding: 0.625rem 0;
     background-color: $white;
-
+    max-width: 800px;
     &:last-child {
       border: 0;
     }
 
     .step-title {
-      padding-bottom: 1.25rem; 
+      padding-bottom: 1.25rem;  
       margin-bottom: 0;
       font-size: 1.125rem;
-      font-weight: 700;
-      text-transform: none;
+      font-weight: $headings-font-weight;
+      text-transform: uppercase;
       cursor: pointer;
       border-bottom: 1px solid $border-gray;
     }
 	.nav-link {
 	  font-size: 1rem;
-	  font-weight: 700;
-	    &:hover,
+	  font-weight: $headings-font-weight;
+    color: $gray-dark;
+	  &:hover,
 		&.active {
 		  text-decoration:underline;
 		}
@@ -189,11 +190,12 @@ body#checkout {
         height: 33px;
         margin-right: 0.65rem;
         font-size: 1rem;
-        color: $main-color;
         vertical-align: middle;
-        background-color: $current-step-color;
+        background: var(--buttonbackground);
+        color: var(--buttoncolor);
         border: none;
         border-radius: 50%;
+        vertical-align: 2px;
       }
     }
 
@@ -201,19 +203,16 @@ body#checkout {
       h1 {
         .done {
           display: inline-block;
-		  padding-left: 0;
+		      padding-left: 0;
+          vertical-align: -4px;
         }
-
-        .step-number {
-          display: none;
-        }
-
         .step-edit {
           display: block;
           float: right;
           margin-right: 0.125rem;
           color: $main-color;
           cursor: pointer;
+          line-height: 33px; 
         }
       }
 
@@ -291,8 +290,10 @@ body#checkout {
       margin-right: 1rem;
       font-size: 1rem;
       vertical-align: middle;
-      border: 1px solid $gray-darker;
+      background-color: $current-step-color;
+      color: $white;
       border-radius: 50%;
+      vertical-align: 2px;
     }
 
     .address-selector {
@@ -305,34 +306,46 @@ body#checkout {
     .address-item {
       flex: 0 0 49%;
       margin-bottom: $small-space;
-      background: $gray-lighter;
-      border: 3px solid transparent;
+      background: $white;
+      border: 1px solid $border-gray;
 
       > header {
-        min-height: 11.7rem;
+        min-height: 13.125rem;
       }
 
       &.selected {
         background: $white;
-        border: $brand-primary 3px solid;
+        border: var(--hovercolor) 1px solid;
+        hr {
+          border-top: var(--hovercolor) 1px solid;
+        }
+      }
+      .custom-radio {
+        margin-top: -2px; 
       }
     }
 
     .address-alias {
       display: inline-block;
       margin-bottom: 0.625rem;
-      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
     }
 
     .address {
       margin-left: 1.563rem;
-      font-weight: 500;
+      padding-top: 1.25rem;
+      margin-left: 1.563rem;
+      font-weight: 400;
+      border-top: 1px solid $border-gray;
+      line-height: 1.8;
     }
 
     .radio-block {
       padding: 0.9375rem;
       text-align: left;
       cursor: pointer;
+      display: block;
     }
 
     .custom-radio {
@@ -434,8 +447,6 @@ body#checkout {
     #invoice-address,
     #login-form {
       margin-top: 1.563rem;
-      margin-left: 0.3125rem;
-
       .form-control-label {
         text-align: left;
       }

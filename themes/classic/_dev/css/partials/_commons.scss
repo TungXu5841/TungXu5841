@@ -16,8 +16,8 @@ main {
   overflow: hidden; 
 }
 ul {
-  padding-left: 15px;
-  list-style: circle; 
+  list-style: none;   
+  padding-left: 0;
 }
 
 a{
@@ -27,7 +27,10 @@ a{
     text-decoration: none;
   }
 }
-
+img {
+  max-width: 100%;
+  height: auto;
+}
 p {
   font-size: .875rem;
   font-weight: 400;
@@ -41,10 +44,20 @@ button:focus{
 .btn:active:focus, 
 .btn:active.focus, 
 .btn.active:focus, 
-.btn.active.focus {
+.btn.active.focus,
+.btn-primary:active,
+.btn-secondary:active,
+.btn-tertiary:active,
+.btn-primary:active:hover,
+.btn-secondary:active:hover,
+.btn-tertiary:active:hover,
+.btn-primary.active,
+.btn-secondary.active, 
+.btn-tertiary.active {
 	outline:none; 
-	background: var(--hovercolor);
-	color: $white;
+	background: var(--buttonhoverbackground);
+	color: var(--buttonhovercolor);
+  border-color: var(--buttonhoverborder);
 }
 .dropdown-item:focus,
 .dropdown-item:hover {
@@ -92,39 +105,29 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: $gray-darker;
 }
+.btn,
 .btn-primary,
-.btn-secondary {
-  padding: 0.625rem 1.25rem; 
-  font-weight: 400;
-  text-transform: capitalize;
+.btn-secondary,
+.btn-tertiary {
+  padding: .7813rem 1.25rem; 
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: .875rem;
+  border: none;
+  background: var(--buttonbackground);
+  color: var(--buttoncolor);
+  border-color: var(--buttonborder);
   @include vec-transition(300ms); 
   &:hover {
-	 background: var(--hovercolor); 
-	 color: $white;
+    background: var(--buttonhoverbackground);
+    color: var(--buttonhovercolor);
+    border-color: var(--buttonhoverborder);
   }
-  .material-icons {
+  i {
     margin-right: $small-space;
+    vertical-align: -2px;
   }
 }
-
-.btn-tertiary {
-  @extend .btn-secondary;
-  padding: 0.25rem;
-  margin: 0.25rem 0;
-  font-size: $font-size-sm;
-  font-weight: 400;
-  color: $gray;
-  text-transform: lowercase;
-  background-color: #f7f7f7;
-  .material-icons {
-    font-size: $base-font-size;
-  }
-
-  &:hover {
-    border: $input-btn-border-width solid rgba(35, 35, 35, 0.2);
-  }
-}
-
 .btn-unstyle {
   padding: 0;
   text-align: inherit;
@@ -161,9 +164,9 @@ small.value {
 }
 
 .form-control {
-  padding: 0.5rem 1rem;
+  padding: .836rem 1rem;
   color: $gray;
-  background: $gray-light;
+  background: $white; 
   border: $input-btn-border-width solid $input-border-color;
   font-size: .8125rem; 
   &:focus {
@@ -172,6 +175,34 @@ small.value {
   }
 }
 
+.form-group {
+  position: relative;
+  clear: both;
+}
+.form-group .form-control-label {
+  position: absolute;
+  left: 12px;
+  top: 0px;
+  z-index: 10;
+  font-weight: 400;
+  color: #999;
+  transition: 0.3s;
+}
+.form-group .form-control-label.has-value{
+  top: -6px;
+  background-color: $white;
+  padding: 0 5px;
+  font-size: 12px;
+  color: $gray-dark;
+  line-height: 1;
+}
+
+.form-group .form-control:focus{
+  border-color: var(--hovercolor);
+}
+.field-require{
+  color: red;
+}
 .input-group {
   display: flex;
   .form-control:focus {
@@ -243,10 +274,10 @@ textarea {
 }
 
 .form-control-select {
-  height: 2.625rem;
+  height: 2.8125rem;
   padding: 0 0.5rem;
   background:
-    $gray-light
+    $white
     url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAPklEQVR4Ae3TwREAEBQD0V/6do4SXPZg7EsBhsQ8IEmSMOsiuEfg3gL3oXC7wK0bd1G4o8X9F4yIkyQfSrIByQBjp7QuND8AAAAASUVORK5CYII=")
     no-repeat scroll right 0.5rem center / 1.25rem 1.25rem;
   /* stylelint-disable */
@@ -254,7 +285,9 @@ textarea {
   -webkit-appearance: none;
   /* stylelint-enable */
 }
-
+select.form-control:not([size]):not([multiple]) {
+  height: 2.8125rem;
+}
 .form-control-valign {
   padding-top: 0.5rem;
 }
@@ -537,7 +570,6 @@ form {
 .btn.disabled:hover {
   color: $btn-disabled-color;
   background: $btn-disabled-background;
-  opacity: 1;
 }
 
 .alert-warning {
@@ -632,22 +664,29 @@ form {
   .modal-content {
     pointer-events: auto;
     width: 100%;
+    border-radius: 0;
   }
   .close {
     position: absolute;
-    right: -2.5rem;
-    top: -1.25rem;
+    right: 0;
+    top: 0;
     width: 1.875rem;
     height: 1.875rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 10px;
-    color: $white;
-    border: 1px solid $white; 
-    border-radius: 50%;
+    color: var(--buttoncolor);
+    background: var(--buttonbackground);
+    border: none;
+    z-index: 1;
+    opacity: 1;
+    &:hover {
+      color: var(--buttonhovercolor);
+      background: var(--buttonhoverbackground);
+    }
     i {
-      font-size: 1rem;
+      font-size: 1.375rem;
     }
   }
 }

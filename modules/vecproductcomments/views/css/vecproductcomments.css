@@ -84,7 +84,7 @@ div.star.star_on:after {
   content: "\e915";
    font-family: "vecthemes-icon";
   display: inline-block;
-  color: #fdd835;
+  color: #f9b223;
   font-weight:400;
   line-height:1;
   vertical-align:top;
@@ -94,7 +94,7 @@ div.star.star_hover:after {
   content: "\e915";
    font-family: "vecthemes-icon";
   display: inline-block;
-  color: #fdd835;
+  color: #f9b223;
   font-weight:400;
   line-height:1;
   vertical-align:top;
@@ -190,13 +190,13 @@ div.star a:hover {
   padding: 0;
   font-weight: normal;
   line-height: 1;
-  margin: 10px 0 0 0;
+  margin: 0 0 20px 0;
   display:flex;
   align-items: center;
   flex-wrap: wrap;
 }
 #product_comments_block_extra .comments_note {
-  margin: 0 25px 10px 0;
+  margin: 0 20px 0 0;
   display: inline-block;
 }
 
@@ -216,7 +216,7 @@ div.star a:hover {
   content: "\e915";
    font-family: "vecthemes-icon";
   display: inline-block;
-  color: #fdd835;
+  color: #f9b223;
   font-weight:400;
   line-height:1;
   vertical-align:top;
@@ -351,15 +351,6 @@ div.star a:hover {
 #product_comments_block_tab {
   margin: 0 0 20px 0;
 }
-#product_comments_block_tab div.comment {
-  margin: 0 0 14px;
-  padding-top: 14px;
-  border-top: 1px solid #ebebeb;
-}
-#product_comments_block_tab div.comment:first-child {
-  padding: 0;
-  border: none;
-}
 #product_comments_block_tab div.comment .comment_author {
   line-height: 1;
 }
@@ -410,7 +401,7 @@ div.star a:hover {
   content: "\e915";
    font-family: "vecthemes-icon";
   display: inline-block;
-  color: #fdd835;
+  color: #f9b223;
   font-weight:400;
   line-height: 1;
   vertical-align: top;
@@ -428,11 +419,6 @@ div.star a:hover {
 #product_comments_block_tab .comment_author_infos em {
   color: #adadad;
 }
-
-#product_comments_block_tab a:hover {
-  color: #ffffff;
-}
-
 .fl {
   float: left;
 }

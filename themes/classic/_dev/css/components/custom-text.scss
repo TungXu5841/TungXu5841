@@ -31,7 +31,6 @@
 }
 
 .page-content.page-cms {
-  padding: 1.25rem;
   text-align: justify;
   background: $white;
 
@@ -43,7 +42,7 @@
 
   ul {
     @extend p;
-    list-style: disc inside none;
+    list-style: circle inside none;
   }
 }
 

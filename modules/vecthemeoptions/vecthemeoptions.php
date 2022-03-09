@@ -361,9 +361,34 @@ class VecThemeoptions extends Module implements WidgetInterface
     {
         $css = '';
         $main_color = Configuration::get($this->name . 'g_main_color');
+        $button_color = Configuration::get($this->name . 'button_text');
+        $button_colorh = Configuration::get($this->name . 'button_texth');
+        $button_border = Configuration::get($this->name . 'button_border');
+        $button_border_width = Configuration::get($this->name . 'button_border_width');
+        $button_border_color = Configuration::get($this->name . 'button_border_color');
+        $button_border_colorh = Configuration::get($this->name . 'button_border_colorh');
+        $button_background = Configuration::get($this->name . 'button_background');
+        $button_backgroundh = Configuration::get($this->name . 'button_backgroundh');
+        if($button_border != 'none'){
+            $css .= '.btn, .btn-primary, .btn-secondary, .btn-tertiary {';
+                if($button_border != 'none'){
+                    $css .= 'border-style: ' . $button_border .';';
+                }
+                if($button_border_width){
+                    $css .= 'border-width: ' . $button_border_width .'px;';
+                }
+
+            $css .= '}';
+        }
         $css .='
          :root {  
-            --hovercolor: '.$main_color.'; 
+            --hovercolor: '.$main_color.';
+            --buttoncolor: '.$button_color.'; 
+            --buttonbackground: '.$button_background.'; 
+            --buttonborder: '.$button_border_color.'; 
+            --buttonhovercolor: '.$button_colorh.'; 
+            --buttonhoverbackground: '.$button_backgroundh.'; 
+            --buttonhoverborder: '.$button_border_colorh.';  
         }';
         $body_font_family = Configuration::get($this->name . 'g_body_gfont_name');
         $body_font_size = Configuration::get($this->name . 'g_body_font_size');
@@ -377,44 +402,6 @@ class VecThemeoptions extends Module implements WidgetInterface
             font-size: '.$body_font_size.'px;
         }';
        
-        $button_color = Configuration::get($this->name . 'button_color');
-        $button_colorh = Configuration::get($this->name . 'button_colorh');
-        $button_border = Configuration::get($this->name . 'button_border');
-        $button_border_width = Configuration::get($this->name . 'button_border_width');
-        $button_border_color = Configuration::get($this->name . 'button_border_color');
-        $button_border_colorh = Configuration::get($this->name . 'button_border_colorh');
-        $button_background = Configuration::get($this->name . 'button_background');
-        $button_backgroundh = Configuration::get($this->name . 'button_backgroundh');
-        if($button_color || $button_background || ($button_border != 'none')){
-            $css .= '.btn-primary{';
-                if($button_color){
-                    $css .= 'color: ' . $button_color .';';
-                }
-                if($button_background){
-                    $css .= 'background: ' . $button_background .';';
-                }
-                if($button_border != 'none'){
-                    $css .= 'border-style: ' . $button_border .';';
-                }
-                if($button_border_width){
-                    $css .= 'border-width: ' . $button_border_width .'px;';
-                }
-                if($button_border_color){
-                    $css .= 'border-color: ' . $button_border_color .';';
-                }
-            $css .= '}';
-            $css .= '.btn-primary:hover{';
-                if($button_colorh){
-                    $css .= 'color: ' . $button_colorh .';';
-                }
-                if($button_backgroundh){
-                    $css .= 'background: ' . $button_backgroundh .';';
-                }
-                if($button_border_colorh){
-                    $css .= 'border-color: ' . $button_border_colorh .';';
-                }
-            $css .= '}';
-        }
         //header
         $sticky_header_bg = Configuration::get($this->name . 'sticky_background');
         $css .= '.sticky-inner{  

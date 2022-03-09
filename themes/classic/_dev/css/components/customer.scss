@@ -85,8 +85,6 @@
 /*** Most of the customer accpunt pages ***/
 .page-customer-account {
   #content {
-    @include customer-area-box();
-
     .order-actions {
       a {
         padding: 0 0.125rem;
@@ -123,23 +121,26 @@
     font-size: $font-size-sm;
     color: $gray-darker;
     background: $white;
-
+    border: 1px solid $border-gray;
     .address-body {
       padding: 1rem;
 
       h4 {
-        font-size: $base-font-size;
-        font-weight: 700;
+        padding-bottom: 0.625rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border-bottom: 1px solid $border-gray;
       }
 
       address {
         min-height: 9rem;
+        margin: 0;
       }
     }
 
     .address-footer {
       padding: 0.5rem 1rem;
-      border-top: 1px solid $gray;
+      border-top: 1px solid $border-gray;
 
       a {
         margin-right: 0.5rem;
@@ -349,51 +350,6 @@
     margin-top: 0.75rem;
   }
 }
-
-/*** My account landing page ***/
-.page-my-account {
-  #content {
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-
-      a {
-        display: inline-block;
-        padding: 0 0.9375rem;
-        margin-bottom: 1.875rem;
-        font-size: $base-font-size;
-        font-weight: 700;
-        color: $gray;
-        text-align: center;
-        text-transform: uppercase;
-
-        span.link-item {
-          display: block;
-          height: 100%;
-          @include customer-area-base-box();
-        }
-
-        i {
-          display: block;
-          width: 100%;
-          padding-bottom: 3.4rem;
-          font-size: 2.6rem;
-          color: $gray-darker;
-        }
-
-        &:hover {
-          color: $gray-darker;
-
-          i {
-            color: $brand-primary;
-          }
-        }
-      }
-    }
-  }
-}
-
 /*** History page ***/
 #history {
   .orders {
@@ -457,7 +413,8 @@
     }
     &.active,
     &:hover {
-      background: var(--hovercolor);
+      background: var(--buttonbackground);
+      color: var(--buttoncolor); 
     }
   }
 }

@@ -33,9 +33,6 @@
        <div class="product-line-info">
          <a class="product_name" href="{$product.url}" data-id_customization="{$product.id_customization|intval}">{$product.name}</a>
        </div>
-
-       <br/>
-
        {foreach from=$product.attributes key="attribute" item="value"}
          <div class="product-line-info">
            <span class="label">{$attribute}:</span>
@@ -138,7 +135,7 @@
              </strong>
            </span>
          </div>
-         <div class="col-md-1 col-xs-2 text-xs-right">
+         <div class="col-md-1 col-xs-2 remove-cart">
            <div class="cart-line-product-actions">
              <a
                  class                       = "remove-from-cart"

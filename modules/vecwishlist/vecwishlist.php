@@ -57,7 +57,7 @@ class VecWishlist extends Module implements WidgetInterface
             && $this->registerHook('actionDeleteGDPRCustomer')
             && $this->registerHook('actionExportGDPRData')
             && $this->registerHook('actionProductDelete')
-            && $this->registerHook('displayHeader')
+            && $this->registerHook('header')
             && $this->registerHook('displayCustomerAccount')
 			&& $this->registerHook('displayWishlistHeader')
             && $this->registerHook('displayWishlistButton')
@@ -103,12 +103,13 @@ class VecWishlist extends Module implements WidgetInterface
 
         Media::addJsDef(array(
 			'wishListVar' => array(
-					'url' => $this->context->link->getModuleLink('vecwishlist', 'view', array(), null, null, null, true),
-					'actions' => $this->context->link->getModuleLink('vecwishlist', 'actions', array(), null, null, null, true),
-					'login' => $this->context->link->getModuleLink('vecwishlist', 'login', array(), null, null, null, true),
+					'login_url' => $this->context->link->getPageLink('my-account', true),
 					'ids' =>  $productsIds,
+                    'actions' => $this->context->link->getModuleLink('vecwishlist', 'actions', array(), null, null, null, true),
 					'alert' => ['add' => $this->l('Add to Wishlist'),
 								'view' => $this->l('Go to Wishlist')],
+                    'loggin_required_text' => $this->l('You have to login to use wishlist'),
+                    'loggin_text' => $this->l('Login'),
         )));
 		
     }
@@ -129,7 +130,7 @@ class VecWishlist extends Module implements WidgetInterface
         } elseif (preg_match('/^displayBeforeBodyClosingTag\d*$/', $hookName)) {
             $templateFile = 'module:' . $this->name . '/views/templates/hook/' . 'wishlist-modal.tpl';
 			$cacheId = 'mdWishList';
-        } elseif (preg_match('/^displayWishlistButton\d*$/', $hookName)) {
+        } elseif (preg_match('/^displayWishlistButton\d*$/', $hookName) || preg_match('/^displayAfterButtonCart\d*$/', $hookName)) {
             $templateFile = 'module:' . $this->name . '/views/templates/hook/' . 'wishlist-btn.tpl';
 			$cacheId = 'btnWishList|'.$configuration['smarty']->tpl_vars['product']->value['id_product'].'|'.$configuration['smarty']->tpl_vars['product']->value['id_product_attribute'];
 			
@@ -146,7 +147,6 @@ class VecWishlist extends Module implements WidgetInterface
         if ($hookName == null && isset($configuration['hook'])) {
             $hookName = $configuration['hook'];
         }
-		
 		return array(
 			'id_product_attribute' => $configuration['smarty']->tpl_vars['product']->value['id_product_attribute'],
 			'id_product' => $configuration['smarty']->tpl_vars['product']->value['id_product'],
@@ -187,4 +187,5 @@ class VecWishlist extends Module implements WidgetInterface
             }
         }
     }
+   
 }

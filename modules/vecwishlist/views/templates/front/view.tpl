@@ -33,17 +33,12 @@
 
 {block name='page_content_content'}
     {if isset($wlProducts) && $wlProducts}
-	 
-		{$imageType	= 'home_default'}
-
-		{if isset($opThemect.general_product_image_type_small) && $opThemect.general_product_image_type_small}
-			{$imageType = $opThemect.general_product_image_type_small}
-		{/if}	
+	 	
 	 	<div id="my_wishlist">
-	 		<div id="js-wishlist-table" class="wrapper-wishlist-table">
-				<div class="wishlist-table-actions" style="display: none;">
+	 		<div id="js-wishlist-table" class="wishlist-table-wrapper">
+				<div class="wishlist-table-actions">
 					<a href="javascript:void(0)" class="js-wishlist-remove-all">
-						<i class="las la-trash-alt"></i> {l s='Remove all products' mod='vecwishlist'}
+						<i class="icon-rt-close-outline"></i> {l s='Remove all products' mod='vecwishlist'}
 					</a>
 				</div>
 				<table class="shop_table_responsive shop_table">
@@ -53,7 +48,6 @@
 							<th class="product-thumbnail"></th>
 							<th class="product-name">{l s='Name' mod='vecwishlist'}</th>
 							<th class="product-w-price">{l s='Price' mod='vecwishlist'}</th>
-							<th class="product-stock">{l s='Stock' mod='vecwishlist'}</th>
 							<th class="product-button"></th>
 						</tr>
 					</thead>
@@ -65,26 +59,26 @@
 										<a href="javascript:void(0)" class="js-wishlist-remove btn-action-wishlist-remove js-wishlist-remove-{$product.id_product|intval}-{$product.id_product_attribute|intval}"
 											data-id-product="{$product.id_product|intval}"
 											data-id-product-attribute="{$product.id_product_attribute|intval}">
-											{l s='Remove' mod='vecwishlist'}
+											<i class="icon-rt-close-outline"></i>
 										</a>
 									</td>
 								{/if}
 								<td class="product-thumbnail">
 									<a class="product-image" href="{$product.url}" title="{$product.name}">
-									  <div class="img-placeholder {$imageType}">
+									  <div class="img-placeholder">
 										{if $product.default_image}
 											{$image = $product.default_image}
 										{else}
 											{$image = $urls.no_picture_image}
 										{/if}
 										<img
-											class="img-loader lazy-load" 
-											data-src="{$image.bySize.{$imageType}.url}"
-											src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+											class="lazy-load" 
+											data-src="{$image.bySize.home_default.url}"
+											src="{$image.bySize.home_default.url}" 
 											alt="{if !empty($image.legend)}{$image.legend}{else}{$product.name}{/if}"
 											title="{if !empty($image.legend)}{$image.legend}{else}{$product.name}{/if}" 
-											width="{$image.bySize.{$imageType}.width}"
-											height="{$image.bySize.{$imageType}.height}"
+											width="{$image.bySize.home_default.width}"
+											height="{$image.bySize.home_default.height}"
 										> 
 									  </div>
 									</a>  
@@ -109,50 +103,23 @@
 										{hook h='displayProductPriceBlock' product=$product type='weight'}
 									{/if}
 								</td>	
-								<td class="product-stock">
-									{if $product.show_availability && $product.availability_message}
-										{if $product.availability == 'available'}
-											<span class="type-available">
-										{elseif $product.availability == 'last_remaining_items'}
-											<span class="type-last-remaining-items">
-										{else}
-											<span class="type-out-stock">
-										{/if}
-											{$product.availability_message}
-											</span>
-									{/if}
-								</td>
 								<td class="product-button">
 									<div class="js-product-miniature" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
 										<form action="{$urls.pages.cart}" method="post">
-											 {if !$configuration.is_catalog && $product.add_to_cart_url && ($product.quantity > 0 || $product.allow_oosp)}
-												  {if !$product.id_product_attribute}
+											{if !$configuration.is_catalog}
+												{if ($product.quantity > 0 || $product.allow_oosp)}
 													<input type="hidden" name="token" value="{$static_token}">
-													<input type="hidden" name="id_product" value="{$product.id}">
-													<input type="number"
-														   name="qty"
-														   value="{$product.minimal_quantity}"
-														   class="hidden"
-														   min="{$product.minimal_quantity}"
-													>
-													<a 	href="javascript:void(0)" 
-														class="btn-action btn button add-to-cart" data-button-action="add-to-cart" 
+													<input type="hidden" name="id_product" value="{$product.id_product}">
+													<input type="hidden" name="id_product_attribute" value="{$product.id_product_attribute}">
+                                                	<input type="hidden" name="qty" value="{$product.minimal_quantity}">
+													<button class="btn btn-primary add-to-cart" data-button-action="add-to-cart" 
 														title="{l s='Add to cart' d='Shop.Theme.Actions'}">
 														{l s='Add to cart' d='Shop.Theme.Actions'}
-													</a>
-												  {else}
-													<a 	href="javascript:void(0)" 
-														class="btn-action btn button add-to-cart quick-view" data-link-action="quickview" 
-														title="{l s='Select options' d='Shop.Theme.Actions'}">
-														{l s='Select options' d='Shop.Theme.Actions'}
-													</a>       
-												  {/if}
-											  {else}
-												<a  href="{$product.url}" 
-													class="btn-action btn button add-to-cart" title="{l s='Discover' mod='nrtcompare'}">
-													{l s='Discover' mod='nrtcompare'}
-												</a>
-											  {/if}
+													</button>
+											  	{else}
+													<button class="btn-primary add-to-cart out-of-stock" title="{l s='Out of stock' mod='vecwishlist'}">{l s='Out of stock' mod='vecwishlist'}</button>
+											  	{/if}
+											{/if}
 										</form>
 									</div>	
 								</td>							
@@ -163,9 +130,9 @@
 				{if !$readOnly}
 					<h5>{l s='Share your wishlist' mod='vecwishlist'}</h5>
 					<div class="input-group">
-						<input class="form-control js-to-clipboard" readonly="readonly" type="url" value="{url entity='module' name='vecwishlist' relative_protocol=false controller='view' params=['token' => $token]}">
+						<input class="form-control js-to-copy" readonly="readonly" type="url" value="{url entity='module' name='vecwishlist' relative_protocol=false controller='view' params=['token' => $token]}">
 						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="button" id="wishlist-clipboard-btn" data-text-copied="{l s='Copied' mod='vecwishlist'}" data-text-copy="{l s='Copy' mod='vecwishlist'}">{l s='Copy' mod='vecwishlist'}</button>
+							<button class="btn btn-primary" type="button" id="wishlist-copy-btn" data-text-copied="{l s='Copied' mod='vecwishlist'}" data-text-copy="{l s='Copy' mod='vecwishlist'}">{l s='Copy' mod='vecwishlist'}</button>
 						</span>
 					</div>
 					{hook h='displayWishListShareButtons'}
@@ -181,7 +148,7 @@
 			</div>
 			<p class="return-to-home">
 				<a href="{$urls.pages.index}" class="btn btn-primary">
-					<i class="las la-reply"></i>
+					<i class="icon-rt-arrow-left-solid"></i>
 					{l s='Return to home' mod='vecwishlist'}
 				</a>
 			</p>
@@ -196,7 +163,7 @@
 			</div>
 			<p class="return-to-home">
 				<a href="{$urls.pages.index}" class="btn btn-primary">
-					<i class="las la-reply"></i>
+					<i class="icon-rt-arrow-left-solid"></i>
 					{l s='Return to home' mod='vecwishlist'}
 				</a>
 			</p>

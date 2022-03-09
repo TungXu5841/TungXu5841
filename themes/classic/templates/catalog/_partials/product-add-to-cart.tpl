@@ -56,11 +56,9 @@
           >
             {l s='Add to cart' d='Shop.Theme.Actions'}
           </button>
-        </div>
-		<div class="box_button">
-			{hook h='displayAfterButtonCart'}
-		</div>
-		<div class="buy-cart">
+          <div class="box_button">
+            {hook h='displayAfterButtonCart'}
+          </div>
           <button
             class="btn btn-primary buy-now"
             data-button-action="buy-now"
@@ -69,9 +67,10 @@
               disabled
             {/if}
           >
-           {l s='Buy now' d='Shop.Theme.Actions'}
+          {l s='Buy now' d='Shop.Theme.Actions'}
           </button>
-        </div>	
+        </div>
+        	
         {hook h='displayProductActions' product=$product}
       </div>
     {/block}

@@ -82,7 +82,7 @@ class WidgetsManager
             'slideshow',
             'product-grid',
             'product-carousel',
-            'product-box',
+            'product-sale',
             'product-tab',
             'call-to-action',
             'flip-box',
@@ -106,7 +106,8 @@ class WidgetsManager
             'language-selector',
             'currency-selector',
             'v-smartblog',
-            'promo'
+            'promo',
+            'wishlist'
         ];
         
         $build_widgets_filename[] = 'category-tree';

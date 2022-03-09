@@ -1854,6 +1854,69 @@ abstract class WidgetProductBase extends WidgetBase
         return $tpls;
     }
 
+    protected function getSaleProducts($source, $order_by, $order_dir, $limit, $id_category = 2, $products = [])
+    {
+        $tpls = [];
+        $limit = $limit ? $limit : 4;
+		$orderby = $order_by;
+		$orderway = $order_dir;
+
+		$id_lang = $this->context->language->id;
+
+		$front   = true;
+		if ( ! in_array( $this->context->controller->controller_type, array( 'front', 'modulefront' ) ) ) {
+			$front = false;
+		}
+        $translator = $this->context->getTranslator();
+
+		switch ($source) {
+			case 'all_products':
+                $translator = $this->context->getTranslator();
+                $query = new \PrestaShop\PrestaShop\Core\Product\Search\ProductSearchQuery();
+                $query->setResultsPerPage($limit <= 0 ? 8 : (int) $limit);
+                $query->setQueryType('prices-drop');
+
+                $searchProvider = new \PrestaShop\PrestaShop\Adapter\PricesDrop\PricesDropProductSearchProvider($translator);
+                $query->setSortOrder(new \PrestaShop\PrestaShop\Core\Product\Search\SortOrder('product', $order_by, $order_dir));
+
+                $result = $searchProvider->runQuery(new \PrestaShop\PrestaShop\Core\Product\Search\ProductSearchContext($this->context), $query);
+				$products = $result->getProducts();
+				break;
+            case 'cate_products':
+                $products = $this->getSaleProductInCategory((int) $this->context->language->id, 0, $limit, $orderby , $orderway, false, false, $id_category);	
+                break;
+			case 'select_products':
+				foreach ($products as &$product) {
+                    if ($product['id']) {
+                        $tpls[] = $this->getProduct($product['id']);
+                    }
+                }	
+                return $tpls;
+				break;
+		}
+
+		$assembler = new \ProductAssembler($this->context);
+        $presenterFactory = new \ProductPresenterFactory($this->context);
+        $presentationSettings = $presenterFactory->getPresentationSettings();
+        $presenter = new \PrestaShop\PrestaShop\Core\Product\ProductListingPresenter(
+            new \PrestaShop\PrestaShop\Adapter\Image\ImageRetriever($this->context->link),
+            $this->context->link,
+            new \PrestaShop\PrestaShop\Adapter\Product\PriceFormatter(),
+            new \PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever(),
+            $translator
+        );
+        $tpls = array();
+        if(!empty($products))
+        foreach ($products as $rawProduct) {
+            $tpls[] = $presenter->present(
+                $presentationSettings,
+                $assembler->assembleProduct($rawProduct),
+                $this->context->language
+            );
+        }
+        return $tpls;
+    }
+
     /**
      * Use this method to return the result of a product miniature template.
      *
@@ -2033,5 +2096,135 @@ abstract class WidgetProductBase extends WidgetBase
 
     public function renderPlainContent()
     {
+    }
+
+    public function getSaleProductInCategory(
+        $id_lang,
+        $page_number = 0,
+        $nb_products = 10,
+        $order_by = null,
+        $order_way = null,
+        $beginning = false,
+        $ending = false,
+        $id_category = 2
+    ) {
+        
+        if ($page_number < 0) {
+            $page_number = 0;
+        }
+        if ($nb_products < 1) {
+            $nb_products = 10;
+        }
+        if (empty($order_by) || $order_by == 'position') {
+            $order_by = 'price';
+        }
+        if (empty($order_way)) {
+            $order_way = 'DESC';
+        }
+        if ($order_by == 'id_product' || $order_by == 'price' || $order_by == 'date_add' || $order_by == 'date_upd') {
+            $order_by_prefix = 'product_shop';
+        } elseif ($order_by == 'name') {
+            $order_by_prefix = 'pl';
+        }
+        if (!\Validate::isOrderBy($order_by) || !\Validate::isOrderWay($order_way)) {
+            die(Tools::displayError());
+        }
+
+        $current_date = date('Y-m-d H:i:00');
+        $ids_product = $this->getProductIdByDate((!$beginning ? $current_date : $beginning), (!$ending ? $current_date : $ending));
+        $tab_id_product = array();
+        foreach ($ids_product as $product) {
+            if (is_array($product)) {
+                $tab_id_product[] = (int)$product['id_product'];
+            } else {
+                $tab_id_product[] = (int)$product;
+            }
+        }
+		
+        $front = true;
+        if (!in_array($this->context->controller->controller_type, array('front', 'modulefront'))) {
+            $front = false;
+        }
+
+        $sql_groups = '';
+        if (\Group::isFeatureActive()) {
+            $groups = \FrontController::getCurrentCustomerGroups();
+            $sql_groups = ' AND EXISTS(SELECT 1 FROM `'._DB_PREFIX_.'category_product` cp
+				JOIN `'._DB_PREFIX_.'category_group` cg ON (cp.id_category = cg.id_category AND cg.`id_group` '.(count($groups) ? 'IN ('.implode(',', $groups).')' : '= 1').')
+				WHERE cp.`id_product` = p.`id_product`)';
+        }
+
+        if (strpos($order_by, '.') > 0) {
+            $order_by = explode('.', $order_by);
+            $order_by = pSQL($order_by[0]).'.`'.pSQL($order_by[1]).'`';
+        }
+
+        $sql = '
+		SELECT
+			p.*, product_shop.*, stock.out_of_stock, IFNULL(stock.quantity, 0) as quantity, pl.`description`, pl.`description_short`, pl.`available_now`, pl.`available_later`,
+			IFNULL(product_attribute_shop.id_product_attribute, 0) id_product_attribute,
+			pl.`link_rewrite`, pl.`meta_description`, pl.`meta_keywords`, pl.`meta_title`,
+			pl.`name`, image_shop.`id_image` id_image, il.`legend`, m.`name` AS manufacturer_name,
+			DATEDIFF(
+				p.`date_add`,
+				DATE_SUB(
+					"'.date('Y-m-d').' 00:00:00",
+					INTERVAL '.(\Validate::isUnsignedInt(\Configuration::get('PS_NB_DAYS_NEW_PRODUCT')) ? \Configuration::get('PS_NB_DAYS_NEW_PRODUCT') : 20).' DAY
+				)
+			) > 0 AS new
+		FROM `'._DB_PREFIX_.'product` p
+		'.\Shop::addSqlAssociation('product', 'p').'
+		LEFT JOIN `'._DB_PREFIX_.'product_attribute_shop` product_attribute_shop
+			ON (p.`id_product` = product_attribute_shop.`id_product` AND product_attribute_shop.`default_on` = 1 AND product_attribute_shop.id_shop='.(int)$this->context->shop->id.')
+		'.\Product::sqlStock('p', 0, false, $this->context->shop).'
+		LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (
+			p.`id_product` = pl.`id_product`
+			AND pl.`id_lang` = '.(int)$id_lang.\Shop::addSqlRestrictionOnLang('pl').'
+		)
+		LEFT JOIN `'._DB_PREFIX_.'image_shop` image_shop
+			ON (image_shop.`id_product` = p.`id_product` AND image_shop.cover=1 AND image_shop.id_shop='.(int)$this->context->shop->id.')
+		LEFT JOIN `'._DB_PREFIX_.'image_lang` il ON (image_shop.`id_image` = il.`id_image` AND il.`id_lang` = '.(int)$id_lang.')
+		LEFT JOIN `'._DB_PREFIX_.'manufacturer` m ON (m.`id_manufacturer` = p.`id_manufacturer`)
+		LEFT JOIN `'._DB_PREFIX_.'category_product` cp ON (p.`id_product` = cp.`id_product`)
+		WHERE product_shop.`active` = 1
+		AND cp.`id_category` = '.(int)$id_category.'
+        
+		AND product_shop.`show_price` = 1
+		'.($front ? ' AND p.`visibility` IN ("both", "catalog")' : '').'
+        '.((!$beginning && !$ending) ? ' AND p.`id_product` IN ('.((is_array($tab_id_product) && count($tab_id_product)) ? implode(', ', $tab_id_product) : 0).')' : '').'
+		'.$sql_groups.'
+		ORDER BY '.(isset($order_by_prefix) ? pSQL($order_by_prefix).'.' : '').pSQL($order_by).' '.pSQL($order_way).'
+		LIMIT '.(int)($page_number * $nb_products).', '.(int)$nb_products;
+
+        $result = \Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+
+        if (!$result) {
+            return false;
+        }
+
+        if ($order_by == 'price') {
+            \Tools::orderbyPrice($result, $order_way);
+        }
+
+        return \Product::getProductsProperties($id_lang, $result);
+    }
+
+    public function getProductIdByDate($beginning, $ending)
+    {
+
+        $id_address = $this->context->cart->{\Configuration::get('PS_TAX_ADDRESS_TYPE')};
+        $ids = \Address::getCountryAndState($id_address);
+        $id_country = $ids['id_country'] ? (int)$ids['id_country'] : (int)\Configuration::get('PS_COUNTRY_DEFAULT');
+
+        return \SpecificPrice::getProductIdByDate(
+            $this->context->shop->id,
+            $this->context->currency->id,
+            $id_country,
+            $this->context->customer->id_default_group,
+            $beginning,
+            $ending,
+            0,
+            false
+        );
     }
 }

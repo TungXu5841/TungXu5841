@@ -2623,6 +2623,7 @@ module.exports = function ($) {
 		'product-carousel.default': __webpack_require__(193),
 		'v-smartblog.default': __webpack_require__(193),
 		'trustedshops-reviews.default': __webpack_require__(193),
+		'product-sale.default': __webpack_require__(193),
 		'text-editor.default': __webpack_require__(194),
 		'contact-form.default': __webpack_require__(200),
 		'email-subscription.default': __webpack_require__(200),

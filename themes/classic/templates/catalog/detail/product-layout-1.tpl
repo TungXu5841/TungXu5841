@@ -15,6 +15,13 @@
             <h1 class="h1 namne_details" itemprop="name">{block name='page_title'}{$product.name}{/block}</h1>
         {/block}
     {/block}
+    {if isset($product_manufacturer->id) && isset($manufacturer_image_url)}
+        <div class="product-brand">
+            <a href="{$product_brand_url}">
+                <img class="img-responsive" src="{$manufacturer_image_url}" title="{$product_manufacturer->name}" alt="{$product_manufacturer->name}"  loading="lazy">
+            </a>
+        </div>
+    {/if}
     {hook h="displayReviewsProduct"}
     {block name='product_prices'}
         {include file='catalog/_partials/product-prices.tpl'}

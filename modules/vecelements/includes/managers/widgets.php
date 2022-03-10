@@ -97,8 +97,6 @@ class WidgetsManager
             'trustedshops-reviews',
 
             'site-logo',
-            'site-title',
-            'nav-menu',
             'megamenu',
             'shopping-cart',
             'ajax-search',

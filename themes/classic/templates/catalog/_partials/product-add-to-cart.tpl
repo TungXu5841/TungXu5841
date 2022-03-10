@@ -23,6 +23,29 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <div class="product-add-to-cart js-product-add-to-cart">
+  {block name='product_quantities'}
+    {if $product.show_quantities}
+      <div class="product-quantities">
+        <label class="label">{l s='In stock' d='Shop.Theme.Catalog'}</label>: 
+        <span data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{$product.quantity} {$product.quantity_label}</span>
+      </div>
+    {/if}
+  {/block}
+
+  {block name='product_availability_date'}
+    {if $product.availability_date}
+      <div class="product-availability-date">
+        <label>{l s='Availability date:' d='Shop.Theme.Catalog'} </label>
+        <span>{$product.availability_date}</span>
+      </div>
+    {/if}
+  {/block}
+
+  {block name='product_out_of_stock'}
+    <div class="product-out-of-stock">
+      {hook h='actionProductOutOfStock' product=$product}
+    </div>
+  {/block}
   {if !$configuration.is_catalog}
     {block name='product_quantity'}
       <div class="product-quantity clearfix">
@@ -56,9 +79,11 @@
           >
             {l s='Add to cart' d='Shop.Theme.Actions'}
           </button>
-          <div class="box_button">
+        </div>
+        <div class="box_button">
             {hook h='displayAfterButtonCart'}
-          </div>
+        </div>
+        <div class="buy-now">
           <button
             class="btn btn-primary buy-now"
             data-button-action="buy-now"
@@ -68,9 +93,8 @@
             {/if}
           >
           {l s='Buy now' d='Shop.Theme.Actions'}
-          </button>
+          </button>	
         </div>
-        	
         {hook h='displayProductActions' product=$product}
       </div>
     {/block}

@@ -41,7 +41,6 @@ $(document).ready(() => {
       const minimalProductQuantity = parseInt(event.product_minimal_quantity, 10);
       const quantityInputSelector = prestashop.selectors.quantityWanted;
       const quantityInput = $(quantityInputSelector);
-
       // @see http://www.virtuosoft.eu/code/bootstrap-touchspin/ about Bootstrap TouchSpin
       quantityInput.trigger('touchspin.updatesettings', {
         min: minimalProductQuantity,
@@ -49,7 +48,8 @@ $(document).ready(() => {
     }
     $($(prestashop.themeSelectors.product.activeTabs).attr('href')).addClass('active').removeClass('fade');
     $(prestashop.themeSelectors.product.imagesModal).replaceWith(event.product_images_modal);
-
+    $('.box_button').empty();
+    $('.box_button').append($(event.product_add_to_cart).find('.box_button').html());
     const productSelect = new ProductSelect();
     productSelect.init();
   });

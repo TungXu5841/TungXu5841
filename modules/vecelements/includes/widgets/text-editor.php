@@ -63,7 +63,7 @@ class WidgetTextEditor extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-align-left';
+        return 'eicon-text';
     }
 
     /**

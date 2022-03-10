@@ -55,7 +55,7 @@ class WidgetLanguageSelector extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-langs';
+        return 'eicon-global-settings';
     }
 
     /**

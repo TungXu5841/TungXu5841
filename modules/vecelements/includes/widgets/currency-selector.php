@@ -55,7 +55,7 @@ class WidgetCurrencySelector extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-currencies';
+        return 'eicon-product-upsell';
     }
 
     /**

@@ -21,7 +21,7 @@ class WidgetCompare extends WidgetBase
 	}
 
 	public function getIcon() {
-		return 'eicon-heart';
+		return 'eicon-sync';
 	}
 
 	public function getCategories() {

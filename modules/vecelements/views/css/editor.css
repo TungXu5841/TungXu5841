@@ -833,7 +833,7 @@ select {
       font-size: 11px;
       cursor: pointer; }
       .elementor-panel .elementor-panel-category-title:before {
-        content: "";
+        content: "\e87d";
         font-family: eicons;
         position: absolute;
         right: 0;
@@ -1333,7 +1333,7 @@ select {
       cursor: pointer; }
     .elementor-control.elementor-control-type-select .elementor-control-input-wrapper:after {
       font-family: eicons;
-      content: '\e955';
+      content: '\e8ad';
       font-size: 12px;
       position: absolute;
       top: 50%;

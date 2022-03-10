@@ -62,7 +62,7 @@ class WidgetHeading extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-type-tool';
+        return 'eicon-post-title';
     }
 
     /**

@@ -22,6 +22,15 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
+
 <div class="product-additional-info js-product-additional-info">
+  {block name='product_reference'}
+    {if isset($product.reference_to_display) && $product.reference_to_display neq ''}
+      <div class="product-reference">
+        <label class="label">{l s='Reference' d='Shop.Theme.Catalog'} </label>: 
+        <span>{$product.reference_to_display}</span>
+      </div>
+    {/if}
+  {/block}
   {hook h='displayProductAdditionalInfo' product=$product}
 </div>

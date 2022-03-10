@@ -62,7 +62,7 @@ class WidgetPromo extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-type-tool';
+        return 'eicon-banner';
     }
 
     /**
@@ -79,7 +79,7 @@ class WidgetPromo extends WidgetBase
      */
     public function getCategories()
     {
-        return ['basic'];
+        return ['theme-elements'];
     }
 
     /**

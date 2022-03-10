@@ -62,7 +62,7 @@ class WidgetHtml extends WidgetBase
      */
     public function getIcon()
     {
-        return 'eicon-coding';
+        return 'eicon-editor-code';
     }
 
     /**

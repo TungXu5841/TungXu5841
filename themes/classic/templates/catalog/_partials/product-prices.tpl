@@ -22,54 +22,6 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-  <div class="top-details">
-  {block name='product_reference'}
-    {if isset($product_manufacturer->id)}
-      <div class="product-manufacturer">
-        {if isset($manufacturer_image_url)}
-          <a href="{$product_brand_url}">
-            <img src="{$manufacturer_image_url}" class="img img-thumbnail manufacturer-logo" alt="{$product_manufacturer->name}" loading="lazy" width="98" height="50">
-          </a>
-        {else}
-          <label class="label">{l s='Brand' d='Shop.Theme.Catalog'}</label>: 
-          <span>
-            <a href="{$product_brand_url}">{$product_manufacturer->name}</a>
-          </span>
-        {/if}
-      </div>
-    {/if}
-    {if isset($product.reference_to_display) && $product.reference_to_display neq ''}
-      <div class="product-reference">
-        <label class="label">{l s='Reference' d='Shop.Theme.Catalog'} </label>: 
-        <span>{$product.reference_to_display}</span>
-      </div>
-    {/if}
-  {/block}
-  {block name='product_quantities'}
-    {if $product.show_quantities}
-      <div class="product-quantities">
-        <label class="label">{l s='In stock' d='Shop.Theme.Catalog'}</label>: 
-        <span data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{$product.quantity} {$product.quantity_label}</span>
-      </div>
-    {/if}
-  {/block}
-
-  {block name='product_availability_date'}
-    {if $product.availability_date}
-      <div class="product-availability-date">
-        <label>{l s='Availability date:' d='Shop.Theme.Catalog'} </label>
-        <span>{$product.availability_date}</span>
-      </div>
-    {/if}
-  {/block}
-
-  {block name='product_out_of_stock'}
-    <div class="product-out-of-stock">
-      {hook h='actionProductOutOfStock' product=$product}
-    </div>
-  {/block}
-
-</div>
 {if $product.show_price}
   <div class="product-prices js-product-prices">
     {block name='product_discount'}

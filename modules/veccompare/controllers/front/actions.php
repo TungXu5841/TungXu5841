@@ -84,7 +84,9 @@ class VecCompareActionsModuleFrontController extends ModuleFrontController
         $idProduct = (int)Tools::getValue('id');
         $productsIds = $this->context->cookie->vecCompare;
         $productsIds = json_decode($productsIds, true);
-        unset($productsIds[$idProduct]);
+        if (($key = array_search($idProduct, $productsIds)) !== false) {
+            unset($productsIds[$key]);
+        }
         $productsIds = json_encode($productsIds, true);
         $this->context->cookie->__set('vecCompare', $productsIds);
         $this->context->cookie->__set('vecCompareNb', (int) $this->context->cookie->vecCompareNb - 1);

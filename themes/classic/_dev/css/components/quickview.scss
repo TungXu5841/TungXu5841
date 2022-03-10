@@ -6,75 +6,50 @@
 
   .modal-content {
     min-height: 28.13rem;
-    background: $gray-light;
   }
 
   .modal-header {
     padding: $small-space;
     border: none;
+    .close {
+      margin-top: 0;
+    }
   }
 
   .modal-body {
     min-height: 23.75rem;
+    padding: 1.25rem;
   }
 
   .modal-footer {
-    border-top: 1px solid rgba($gray, 0.3);
+    border-top: 1px solid $border-gray;
+    padding: 1.25rem;
   }
 
   .layer {
     display: none;
   }
 
-  .product-cover img {
-    width: 100%;
-    height: auto;
+  .product-images-cover{
+    margin-bottom: .625rem;
+    .cover-item {
+      padding: 0;
+    }
   }
 
   .images-container {
     z-index: 1;
-    display: flex;
-    min-height: 21.88rem;
-
-    .product-images > li.thumb-container > .thumb {
-      width: 100%;
-      max-width: 4.938rem;
-      height: auto;
-      margin-bottom: 0.8125rem;
-      background: $white;
+    .icon-zoom {
+      display: none;
+    }
+    
+  }
+  #product_comments_block_extra {
+    .reviews {
+      display: none;
     }
   }
-
-  .mask {
-    width: 35%;
-    max-height: 22.5rem;
-    margin-left: $small-space;
-    overflow: hidden;
-  }
-
-  .arrows {
-    position: absolute;
-    top: 0;
-    right: 5rem;
-    bottom: 0;
-    z-index: 0;
-    max-height: 22.5rem;
-
-    .arrow-up {
-      margin-top: -3.125rem;
-      cursor: pointer;
-      opacity: 0.2;
-    }
-
-    .arrow-down {
-      position: absolute;
-      bottom: -1.875rem;
-      cursor: pointer;
-    }
-  }
-
   .social-sharing {
     margin-top: 0;
-    margin-left: $extra-large-space;
   }
 }

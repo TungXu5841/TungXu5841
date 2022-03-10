@@ -383,6 +383,7 @@
 /*** FOOTER ***/
 .page-footer {
   .account-link {
+    margin-top: .625rem; 
     margin-right: 1rem;
 
     i {
@@ -402,6 +403,7 @@
 //links account
 .group-link-infomation {
   background: $gray-light;
+  margin-bottom: 1.875rem;
   > a {
     display: block;   
     padding: .625rem 1.25rem;

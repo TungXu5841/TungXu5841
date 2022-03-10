@@ -19,11 +19,11 @@
 				{/block}
 				<div class="add-links">
 					{include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
-					{block name='quick_view'}	
-					<a class="quick_view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
-					<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
-					</a>
-					{/block}					
+					{block name='quick_view'}
+						<a class="quick-view js-quick-view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
+							<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
+						</a>
+					{/block}	 					
 					{hook h='displayProductListFunctionalButtons' product=$product}
 					{hook h='displayWishlistButton' product=$product}
 				</div>

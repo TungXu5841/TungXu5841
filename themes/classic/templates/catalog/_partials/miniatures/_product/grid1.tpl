@@ -18,11 +18,11 @@
 				{/if}
 				{/block}
 				<div class="add-links">
-					{block name='quick_view'}	
-					<a class="quick_view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
-					<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
+				   {block name='quick_view'}
+					<a class="quick-view js-quick-view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
+						<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
 					</a>
-					{/block}					
+				    {/block}	 			
 					{hook h='displayProductListFunctionalButtons' product=$product}
 					{hook h='displayWishlistButton' product=$product}
 				</div>

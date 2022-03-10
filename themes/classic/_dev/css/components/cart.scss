@@ -26,7 +26,7 @@
   .product-price {
     margin: 0;
     > strong {
-      color: #da2e1f;
+      color: $price-color;
       font-weight: 500;
       font-size: 1.125rem;
     }

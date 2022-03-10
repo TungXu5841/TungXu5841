@@ -369,6 +369,12 @@ class VecThemeoptions extends Module implements WidgetInterface
         $button_border_colorh = Configuration::get($this->name . 'button_border_colorh');
         $button_background = Configuration::get($this->name . 'button_background');
         $button_backgroundh = Configuration::get($this->name . 'button_backgroundh');
+        $grid_name_color = Configuration::get($this->name . 'grid_name_color');
+        $grid_name_colorh = Configuration::get($this->name . 'grid_name_colorh');
+        $grid_name_size = Configuration::get($this->name . 'grid_name_size');
+        $grid_name_transform = $this->convertTransform(Configuration::get($this->name . 'grid_name_transform'));
+        $grid_price_color = Configuration::get($this->name . 'grid_price_color');
+        $grid_price_size = Configuration::get($this->name . 'grid_price_size');
         if($button_border != 'none'){
             $css .= '.btn, .btn-primary, .btn-secondary, .btn-tertiary {';
                 if($button_border != 'none'){
@@ -383,6 +389,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $css .='
          :root {  
             --hovercolor: '.$main_color.';
+            --pricecolor: '.$grid_price_color.';
             --buttoncolor: '.$button_color.'; 
             --buttonbackground: '.$button_background.'; 
             --buttonborder: '.$button_border_color.'; 
@@ -424,12 +431,6 @@ class VecThemeoptions extends Module implements WidgetInterface
         
 
         //Product grid
-        $grid_name_color = Configuration::get($this->name . 'grid_name_color');
-        $grid_name_colorh = Configuration::get($this->name . 'grid_name_colorh');
-        $grid_name_size = Configuration::get($this->name . 'grid_name_size');
-        $grid_name_transform = $this->convertTransform(Configuration::get($this->name . 'grid_name_transform'));
-        $grid_price_color = Configuration::get($this->name . 'grid_price_color');
-        $grid_price_size = Configuration::get($this->name . 'grid_price_size');
         $css .= '.js-product-miniature .product_desc .product_name{
             color: '.$grid_name_color.';
             font-size: '.$grid_name_size.'px;
@@ -439,7 +440,6 @@ class VecThemeoptions extends Module implements WidgetInterface
             color: '.$grid_name_colorh.';
         }';
         $css .= '.product-price-and-shipping .price{
-            color:'.$grid_price_color.';
             font-size: '.$grid_price_size.'px;
         }';
 

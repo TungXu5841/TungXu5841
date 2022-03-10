@@ -27,27 +27,24 @@
    <div class="modal-content">
      <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
-         <span aria-hidden="true">&times;</span>
+       <i class="icon-rt-close-outline"></i>
        </button>
      </div>
      <div class="modal-body">
       <div class="row">
-        <div class="col-md-6 col-sm-6 hidden-xs-down">
+        <div class="col-md-6 col-sm-6 col-xs-12">
           {block name='product_cover_thumbnails'}
             {include file='catalog/_partials/product-cover-thumbnails.tpl'}
           {/block}
-          <div class="arrows js-arrows">
-            <i class="material-icons arrow-up js-arrow-up">&#xE316;</i>
-            <i class="material-icons arrow-down js-arrow-down">&#xE313;</i>
-          </div>
         </div>
-        <div class="col-md-6 col-sm-6">
-          <h1 class="h1">{$product.name}</h1>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <h1 class="h1 namne_details h1">{$product.name}</h1>
+          {hook h="displayReviewsProduct"}
           {block name='product_prices'}
             {include file='catalog/_partials/product-prices.tpl'}
           {/block}
           {block name='product_description_short'}
-            <div id="product-description-short">{$product.description_short nofilter}</div>
+            <div class="product-description">{$product.description_short nofilter}</div>
           {/block}
           {block name='product_buy'}
             <div class="product-actions js-product-actions">

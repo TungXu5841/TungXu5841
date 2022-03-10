@@ -104,7 +104,7 @@
 									{/if}
 								</td>	
 								<td class="product-button">
-									<div class="js-product-miniature" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
+									<div data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
 										<form action="{$urls.pages.cart}" method="post">
 											{if !$configuration.is_catalog}
 												{if ($product.quantity > 0 || $product.allow_oosp)}

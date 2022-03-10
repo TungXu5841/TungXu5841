@@ -107,7 +107,7 @@ class VecWishlist extends Module implements WidgetInterface
 					'ids' =>  $productsIds,
                     'actions' => $this->context->link->getModuleLink('vecwishlist', 'actions', array(), null, null, null, true),
 					'alert' => ['add' => $this->l('Add to Wishlist'),
-								'view' => $this->l('Go to Wishlist')],
+								'view' => $this->l('Remove to Wishlist')],
                     'loggin_required_text' => $this->l('You have to login to use wishlist'),
                     'loggin_text' => $this->l('Login'),
         )));

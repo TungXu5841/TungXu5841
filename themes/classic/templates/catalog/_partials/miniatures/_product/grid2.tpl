@@ -17,11 +17,11 @@
 				  </a>
 				{/if}
 				{/block}
-				{block name='quick_view'}	
-					<a class="quick_view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
-					<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
-					</a>
-				{/block}
+				{block name='quick_view'}
+					<a class="quick-view js-quick-view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
+						<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
+					</a> 
+				{/block}	 
 				{block name='product_flags'}
 				<ul class="product-flag">
 				{foreach from=$product.flags item=flag}

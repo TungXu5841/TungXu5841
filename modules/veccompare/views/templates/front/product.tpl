@@ -1,6 +1,6 @@
 <article class="veccompare-product ">
 	<div class="js-product-miniature">
-		<div class="img_block">
+		<div class="img-block">
 			{block name='product_thumbnail'}
 			<a href="{$product.url}" class="thumbnail product-thumbnail">
 			  <img class="first-image"
@@ -12,13 +12,16 @@
 			</a>
 		  {/block}
 		</div>
-		<div class="product_desc">
-			<a href="{$product.url}" class="product_name">{$product.name|truncate:50:'...'}</a>
+		<div class="product-content">
 			{block name='product_reviews'}
 				<div class="hook-reviews">
 				{hook h='displayProductListReviews' product=$product}
 				</div>
 			{/block} 
+			{if isset($product.id_manufacturer)}
+				<div class="manufacturer"><a href="{url entity='manufacturer' id=$product.id_manufacturer }">{Manufacturer::getnamebyid($product.id_manufacturer)}</a></div>
+			{/if}
+			<a href="{$product.url}" class="product_name">{$product.name|truncate:50:'...'}</a>
 			{block name='product_price_and_shipping'}
 			  {if $product.show_price}
 				<div class="product-price-and-shipping">

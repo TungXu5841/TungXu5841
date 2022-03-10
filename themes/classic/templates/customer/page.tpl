@@ -34,10 +34,10 @@
   <section id="content" class="page-content">
     {block name='page_content'}
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-lg-3">
             {include file="customer/_partials/account-menu.tpl"}
           </div>
-          <div class="col-md-9">
+          <div class="col-lg-9">
             <div class="customer-account-content">
               {block name='page_content_title'}{/block}
               {block name='page_content_top'}

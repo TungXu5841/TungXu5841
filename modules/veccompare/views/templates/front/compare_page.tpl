@@ -12,7 +12,7 @@
   
                     <div class="veccompare-product-tr">
 						<div class="veccompare-table-actions feature-name veccompare-product-td">
-							<a href="#" class="js-veccompare-remove-all veccompare-remove-all"
+							<a href="#" class="js-compare-remove-all compare-remove-all"
 							   data-url="{url entity='module' name='veccompare' controller='actions'}">
 								{l s='Remove all products' mod='veccompare'}
 							</a>

@@ -13,7 +13,7 @@
 		  {/block}
 		</div>
 		<div class="product_desc">
-			<a href="{$product.url}" class="product_name {if $postheme.name_length ==0 }one_line{/if}">{$product.name|truncate:45:'...'}</a>
+			<a href="{$product.url}" class="product_name">{$product.name|truncate:50:'...'}</a>
 			{block name='product_reviews'}
 				<div class="hook-reviews">
 				{hook h='displayProductListReviews' product=$product}
@@ -56,5 +56,5 @@
 			</div>	
 		</div>			
 	</div>
-	<a href="#" class="js-veccompare-remove veccompare-remove" onclick="vecCompare.removeCompare({$product.id_product|intval}); return false;">{l s='Remove' mod='veccompare'}</a>
+	<a href="#" class="js-compare-remove compare-remove" data-id-product="{$product.id_product|intval}">{l s='Remove' mod='veccompare'}</a>
 </article>

@@ -107,7 +107,8 @@ class WidgetsManager
             'currency-selector',
             'v-smartblog',
             'promo',
-            'wishlist'
+            'wishlist',
+            'compare',
         ];
         
         $build_widgets_filename[] = 'category-tree';

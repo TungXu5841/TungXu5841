@@ -1,46 +1,56 @@
 <?php
+/**
+ * V-Elements - Live page builder
+ *
+ * @author    ThemeVec
+ * @copyright 2020-2022 themevec.com
+ */
 
-namespace CE;
+namespace VEC;
 
 defined('_PS_VERSION_') or die;
 
-use Context;
-
-class PosHeaderCompareWidget extends WidgetBase { 
+class WidgetCompare extends WidgetBase
+{  
 
 	public function getName() {
-		return 'posCompare';
+		return 'compare';
 	}
 	public function getTitle() {
-		return $this->l( 'My Compare' );
+		return __( 'Compare' );
 	}
 
 	public function getIcon() {
-		return 'fa fa-exchange';
+		return 'eicon-heart';
 	}
 
 	public function getCategories() {
-		return [ 'posthemes_header' ];
+		return ['theme-elements'];
 	}
+
+	public function getKeywords()
+    {
+        return ['header', 'compare'];
+    }
 
 	protected function _registerControls() {
 		$this->startControlsSection(
 			'content_section',
 			[
-				'label' => $this->l( 'Content' ),
+				'label' => __( 'Content' ),
 				'tab' => ControlsManager::TAB_CONTENT,
 			]
 		);
 			$this->addControl(
 				'button_layout',
 				[
-					'label' => $this->l( 'Button Layout'),
+					'label' => __( 'Button Layout'),
 					'type' => ControlsManager::SELECT,
 					'default' => 'icon_text',
 					'options' => [
-						'icon' => $this->l( 'Icon'),
-						'icon_text' => $this->l( 'Icon & Text'),
-						'text' => $this->l( 'Text'),
+						'icon' => __( 'Icon'),
+						'icon_text' => __( 'Icon & Text'),
+						'text' => __( 'Text'),
 					],
 					'prefix_class' => 'button-layout-',
 				]
@@ -48,15 +58,15 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 				'compare_icon',
 				[
-					'label' => $this->l( 'Compare icon'),
+					'label' => __( 'Compare icon'),
 					'type' => ControlsManager::SELECT,
 					'default' => 'icon-rt-ios-shuffle-strong',
 					'options' => [
-						'icon-rt-ios-shuffle-strong' => $this->l( 'Icon 1'),
-						'icon-rt-repeat-outline' => $this->l( 'Icon 2'),
-						'icon-rt-sync-alt-solid' => $this->l( 'Icon 3'),
-						'icon-rt-ios-shuffle' => $this->l( 'Icon 4'),
-						'icon-rt-refresh' => $this->l( 'Icon 5')
+						'icon-rt-ios-shuffle-strong' => __( 'Icon 1'),
+						'icon-rt-repeat-outline' => __( 'Icon 2'),
+						'icon-rt-sync-alt-solid' => __( 'Icon 3'),
+						'icon-rt-ios-shuffle' => __( 'Icon 4'),
+						'icon-rt-refresh' => __( 'Icon 5')
 					],
 					'condition' => array(
 	                    'button_layout!' => 'text',
@@ -92,14 +102,14 @@ class PosHeaderCompareWidget extends WidgetBase {
 		$this->startControlsSection(
 			'style_section',
 			[
-				'label' => $this->l( 'Style' ),
+				'label' => __( 'Style' ),
 				'tab' => ControlsManager::TAB_STYLE,
 			]
 		);
 			$this->addControl(
             	'icon_size',
 	            [
-	                'label' => $this->l('Icon size'),
+	                'label' => __('Icon size'),
 	                'type' => ControlsManager::SLIDER,
 	                'default' => [
 	                    'size' => 14,
@@ -124,14 +134,14 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->startControlsTab(
 	            'tab_button_normal',
 	            array(
-	                'label' => $this->l('Normal'),
+	                'label' => __('Normal'),
 	            )
 	        );
 
 	        $this->addControl(
 	            'button_text_color',
 	            array(
-	                'label' => $this->l('Text Color'),
+	                'label' => __('Text Color'),
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
@@ -143,7 +153,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->addControl(
 	            'background_color',
 	            array(
-	                'label' => $this->l('Background Color'),
+	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,	                
 	                'selectors' => array(
 	                    '{{WRAPPER}} .compare-top a' => 'background-color: {{VALUE}};',
@@ -156,14 +166,14 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->startControlsTab(
 	            'tab_button_hover',
 	            array(
-	                'label' => $this->l('Hover'),
+	                'label' => __('Hover'),
 	            )
 	        );
 
 	        $this->addControl(
 	            'hover_color',
 	            array(
-	                'label' => $this->l('Color'),
+	                'label' => __('Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
 	                    '{{WRAPPER}} .compare-top a:hover' => 'color: {{VALUE}};',
@@ -178,7 +188,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->addControl(
 	            'button_background_hover_color',
 	            array(
-	                'label' => $this->l('Background Color'),
+	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
 	                    '{{WRAPPER}} .compare-top a:hover' => 'background-color: {{VALUE}};',
@@ -189,7 +199,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->addControl(
 	            'button_hover_border_color',
 	            array(
-	                'label' => $this->l('Border Color'),
+	                'label' => __('Border Color'),
 	                'type' => ControlsManager::COLOR,
 	                'condition' => array(
 	                    'border_border!' => '',
@@ -208,7 +218,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 	            GroupControlBorder::getType(),
 	            array(
 	                'name' => 'border',
-	                'label' => $this->l('Border'),
+	                'label' => __('Border'),
 	                'placeholder' => '1px',
 	                'default' => '1px',
 	                'selector' => '{{WRAPPER}} .compare-top a',
@@ -218,7 +228,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->addControl(
 	            'border_radius',
 	            array(
-	                'label' => $this->l('Border Radius'),
+	                'label' => __('Border Radius'),
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', '%'),
 	                'selectors' => array(
@@ -230,7 +240,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 	            'padding',
 	            array(
-	                'label' => $this->l('Padding'),
+	                'label' => __('Padding'),
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', 'em', '%'),
 	                'selectors' => array(
@@ -249,7 +259,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 		$this->startControlsSection(
 			'count_section',
 			[
-				'label' => $this->l( 'Count' ),
+				'label' => __( 'Count' ),
 				'tab' => ControlsManager::TAB_STYLE,
 				'condition' => [
 					'button_layout' => 'icon',
@@ -259,14 +269,14 @@ class PosHeaderCompareWidget extends WidgetBase {
 	        $this->addControl(
 	            'heading_cart_count',
 	            [
-	                'label' => $this->l('Count style'),
+	                'label' => __('Count style'),
 	                'type' => ControlsManager::HEADING,
 	            ]
 	        );
 	        $this->addControl(
 				'count_top',
 				[
-					'label' => $this->l( 'Count Position Top'),
+					'label' => __( 'Count Position Top'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -285,7 +295,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 				'count_right',
 				[
-					'label' => $this->l( 'Count Position Right'),
+					'label' => __( 'Count Position Right'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -304,7 +314,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 				'count_size',
 				[
-					'label' => $this->l( 'Count Size'),
+					'label' => __( 'Count Size'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -323,7 +333,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 				'count_font_size',
 				[
-					'label' => $this->l( 'Count Font Size'),
+					'label' => __( 'Count Font Size'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -342,7 +352,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 				'count_text_color',
 				[
-					'label' => $this->l( 'Count Text Color'),
+					'label' => __( 'Count Text Color'),
 					'type' => ControlsManager::COLOR,
 					'default' => '',
 					'selectors' => [
@@ -355,7 +365,7 @@ class PosHeaderCompareWidget extends WidgetBase {
 			$this->addControl(
 				'count_background_color',
 				[
-					'label' => $this->l( 'Count Background Color'),
+					'label' => __( 'Count Background Color'),
 					'type' => ControlsManager::COLOR,
 					'selectors' => [
 						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'background-color: {{VALUE}};', 
@@ -371,30 +381,31 @@ class PosHeaderCompareWidget extends WidgetBase {
   
 	 */
 	protected function render() {
-
 		if (is_admin()){
 			return print '<div class="ce-remote-render"></div>';
 		}
 
-		if( \Module::isEnabled('poscompare') ) {
+		if( \Module::isEnabled('veccompare') ) {
 			$settings = $this->getSettings();
 			$icon = $settings['compare_icon'];
-			$module = \Module::getInstanceByName( 'poscompare' );
-			echo $module->renderWidget( 'displayNav', [ 'icon' => $icon ] );
-		}
 
+			echo $this->fetch( 'module:veccompare/views/templates/hook/compare-top.tpl', [ 'icon' => $icon ] );
+		}
 	} 
-	/**
-     * Get translation for a given widget text
-     *
-     * @access protected
-     *
-     * @param string $string    String to translate
-     *
-     * @return string Translation
-     */
-    protected function l($string)
-    {
-        return translate($string, 'poselements', basename(__FILE__, '.php'));
-    }
+
+	protected function fetch( $templatePath, $params ) {
+		$context = \Context::getContext();
+		
+		$smarty = $context->smarty;
+		
+        if ( is_object( $context->smarty ) ) {
+            $smarty = $context->smarty->createData( $context->smarty );
+        }
+		
+		$smarty->assign( $params );
+		
+        $template = $context->smarty->createTemplate( $templatePath, null, null, $smarty );
+
+        return $template->fetch();
+	}
 }

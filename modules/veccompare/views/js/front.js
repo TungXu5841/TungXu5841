@@ -1,5 +1,6 @@
 var vecCompare = {
-    addCompare: function(obj, id, product_name, product_image){
+    addCompare: function(selector, id){
+        selector.addClass('loading');
         $.ajax({
             type: 'POST',
             url: veccompare.baseDir + 'module/veccompare/actions',
@@ -12,33 +13,15 @@ var vecCompare = {
             success: function(data)
             {  
                 veccompare.nbProducts++;
-                $('#veccompare-nb, #qmcompare-count').text(veccompare.nbProducts);
-                var html = '';
-                    html += '<div class="modal fade" id="compareModal">';
-                    html += '<div class="modal-dialog"><div class="modal-content">';
-                        html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons">close</i></button>';
-                        html += '<div class="modal-body">';
-                            html += '<img src="' + product_image + '" alt="' + product_name + '" />';
-                            html += '<h4>' + product_name + '</h4>';
-                            html += veccompare.success_text;
-                            html += '<a class="btn-primary" href="' + veccompare.compare_url + '">' + veccompare.compare_text + '</a>';
-                        html += '</div>';
-                    html += '</div></div></div>';
-                $("body").append(html);
-                $('.quickview').modal('hide');
-                $('#compareModal').modal('show');
-                $('#compareModal').on('hidden.bs.modal', function () {
-                    $('#compareModal').remove();
-                });
-                obj.addClass('cmp_added');
-            },
-            error: function (jqXHR, status, err) {
-                 obj.addClass('cmp_added');
+                $('.js-compare-count, #qmcompare-count').text(veccompare.nbProducts);
+                selector.removeClass('loading');
+                selector.addClass('cmp_added').removeClass('js-compare-add').addClass('js-compare-remove');
             }
         })
+        
     },
-    removeCompare: function(id){
-        vecCompare.blockUI('#veccompare-table');
+    removeCompare: function(selector, id){
+        selector.addClass('loading');
         $.ajax({
             type: 'POST',
             url: veccompare.baseDir + 'module/veccompare/actions',
@@ -49,22 +32,23 @@ var vecCompare = {
                 ajax : true
             },
             success: function(data)
-
             {
                 $('.js-veccompare-product-' + id).remove();
                 veccompare.nbProducts--;
-                $('#veccompare-nb, #qmcompare-count').text(veccompare.nbProducts);
+                $('.js-compare-count, #qmcompare-count').text(veccompare.nbProducts);
 
                 if (veccompare.nbProducts == 0) {
                     $('#veccompare-table').remove();
                     $('#veccompare-warning').removeClass('hidden-xs-up');
                 }
-                vecCompare.unblockUI('#veccompare-table');
+                selector.removeClass('loading');
+                selector.removeClass('cmp_added').removeClass('js-compare-remove').addClass('js-compare-add');
             }
         })
+        
     },
     removeAllCompare: function(){
-        vecCompare.blockUI('#content');
+        $('.js-compare-remove-all').addClass('loading');
         $.ajax({
             type: 'POST',
             url: veccompare.baseDir + 'module/veccompare/actions',
@@ -76,16 +60,15 @@ var vecCompare = {
             success: function(data)
 
             {
-                $('#veccompare-nb, #qmcompare-count').text(0);
+                $('.js-compare-count, #qmcompare-count').text(0);
+                $('.js-compare-remove-all').removeClass('loading');
                 $('#veccompare-table').remove();
                 $('#veccompare-warning').removeClass('hidden-xs-up');
-                vecCompare.unblockUI('#content');
             }
         })
     },
-
     checkCompare : function (){
-        var target = $('.veccompare-add');
+        var target = $('.js-compare-add');
         var compareList = veccompare.idProducts;
         target.each(function(){
             var $id = $(this).data('id-product');
@@ -96,36 +79,34 @@ var vecCompare = {
               };
             });
             if(flag) {
-                $(this).addClass('cmp_added');
+                $(this).addClass('cmp_added').removeClass('js-compare-add').addClass('js-compare-remove');
             }
         })
-    },
-    blockUI: function(selector){
-        $(selector).addClass('ar-blocked');
-        $(selector).find('.ar-loading').remove();
-        $(selector).append('<div class="ar-loading"><div class="ar-loading-inner"></div></div>');
-    },
-    unblockUI: function(selector){
-        $(selector).find('.ar-loading').remove();
-        $(selector).removeClass('ar-blocked');
     },
 };
 
 $(document).ready(function () { 
     vecCompare.checkCompare();
-    
-    $('#veccompare-nb, #qmcompare-count').text(veccompare.nbProducts);
-    $('body').on('click', '.js-veccompare-remove-all', function (event) {
+    $('.js-compare-count, #qmcompare-count').text(veccompare.nbProducts);
+    $('body').on('click', '.js-compare-remove-all', function (event) {
         vecCompare.removeAllCompare();
         event.preventDefault();
     });
-    $(".veccompare-add").click(function(e) {
+    $("body").on('click', '.js-compare-add', function(e) {
+        console.log($(this));
         e.preventDefault();
-        var id = $(this).data('id-product'),
-            product_name = $(this).data('product-name'),
-            product_image = $(this).data('product-image');
-        vecCompare.addCompare($(this), id, product_name, product_image);
+        if($(this).hasClass('loading')) return; 
+
+        var id = $(this).data('id-product');
+        vecCompare.addCompare($(this), id);
     }); 
-    
+    $("body").on('click', '.js-compare-remove', function(e) {
+        console.log($(this));
+        e.preventDefault();
+        if($(this).hasClass('loading')) return; 
+
+        var id = $(this).data('id-product');
+        vecCompare.removeCompare($(this), id);
+    }); 
 });
 

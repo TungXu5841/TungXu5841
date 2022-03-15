@@ -61,12 +61,12 @@ class WidgetShoppingCart extends WidgetBase{
 				[
 					'label' => __('Cart icon'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'icon-rt-FullShoppingCart',
+					'default' => 'Icon 4',
 					'options' => [
 						'icon-rt-cart-outline' => __('Icon 1'),
 						'icon-rt-FullShoppingCart' => __('Icon 2'),
 						'icon-rt-bag2' => __('Icon 3'),
-						'icon-rt-shopping-cart' => __('Icon 4'),
+						'icon-rt-bag' => __('Icon 4'),
 						'icon-rt-basket-outline' => __('Icon 5'),
 					],
 					'condition' => array(
@@ -89,7 +89,7 @@ class WidgetShoppingCart extends WidgetBase{
 	                'label' => __('Icon size'),
 	                'type' => ControlsManager::SLIDER,
 	                'default' => [
-	                    'size' => 28,
+	                    'size' => 21,
 	                ],
 	                'selectors' => [
 	                    '{{WRAPPER}} .blockcart > a > i' => 'font-size: {{SIZE}}{{UNIT}}',
@@ -287,7 +287,7 @@ class WidgetShoppingCart extends WidgetBase{
 						]
 					],
 					'default' => [
-						'size' => 20,
+						'size' => 18,
 						'unit' => 'px',
 					],
 					'selectors' => [

@@ -76,29 +76,6 @@ class WidgetCompare extends WidgetBase
 			);
 		$this->endControlsSection();
 		// Start for style
-        $this->startControlsSection(
-            'section_general',
-            [
-                'label' => __('General'),
-                'tab' => ControlsManager::TAB_STYLE,
-            ]
-        );
-            $this->addControl(
-            'search_width',
-                [
-                    'label' => __('Width'),
-                    'type' => ControlsManager::SELECT,
-                    'default' => 'inline',
-                    'options' => [ 
-                        'fullwidth' => __('Full width 100%'),
-                        'inline' => __('Inline (auto)')
-                    ],
-                    'prefix_class' => 'pewidth-',
-                    'render_type' => 'template',
-                    'frontend_available' => true
-                ]
-            );
-        $this->endControlsSection();
 		$this->startControlsSection(
 			'style_section',
 			[
@@ -115,7 +92,7 @@ class WidgetCompare extends WidgetBase
 	                    'size' => 14,
 	                ],
 	                'selectors' => [
-	                    '{{WRAPPER}} .compare-top i' => 'font-size: {{SIZE}}{{UNIT}}',
+	                    '{{WRAPPER}} .btn-compare-top i' => 'font-size: {{SIZE}}{{UNIT}}',
 	                ],
 	                'condition' => [
 	                    'button_layout!' => 'text' 
@@ -126,7 +103,7 @@ class WidgetCompare extends WidgetBase
 				GroupControlTypography::getType(),
 				[
 					'name' 			=> 'text_typo',
-					'selector' 		=> '{{WRAPPER}} .compare-top a',
+					'selector' 		=> '{{WRAPPER}} .btn-compare-top',
 				]
 			);
 	        $this->startControlsTabs('tabs_button_style');
@@ -145,7 +122,7 @@ class WidgetCompare extends WidgetBase
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-compare-top' => 'color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -156,7 +133,7 @@ class WidgetCompare extends WidgetBase
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,	                
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-compare-top' => 'background-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -176,7 +153,7 @@ class WidgetCompare extends WidgetBase
 	                'label' => __('Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a:hover' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-compare-top:hover' => 'color: {{VALUE}};',
 	                ),
 	                'scheme' => array(
 	                    'type' => SchemeColor::getType(),
@@ -191,7 +168,7 @@ class WidgetCompare extends WidgetBase
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a:hover' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-compare-top:hover' => 'background-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -205,7 +182,7 @@ class WidgetCompare extends WidgetBase
 	                    'border_border!' => '',
 	                ),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a:hover' => 'border-color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-compare-top:hover' => 'border-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -221,7 +198,7 @@ class WidgetCompare extends WidgetBase
 	                'label' => __('Border'),
 	                'placeholder' => '1px',
 	                'default' => '1px',
-	                'selector' => '{{WRAPPER}} .compare-top a',
+	                'selector' => '{{WRAPPER}} .btn-compare-top',
 	            )
 	        );
 
@@ -232,7 +209,7 @@ class WidgetCompare extends WidgetBase
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', '%'),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                    '{{WRAPPER}} .btn-compare-top' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	                ),
 	                'separator' => 'none'
 	            )
@@ -244,7 +221,7 @@ class WidgetCompare extends WidgetBase
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', 'em', '%'),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .compare-top a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                    '{{WRAPPER}} .btn-compare-top' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	                ),
 	            )
 	        );
@@ -252,7 +229,7 @@ class WidgetCompare extends WidgetBase
 	            GroupControlBoxShadow::getType(),
 	            array(
 	                'name' => 'button_box_shadow',
-	                'selector' => '{{WRAPPER}} .compare-top a',
+	                'selector' => '{{WRAPPER}} .btn-compare-top',
 	            )
 	        );
 	    $this->endControlsSection();
@@ -286,16 +263,16 @@ class WidgetCompare extends WidgetBase
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'top: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-compare-top .compare-count' => 'top: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
 			);	
 		
 			$this->addControl(
-				'count_right',
+				'count_left',
 				[
-					'label' => __( 'Count Position Right'),
+					'label' => __( 'Count Position Left'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -305,7 +282,7 @@ class WidgetCompare extends WidgetBase
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'right: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-compare-top .compare-count' => 'left: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -323,8 +300,12 @@ class WidgetCompare extends WidgetBase
 							'max' => 200,
 						]
 					],
+					'default' => [
+						'size' => 18,
+						'unit' => 'px',
+					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'min-width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-compare-top .compare-count' => 'min-width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -343,7 +324,7 @@ class WidgetCompare extends WidgetBase
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'font-size: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-compare-top .compare-count' => 'font-size: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -356,7 +337,7 @@ class WidgetCompare extends WidgetBase
 					'type' => ControlsManager::COLOR,
 					'default' => '',
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'fill: {{VALUE}}; color: {{VALUE}};',
+						'{{WRAPPER}}.button-layout-icon .btn-compare-top .compare-count' => 'fill: {{VALUE}}; color: {{VALUE}};',
 					],
 					'separator' => 'none'
 				]
@@ -368,7 +349,7 @@ class WidgetCompare extends WidgetBase
 					'label' => __( 'Count Background Color'),
 					'type' => ControlsManager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .compare-top .compare-top-count' => 'background-color: {{VALUE}};', 
+						'{{WRAPPER}}.button-layout-icon .btn-compare-top .compare-count' => 'background-color: {{VALUE}};', 
 					],
 					'separator' => 'none'
 				]

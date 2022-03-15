@@ -60,12 +60,12 @@ class WidgetWishlist extends WidgetBase
 				[
 					'label' => __( 'Wishlist icon'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'icon-rt-heart2',
+					'default' => 'icon-rt-heart',
 					'options' => [
 						'icon-rt-heart2' => __( 'Icon 1'),
 						'icon-rt-heart-solid' => __( 'Icon 2'),
 						'icon-rt-heart-outline' => __( 'Icon 3'),
-						'icon-rt-ios-heart-outline' => __( 'Icon 4'),
+						'icon-rt-heart' => __( 'Icon 4'),
 						'icon-rt-Heart' => __( 'Icon 5')
 					],
 					'condition' => array(
@@ -92,7 +92,7 @@ class WidgetWishlist extends WidgetBase
 	                    'size' => 14,
 	                ],
 	                'selectors' => [
-	                    '{{WRAPPER}} .wishlist-top i' => 'font-size: {{SIZE}}{{UNIT}}',
+	                    '{{WRAPPER}} .btn-wishlist-top i' => 'font-size: {{SIZE}}{{UNIT}}',
 	                ],
 	                'condition' => [
 	                    'button_layout!' => 'text' 
@@ -103,7 +103,7 @@ class WidgetWishlist extends WidgetBase
 				GroupControlTypography::getType(),
 				[
 					'name' 			=> 'text_typo',
-					'selector' 		=> '{{WRAPPER}} .wishlist-top a',
+					'selector' 		=> '{{WRAPPER}} .btn-wishlist-top',
 				]
 			);
 	        $this->startControlsTabs('tabs_button_style');
@@ -122,7 +122,7 @@ class WidgetWishlist extends WidgetBase
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-wishlist-top' => 'color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -133,7 +133,7 @@ class WidgetWishlist extends WidgetBase
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-wishlist-top' => 'background-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -153,7 +153,7 @@ class WidgetWishlist extends WidgetBase
 	                'label' => __('Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a:hover' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-wishlist-top:hover' => 'color: {{VALUE}};',
 	                ),
 	                'scheme' => array(
 	                    'type' => SchemeColor::getType(),
@@ -168,7 +168,7 @@ class WidgetWishlist extends WidgetBase
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a:hover' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-wishlist-top:hover' => 'background-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -182,7 +182,7 @@ class WidgetWishlist extends WidgetBase
 	                    'border_border!' => '',
 	                ),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a:hover' => 'border-color: {{VALUE}};',
+	                    '{{WRAPPER}} .btn-wishlist-top:hover' => 'border-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -198,7 +198,7 @@ class WidgetWishlist extends WidgetBase
 	                'label' => __('Border'),
 	                'placeholder' => '1px',
 	                'default' => '1px',
-	                'selector' => '{{WRAPPER}} .wishlist-top a',
+	                'selector' => '{{WRAPPER}} .btn-wishlist-top',
 	            )
 	        );
 
@@ -209,7 +209,7 @@ class WidgetWishlist extends WidgetBase
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', '%'),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                    '{{WRAPPER}} .btn-wishlist-top' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	                ),
 	                'separator' => 'none'
 	            )
@@ -221,7 +221,7 @@ class WidgetWishlist extends WidgetBase
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', 'em', '%'),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .wishlist-top a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                    '{{WRAPPER}} .btn-wishlist-top' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	                ),
 	            )
 	        );
@@ -229,7 +229,7 @@ class WidgetWishlist extends WidgetBase
 	            GroupControlBoxShadow::getType(),
 	            array(
 	                'name' => 'button_box_shadow',
-	                'selector' => '{{WRAPPER}} .wishlist-top a',
+	                'selector' => '{{WRAPPER}} .btn-wishlist-top',
 	            )
 	        );
 	    $this->endControlsSection();
@@ -264,16 +264,16 @@ class WidgetWishlist extends WidgetBase
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .wishlist-top .wishlist-top-count' => 'top: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-wishlist-top .wishlist-count' => 'top: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
 			);	
 		
 			$this->addControl(
-				'count_right',
+				'count_left',
 				[
-					'label' => __( 'Count Position Right'),
+					'label' => __( 'Count Position Left'),
 					'type' => ControlsManager::SLIDER,
 					'size_units' => [ 'px' ],
 					'range' => [
@@ -283,7 +283,7 @@ class WidgetWishlist extends WidgetBase
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .wishlist-top .wishlist-top-count' => 'right: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-wishlist-top .wishlist-count' => 'left: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -301,8 +301,12 @@ class WidgetWishlist extends WidgetBase
 							'max' => 200,
 						]
 					],
+					'default' => [
+						'size' => 18,
+						'unit' => 'px',
+					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .wishlist-top .wishlist-top-count' => 'min-width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-wishlist-top .wishlist-count' => 'min-width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -321,7 +325,7 @@ class WidgetWishlist extends WidgetBase
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .wishlist-top .wishlist-top-count' => 'font-size: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}}.button-layout-icon .btn-wishlist-top .wishlist-count' => 'font-size: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -334,7 +338,7 @@ class WidgetWishlist extends WidgetBase
 					'type' => ControlsManager::COLOR,
 					'default' => '',
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .wishlist-top .wishlist-top-count' => 'fill: {{VALUE}}; color: {{VALUE}};',
+						'{{WRAPPER}}.button-layout-icon .btn-wishlist-top .wishlist-count' => 'fill: {{VALUE}}; color: {{VALUE}};',
 					],
 					'separator' => 'none'
 				]
@@ -346,7 +350,7 @@ class WidgetWishlist extends WidgetBase
 					'label' => __( 'Count Background Color'),
 					'type' => ControlsManager::COLOR,
 					'selectors' => [
-						'{{WRAPPER}}.button-layout-icon .wishlist-top .wishlist-top-count' => 'background-color: {{VALUE}};',
+						'{{WRAPPER}}.button-layout-icon .btn-wishlist-top .wishlist-count' => 'background-color: {{VALUE}};',
 					],
 					'separator' => 'none'
 				]

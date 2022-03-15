@@ -378,6 +378,12 @@
     color: $brand-success;
   }
 }
+.product-reference {
+  .label {
+    font-weight: 500;
+    color: $gray-dark;
+  }
+}
 .product-quantity {
   @include flex;
   align-items: center;

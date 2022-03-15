@@ -234,6 +234,56 @@ class WidgetPromo extends WidgetBase
                 'tab' => ControlsManager::TAB_STYLE,
             ]
         );
+            $this->addResponsiveControl(
+                'align',
+                [
+                    'label' => __('Alignment'),
+                    'type' => ControlsManager::CHOOSE,
+                    'options' => [
+                        'left' => [
+                            'title' => __('Left'),
+                            'icon' => 'fa fa-align-left',
+                        ],
+                        'center' => [
+                            'title' => __('Center'),
+                            'icon' => 'fa fa-align-center',
+                        ],
+                        'right' => [
+                            'title' => __('Right'),
+                            'icon' => 'fa fa-align-right',
+                        ],
+                    ],
+                    'default' => 'center',
+                    'selectors' => [
+                        '{{WRAPPER}} .promo-widget .promo-item' => 'text-align: {{VALUE}};',
+                    ],
+                ]
+            );
+            $this->addResponsiveControl(
+                'vertical',
+                [
+                    'label' => __('Vertical'),
+                    'type' => ControlsManager::CHOOSE,
+                    'options' => [
+                        'flex-start' => [
+                            'title' => __('Top'),
+                            'icon' => 'fa fa-long-arrow-up',
+                        ],
+                        'center' => [
+                            'title' => __('Middle'),
+                            'icon' => 'fa fa-arrows-h',
+                        ],
+                        'flex-end' => [
+                            'title' => __('bottom'),
+                            'icon' => 'fa fa-long-arrow-down',
+                        ],
+                    ],
+                    'default' => 'center',
+                    'selectors' => [
+                        '{{WRAPPER}} .promo-widget' => 'align-items: {{VALUE}};',
+                    ],
+                ]
+            );
             $this->addControl(
                 'height',
                 [
@@ -246,7 +296,7 @@ class WidgetPromo extends WidgetBase
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementor-flip-box-front .elementor-icon-wrapper' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .promo-widget' => 'min-height: {{SIZE}}{{UNIT}};',
                     ],
                 ]
             );
@@ -255,7 +305,7 @@ class WidgetPromo extends WidgetBase
                 [
                     'name' => 'background',
                     'types' => ['none', 'classic', 'gradient'],
-                    'selector' => '{{WRAPPER}} .elementor-flip-box-front',
+                    'selector' => '{{WRAPPER}} .promo-widget', 
                 ]
             );
             $this->addControl(
@@ -264,10 +314,17 @@ class WidgetPromo extends WidgetBase
                     'label' => __('Text Color'),
                     'type' => ControlsManager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementor-flip-box-front .elementor-view-stacked .elementor-icon' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .promo-widget, {{WRAPPER}} .promo-widget p' => 'color: {{VALUE}}', 
                     ],
                 ]
             );
+            $this->addGroupControl(
+				GroupControlTypography::getType(),
+				[
+					'name' 			=> 'text_typo',
+					'selector' 		=> '{{WRAPPER}} .promo-widget, {{WRAPPER}} .promo-widget p',
+				]
+			);
 
         $this->endControlsSection();
     }

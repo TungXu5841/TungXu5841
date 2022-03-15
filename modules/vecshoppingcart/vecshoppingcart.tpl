@@ -23,13 +23,15 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <div id="_desktop_cart_block">
-  <div class="blockcart cart-preview {if $cart_layout == '1'}cart-default{else}cart-sidebar{/if}" data-refresh-url="{$refresh_url}" data-cartitems="{$cart.products_count}">
+  <div class="blockcart cart-preview {if $cart_layout == '1'}cart-default{else}cart-sidebar{/if}" {if isset($icon)}data-icon="{$icon}"{else}data-icon="icon-rt-FullShoppingCart"{/if} data-refresh-url="{$refresh_url}" data-cartitems="{$cart.products_count}">
      <a rel="nofollow" href="{$cart_url}">
-        {if isset($icon)}
-        <i class="{$icon}"></i>
-        {else}
-        <i class="icon-rt-FullShoppingCart"></i>
-        {/if}
+        <span class="shopping-cart-icon">
+          {if isset($icon)}
+            <i class="{$icon}"></i>
+          {else}
+            <i class="icon-rt-FullShoppingCart"></i>
+          {/if}
+        </span>
         <span class="cart-products-total">{$cart.totals.total.value}</span>
         <span class="cart-products-count">{$cart.products_count}</span>
     </a>
@@ -41,10 +43,18 @@
             <li>{include 'module:vecshoppingcart/vecshoppingcart-product-line.tpl' product=$product}</li>
             {/foreach}
           </ul>
-          <div class="price_content">
-            {block name='cart_totals'}
-              {include file='checkout/_partials/cart-detailed-totals.tpl' cart=$cart}
-            {/block}
+          <div class="shopping-cart-totals">
+            {if !$configuration.display_prices_tax_incl && $configuration.taxes_enabled}
+              <div class="cart-summary-line cart-total">
+                <span class="label">{$cart.totals.total_including_tax.label}</span>
+                <span class="value">{$cart.totals.total_including_tax.value}</span>
+              </div>
+            {else}
+              <div class="cart-summary-line cart-total">
+                <span class="label">{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}{$cart.labels.tax_short}{/if}</span>
+                <span class="value">{$cart.totals.total.value}</span>
+              </div>
+            {/if}
           </div>
           <div class="checkout">
             <a href="{$cart_url}" class="btn btn-primary">{l s='Checkout' d='Shop.Theme.Actions'}</a> 
@@ -63,10 +73,18 @@
 				<li>{include 'module:vecshoppingcart/vecshoppingcart-product-line.tpl' product=$product}</li>
 				{/foreach}
 			  </ul>
-			  <div class="price_content">
-				{block name='cart_totals'}
-	              {include file='checkout/_partials/cart-detailed-totals.tpl' cart=$cart}
-	            {/block}
+			  <div class="shopping-cart-totals">
+          {if !$configuration.display_prices_tax_incl && $configuration.taxes_enabled}
+            <div class="cart-summary-line cart-total">
+              <span class="label">{$cart.totals.total_including_tax.label}</span>
+              <span class="value">{$cart.totals.total_including_tax.value}</span>
+            </div>
+          {else}
+            <div class="cart-summary-line cart-total">
+              <span class="label">{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}{$cart.labels.tax_short}{/if}</span>
+              <span class="value">{$cart.totals.total.value}</span>
+            </div>
+          {/if}
 			  </div>
 			  <div class="checkout">
 				<a href="{$cart_url}" class="btn btn-primary">{l s='Checkout' d='Shop.Theme.Actions'}</a> 

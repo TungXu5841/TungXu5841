@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 
-<a class="my-wisht-list" href="{url entity='module' name='vecwishlist' controller='view'}" title="{l s='My wishlists' mod='vecwishlist'}">
+<a class="my-wisht-list {if $page.page_name == 'view-wishlist'}active{/if}" href="{url entity='module' name='vecwishlist' controller='view'}" title="{l s='My wishlists' mod='vecwishlist'}">
 	<span class="link-item">
 		<i class="fa fa-heart"></i> 
 		{l s='My wishlists' mod='vecwishlist'}

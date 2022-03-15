@@ -24,7 +24,7 @@
  *}
 
 {extends file='customer/page.tpl'}
-	 
+	
 {block name='page_content_title'}
 	<h4>
 	  	{l s='Wishlist' mod='vecwishlist'}

@@ -12,8 +12,7 @@
 * @license   http://addons.prestashop.com/en/content/12-terms-and-conditions-of-use
 * International Registered Trademark & Property of PrestaShop SA
 *}
-
-<a id="identity-link" href="{$front_controller}">
+<a id="identity-link" class="{if $page.page_name == 'module-psgdpr-gdpr'}active{/if}" href="{$front_controller}">
     <span class="link-item">
         <i class="fa fa-user-secret fa-fw"></i> {l s='My personal data' mod='psgdpr'}
     </span>

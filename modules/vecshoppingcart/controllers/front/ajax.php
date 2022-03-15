@@ -49,7 +49,7 @@ class VecShoppingcartAjaxModuleFrontController extends ModuleFrontController
         ob_end_clean();
         header('Content-Type: application/json');
         die(json_encode([
-            'preview' => $this->module->renderWidget(null, ['cart' => $this->context->cart]),
+            'preview' => $this->module->renderWidget(null, ['cart' => $this->context->cart, 'icon' => Tools::getValue('icon')]),
             'modal' => $modal,
         ]));
     }

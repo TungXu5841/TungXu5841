@@ -21,242 +21,7 @@ trait NavTrait
         return ['smartmenus'];
     }
 
-    protected function registerNavContentControls(array $args = [])
-    {
-        $self = ${'this'};
-        $layout_options = isset($args['layout_options']) ? $args['layout_options'] : [];
-
-        if ($layout_options) {
-            $self->addControl(
-                'layout',
-                [
-                    'label' => __('Layout'),
-                    'type' => ControlsManager::SELECT,
-                    'default' => 'horizontal',
-                    'options' => $layout_options,
-                    'frontend_available' => true,
-                    'separator' => 'before',
-                ]
-            );
-        } else {
-            $self->addControl(
-                'layout',
-                [
-                    'type' => ControlsManager::HIDDEN,
-                    'default' => 'horizontal',
-                    'frontend_available' => true,
-                ]
-            );
-        }
-
-        $self->addControl(
-            'align_items',
-            [
-                'label' => __('Align'),
-                'type' => ControlsManager::CHOOSE,
-                'label_block' => false,
-                'options' => [
-                    'left' => [
-                        'title' => __('Left'),
-                        'icon' => 'eicon-h-align-left',
-                    ],
-                    'center' => [
-                        'title' => __('Center'),
-                        'icon' => 'eicon-h-align-center',
-                    ],
-                    'right' => [
-                        'title' => __('Right'),
-                        'icon' => 'eicon-h-align-right',
-                    ],
-                    'justify' => [
-                        'title' => __('Stretch'),
-                        'icon' => 'eicon-h-align-stretch',
-                    ],
-                ],
-                'prefix_class' => 'elementor-nav--align-',
-                'condition' => [
-                    'layout!' => 'dropdown',
-                ],
-                'separator' => $layout_options ? '' : 'before',
-            ]
-        );
-
-        $self->addControl(
-            'pointer',
-            [
-                'label' => __('Pointer'),
-                'type' => ControlsManager::SELECT,
-                'default' => 'underline',
-                'options' => [
-                    'none' => __('None'),
-                    'underline' => __('Underline'),
-                    'overline' => __('Overline'),
-                    'double-line' => __('Double Line'),
-                    'framed' => __('Framed'),
-                    'background' => __('Background'),
-                    'text' => __('Text'),
-                ],
-                'condition' => [
-                    'layout!' => 'dropdown',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'animation_line',
-            [
-                'label' => __('Animation'),
-                'type' => ControlsManager::SELECT,
-                'default' => 'fade',
-                'options' => [
-                    'fade' => 'Fade',
-                    'slide' => 'Slide',
-                    'grow' => 'Grow',
-                    'drop-in' => 'Drop In',
-                    'drop-out' => 'Drop Out',
-                    'none' => 'None',
-                ],
-                'condition' => [
-                    'layout!' => 'dropdown',
-                    'pointer' => ['underline', 'overline', 'double-line'],
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'animation_framed',
-            [
-                'label' => __('Animation'),
-                'type' => ControlsManager::SELECT,
-                'default' => 'fade',
-                'options' => [
-                    'fade' => 'Fade',
-                    'grow' => 'Grow',
-                    'shrink' => 'Shrink',
-                    'draw' => 'Draw',
-                    'corners' => 'Corners',
-                    'none' => 'None',
-                ],
-                'condition' => [
-                    'layout!' => 'dropdown',
-                    'pointer' => 'framed',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'animation_background',
-            [
-                'label' => __('Animation'),
-                'type' => ControlsManager::SELECT,
-                'default' => 'fade',
-                'options' => [
-                    'fade' => 'Fade',
-                    'grow' => 'Grow',
-                    'shrink' => 'Shrink',
-                    'sweep-left' => 'Sweep Left',
-                    'sweep-right' => 'Sweep Right',
-                    'sweep-up' => 'Sweep Up',
-                    'sweep-down' => 'Sweep Down',
-                    'shutter-in-vertical' => 'Shutter In Vertical',
-                    'shutter-out-vertical' => 'Shutter Out Vertical',
-                    'shutter-in-horizontal' => 'Shutter In Horizontal',
-                    'shutter-out-horizontal' => 'Shutter Out Horizontal',
-                    'none' => 'None',
-                ],
-                'condition' => [
-                    'layout!' => 'dropdown',
-                    'pointer' => 'background',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'animation_text',
-            [
-                'label' => __('Animation'),
-                'type' => ControlsManager::SELECT,
-                'default' => 'grow',
-                'options' => [
-                    'grow' => 'Grow',
-                    'shrink' => 'Shrink',
-                    'sink' => 'Sink',
-                    'float' => 'Float',
-                    'skew' => 'Skew',
-                    'rotate' => 'Rotate',
-                    'none' => 'None',
-                ],
-                'condition' => [
-                    'layout!' => 'dropdown',
-                    'pointer' => 'text',
-                ],
-            ]
-        );
-
-        $indicator_options = [
-            'fa fa-caret-down' => 'classic',
-            'fa fa-angle-down' => 'angle',
-            'fa fa-chevron-down' => 'chevron',
-            'fa fa-plus' => 'plus',
-        ];
-
-        $submenu_condition = isset($args['submenu_condition']) ? $args['submenu_condition'] : [];
-
-        $self->addControl(
-            'indicator',
-            [
-                'label' => __('Submenu Indicator'),
-                'label_block' => false,
-                'type' => ControlsManager::ICON,
-                'default' => $self->indicator,
-                'options' => $indicator_options,
-                'include' => array_keys($indicator_options),
-                'condition' => $submenu_condition,
-            ]
-        );
-
-        if (isset($layout_options['dropdown'])) {
-            $submenu_condition['layout!'] = 'dropdown';
-        }
-
-        $self->addControl(
-            'align_submenu',
-            [
-                'label' => __('Submenu Align'),
-                'type' => ControlsManager::CHOOSE,
-                'label_block' => false,
-                'options' => [
-                    'left' => [
-                        'title' => __('Left'),
-                        'icon' => 'eicon-h-align-left',
-                    ],
-                    'right' => [
-                        'title' => __('Right'),
-                        'icon' => 'eicon-h-align-right',
-                    ],
-                ],
-                'frontend_available' => true,
-                'condition' => $submenu_condition,
-            ]
-        );
-
-        $self->addControl(
-            'show_submenu_on',
-            [
-                'label' => __('Show Submenu'),
-                'type' => ControlsManager::SELECT,
-                'label_block' => false,
-                'default' => 'hover',
-                'options' => [
-                    'hover' => __('On Hover'),
-                    'click' => __('On Click'),
-                ],
-                'frontend_available' => true,
-                'condition' => $submenu_condition,
-            ]
-        );
-    }
-
+    
     protected function registerNavStyleSection(array $args = [])
     {
         $self = ${'this'};
@@ -308,17 +73,20 @@ trait NavTrait
                 ],
             ]
         );
-
-        empty($args['show_icon']) or $self->addControl(
-            'color_icon',
+        $self->addControl(
+            'bgcolor_menu_item',
             [
-                'label' => __('Icon Color'),
+                'label' => __('Background color'),
                 'type' => ControlsManager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-item > i' => 'color: {{VALUE}}',
+                'scheme' => [
+                    'type' => SchemeColor::getType(),
+                    'value' => SchemeColor::COLOR_4,
                 ],
-                'condition' => [
-                    'icon!' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active:not(#e), ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.highlighted:not(#e), ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):hover, ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):focus' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -328,7 +96,7 @@ trait NavTrait
         $self->startControlsTab(
             'tab_menu_item_hover',
             [
-                'label' => __('Hover'),
+                'label' => __('Hover & Active'),
             ]
         );
 
@@ -347,233 +115,56 @@ trait NavTrait
                     '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):hover, ' .
                     '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):focus' => 'color: {{VALUE}}',
                 ],
-                'condition' => [
-                    'pointer!' => 'background',
-                ],
             ]
         );
-
-        empty($args['show_icon']) or $self->addControl(
-            'color_icon_hover',
-            [
-                'label' => __('Icon Color'),
-                'type' => ControlsManager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-item:hover > i' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'icon!' => '',
-                ],
-            ]
-        );
-
         $self->addControl(
-            'color_menu_item_hover_pointer_bg',
+            'background_menu_item_hover',
             [
-                'label' => __('Text Color'),
-                'type' => ControlsManager::COLOR,
-                'default' => '#fff',
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active:not(#e), ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.highlighted:not(#e), ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):hover, ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):focus' => 'color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pointer' => 'background',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'pointer_color_menu_item_hover',
-            [
-                'label' => __('Pointer Color'),
+                'label' => __('Background Color'),
                 'type' => ControlsManager::COLOR,
                 'scheme' => [
                     'type' => SchemeColor::getType(),
                     'value' => SchemeColor::COLOR_4,
                 ],
-                'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main:not(.e--pointer-framed) .elementor-item:before, ' .
-                    '{{WRAPPER}} .elementor-nav--main:not(.e--pointer-framed) .elementor-item:after' => 'background-color: {{VALUE}}',
-                    '{{WRAPPER}} .e--pointer-framed .elementor-item:before, ' .
-                    '{{WRAPPER}} .e--pointer-framed .elementor-item:after' => 'border-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pointer!' => ['none', 'text'],
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active:not(#e), ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.highlighted:not(#e), ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):hover, ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):focus' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
-
-        $self->endControlsTab();
-
-        $self->startControlsTab(
-            'tab_menu_item_active',
-            [
-                'label' => __('Active'),
-                'condition' => isset($args['active_condition']) ? $args['active_condition'] : [],
-            ]
-        );
-
         $self->addControl(
-            'color_menu_item_active',
-            [
-                'label' => __('Text Color'),
+            'menu_item_border_color_hover',
+            array(
+                'label' => __('Border Color'),
                 'type' => ControlsManager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active:not(#e)' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'pointer_color_menu_item_active',
-            [
-                'label' => __('Pointer Color'),
-                'type' => ControlsManager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main:not(.e--pointer-framed) .elementor-item.elementor-item-active:before, ' .
-                    '{{WRAPPER}} .elementor-nav--main:not(.e--pointer-framed) .elementor-item.elementor-item-active:after' => 'background-color: {{VALUE}}',
-                    '{{WRAPPER}} .e--pointer-framed .elementor-item.elementor-item-active:before, ' .
-                    '{{WRAPPER}} .e--pointer-framed .elementor-item.elementor-item-active:after' => 'border-color: {{VALUE}}',
-                ],
-                'condition' => [
-                    'pointer!' => ['none', 'text'],
-                ],
-            ]
+                'condition' => array(
+                    'border_border!' => '',
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active:not(#e), ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.highlighted:not(#e), ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):hover, ' .
+                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not(#e):focus' => 'border-color: {{VALUE}}',
+                ),
+            )
         );
 
         $self->endControlsTab();
 
         $self->endControlsTabs();
 
-        $self->addResponsiveControl(
-            'padding_horizontal_menu_item',
-            [
-                'label' => __('Horizontal Padding'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 50,
-                    ],
-                ],
-                'devices' => $devices,
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main .elementor-item' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
-                ],
-                'separator' => 'before',
-            ]
+        $this->addGroupControl(
+            GroupControlBorder::getType(),
+            array(
+                'name' => 'border',
+                'label' => __('Border'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .blockcart > a',
+            )
         );
-
-        $self->addResponsiveControl(
-            'padding_vertical_menu_item',
-            [
-                'label' => __('Vertical Padding'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 50,
-                    ],
-                ],
-                'devices' => $devices,
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main .elementor-item' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
-                ],
-            ]
-        );
-
-        empty($args['show_icon']) or $self->addControl(
-            'icon_size',
-            [
-                'label' => __('Icon Size'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 50,
-                    ],
-                ],
-                'size_units' => ['px', 'em'],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-item > i' => 'font-size: {{SIZE}}{{UNIT}}',
-                ],
-                'condition' => [
-                    'icon!' => '',
-                ],
-            ]
-        );
-
-        $self->addResponsiveControl(
-            'menu_space_between',
-            [
-                'label' => __('Space Between'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 100,
-                    ],
-                ],
-                'devices' => $devices,
-                'selectors' => [
-                    'body:not(.lang-rtl) {{WRAPPER}} .elementor-nav--layout-horizontal .elementor-nav > li:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}}',
-                    'body.lang-rtl {{WRAPPER}} .elementor-nav--layout-horizontal .elementor-nav > li:not(:last-child)' => 'margin-left: {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .elementor-nav--main:not(.elementor-nav--layout-horizontal) .elementor-nav > li:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
-                ],
-                'condition' => isset($args['space_between_condition']) ? $args['space_between_condition'] : [],
-            ]
-        );
-
-        $self->addResponsiveControl(
-            'border_radius_menu_item',
-            [
-                'label' => __('Border Radius'),
-                'type' => ControlsManager::SLIDER,
-                'size_units' => ['px', 'em', '%'],
-                'devices' => $devices,
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-item:before' => 'border-radius: {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .e--animation-shutter-in-horizontal .elementor-item:before' => 'border-radius: {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}} 0 0',
-                    '{{WRAPPER}} .e--animation-shutter-in-horizontal .elementor-item:after' => 'border-radius: 0 0 {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .e--animation-shutter-in-vertical .elementor-item:before' => 'border-radius: 0 {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}} 0',
-                    '{{WRAPPER}} .e--animation-shutter-in-vertical .elementor-item:after' => 'border-radius: {{SIZE}}{{UNIT}} 0 0 {{SIZE}}{{UNIT}}',
-                ],
-                'condition' => [
-                    'pointer' => 'background',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'pointer_width',
-            [
-                'label' => __('Pointer Width'),
-                'type' => ControlsManager::SLIDER,
-                'devices' => $devices,
-                'range' => [
-                    'px' => [
-                        'max' => 30,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .e--pointer-framed .elementor-item:before' => 'border-width: {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .e--pointer-framed.e--animation-draw .elementor-item:before' => 'border-width: 0 0 {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .e--pointer-framed.e--animation-draw .elementor-item:after' => 'border-width: {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}} 0 0',
-                    '{{WRAPPER}} .e--pointer-framed.e--animation-corners .elementor-item:before' => 'border-width: {{SIZE}}{{UNIT}} 0 0 {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .e--pointer-framed.e--animation-corners .elementor-item:after' => 'border-width: 0 {{SIZE}}{{UNIT}} {{SIZE}}{{UNIT}} 0',
-                    '{{WRAPPER}} .e--pointer-underline .elementor-item:after, ' .
-                    '{{WRAPPER}} .e--pointer-overline .elementor-item:before, ' .
-                    '{{WRAPPER}} .e--pointer-double-line .elementor-item:before, ' .
-                    '{{WRAPPER}} .e--pointer-double-line .elementor-item:after' => 'height: {{SIZE}}{{UNIT}}',
-                ],
-                'condition' => [
-                    'pointer' => ['underline', 'overline', 'double-line', 'framed'],
-                ],
-            ]
-        );
-
         $self->endControlsSection();
     }
 
@@ -587,16 +178,6 @@ trait NavTrait
                 'label' => __('Dropdown'),
                 'tab' => ControlsManager::TAB_STYLE,
                 'condition' => isset($args['dropdown_condition']) ? $args['dropdown_condition'] : [],
-            ]
-        );
-
-        empty($args['show_description']) or $self->addControl(
-            'dropdown_description',
-            [
-                'raw' => __('On desktop, this will affect the submenu. On mobile, this will affect the entire menu.'),
-                'type' => ControlsManager::RAW_HTML,
-                'content_classes' => 'elementor-descriptor',
-                'separator' => 'after',
             ]
         );
 
@@ -649,7 +230,7 @@ trait NavTrait
         $self->startControlsTab(
             'tab_dropdown_item_hover',
             [
-                'label' => __('Hover'),
+                'label' => __('Hover & Active'),
             ]
         );
 
@@ -664,6 +245,7 @@ trait NavTrait
                     '{{WRAPPER}} .elementor-nav--dropdown a.highlighted:not(#e), ' .
                     '{{WRAPPER}} .elementor-nav--dropdown a:not(#e):hover, ' .
                     '{{WRAPPER}} .elementor-menu-toggle:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active:not(#e)' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -678,46 +260,27 @@ trait NavTrait
                     '{{WRAPPER}} .elementor-nav--dropdown a:hover, ' .
                     '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active, ' .
                     '{{WRAPPER}} .elementor-nav--dropdown a.highlighted' => 'background-color: {{VALUE}}',
-                ],
-                'separator' => 'none',
-            ]
-        );
-
-        $self->endControlsTab();
-
-        $self->startControlsTab(
-            'tab_dropdown_item_active',
-            [
-                'label' => __('Active'),
-                'condition' => isset($args['active_condition']) ? $args['active_condition'] : [],
-            ]
-        );
-
-        $self->addControl(
-            'color_dropdown_item_active',
-            [
-                'label' => __('Text Color'),
-                'type' => ControlsManager::COLOR,
-                'default' => '',
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active:not(#e)' => 'color: {{VALUE}}',
-                ],
-            ]
-        );
-
-        $self->addControl(
-            'background_color_dropdown_item_active',
-            [
-                'label' => __('Background Color'),
-                'type' => ControlsManager::COLOR,
-                'default' => '',
-                'selectors' => [
                     '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active' => 'background-color: {{VALUE}}',
                 ],
                 'separator' => 'none',
             ]
         );
-
+        $self->addControl(
+            'dropdown_item_border_color_hover',
+            array(
+                'label' => __('Border Color'),
+                'type' => ControlsManager::COLOR,
+                'condition' => array(
+                    'border_border!' => '',
+                ),
+                'selectors' => array(
+                    '{{WRAPPER}} .elementor-nav--dropdown a:hover, ' .
+                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active, ' .
+                    '{{WRAPPER}} .elementor-nav--dropdown a.highlighted' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active' => 'border-color: {{VALUE}}',
+                ),
+            )
+        );
         $self->endControlsTab();
 
         $self->endControlsTabs();

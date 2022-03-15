@@ -220,12 +220,6 @@ abstract class CoreXBaseXDocument extends ControlsStack
             'class' => 'elementor elementor-' . $id,
         ];
 
-        $version_meta = $this->getMainMeta('_elementor_version');
-
-        if (version_compare($version_meta, '2.5.0', '<')) {
-            $attributes['class'] .= ' elementor-bc-flex-widget';
-        }
-
         if (!Plugin::$instance->preview->isPreviewMode($id)) {
             $attributes['data-elementor-settings'] = json_encode($this->getFrontendSettings());
         }

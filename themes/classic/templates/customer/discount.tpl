@@ -24,11 +24,11 @@
  *}
 {extends file='customer/page.tpl'}
 
-{block name='page_title'}
-  {l s='Your vouchers' d='Shop.Theme.Customeraccount'}
+{block name='page_content_title'}
+  <h4>{l s='Your vouchers' d='Shop.Theme.Customeraccount'}</h4>
 {/block}
 
-{block name='page_content'}
+{block name='page_content_content'}
   {if $cart_rules}
     <table class="table table-striped table-bordered hidden-sm-down">
       <thead class="thead-default">

@@ -152,28 +152,33 @@ class WidgetCurrencySelector extends WidgetBase
                         'icon' => 'eicon-h-align-right',
                     ]
                 ],
-                'prefix_class' => 'elementor-nav--align-',
+                'prefix_class' => 'align-',
             ]
         );
-
-        $this->addControl(
-            'show_submenu_on',
+        $this->addResponsiveControl(
+            'dropdown_width',
             [
-                'label' => __('Show Submenu'),
-                'type' => ControlsManager::SELECT,
-                'label_block' => false,
-                'default' => 'hover',
-                'options' => [
-                    'hover' => __('On Hover'),
-                    'click' => __('On Click'),
+                'label' => __( 'Dropdown width' ),
+                'type' => ControlsManager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 500,
+                    ],
                 ],
-                'frontend_available' => true,
+                'selectors' => [
+                    '{{WRAPPER}} .currency-widget .dropdown-menu' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'skin' => 'dropdown'
+                ]
             ]
         );
         $this->addControl(
             'align_submenu',
             [
-                'label' => __('Submenu Align'),
+                'label' => __('Dropdown Align'),
                 'type' => ControlsManager::CHOOSE,
                 'label_block' => false,
                 'options' => [
@@ -186,7 +191,9 @@ class WidgetCurrencySelector extends WidgetBase
                         'icon' => 'eicon-h-align-right',
                     ],
                 ],
-                'frontend_available' => true,
+                'selectors' => [
+                    '{{WRAPPER}} .currency-widget .dropdown-menu' => 'text-align: {{VALUE}};',
+                ],
             ]
         );
         $this->endControlsSection();
@@ -207,7 +214,10 @@ class WidgetCurrencySelector extends WidgetBase
             [
                 'name' => 'menu_typography',
                 'scheme' => SchemeTypography::TYPOGRAPHY_1,
-                'selector' => '{{WRAPPER}} .elementor-nav--main',
+                'selectors' => [
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a' => 'color: {{VALUE}}',
+                ],
             ]
         );
 
@@ -231,7 +241,8 @@ class WidgetCurrencySelector extends WidgetBase
                 ],
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -245,7 +256,8 @@ class WidgetCurrencySelector extends WidgetBase
                     'value' => SchemeColor::COLOR_4,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -269,9 +281,10 @@ class WidgetCurrencySelector extends WidgetBase
                     'value' => SchemeColor::COLOR_4,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active, ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not:hover, ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:not:focus' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee.active' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a.active' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a:hover' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -285,9 +298,11 @@ class WidgetCurrencySelector extends WidgetBase
                     'value' => SchemeColor::COLOR_4,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active, ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:hover, ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:focus' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee.active' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a.active' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget > a:hover' => 'background-color: {{VALUE}}',
+
                 ],
             ]
         );
@@ -300,10 +315,11 @@ class WidgetCurrencySelector extends WidgetBase
                     'border_border!' => '',
                 ),
                 'selectors' => array(
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item.elementor-item-active, ' .
-
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:hover, ' .
-                    '{{WRAPPER}} .elementor-nav--main a.elementor-item:focus' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee.active, ' .
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover, ' .
+                    '{{WRAPPER}} .currency-widget > a.active, ' .
+                    '{{WRAPPER}} .currency-widget > a:hover, ' .
+                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover, ' => 'border-color: {{VALUE}}',
                 ),
             )
         );
@@ -315,12 +331,64 @@ class WidgetCurrencySelector extends WidgetBase
         $this->addGroupControl(
             GroupControlBorder::getType(),
             array(
-                'name' => 'border',
+                'name' => 'border_dropdown',
                 'label' => __('Border'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .elementor-nav--main a.elementor-item',
+                'selector' => '{{WRAPPER}} .currency-widget .dropdown-togglee',
+                'condition' => [
+                    'skin' => 'dropdown'
+                ]
+                
             )
+        );
+        $this->addGroupControl(
+            GroupControlBorder::getType(),
+            array(
+                'name' => 'border_classic',
+                'label' => __('Border'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .currency-widget > a',
+                'condition' => [
+                    'skin' => 'classic'
+                ]
+                
+            )
+        );
+        $this->addResponsiveControl(
+            'padding',
+            [
+                'label' => __('Padding'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .currency-widget > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'skin' => 'classic'
+                ]
+            ]
+        );
+        $this->addResponsiveControl(
+            'space',
+            [
+                'label' => __( 'Item space' ),
+                'type' => ControlsManager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .currency-widget > a' => 'margin-right: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'skin' => 'classic'
+                ]
+            ]
         );
         $this->endControlsSection();
 
@@ -337,13 +405,14 @@ class WidgetCurrencySelector extends WidgetBase
             ]
         );
 
+
         $this->addGroupControl(
             GroupControlTypography::getType(),
             [
                 'name' => 'dropdown_typography',
                 'scheme' => SchemeTypography::TYPOGRAPHY_4,
                 'exclude' => ['line_height'],
-                'selector' => '{{WRAPPER}} .elementor-nav--dropdown',
+                'selector' => '{{WRAPPER}} .dropdown-menu',
             ]
         );
 
@@ -363,7 +432,7 @@ class WidgetCurrencySelector extends WidgetBase
                 'type' => ControlsManager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown a, {{WRAPPER}} .elementor-menu-toggle' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .dropdown-menu a' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -375,7 +444,7 @@ class WidgetCurrencySelector extends WidgetBase
                 'type' => ControlsManager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .dropdown-menu a' => 'background-color: {{VALUE}}',
                 ],
                 'separator' => 'none',
             ]
@@ -397,10 +466,8 @@ class WidgetCurrencySelector extends WidgetBase
                 'type' => ControlsManager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active, ' .
-                    '{{WRAPPER}} .elementor-nav--dropdown a:hover, ' .
-                    '{{WRAPPER}} .elementor-menu-toggle:hover' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .dropdown-menu a.active, ' .
+                    '{{WRAPPER}} .dropdown-menu a:hover ' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -412,9 +479,8 @@ class WidgetCurrencySelector extends WidgetBase
                 'type' => ControlsManager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown a:hover, ' .
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active, ' .
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .dropdown-menu a.active, ' .
+                    '{{WRAPPER}} .dropdown-menu a:hover ' => 'background-color: {{VALUE}}',
                 ],
                 'separator' => 'none',
             ]
@@ -428,9 +494,8 @@ class WidgetCurrencySelector extends WidgetBase
                     'border_border!' => '',
                 ),
                 'selectors' => array(
-                    '{{WRAPPER}} .elementor-nav--dropdown a:hover, ' .
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active, ' .
-                    '{{WRAPPER}} .elementor-nav--dropdown a.elementor-item-active' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .dropdown-menu a.active, ' .
+                    '{{WRAPPER}} .dropdown-menu a:hover, ' => 'border-color: {{VALUE}}',
                 ),
             )
         );
@@ -442,7 +507,7 @@ class WidgetCurrencySelector extends WidgetBase
             GroupControlBorder::getType(),
             [
                 'name' => 'dropdown_border',
-                'selector' => '{{WRAPPER}} .elementor-nav--dropdown',
+                'selector' => '{{WRAPPER}} .dropdown-menu a',
                 'separator' => 'before',
             ]
         );
@@ -454,9 +519,7 @@ class WidgetCurrencySelector extends WidgetBase
                 'type' => ControlsManager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .elementor-nav--dropdown li:first-child a' => 'border-top-left-radius: {{TOP}}{{UNIT}}; border-top-right-radius: {{RIGHT}}{{UNIT}};',
-                    '{{WRAPPER}} .elementor-nav--dropdown li:last-child a' => 'border-bottom-right-radius: {{BOTTOM}}{{UNIT}}; border-bottom-left-radius: {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .dropdown-menu' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -468,95 +531,20 @@ class WidgetCurrencySelector extends WidgetBase
                 'exclude' => [
                     'box_shadow_position',
                 ],
-                'selector' => '{{WRAPPER}} .elementor-nav--main .elementor-nav--dropdown, {{WRAPPER}} .elementor-nav__container.elementor-nav--dropdown',
+                'selector' => '{{WRAPPER}} .dropdown-menu',
             ]
         );
-
         $this->addResponsiveControl(
-            'padding_horizontal_dropdown_item',
+            'padding_dropdown',
             [
-                'label' => __('Horizontal Padding'),
-                'type' => ControlsManager::SLIDER,
+                'label' => __('Padding'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
-                ],
-                'separator' => 'before',
-
-            ]
-        );
-
-        $this->addResponsiveControl(
-            'padding_vertical_dropdown_item',
-            [
-                'label' => __('Vertical Padding'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 50,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown a' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .dropdown-menu a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
-
-        $this->addControl(
-            'heading_dropdown_divider',
-            [
-                'label' => __('Divider'),
-                'type' => ControlsManager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-
-        $this->addGroupControl(
-            GroupControlBorder::getType(),
-            [
-                'name' => 'dropdown_divider',
-                'selector' => '{{WRAPPER}} .elementor-nav--dropdown li:not(:last-child)',
-                'exclude' => ['width'],
-            ]
-        );
-
-        $this->addControl(
-            'dropdown_divider_width',
-            [
-                'label' => __('Border Width'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 50,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--dropdown li:not(:last-child)' => 'border-bottom-width: {{SIZE}}{{UNIT}}',
-                ],
-                'condition' => [
-                    'dropdown_divider_border!' => '',
-                ],
-            ]
-        );
-
-        $this->addResponsiveControl(
-            'dropdown_top_distance',
-            [
-                'label' => __('Distance'),
-                'type' => ControlsManager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => -100,
-                        'max' => 100,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-nav--main > .elementor-nav > li > .elementor-nav--dropdown, ' .
-                    '{{WRAPPER}} .elementor-nav__container.elementor-nav--dropdown' => 'margin-top: {{SIZE}}{{UNIT}} !important',
-                ],
-                'separator' => 'before',
-            ]
-        );
-
         $this->endControlsSection();
     }
 
@@ -571,7 +559,9 @@ class WidgetCurrencySelector extends WidgetBase
      */
     protected function render()
     {
-        $settings = $this->getActiveSettings();
+        $params = array();
+        $settings = $this->getSettings();
+        $params['settings'] = $settings;
         $currencies = \Currency::getCurrencies(false, true, true);
 
         if (\Configuration::isCatalogMode() || count($currencies) <= 1 || !$settings['content']) {
@@ -584,66 +574,24 @@ class WidgetCurrencySelector extends WidgetBase
         $url = preg_replace('/[&\?](SubmitCurrency|id_currency)=[^&]*/', '', $_SERVER['REQUEST_URI']);
         $separator = stripos($url, '?') === false ? '?' : '&';
         $id_currency = $this->context->currency->id;
-        $menu = [
-            '0' => [
+        $current_currency = [
                 'id' => $id_currency,
-                'symbol' => $this->context->currency->symbol,
-                'iso_code' => $this->context->currency->iso_code,
-                'name' => $this->context->currency->name,
-                'url' => 'javascript:;',
-                'current' => false,
-                'children' => [],
-            ]
+                'symbol' => $this->currency_symbol ? $this->context->currency->symbol : '',
+                'iso_code' => $this->currency_code ? $this->context->currency->iso_code : '',
+                'name' => $this->currency_name ? $this->context->currency->name : '',
         ];
         foreach ($currencies as &$currency) {
             $currency['current'] = $id_currency == $currency['id'];
             $currency['url'] = $url . $separator . 'SubmitCurrency=1&id_currency=' . (int) $currency['id'];
-
-            $menu[0]['children'][] = $currency;
         }
-        if ('classic' === $settings['skin']) {
-            $menu = &$menu[0]['children'];
-        }
-        $ul_class = 'elementor-nav';
+        //echo '<pre>'; print_r($currencies);die;
+        $params['currencies'] =  $currencies;
+        $params['current_currency'] =  $current_currency;
+        $params['use_symbol'] = $this->currency_symbol; 
+        $params['use_iso'] = $this->currency_code; 
+        $params['use_name'] = $this->currency_name; 
 
-        // General Menu.
-        ob_start();
-        $this->selectorList($menu, 0, $ul_class);
-        $menu_html = ob_get_clean();
-
-        $this->addRenderAttribute('main-menu', 'class', [
-            'elementor-currencies',
-            'elementor-nav--main',
-            'elementor-nav__container',
-        ]);
-        ?>
-        <nav <?= $this->getRenderAttributeString('main-menu') ?>><?= $menu_html ?></nav>
-        <?php
-    }
-
-    protected function selectorList(array &$nodes, $depth = 0, $ul_class = '')
-    {
-        ?>
-        <ul <?= $depth ? 'class="sub-menu elementor-nav--dropdown"' : 'id="selector-' . $this->getId() . '" class="' . $ul_class . '"' ?>>
-        <?php foreach ($nodes as &$node) : ?>
-            <li class="<?= sprintf(self::$li_class, 'lang', "currency-{$node['id']}", $node['current'] ? ' current-menu-item' : '', !empty($node['children']) ? ' menu-item-has-children' : '') ?>">
-                <a class="<?= ($depth ? 'elementor-sub-item' : 'elementor-item') . ($node['current'] ? ' elementor-item-active' : '') ?>" href="<?= esc_attr($node['url']) ?>">
-                <?php if ($this->currency_symbol) : ?>
-                    <span class="elementor-currencies__symbol"><?= $node['symbol'] ?></span>
-                <?php endif ?>
-                <?php if ($this->currency_code) : ?>
-                    <span class="elementor-currencies__code"><?= $node['iso_code'] ?></span>
-                <?php endif ?>
-                <?php if ($this->currency_name) : ?>
-                    <span class="elementor-currencies__name"><?= $node['name'] ?></span>
-                <?php endif ?>
-                <span class="sub-arrow"><i class=""></i></span>
-                </a>
-                <?php empty($node['children']) or $this->selectorList($node['children'], $depth + 1) ?>
-            </li>
-        <?php endforeach ?>
-        </ul>
-        <?php
+        echo $this->fetch( _VEC_TEMPLATES_ . 'front/widgets/currency-selector.tpl', $params );
     }
 
     public function __construct($data = [], $args = [])
@@ -652,4 +600,20 @@ class WidgetCurrencySelector extends WidgetBase
 
         parent::__construct($data, $args);
     }
+
+    protected function fetch( $templatePath, $params ) {
+		$context = \Context::getContext();
+		
+		$smarty = $context->smarty;
+		
+        if ( is_object( $context->smarty ) ) {
+            $smarty = $context->smarty->createData( $context->smarty );
+        }
+		
+		$smarty->assign( $params );
+		
+        $template = $context->smarty->createTemplate( $templatePath, null, null, $smarty );
+
+        return $template->fetch();
+	}
 }

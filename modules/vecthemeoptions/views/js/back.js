@@ -117,6 +117,12 @@ $(document).ready(function(){
 		'grid_name_color',
 		'grid_name_colorh',
 		'grid_price_color',
+		'new_bgcolor',
+		'new_color',
+		'sale_bgcolor',
+		'sale_color',
+		'pack_bgcolor',
+		'pack_color',
 		'product_name_color',
 		'product_price_color',
 		

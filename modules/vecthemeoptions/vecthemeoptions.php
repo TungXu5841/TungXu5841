@@ -222,7 +222,6 @@ class VecThemeoptions extends Module implements WidgetInterface
             foreach($this->fields_form as $key => $value){
                 $multiple_arr = array_merge($multiple_arr,$value['form']['input']);
             }
-            $old_categoty = Configuration::get('vecthemeoptionscp_layout');
             // START LANG
             $languages = Language::getLanguages(false);
             if(isset($multiple_arr) && !empty($multiple_arr)){
@@ -457,6 +456,43 @@ class VecThemeoptions extends Module implements WidgetInterface
             color:'.$product_price_color.';
             font-size: '.$product_price_size.'px;
         }';
+        $new_bgcolor = Configuration::get($this->name . 'new_bgcolor');
+        $new_color = Configuration::get($this->name . 'new_color');
+        $sale_bgcolor = Configuration::get($this->name . 'sale_bgcolor');
+        $sale_color = Configuration::get($this->name . 'sale_color');
+        $pack_bgcolor = Configuration::get($this->name . 'pack_bgcolor');
+        $pack_color = Configuration::get($this->name . 'pack_color');
+        if($new_bgcolor || $new_color){
+            $css .= '.new-label{';
+                if($new_bgcolor){
+                    $css .= 'background: '. $new_bgcolor . ';';
+                }
+                if($new_color){
+                    $css .= 'color: '. $new_bgcolor . ';';
+                }    
+            $css .= '}';
+        }
+        if($sale_bgcolor || $sale_color){
+            $css .= '.sale-label{';
+                if($sale_bgcolor){
+                    $css .= 'background: '. $sale_bgcolor . ';';
+                }
+                if($sale_color){
+                    $css .= 'color: '. $sale_color . ';';
+                }    
+            $css .= '}';
+        }
+        if($pack_bgcolor || $pack_color){
+            $css .= '.oack-label{';
+                if($pack_bgcolor){
+                    $css .= 'background: '. $pack_bgcolor . ';';
+                }
+                if($pack_color){
+                    $css .= 'color: '. $pack_color . ';';
+                }    
+            $css .= '}';
+        }
+        
         //Category
         $category_width = Configuration::get($this->name . 'category_width');
         $category_custom_width = Configuration::get($this->name . 'category_custom_width');
@@ -559,6 +595,7 @@ class VecThemeoptions extends Module implements WidgetInterface
             'header_sticky'                 => Configuration::get($this->name . 'header_sticky'),
             //Product grid
 			'grid_type'                     => isset($_GET['grid']) ? $_GET['grid'] : Configuration::get($this->name . 'grid_type'),
+			'rotator'                       => Configuration::get($this->name . 'second_img'),
 			'name_length'                   => Configuration::get($this->name . 'p_name_length'),
             //Page title
             'ptitle_size'                   => Configuration::get($this->name . 'ptitle_size'),
@@ -576,6 +613,11 @@ class VecThemeoptions extends Module implements WidgetInterface
             'main_layout'                   => Configuration::get($this->name . 'main_layout'),
             'product_image'                 => Configuration::get($this->name . 'product_image'),
             'information_layout'            => Configuration::get($this->name . 'information_layout'),
+            //404 page
+            '404_content'                   => Configuration::get($this->name . '404_content'),
+            '404_image'                     => Configuration::get($this->name . '404_image') ? Configuration::get($this->name . '404_image') : '',
+            '404_text1'                     => Configuration::get($this->name . '404_text1', $this->context->language->id) ? Configuration::get($this->name . '404_text1', $this->context->language->id) : '',
+            '404_text2'                     => Configuration::get($this->name . '404_text2', $this->context->language->id) ? Configuration::get($this->name . '404_text2', $this->context->language->id) : '',
 		);
         if (isset($this->context->cookie->shop_view)) {
             $options['shop_view'] = $this->context->cookie->shop_view;

@@ -29,7 +29,8 @@
 			'<option value="displayShoppingCart">displayShoppingCart</option>' +
 			'<option value="displayShoppingCartFooter">displayShoppingCartFooter</option>' +
 			'<option value="displayFooterProduct">displayFooterProduct</option>' +
-			'<option value="displayNotFound">displayNotFound</option>'
+			'<option value="displayNotFound">displayNotFound</option>' +
+			'<option value="display404PageBuilder">display404PageBuilder</option>'
 		).insertAfter($hook);
 
 		if (!$select.find('[value="'+$hook.val()+'"]').length) {

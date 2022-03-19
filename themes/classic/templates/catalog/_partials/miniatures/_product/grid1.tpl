@@ -9,7 +9,21 @@
 					alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
 					data-full-size-image-url = "{$product.cover.large.url}"
 				  >
-				   {hook h="rotatorImg" product=$product}	
+				   {if $vectheme.rotator}
+						{foreach from=$product.images item=image}
+							{if !$image.cover}
+								<img
+									src="{$image.bySize.home_default.url}"
+									data-src="{$image.bySize.home_default.url}"
+									width="{$image.bySize.home_default.width}"
+									height="{$image.bySize.home_default.height}"
+									alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if} 2"
+									class="lazy-product-image product-thumbnail-rotator"
+								>
+								{break}
+							{/if}
+						{/foreach}
+				   {/if}
 				</a>
 				{else}
 				  <a href="{$product.url}" class="thumbnail product-thumbnail">

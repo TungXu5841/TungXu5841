@@ -56,7 +56,7 @@
 
                 </div>
             {elseif $block['type_content'] == 4}
-                <div class="quickmenu-item quickmenu-cart" {if $wishlist_url} onclick="window.open('{$cart_url}','_self')"{/if}>
+                <div class="quickmenu-item quickmenu-cart" onclick="window.open('{$cart_url}','_self')">
                     <div class="block-icon">
                         {if $block['icon'] != 'undefined'}
                             {if $block['icon']}

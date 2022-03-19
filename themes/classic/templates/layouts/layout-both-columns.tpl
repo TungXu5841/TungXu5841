@@ -56,7 +56,7 @@
         {if $page.page_name == 'category' && isset($category.image.large.url)  }
           {assign var="background" value="{$category.image.large.url}"}
         {/if}
-        {if $page.page_name != 'index'}
+        {if $page.page_name != 'index' && $page.page_name != 'module-vecelements-preview'}
         {block name='page_header_container'}
         <div class=" page-title-wrapper {if $vectheme.ptitle_size == 'small'}v_tilte_small{elseif $vectheme.ptitle_size == 'big'}v_tilte_big{/if}" {if $background} style="background: url('{$background}') no-repeat;" {/if}>
           <div class="container">

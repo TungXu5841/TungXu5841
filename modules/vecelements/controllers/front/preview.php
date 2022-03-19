@@ -46,10 +46,11 @@ class VecElementsPreviewModuleFrontController extends ModuleFrontController
     public function initContent()
     {
         $model = $this->uid->getModel();
+        //$hook_name = \Tools::strtolower(\VECContent::getHookById($this->uid->id));
 
-        if ('VECTemplate' != $model) {
-            $this->warning[] = VECSmarty::get(_VEC_TEMPLATES_ . 'admin/admin.tpl', 'ce_undefined_position');
-        }
+        // if ('VECTemplate' != $model && $hook_name != 'display404pagebuilder') {
+        //     $this->warning[] = VECSmarty::get(_VEC_TEMPLATES_ . 'admin/admin.tpl', 'ce_undefined_position');
+        // }
         $post = VEC\get_post($this->uid);
 
         $this->title = $post->post_title;

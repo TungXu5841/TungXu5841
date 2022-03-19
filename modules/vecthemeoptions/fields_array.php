@@ -195,7 +195,7 @@ $this->fields_form[]['form'] = array(
 );
 $this->fields_form[]['form'] = array(
     'legend' => array(
-        'title' => $this->l('Product grid settings'),
+        'title' => $this->l('Product grid & labels'),
         'icon' => 'icon-windows'
     ),
     'input' => array(
@@ -229,6 +229,20 @@ $this->fields_form[]['form'] = array(
                 ),
                 'id' => 'id_option',
                 'name' => 'name',
+            ),
+        ),
+        array(
+            'type' => 'select',
+            'label' => $this->l('Second image on hover'),
+            'name' => 'second_img',
+            'options' => array (
+                'query' => array(
+                	'0' => array('id' => '0' , 'name' => 'Disabled'),
+       				'1' => array('id' => 'fade' , 'name' => 'Fade'),
+       				'2' => array('id' => 'zoom' , 'name' => 'Zoom'),
+                ),
+                'id' => 'id',
+                'name' => 'name'
             ),
         ),
         array(
@@ -290,6 +304,49 @@ $this->fields_form[]['form'] = array(
             'class' => 'fixed-width-sm',
             'suffix' => 'px',
         ),
+        array(
+            'type' => 'infoheading',
+            'label' => $this->l('Product labels'),
+            'name' => 'heading_label'
+        ),
+        array(
+            'type' => 'color2',
+            'label' => $this->l('"New" label background'),
+            'name' => 'new_bgcolor',
+        ),  
+        array(
+            'type' => 'color2',
+            'label' => $this->l('"New" label color'),
+            'name' => 'new_color',
+        ),  
+        array(
+            'type' => 'hr',
+            'name' => 'new_hr',
+        ),
+        array(
+            'type' => 'color2',
+            'label' => $this->l('"Sale" label background'),
+            'name' => 'sale_bgcolor',
+        ),  
+        array(
+            'type' => 'color2',
+            'label' => $this->l('"Sale" label color'),
+            'name' => 'sale_color',
+        ), 
+        array(
+            'type' => 'hr',
+            'name' => 'sale_hr',
+        ),
+        array(
+            'type' => 'color2',
+            'label' => $this->l('"Pack" label background'),
+            'name' => 'pack_bgcolor',
+        ),  
+        array(
+            'type' => 'color2',
+            'label' => $this->l('"Pack" label color'),
+            'name' => 'pack_color',
+        ),   
     ),
     'submit' => array(
         'title' => $this->l('Save'),
@@ -663,6 +720,36 @@ $this->fields_form[]['form'] = array(
         ),
         array(
             'type' => 'infoheading',
+            'label' => $this->l('Configurations'),
+            'name'=> 'ppageconfig'
+        ),
+        array(
+            'type' => 'switch',
+            'label' => $this->l('Active zoom'),
+            'name' => 'zoom',
+            'class' => 'fixed-width-xs',
+            'values' => array(
+                array(
+                    'id' => 'zoom_on',
+                    'value' => 1,
+                    'label' => $this->l('Yes')
+                    ),
+                array(
+                    'id' => 'zoom_off',
+                    'value' => 0,
+                    'label' => $this->l('No')
+                )
+            ),
+            'desc' => $this->l('Active zoom function when hover on product image')
+        ),
+        array(
+            'type' => 'text',
+            'label' => $this->l('Number of thumbnail items'),
+            'name' => 'thumbnail_items',
+            'class' => 'fixed-width-sm',
+        ),
+        array(
+            'type' => 'infoheading',
             'label' => $this->l('Style'),
             'name'=> 'ppagec'
         ),
@@ -706,6 +793,56 @@ $this->fields_form[]['form'] = array(
         'title' => $this->l('Save'),
     )
 
+);
+//404 page
+$this->fields_form[]['form'] = array(
+    'legend' => array(
+        'title' => $this->l('404 page'),
+        'icon' => 'icon-crosshairs'
+    ),
+    'input' => array(
+        array(
+            'type' => 'select',
+            'label' => $this->l('Content'),
+            'name' => '404_content',
+            'options' => array (
+                'query' =>[
+                    1 => ['id' => 'default', 'name' => 'Default content'],
+                    2 => ['id' => 'element', 'name' => 'Use content from V-Elements'],
+                ],
+                'id' => 'id',
+                'name' => 'name'
+            ),
+            'class' => 'fixed-width-xxl',
+            'desc' => $this->l('Use "display404PageBuilder" hook to build 404 page with V-Elements')
+        ),
+        array(
+            'type' => 'infoheading',
+            'label' => $this->l('Default content'),
+            'name'=> '404default'
+        ),
+        array(
+            'type' => 'filemanager',
+            'label' => $this->l('404 image'),
+            'name' => '404_image',
+            'desc' => $this->l('If there\'s no image selected, the text 404 will be used.')
+        ),
+        array(
+            'type' => 'text',
+            'label' => $this->l('Text 1'),
+            'name' => '404_text1',
+            'lang' => true
+        ),
+        array(
+            'type' => 'text',
+            'label' => $this->l('Text 2'),
+            'name' => '404_text2',
+            'lang' => true
+        ),
+    ),
+    'submit' => array(
+        'title' => $this->l('Save'),
+    )
 );
 $this->fields_form[]['form'] = array(
     'legend' => array(

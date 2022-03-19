@@ -26,15 +26,40 @@
 
 {block name="breadcrumb"}{/block}
 
-{block name='page_title'}
-  {$page.title}
-{/block}
+{block name='page_header_container'}{/block}
 
-{capture assign="errorContent"}
-  <h4>{l s='No products available yet' d='Shop.Theme.Catalog'}</h4>
-  <p>{l s='Stay tuned! More products will be shown here as they are added.' d='Shop.Theme.Catalog'}</p>
-{/capture}
+{if $vectheme.404_content == 'default'}
+  {capture assign="errorContent"}
+    <div class="404-image">
+    {if $vectheme.404_image}
+      <img src="{$vectheme.404_image}" alt="404" />
+    {else}
+      404
+    {/if}
+    </div>
+    <h4>
+      {if $vectheme.404_text1}
+        {$vectheme.404_text1}
+      {else}
+        {l s='Oops! That page can not be found.' d='Shop.Theme.Catalog'}
+      {/if}
+    </h4>
+    <p>
+      {if $vectheme.404_text2}
+        {$vectheme.404_text2}
+      {else}
+        {l s='Stay tuned! More products will be shown here as they are added.' d='Shop.Theme.Catalog'}
+      {/if}
+    </p>
+    <a href="{$urls.pages.index}" class="btn btn-primary">{l s='Back to homepage' d='Shop.Theme.Catalog'}</a>
+    <a href="{$urls.pages.contact}" class="btn btn-primary">{l s='Contact us' d='Shop.Theme.Catalog'}</a>
+  {/capture}
 
-{block name='page_content_container'}
-  {include file='errors/not-found.tpl' errorContent=$errorContent}
-{/block}
+  {block name='page_content_container'}
+    {include file='errors/not-found.tpl' errorContent=$errorContent}
+  {/block}
+{else}
+  {block name='page_content_container'}
+    {hook h="display404PageBuilder"}
+  {/block}
+{/if}

@@ -373,6 +373,9 @@ function get_preview_post_link($post = null, array $args = [], $relative = true)
                 // Remove rewritten URL if exists
                 $link = preg_replace('~[^/]+$~', '', $link);
             }
+            if('display404pagebuilder' === $hook){
+                $link = $ctx->link->getModuleLink('vecelements', 'preview', [], null, null, null, $relative);
+            }
             break;
         case UId::PRODUCT:
             $prod = new \Product($uid->id, false, $uid->id_lang, $id_shop);

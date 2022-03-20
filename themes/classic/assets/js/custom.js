@@ -26,4 +26,30 @@ $(document).ready(function(){
                 });
         })
     });
+	
+	$('#menu-icon') .click(function(){ 
+			$(this).toggleClass('open-menu'); 
+			var hClass = $(this).hasClass('open-menu');
+			if(hClass){
+				$(window).resize(function(){
+					if($(window).width() < 1024)   
+					{
+						$(this).parents('body').css( 'overflow','hidden');
+					}
+				});
+				
+				$(this).parents('body') .find( '#mobile_menu_wrapper' ) .addClass('box-menu');
+			}
+			else
+			{
+				$(this).parents('body').css( 'overflow','visible');
+				$(this).parents('body') .find( '#mobile_menu_wrapper' ) .removeClass('box-menu');
+				
+			}
+		});	  
+		$('.menu-close') .click(function(){
+			$(this).parents('body').css( 'overflow','visible');
+			$(this).parents('body') .find( '#mobile_menu_wrapper' ) .removeClass('box-menu');
+			$(this).parents('body').find( '#menu-icon' ).removeClass('open-menu');
+		});	
 })

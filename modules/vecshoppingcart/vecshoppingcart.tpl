@@ -23,13 +23,13 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <div id="_desktop_cart_block">
-  <div class="blockcart cart-preview {if $cart_layout == '1'}cart-default{else}cart-sidebar{/if}" {if isset($icon)}data-icon="{$icon}"{else}data-icon="icon-rt-FullShoppingCart"{/if} data-refresh-url="{$refresh_url}" data-cartitems="{$cart.products_count}">
+  <div class="blockcart cart-preview {if $cart_layout == '1'}cart-default{else}cart-sidebar{/if}" {if isset($icon)}data-icon="{$icon}"{else}data-icon="vecicon-FullShoppingCart"{/if} data-refresh-url="{$refresh_url}" data-cartitems="{$cart.products_count}">
      <a rel="nofollow" href="{$cart_url}">
         <span class="shopping-cart-icon">
           {if isset($icon)}
             <i class="{$icon}"></i>
           {else}
-            <i class="icon-rt-FullShoppingCart"></i>
+            <i class="vecicon-FullShoppingCart"></i>
           {/if}
         </span>
         <span class="cart-products-total">{$cart.totals.total.value}</span>
@@ -64,7 +64,7 @@
      <div class="popup_cart popup-sidebar">
 		<div class="title-cart flex-layout space-between">
 			<span>{l s='My cart' d='Shop.Theme.Actions'}</span>
-			<a href="javascript:void(0)" class="close-cart"><i class="icon-rt-close-outline"></i></a>
+			<a href="javascript:void(0)" class="close-cart"><i class="vecicon-close-outline"></i></a>
 		</div>
 		<div class="content-sidebar">
 			{if $cart.products_count != '0'}
@@ -91,7 +91,7 @@
 			  </div>
 			{else}
 				<div class="empty-cart">
-					<i class="icon-rt-handbag"></i>
+					<i class="vecicon-handbag"></i>
 					{l s='Your cart is empty.' d='Shop.Theme.Actions'}
 				</div>
 			{/if}

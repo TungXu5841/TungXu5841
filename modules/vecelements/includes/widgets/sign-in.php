@@ -41,7 +41,7 @@ class WidgetSignIn extends WidgetBase {
 				[
 					'label' => __( 'Button layout'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'icon',
+					'default' => 'icon_text',
 					'options' => [
 						'icon' => __( 'Icon'),
 						'text' => __( 'Text'),
@@ -55,11 +55,11 @@ class WidgetSignIn extends WidgetBase {
 				[
 					'label' => __( 'Account icon'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'icon-rt-user',
+					'default' => 'vecicon-user',
 					'options' => [
-						'icon-rt-user' => __( 'Icon 1'),
-						'icon-rt-person-circle-outline' => __( 'Icon 2'),
-						'icon-rt-person-outline' => __( 'Icon 3')
+						'vecicon-user' => __( 'Icon 1'),
+						'vecicon-person-circle-outline' => __( 'Icon 2'),
+						'vecicon-person-outline' => __( 'Icon 3')
 					],
 					'condition' => array(
 	                    'button_layout!' => 'text',
@@ -84,7 +84,7 @@ class WidgetSignIn extends WidgetBase {
 	                    'size' => 14,
 	                ],
 	                'selectors' => [
-	                    '{{WRAPPER}} .pos-account i' => 'font-size: {{SIZE}}{{UNIT}}',
+	                    '{{WRAPPER}} .vec-customersignin .my-account i' => 'font-size: {{SIZE}}{{UNIT}}',
 	                ],
 	                'condition' => [
 	                    'button_layout!' => 'text' 
@@ -95,7 +95,7 @@ class WidgetSignIn extends WidgetBase {
 				GroupControlTypography::getType(),
 				[
 					'name' 			=> 'text_typo',
-					'selector' 		=> '{{WRAPPER}} .pos-account > a',
+					'selector' 		=> '{{WRAPPER}} .vec-customersignin .my-account',
 				]
 			);
 	        $this->startControlsTabs('tabs_button_style');
@@ -114,7 +114,7 @@ class WidgetSignIn extends WidgetBase {
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account' => 'color: {{VALUE}};',
 	                )
 	            )
 	        );
@@ -125,7 +125,7 @@ class WidgetSignIn extends WidgetBase {
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,	                
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account' => 'background-color: {{VALUE}};',
 	                )
 	            )
 	        );
@@ -145,7 +145,7 @@ class WidgetSignIn extends WidgetBase {
 	                'label' => __('Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a:hover' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account:hover' => 'color: {{VALUE}};',
 	                )
 	            )
 	        );
@@ -156,7 +156,7 @@ class WidgetSignIn extends WidgetBase {
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a:hover' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account:hover' => 'background-color: {{VALUE}};',
 	                )
 	            )
 	        );
@@ -170,7 +170,7 @@ class WidgetSignIn extends WidgetBase {
 	                    'border_border!' => '',
 	                ),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a:hover' => 'border-color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account:hover' => 'border-color: {{VALUE}};',
 	                )
 	            )
 	        );
@@ -186,7 +186,7 @@ class WidgetSignIn extends WidgetBase {
 	                'label' => __('Border'),
 	                'placeholder' => '1px',
 	                'default' => '1px',
-	                'selector' => '{{WRAPPER}} .pos-account > a'
+	                'selector' => '{{WRAPPER}} .vec-customersignin .my-account'
 	            )
 	        );
 
@@ -197,7 +197,7 @@ class WidgetSignIn extends WidgetBase {
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', '%'),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	                ),
 	                'separator' => 'none'
 	            )
@@ -209,7 +209,7 @@ class WidgetSignIn extends WidgetBase {
 	                'type' => ControlsManager::DIMENSIONS,
 	                'size_units' => array('px', 'em', '%'),
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-account > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                    '{{WRAPPER}} .vec-customersignin .my-account' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 	                ),
 	            )
 	        );
@@ -217,7 +217,7 @@ class WidgetSignIn extends WidgetBase {
 	            GroupControlBoxShadow::getType(),
 	            array(
 	                'name' => 'button_box_shadow',
-	                'selector' => '{{WRAPPER}} .pos-account > a'
+	                'selector' => '{{WRAPPER}} .vec-customersignin .my-account'
 	            )
 	        );
 		$this->endControlsSection();
@@ -238,7 +238,7 @@ class WidgetSignIn extends WidgetBase {
 						'left' => __( 'Left'),
 						'right' => __( 'Right'),
 					],
-					'prefix_class' => 'pos-dropdown-',
+					'prefix_class' => 'vec-dropdown-',
 				]
 			);
 			$this->addControl(
@@ -257,7 +257,7 @@ class WidgetSignIn extends WidgetBase {
 						'unit' => 'px',
 					], 
 	                'selectors' => [
-	                    '{{WRAPPER}} .pos-account .pos-dropdown-menu' => 'width: {{SIZE}}{{UNIT}}',
+	                    '{{WRAPPER}} .vec-customersignin .dropdown-menu' => 'width: {{SIZE}}{{UNIT}}',
 	                ],
 	            ]
 	        );

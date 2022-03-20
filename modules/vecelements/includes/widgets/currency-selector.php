@@ -167,12 +167,29 @@ class WidgetCurrencySelector extends WidgetBase
                         'max' => 500,
                     ],
                 ],
+                'default' => [
+                    'size' => 130,
+                    'unit' => 'px',
+                ], 
                 'selectors' => [
                     '{{WRAPPER}} .currency-widget .dropdown-menu' => 'width: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'skin' => 'dropdown'
                 ]
+            ]
+        );
+        $this->addControl(
+            'dropdown_position',
+            [
+                'label' => __( 'Dropdown Position'),
+                'type' => ControlsManager::SELECT,
+                'default' => 'left',
+                'options' => [
+                    'left' => __( 'Left'),
+                    'right' => __( 'Right'),
+                ],
+                'prefix_class' => 'currency-dropdown-',
             ]
         );
         $this->addControl(
@@ -208,16 +225,11 @@ class WidgetCurrencySelector extends WidgetBase
                 'condition' => isset($args['condition']) ? $args['condition'] : [],
             ]
         );
-
         $this->addGroupControl(
             GroupControlTypography::getType(),
             [
-                'name' => 'menu_typography',
-                'scheme' => SchemeTypography::TYPOGRAPHY_1,
-                'selectors' => [
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .currency-widget > a' => 'color: {{VALUE}}',
-                ],
+                'name' 			=> 'text_typo',
+                'selector' 		=> '{{WRAPPER}} .currency-widget .dropdown-toggle, {{WRAPPER}} .currency-widget > a',
             ]
         );
 
@@ -235,13 +247,9 @@ class WidgetCurrencySelector extends WidgetBase
             [
                 'label' => __('Text Color'),
                 'type' => ControlsManager::COLOR,
-                'scheme' => [
-                    'type' => SchemeColor::getType(),
-                    'value' => SchemeColor::COLOR_3,
-                ],
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .currency-widget > a' => 'color: {{VALUE}}',
                 ],
             ]
@@ -251,12 +259,8 @@ class WidgetCurrencySelector extends WidgetBase
             [
                 'label' => __('Background color'),
                 'type' => ControlsManager::COLOR,
-                'scheme' => [
-                    'type' => SchemeColor::getType(),
-                    'value' => SchemeColor::COLOR_4,
-                ],
                 'selectors' => [
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .currency-widget > a' => 'background-color: {{VALUE}}',
                 ],
             ]
@@ -276,13 +280,9 @@ class WidgetCurrencySelector extends WidgetBase
             [
                 'label' => __('Text Color'),
                 'type' => ControlsManager::COLOR,
-                'scheme' => [
-                    'type' => SchemeColor::getType(),
-                    'value' => SchemeColor::COLOR_4,
-                ],
                 'selectors' => [
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee.active' => 'color: {{VALUE}}',
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle.active' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle:hover' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .currency-widget > a.active' => 'color: {{VALUE}}',
                     '{{WRAPPER}} .currency-widget > a:hover' => 'color: {{VALUE}}',
                 ],
@@ -293,13 +293,9 @@ class WidgetCurrencySelector extends WidgetBase
             [
                 'label' => __('Background Color'),
                 'type' => ControlsManager::COLOR,
-                'scheme' => [
-                    'type' => SchemeColor::getType(),
-                    'value' => SchemeColor::COLOR_4,
-                ],
                 'selectors' => [
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee.active' => 'background-color: {{VALUE}}',
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle.active' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle:hover' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .currency-widget > a.active' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .currency-widget > a:hover' => 'background-color: {{VALUE}}',
 
@@ -311,15 +307,12 @@ class WidgetCurrencySelector extends WidgetBase
             array(
                 'label' => __('Border Color'),
                 'type' => ControlsManager::COLOR,
-                'condition' => array(
-                    'border_border!' => '',
-                ),
                 'selectors' => array(
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee.active, ' .
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover, ' .
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle.active, ' .
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle:hover, ' .
                     '{{WRAPPER}} .currency-widget > a.active, ' .
                     '{{WRAPPER}} .currency-widget > a:hover, ' .
-                    '{{WRAPPER}} .currency-widget .dropdown-togglee:hover, ' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle:hover ' => 'border-color: {{VALUE}}',
                 ),
             )
         );
@@ -335,26 +328,19 @@ class WidgetCurrencySelector extends WidgetBase
                 'label' => __('Border'),
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .currency-widget .dropdown-togglee',
-                'condition' => [
-                    'skin' => 'dropdown'
-                ]
-                
+                'selector' => '{{WRAPPER}} .currency-widget .dropdown-toggle, {{WRAPPER}} .currency-widget > a',
             )
         );
-        $this->addGroupControl(
-            GroupControlBorder::getType(),
-            array(
-                'name' => 'border_classic',
-                'label' => __('Border'),
-                'placeholder' => '1px',
-                'default' => '1px',
-                'selector' => '{{WRAPPER}} .currency-widget > a',
-                'condition' => [
-                    'skin' => 'classic'
-                ]
-                
-            )
+        $this->addResponsiveControl(
+            'border_radius',
+            [
+                'label' => __('Border Radius'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle, {{WRAPPER}} .currency-widget > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
         );
         $this->addResponsiveControl(
             'padding',
@@ -363,11 +349,8 @@ class WidgetCurrencySelector extends WidgetBase
                 'type' => ControlsManager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
-                    '{{WRAPPER}} .currency-widget > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .currency-widget .dropdown-toggle, {{WRAPPER}} .currency-widget > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
-                'condition' => [
-                    'skin' => 'classic'
-                ]
             ]
         );
         $this->addResponsiveControl(
@@ -412,7 +395,7 @@ class WidgetCurrencySelector extends WidgetBase
                 'name' => 'dropdown_typography',
                 'scheme' => SchemeTypography::TYPOGRAPHY_4,
                 'exclude' => ['line_height'],
-                'selector' => '{{WRAPPER}} .dropdown-menu',
+                'selector' => '{{WRAPPER}} .dropdown-menu a',
             ]
         );
 
@@ -490,12 +473,9 @@ class WidgetCurrencySelector extends WidgetBase
             array(
                 'label' => __('Border Color'),
                 'type' => ControlsManager::COLOR,
-                'condition' => array(
-                    'border_border!' => '',
-                ),
                 'selectors' => array(
                     '{{WRAPPER}} .dropdown-menu a.active, ' .
-                    '{{WRAPPER}} .dropdown-menu a:hover, ' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .dropdown-menu a:hover ' => 'border-color: {{VALUE}}',
                 ),
             )
         );
@@ -542,6 +522,17 @@ class WidgetCurrencySelector extends WidgetBase
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
                     '{{WRAPPER}} .dropdown-menu a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->addResponsiveControl(
+            'margin_dropdown',
+            [
+                'label' => __('Margin'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .dropdown-menu a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );

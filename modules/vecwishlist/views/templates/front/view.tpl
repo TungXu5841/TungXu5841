@@ -38,7 +38,7 @@
 	 		<div id="js-wishlist-table" class="wishlist-table-wrapper">
 				<div class="wishlist-table-actions">
 					<a href="javascript:void(0)" class="js-wishlist-remove-all">
-						<i class="icon-rt-close-outline"></i> {l s='Remove all products' mod='vecwishlist'}
+						<i class="vecicon-close-outline"></i> {l s='Remove all products' mod='vecwishlist'}
 					</a>
 				</div>
 				<table class="shop_table_responsive shop_table">
@@ -59,7 +59,7 @@
 										<a href="javascript:void(0)" class="js-wishlist-remove btn-action-wishlist-remove js-wishlist-remove-{$product.id_product|intval}-{$product.id_product_attribute|intval}"
 											data-id-product="{$product.id_product|intval}"
 											data-id-product-attribute="{$product.id_product_attribute|intval}">
-											<i class="icon-rt-close-outline"></i>
+											<i class="vecicon-close-outline"></i>
 										</a>
 									</td>
 								{/if}
@@ -148,7 +148,7 @@
 			</div>
 			<p class="return-to-home">
 				<a href="{$urls.pages.index}" class="btn btn-primary">
-					<i class="icon-rt-arrow-left-solid"></i>
+					<i class="vecicon-arrow-left-solid"></i>
 					{l s='Return to home' mod='vecwishlist'}
 				</a>
 			</p>
@@ -163,7 +163,7 @@
 			</div>
 			<p class="return-to-home">
 				<a href="{$urls.pages.index}" class="btn btn-primary">
-					<i class="icon-rt-arrow-left-solid"></i>
+					<i class="vecicon-arrow-left-solid"></i>
 					{l s='Return to home' mod='vecwishlist'}
 				</a>
 			</p>

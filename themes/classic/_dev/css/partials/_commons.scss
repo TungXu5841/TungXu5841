@@ -36,6 +36,9 @@ p {
   font-weight: 400;
   color: $gray; 
 }
+.unvisible {
+  display: none;
+}
 button:focus{
   outline:none; 
 }
@@ -272,7 +275,9 @@ textarea {
   }
   /* stylelint-enable */
 }
-
+input:focus-visible {
+  outline: 1px solid var(--hovercolor); 
+}
 .form-control-select {
   height: 2.8125rem;
   padding: 0 0.5rem;

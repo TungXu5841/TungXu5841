@@ -27,7 +27,7 @@
    <div class="modal-content">
      <div class="modal-header">
        <button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
-       <i class="icon-rt-close-outline"></i>
+       <i class="vecicon-close-outline"></i>
        </button>
      </div>
      <div class="modal-body">

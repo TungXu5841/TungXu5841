@@ -24,11 +24,11 @@
  *}
 {block name='my_account_links'}
   <a href="{$urls.pages.my_account}" class="account-link btn btn-primary">
-    <i class="icon-rt-arrow-left-solid"></i>
+    <i class="vecicon-arrow-left-solid"></i>
     <span>{l s='Back to your account' d='Shop.Theme.Customeraccount'}</span>
   </a>
   <a href="{$urls.pages.index}" class="account-link btn btn-primary">
-    <i class="icon-rt-home-outline"></i>
+    <i class="vecicon-home-outline"></i>
     <span>{l s='Home' d='Shop.Theme.Global'}</span>
   </a>
 {/block}

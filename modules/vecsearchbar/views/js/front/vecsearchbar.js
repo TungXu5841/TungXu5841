@@ -16,6 +16,7 @@ var ajaxSearch = function(){
         order         = searchForm.find('input[name="order"]').val(),
         searchClear   = searchForm.find('.search-clear'),
         view_more     = 'View more', //Need to check
+		search_not_found = 'There is no product', //Need to check
         flagSuggest   = false;
 
     $('.search-cat-value').on('click', function(e){
@@ -38,6 +39,7 @@ var ajaxSearch = function(){
         .on('click', function(e){
             e.stopPropagation();
             $('.vec-overlay').show();
+			$('body').addClass('search-open');
             var resultShow = searchSuggest.find('.suggest-ajax-results');
             if(searchContainer.hasClass('search-classic') || searchContainer.hasClass('search-minimal')){
                 searchSuggest.removeClass('unvisible');
@@ -72,7 +74,7 @@ var ajaxSearch = function(){
                             searchClear.removeClass('loading_search');
                             var html = '';
                             html += '<div class="result-content">';
-                                if(resp.products){
+                                if(resp.products && resp.products.length > 0 ){
                                     for(var i=0 ; i<resp.products.length ; i++){
                                         html += '<div class="search-item">';
                                             html += '<a href="' + resp.products[i].url + '">';
@@ -80,9 +82,9 @@ var ajaxSearch = function(){
                                                 html += '<div class="product-infos">';
                                                     html += '<p class="product_name">'+ resp.products[i].name +'</p>';
                                                     if(resp.products[i].has_discount){
-                                                        html += '<p class="product_old_price">'+ resp.products[i].regular_price +'</p>';
+                                                        html += '<span class="product_old_price">'+ resp.products[i].regular_price +'</span>';
                                                     }
-                                                    html += '<p class="product_price">'+ resp.products[i].price +'</p>';
+                                                    html += '<span class="product_price">'+ resp.products[i].price +'</span>';
                                                 html += '</div>';
                                             html += '</a>';
                                         html += '</div>';   
@@ -113,6 +115,8 @@ var ajaxSearch = function(){
 
     $('body').on('click', function() {
         searchSuggest.addClass('unvisible');
+		$('.vec-overlay').hide();
+		$('body').removeClass('search-open');
     });
 };
 
@@ -134,9 +138,9 @@ var ajaxSuggestProducts = function(){
                         html += '<div class="product-infos">';
                             html += '<p class="product_name">'+ data.products[i].name +'</p>';
                             if(data.products[i].has_discount){
-                                html += '<p class="product_old_price">'+ data.products[i].regular_price +'</p>';
+                                html += '<span class="product_old_price">'+ data.products[i].regular_price +'</span>';
                             }
-                            html += '<p class="product_price">'+ data.products[i].price +'</p>';
+                            html += '<span class="product_price">'+ data.products[i].price +'</span>';
                         html += '</div>';
                     html += '</a>';
                 html += '</div>';

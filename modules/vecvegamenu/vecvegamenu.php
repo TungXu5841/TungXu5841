@@ -679,7 +679,6 @@ class VecVegamenu extends Module
 	public function hookHeader()
 	{
 		$this->context->controller->addJS($this->_path.'/views/js/front.js');
-		$this->context->controller->addCSS($this->_path.'/views/css/front.css');
 		if (Shop::getContext() == Shop::CONTEXT_SHOP)
 		$this->context->controller->addCSS(($this->_path).'views/css/vecvegamenu_s_'.(int)$this->context->shop->getContextShopID().'.css', 'all');
 	}
@@ -1106,34 +1105,19 @@ class VecVegamenu extends Module
 		$css = '';
 
 		$submenus = VecVegamenuClass::getMenus(); 
+		//echo '<pre>'; print_r($submenus);die('xxxxxxxxxxxxxxx');
 		foreach ($submenus as $key => $submenu)
 		{
-			
-			$css .= '#_desktop_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' > a .menu-subtitle,
-			#_mobile_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' > a .menu-subtitle{ 
+			$css .= '.vec-menu-vertical .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' > a .menu-subtitle{
 				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'background: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
 				'.($submenus[$key]['subtitle_color'] != '' ? 'color: '.$submenus[$key]['subtitle_color'].';' : '').'
 				'.($submenus[$key]['subtitle_fontsize'] != 0 ? 'font-size: '.$submenus[$key]['subtitle_fontsize'].'px;' : '').'
 				'.($submenus[$key]['subtitle_lineheight'] != 0 ? 'line-height: '.$submenus[$key]['subtitle_lineheight'].'px;' : '').';
 			}';
-			$css .= '#_desktop_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' > a .menu-subtitle:after{ 
-				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'border-top-color: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
-			}';	
-			$css .= '#_mobile_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' > a .menu-subtitle:after{ 
+			$css .= '.vec-menu-vertical .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' > a .menu-subtitle:after{  
 				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'border-right-color: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
-			}';
-			$submenu_config = VecVegamenuSubmenuClass::getSubmenuConfig($submenus[$key]['id_vecvegamenu_item']);
-			if($submenu_config['submenu_bg'] == 2 && $submenu_config['submenu_bg_color'] != ''){
-				$css .= '#_desktop_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' .menu-dropdown{
-					'.($submenu_config['submenu_bg_color'] != '' ? 'background: '.$submenu_config['submenu_bg_color'].';' : '').'
-				}';
-			}elseif($submenu_config['submenu_bg'] == 3 && $submenu_config['submenu_bg_image'] != ''){
-				$css .= '#_desktop_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecvegamenu_item'].' .menu-dropdown{
-					'.($submenu_config['submenu_bg_image'] != '' ? 'background-image: url("'.$submenu_config['submenu_bg_image'].'");' : '').'
-					background-repeat: '.$this->convertBgRepeat($submenu_config['submenu_bg_repeat']).';
-					background-position: '.$this->convertBgPosition($submenu_config['submenu_bg_position']).';
-				}';
-			}
+			}';	
+		
 		}
 		$css  = trim(preg_replace('/\s+/', ' ', $css));
 		if (Shop::getContext() == Shop::CONTEXT_SHOP)

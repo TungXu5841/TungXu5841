@@ -108,9 +108,8 @@
 /*** Login page ***/
 .page-authentication {
   #content {
-    @include customer-area-base-box();
-    max-width: 640px;
     margin: 0 auto;
+    padding: 0;
   }
 }
 

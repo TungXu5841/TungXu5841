@@ -60,13 +60,13 @@ class WidgetCompare extends WidgetBase
 				[
 					'label' => __( 'Compare icon'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'icon-rt-ios-shuffle-strong',
+					'default' => 'vecicon-ios-shuffle-strong',
 					'options' => [
-						'icon-rt-ios-shuffle-strong' => __( 'Icon 1'),
-						'icon-rt-repeat-outline' => __( 'Icon 2'),
-						'icon-rt-sync-alt-solid' => __( 'Icon 3'),
-						'icon-rt-ios-shuffle' => __( 'Icon 4'),
-						'icon-rt-refresh' => __( 'Icon 5')
+						'vecicon-ios-shuffle-strong' => __( 'Icon 1'),
+						'vecicon-repeat-outline' => __( 'Icon 2'),
+						'vecicon-sync-alt-solid' => __( 'Icon 3'),
+						'vecicon-ios-shuffle' => __( 'Icon 4'),
+						'vecicon-refresh' => __( 'Icon 5')
 					],
 					'condition' => array(
 	                    'button_layout!' => 'text',

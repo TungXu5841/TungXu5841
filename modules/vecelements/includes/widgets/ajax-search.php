@@ -151,28 +151,32 @@ class WidgetAjaxSearch extends WidgetBase {
         $this->addResponsiveControl(
             'width_size',
             [
-                'label' => __('Input width'),
+                'label' => __('Search width'),
                 'type' => ControlsManager::SLIDER,
                 'range' => [
                     'px' => [
                         'min' => 200,
                         'max' => 1000, 
                     ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
                 ],
                 'default' => [
                     'size' => 200,
                     'unit' => 'px', 
                 ],
+                'size_units' => ['px', '%'],
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input' => 'min-width: {{SIZE}}{{UNIT}}',
-                ],
-                
+                    '{{WRAPPER}} .search-content ' => 'width: {{SIZE}}{{UNIT}}',
+                ],      
             ]
         );
         $this->addResponsiveControl(
             'height_size',
             [
-                'label' => __('Input height'),
+                'label' => __('Search height'),
                 'type' => ControlsManager::SLIDER,
                 'range' => [
                     'px' => [
@@ -181,12 +185,12 @@ class WidgetAjaxSearch extends WidgetBase {
                     ],
                 ],
                 'default' => [
-                    'size' => 30, 
+                    'size' => 40, 
                     'unit' => 'px', 
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input' => 'min-height: {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .pos-search__submit' => 'min-height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .search-input' => 'min-height: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .search-submit' => 'min-height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -205,7 +209,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Placeholder Color'),
                 'type' => ControlsManager::COLOR, 
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input::placeholder' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input::placeholder' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -213,29 +217,6 @@ class WidgetAjaxSearch extends WidgetBase {
 
 
         // Start for style
-        $this->startControlsSection(
-            'section_general',
-            [
-                'label' => __('General'),
-                'tab' => ControlsManager::TAB_STYLE,
-            ]
-        );
-            $this->addControl(
-            'search_width',
-                [
-                    'label' => __('Width'),
-                    'type' => ControlsManager::SELECT,
-                    'default' => 'inline',
-                    'options' => [ 
-                        'fullwidth' => __('Full width 100%'),
-                        'inline' => __('Inline (auto)')
-                    ],
-                    'prefix_class' => 'pewidth-',
-                    'render_type' => 'template',
-                    'frontend_available' => true
-                ]
-            );
-        $this->endControlsSection();
         $this->startControlsSection(
             'section_toggle_style',
             [
@@ -271,7 +252,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__toggle i' => 'color: {{VALUE}}; border-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-toggle i' => 'color: {{VALUE}}; border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -289,7 +270,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Hover color'), 
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__toggle i:hover' => 'color: {{VALUE}}; border-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-toggle i:hover' => 'color: {{VALUE}}; border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -301,7 +282,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Icon Size'),
                 'type' => ControlsManager::SLIDER,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__toggle i' => 'font-size: {{SIZE}}{{UNIT}}',  
+                    '{{WRAPPER}} .search-toggle i' => 'font-size: {{SIZE}}{{UNIT}}',  
                 ],
                 'default' => [
                     'size' => 24, 
@@ -345,7 +326,7 @@ class WidgetAjaxSearch extends WidgetBase {
             GroupControlTypography::getType(),
             [
                 'name' => 'input_typography',
-                'selector' => '{{WRAPPER}} input[type="search"].pos-search__input',
+                'selector' => '{{WRAPPER}} input[type="search"].search-input',
                 'scheme' => SchemeTypography::TYPOGRAPHY_3,
             ]
         );
@@ -369,7 +350,7 @@ class WidgetAjaxSearch extends WidgetBase {
                     'value' => SchemeColor::COLOR_3,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -380,7 +361,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Background Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -391,7 +372,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Border Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -400,7 +381,7 @@ class WidgetAjaxSearch extends WidgetBase {
             GroupControlBoxShadow::getType(),
             [
                 'name' => 'input_box_shadow',
-                'selector' => '{{WRAPPER}} .pos-search__input',
+                'selector' => '{{WRAPPER}} .search-input',
                 'fields_options' => [
                     'box_shadow_type' => [
                         'separator' => 'default',
@@ -424,7 +405,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Text Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input:focus' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input:focus' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -435,7 +416,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Background Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input:focus' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input:focus' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -446,7 +427,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Border Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input:focus' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-input:focus' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -455,7 +436,7 @@ class WidgetAjaxSearch extends WidgetBase {
             GroupControlBoxShadow::getType(),
             [
                 'name' => 'input_box_shadow_focus',
-                'selector' => '{{WRAPPER}} .pos-search__input:focus',
+                'selector' => '{{WRAPPER}} .search-input:focus',
                 'fields_options' => [
                     'box_shadow_type' => [
                         'separator' => 'default',
@@ -473,7 +454,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'name' => 'border_input',
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .pos-search__input',
+                'selector' => '{{WRAPPER}} .search-input',
             )
         );
   
@@ -484,11 +465,32 @@ class WidgetAjaxSearch extends WidgetBase {
                 'type' => ControlsManager::DIMENSIONS,
                 'size_units' => array('px', '%'),
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .search-input' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
-
+        $this->addResponsiveControl(
+            'padding_input',
+            [
+                'label' => __('Padding'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .search-input' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->addResponsiveControl(
+            'margin_input',
+            [
+                'label' => __('Margin'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .search-input' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->endControlsSection();
 
@@ -507,7 +509,7 @@ class WidgetAjaxSearch extends WidgetBase {
             GroupControlTypography::getType(),
             [
                 'name' => 'button_typography',
-                'selector' => '{{WRAPPER}} .pos-search__submit',
+                'selector' => '{{WRAPPER}} .search-submit',
                 'scheme' => SchemeTypography::TYPOGRAPHY_3,
                 'condition' => [
                     'button_type' => 'text',
@@ -530,7 +532,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Text Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .search-submit' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -545,7 +547,7 @@ class WidgetAjaxSearch extends WidgetBase {
                     'value' => SchemeColor::COLOR_2,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-submit' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -565,7 +567,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Text Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit:hover' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .search-submit:hover' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -576,7 +578,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Background Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit:hover' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-submit:hover' => 'background-color: {{VALUE}}',
                 ],
             ]
         );
@@ -591,7 +593,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'label' => __('Border Color'),
                 'type' => ControlsManager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit' => 'border-color: {{VALUE}}',
+                    '{{WRAPPER}} .search-submit' => 'border-color: {{VALUE}}',
                 ],
             ]
         );
@@ -600,7 +602,7 @@ class WidgetAjaxSearch extends WidgetBase {
             GroupControlBoxShadow::getType(),
             [
                 'name' => 'button_box_shadow_focus',
-                'selector' => '{{WRAPPER}} .pos-search__submit',
+                'selector' => '{{WRAPPER}} .search-submit',
                 'fields_options' => [
                     'box_shadow_type' => [
                         'separator' => 'default',
@@ -618,7 +620,7 @@ class WidgetAjaxSearch extends WidgetBase {
                 'name' => 'border_button',
                 'placeholder' => '1px',
                 'default' => '1px',
-                'selector' => '{{WRAPPER}} .pos-search__submit',
+                'selector' => '{{WRAPPER}} .search-submit',
             )
         );
        
@@ -629,7 +631,29 @@ class WidgetAjaxSearch extends WidgetBase {
                 'type' => ControlsManager::DIMENSIONS,
                 'size_units' => array('px', '%'),
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .search-submit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->addResponsiveControl(
+            'padding_button',
+            [
+                'label' => __('Padding'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .search-submit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->addResponsiveControl(
+            'margin_button',
+            [
+                'label' => __('Margin'),
+                'type' => ControlsManager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'selectors' => [
+                    '{{WRAPPER}} .search-submit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -649,7 +673,7 @@ class WidgetAjaxSearch extends WidgetBase {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit' => 'font-size: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .search-submit' => 'font-size: {{SIZE}}{{UNIT}}',
                 ],
                 'condition' => [
                     'button_type' => 'icon',
@@ -674,7 +698,7 @@ class WidgetAjaxSearch extends WidgetBase {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .pos-search__submit' => 'min-width: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .search-submit' => 'min-width: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );

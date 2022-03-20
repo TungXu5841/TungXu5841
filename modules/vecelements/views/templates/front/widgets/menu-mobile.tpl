@@ -1,4 +1,4 @@
-<div id="menu-icon"><i class="icon-rt-bars-solid"></i></div> 
+<div id="menu-icon"><i class="vecicon-bars-solid"></i></div> 
 <div class="menu-mobile-content" id="mobile_menu_wrapper">
 	{hook h='displayMegamenuMobileTop'} 
 	<div class="menu-close"> 

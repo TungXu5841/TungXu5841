@@ -24,33 +24,32 @@
  *}
 <div class="vec-customersignin">
   {if $logged}
-  	<div class="currency-selector localiz_block dropdown js-dropdown">
-		<button data-target="#" data-toggle="dropdown" class="btn-unstyle hidden-md-down">
+  	<div class="dropdown js-dropdown">
+		<button data-target="#" data-toggle="dropdown" class="btn-unstyle my-account">
 			{if $icon}<i class="{$icon}"></i>{/if}
-		  	<span class="expand-more">{l s='My account' d='Shop.Theme.Customeraccount'}</span>
+		  	<span class="text-account">{l s='My account' mod='veccustomersignin'}</span>
 		</button>
 		<ul class="dropdown-menu">
 			<li>
 				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{$customerName}</a>
 			</li>
 			<li>
-				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' d='Shop.Theme.Customeraccount'}</a>
+				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' mod='veccustomersignin'}</a>
 			</li>
 			<li>
-				<a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' d='Shop.Theme.Customeraccount'}</a>
+				<a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' mod='veccustomersignin'}</a>
 			</li>
 			<li>
-				<a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' d='Shop.Theme.Customeraccount'}</a>
+				<a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' mod='veccustomersignin'}</a>
 			</li>
 			<li>
 				<a class="logout dropdown-item" href="{$urls.actions.logout}" rel="nofollow">
-					{l s='Sign out' d='Shop.Theme.Actions'}
+					{l s='Sign out' mod='veccustomersignin'}
 				</a>
 			</li>
 		</ul>
 	</div>
   {else}
-  	{if $icon}<i class="{$icon}"></i>{/if}
-    <a class="login" href="{$urls.pages.my_account}" rel="nofollow" title="{l s='Log in to your customer account' d='Shop.Theme.Customeraccount'}">{l s='Sign in' d='Shop.Theme.Actions'}</a>
+    <a class="login my-account" href="{$urls.pages.my_account}" rel="nofollow" title="{l s='Log in to your customer account' mod='veccustomersignin'}">{if $icon}<i class="{$icon}"></i>{/if}<span class="text-account">{l s='Sign in' mod='veccustomersignin'}</span></a>
   {/if}
 </div>

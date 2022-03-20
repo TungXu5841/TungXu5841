@@ -60,13 +60,13 @@ class WidgetWishlist extends WidgetBase
 				[
 					'label' => __( 'Wishlist icon'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'icon-rt-heart',
+					'default' => 'vecicon-heart',
 					'options' => [
-						'icon-rt-heart2' => __( 'Icon 1'),
-						'icon-rt-heart-solid' => __( 'Icon 2'),
-						'icon-rt-heart-outline' => __( 'Icon 3'),
-						'icon-rt-heart' => __( 'Icon 4'),
-						'icon-rt-Heart' => __( 'Icon 5')
+						'vecicon-heart2' => __( 'Icon 1'),
+						'vecicon-heart-solid' => __( 'Icon 2'),
+						'vecicon-heart-outline' => __( 'Icon 3'),
+						'vecicon-heart' => __( 'Icon 4'),
+						'vecicon-Heart' => __( 'Icon 5')
 					],
 					'condition' => array(
 	                    'button_layout!' => 'text',

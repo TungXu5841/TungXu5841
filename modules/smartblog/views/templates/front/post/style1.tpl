@@ -21,14 +21,14 @@
             {/if} 
             <div class="smart-blog-posts-info">
 				{if $smartshowauthor ==1}{l s='Posted by'  d='Modules.Smartblog.Category_loop'}
-                <span itemprop="author">&nbsp;<i class="icon-rt-person-circle-outline"></i>&nbsp; {if $smartshowauthorstyle != 0}{$post.firstname|escape:'htmlall':'UTF-8'}
+                <span itemprop="author">&nbsp;<i class="vecicon-person-circle-outline"></i>&nbsp; {if $smartshowauthorstyle != 0}{$post.firstname|escape:'htmlall':'UTF-8'}
                     {$post.lastname|escape:'htmlall':'UTF-8'}{else}{$post.lastname|escape:'htmlall':'UTF-8'}
                     {$post.firstname|escape:'htmlall':'UTF-8'}{/if}
                 </span> {/if}
                 {$assocCats = BlogCategory::getPostCategoriesFull($post.id_post)}
                 {$catCounts = 0}
                 {if !empty($assocCats)}
-                    &nbsp;&nbsp;<i class="icon-rt-Blog"></i>&nbsp;
+                    &nbsp;&nbsp;<i class="vecicon-Blog"></i>&nbsp;
                     <span itemprop="articleSection">
                         {foreach $assocCats as $catid=>$assoCat}
                             {if $catCounts > 0}, {/if}
@@ -44,10 +44,10 @@
                     </span>
                 {/if}
                 {if Configuration::get('smartenablecomment') == 1}
-                &nbsp; <span class="comment">&nbsp;<i class="icon-rt-logo-wechat"></i>&nbsp;
+                &nbsp; <span class="comment">&nbsp;<i class="vecicon-logo-wechat"></i>&nbsp;
                     <a href="{$smartbloglink->getSmartBlogPostLink($post.id_post,$post.link_rewrite)|escape:'htmlall':'UTF-8'}#articleComments"
                         title="{$post.totalcomment|escape:'htmlall':'UTF-8'} Comments">{l s=' Comments' d='Modules.Smartblog.Category_loop'} <span class="comment-count-number">{$post.totalcomment}</span></a></span>{if $smartshowviewed ==1}&nbsp; <span class="smart-bg-views"><i
-                        class="icon-rt-eye"></i>{l s=' views' d='Modules.Smartblog.Category_loop'}
+                        class="vecicon-eye"></i>{l s=' views' d='Modules.Smartblog.Category_loop'}
                 <span class="comment-count-number">{$post.viewed|intval}</span>{/if}</span>
 			</div>
             {/if}
@@ -67,7 +67,7 @@
         <div class="sdsreadMore smart-blog-post-readmore-btn">
             <a title="{$post.meta_title|escape:'htmlall':'UTF-8'}"
                 href="{$smartbloglink->getSmartBlogPostLink($post.id_post,$post.link_rewrite)|escape:'htmlall':'UTF-8'}"
-                class="r_more btn-primary"><span>{l s='Read More'  d='Modules.Smartblog.Category_loop'}</span> <i class="icon-rt-android-arrow-dropright-circle"></i></a>
+                class="r_more btn-primary"><span>{l s='Read More'  d='Modules.Smartblog.Category_loop'}</span> <i class="vecicon-android-arrow-dropright-circle"></i></a>
         </div>
 
 

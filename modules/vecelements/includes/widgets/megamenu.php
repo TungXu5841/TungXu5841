@@ -138,7 +138,7 @@ class WidgetMegamenu extends WidgetBase {
 				GroupControlTypography::getType(), 
 				[
 					'name' => 'typography',
-					'selector' => '{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a',
+					'selector' => '{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a',
 				]
 			);
 
@@ -159,7 +159,7 @@ class WidgetMegamenu extends WidgetBase {
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a' => 'fill: {{VALUE}}; color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a' => 'fill: {{VALUE}}; color: {{VALUE}};',
 							],
 						]
 					);
@@ -170,7 +170,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Background Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a' => 'background-color: {{VALUE}};',
 							],
 						]
 					);
@@ -190,7 +190,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Text Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-horizontal .menu-item:hover > a, {{WRAPPER}} .pos-menu-vertical .menu-item:hover > a,{{WRAPPER}} .pos-menu-horizontal .menu-item.home > a, {{WRAPPER}} .pos-menu-vertical .menu-item.home > a, {{WRAPPER}} .pos-menu-horizontal .menu-item.active > a, {{WRAPPER}} .pos-menu-vertical .menu-item.active > a' => 'color: {{VALUE}};'
+								'{{WRAPPER}} .vec-menu-horizontal .menu-item:hover > a, {{WRAPPER}} .vec-menu-vertical .menu-item:hover > a,{{WRAPPER}} .vec-menu-horizontal .menu-item.home > a, {{WRAPPER}} .vec-menu-vertical .menu-item.home > a, {{WRAPPER}} .vec-menu-horizontal .menu-item.active > a, {{WRAPPER}} .vec-menu-vertical .menu-item.active > a' => 'color: {{VALUE}};'
 							],
 						]
 					);
@@ -201,7 +201,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Background Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-horizontal .menu-item:hover > a, {{WRAPPER}} .pos-menu-vertical .menu-item:hover > a,{{WRAPPER}} .pos-menu-horizontal .menu-item.home > a, {{WRAPPER}} .pos-menu-vertical .menu-item.home > a, {{WRAPPER}} .pos-menu-horizontal .menu-item.active > a, {{WRAPPER}} .pos-menu-vertical .menu-item.active > a' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-horizontal .menu-item:hover > a, {{WRAPPER}} .vec-menu-vertical .menu-item:hover > a,{{WRAPPER}} .vec-menu-horizontal .menu-item.home > a, {{WRAPPER}} .vec-menu-vertical .menu-item.home > a, {{WRAPPER}} .vec-menu-horizontal .menu-item.active > a, {{WRAPPER}} .vec-menu-vertical .menu-item.active > a' => 'background-color: {{VALUE}};',
 							],
 						] 
 					);
@@ -212,7 +212,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Border Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-horizontal .menu-item:hover > a, {{WRAPPER}} .pos-menu-vertical .menu-item:hover > a,{{WRAPPER}} .pos-menu-horizontal .menu-item.home > a, {{WRAPPER}} .pos-menu-vertical .menu-item.home > a, {{WRAPPER}} .pos-menu-horizontal .menu-item.active > a, {{WRAPPER}} .pos-menu-vertical .menu-item.active > a' => 'border-color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-horizontal .menu-item:hover > a, {{WRAPPER}} .vec-menu-vertical .menu-item:hover > a,{{WRAPPER}} .vec-menu-horizontal .menu-item.home > a, {{WRAPPER}} .vec-menu-vertical .menu-item.home > a, {{WRAPPER}} .vec-menu-horizontal .menu-item.active > a, {{WRAPPER}} .vec-menu-vertical .menu-item.active > a' => 'border-color: {{VALUE}};',
 							],
 						]
 					);
@@ -225,7 +225,7 @@ class WidgetMegamenu extends WidgetBase {
 				GroupControlBorder::getType(),
 				[
 					'name' => 'border',
-					'selector' => '{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a',
+					'selector' => '{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a',
 					'separator' => 'before',
 				]
 			);
@@ -237,7 +237,7 @@ class WidgetMegamenu extends WidgetBase {
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],					
 				]
 			);
@@ -246,7 +246,7 @@ class WidgetMegamenu extends WidgetBase {
 				GroupControlBoxShadow::getType(),
 				[
 					'name' => 'box_shadow',
-					'selector' => '{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a',
+					'selector' => '{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a',
 				]
 			);
 
@@ -257,7 +257,7 @@ class WidgetMegamenu extends WidgetBase {
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-horizontal .menu-item > a, {{WRAPPER}} .pos-menu-vertical .menu-item > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .vec-menu-horizontal .menu-item > a, {{WRAPPER}} .vec-menu-vertical .menu-item > a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 					'separator' => 'before',
 				]
@@ -270,7 +270,7 @@ class WidgetMegamenu extends WidgetBase {
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px' ],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-horizontal .menu-item > a , {{WRAPPER}} .pos-menu-vertical .menu-item > a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .vec-menu-horizontal .menu-item > a , {{WRAPPER}} .vec-menu-vertical .menu-item > a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -302,7 +302,7 @@ class WidgetMegamenu extends WidgetBase {
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-vertical .title_vertical i' => 'font-size: {{SIZE}}{{UNIT}}', 
+						'{{WRAPPER}} .vec-menu-vertical .title_vertical i' => 'font-size: {{SIZE}}{{UNIT}}', 
 					],
 					'separator' => 'before',
 				]
@@ -321,7 +321,7 @@ class WidgetMegamenu extends WidgetBase {
 						]
 					],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-vertical .title_vertical i' => 'margin-right: {{SIZE}}{{UNIT}}',  
+						'{{WRAPPER}} .vec-menu-vertical .title_vertical i' => 'margin-right: {{SIZE}}{{UNIT}}',  
 					]
 				]
 			);
@@ -330,7 +330,7 @@ class WidgetMegamenu extends WidgetBase {
 				GroupControlTypography::getType(),
 				[
 					'name' => 'title_typography',
-					'selector' => '{{WRAPPER}} .pos-menu-vertical .title_vertical',
+					'selector' => '{{WRAPPER}} .vec-menu-vertical .title_vertical',
 				]
 			);
 
@@ -350,7 +350,7 @@ class WidgetMegamenu extends WidgetBase {
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-vertical .title_vertical' => 'fill: {{VALUE}}; color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-vertical .title_vertical' => 'fill: {{VALUE}}; color: {{VALUE}};',
 							],
 						]
 					);
@@ -361,7 +361,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Background Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-vertical .title_vertical' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-vertical .title_vertical' => 'background-color: {{VALUE}};',
 							],
 						]
 					);
@@ -381,7 +381,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Text Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-vertical:hover .title_vertical' => 'fill: {{VALUE}}; color: {{VALUE}};'
+								'{{WRAPPER}} .vec-menu-vertical:hover .title_vertical' => 'fill: {{VALUE}}; color: {{VALUE}};'
 							],
 						]
 					);
@@ -392,7 +392,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Background Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-vertical:hover .title_vertical' => 'background-color: {{VALUE}};', 
+								'{{WRAPPER}} .vec-menu-vertical:hover .title_vertical' => 'background-color: {{VALUE}};', 
 							],
 						]
 					);
@@ -403,7 +403,7 @@ class WidgetMegamenu extends WidgetBase {
 							'label' => __( 'Border Color' ),
 							'type' => ControlsManager::COLOR,
 							'selectors' => [
-								'{{WRAPPER}} .pos-menu-vertical:hover .title_vertical' => 'border-color: {{VALUE}};',
+								'{{WRAPPER}} .vec-menu-vertical:hover .title_vertical' => 'border-color: {{VALUE}};',
 							],
 						]
 					);
@@ -416,7 +416,7 @@ class WidgetMegamenu extends WidgetBase {
 				GroupControlBorder::getType(),
 				[
 					'name' => 'title_border',
-					'selector' => '{{WRAPPER}} .pos-menu-vertical .title_vertical',
+					'selector' => '{{WRAPPER}} .vec-menu-vertical .title_vertical',
 					'separator' => 'before',
 				]
 			);
@@ -428,7 +428,7 @@ class WidgetMegamenu extends WidgetBase {
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-vertical .title_vertical' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .vec-menu-vertical .title_vertical' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					]
 				]
 			);
@@ -437,7 +437,7 @@ class WidgetMegamenu extends WidgetBase {
 				GroupControlBoxShadow::getType(),
 				[
 					'name' => 'title_box_shadow',
-					'selector' => '{{WRAPPER}} .pos-menu-vertical .title_vertical',
+					'selector' => '{{WRAPPER}} .vec-menu-vertical .title_vertical',
 				]
 			);
 
@@ -448,12 +448,68 @@ class WidgetMegamenu extends WidgetBase {
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .pos-menu-vertical .title_vertical' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .vec-menu-vertical .title_vertical' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 					'separator' => 'before',
 				]
 			);
 
+		$this->endControlsSection();
+		$this->startControlsSection(
+			'section_vertical_content',
+			[
+				'label' => __( 'Vertical Content' ),
+				'type' => ControlsManager::SECTION,
+				'tab' => ControlsManager::TAB_STYLE,
+				'condition'    => [
+					'layout' => [ 'vmenu' ],
+				],
+			]
+		);
+			$this->addControl(
+				'content_border_radius',
+				[
+					'label' => __( 'Border Radius' ),
+					'type' => ControlsManager::DIMENSIONS,
+					'size_units' => [ 'px', '%' ],
+					'selectors' => [
+						'{{WRAPPER}} .vec-menu-vertical .menu-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					]
+				]
+			);
+
+			$this->addGroupControl(
+				GroupControlBoxShadow::getType(),
+				[
+					'name' => 'content_box_shadow',
+					'selector' => '{{WRAPPER}} .vec-menu-vertical .menu-content',
+				]
+			);
+
+			$this->addControl(
+				'content_padding',
+				[
+					'label' => __( 'Padding' ),
+					'type' => ControlsManager::DIMENSIONS,
+					'size_units' => [ 'px', 'em', '%' ],
+					'selectors' => [
+						'{{WRAPPER}} .vec-menu-vertical .menu-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+					'separator' => 'before',
+				]
+			);
+			$this->addControl(
+				'content_margin',
+				[
+					'label' => __( 'Margin' ),
+					'type' => ControlsManager::DIMENSIONS,
+					'size_units' => [ 'px', 'em', '%' ],
+					'selectors' => [
+						'{{WRAPPER}} .vec-menu-vertical .menu-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+					'separator' => 'before',
+				]
+			);
 		$this->endControlsSection();
 		
 	}

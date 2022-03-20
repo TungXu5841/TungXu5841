@@ -94,7 +94,7 @@
 
 {block name='hook_filter_canvas'}
   <div class="filters-canvas">
-  <button class="filter-close-btn"><i class="icon-rt-close-outline float-xs-right"></i></button>
+  <button class="filter-close-btn"><i class="vecicon-close-outline float-xs-right"></i></button>
     <div id="_mobile_search_filters"></div>
   </div>
 {/block}

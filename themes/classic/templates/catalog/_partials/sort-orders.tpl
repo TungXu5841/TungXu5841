@@ -26,7 +26,7 @@
 <div class="products-sort-nb-dropdown products-nb-per-page dropdown">
     <a class="select-title expand-more form-control" rel="nofollow" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
         {$listing.products|count}
-        <i class="icon-rt-arrow-down float-xs-right"></i>
+        <i class="vecicon-arrow-down float-xs-right"></i>
     </a>
 
     <div class="dropdown-menu">
@@ -77,7 +77,7 @@
     aria-haspopup="true"
     aria-expanded="false">
     {if $listing.sort_selected}{$listing.sort_selected}{else}{l s='Select' d='Shop.Theme.Actions'}{/if}
-    <i class="icon-rt-arrow-down float-xs-right"></i>
+    <i class="vecicon-arrow-down float-xs-right"></i>
   </button>
   <div class="dropdown-menu">
     {foreach from=$listing.sort_orders item=sort_order}

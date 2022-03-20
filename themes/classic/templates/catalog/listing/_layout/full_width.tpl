@@ -88,7 +88,7 @@
 {block name="right_column"}{/block}
 {block name='hook_filter_canvas'}
   <div class="filters-canvas">
-    <button class="filter-close-btn"><i class="icon-rt-close-outline float-xs-right"></i></button>
+    <button class="filter-close-btn"><i class="vecicon-close-outline float-xs-right"></i></button>
     {if isset($vectheme.category_filter) && $vectheme.category_filter == 'canvas'}
       {hook h="displayFilterCanvas"}
     {else}

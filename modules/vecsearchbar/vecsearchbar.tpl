@@ -64,7 +64,7 @@
 							{if $show_categories && $search_type != 'minimal'}
 								<input type="hidden" name="cat" value="" id="search-cat">
 								<div class="search-category-items">             	
-									<a href="#" class="search-cat-value" data-id="0">{l s='All categories' mod='vecsearchbar'}<i class="icon-rt-arrow-down"></i></a>
+									<a href="#" class="search-cat-value" data-id="0">{l s='All categories' mod='vecsearchbar'}<i class="vecicon-arrow-down"></i></a>
 									<ul class="dropdown-search">
 										<li><a href="#" class="search-cat-value" data-id="0">{l s='All categories' mod='vecsearchbar'}</a></li>
 										{$cateOptions nofilter}
@@ -89,7 +89,7 @@
 						{/if}
 						{if $search_type == 'topbar'}
 							<div class="dialog-lightbox-close-button dialog-close-button">
-								<i class="icon-rt-close-outline" aria-hidden="true"></i> 
+								<i class="vecicon-close-outline" aria-hidden="true"></i> 
 							</div>
 						{/if}
 					</form>

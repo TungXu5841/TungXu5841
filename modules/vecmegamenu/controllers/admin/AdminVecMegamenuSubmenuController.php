@@ -1,6 +1,6 @@
 <?php
 
-include_once dirname(__FILE__).'/../../src/VecMegamenuSubmenuItemClass.php';
+include_once dirname(__FILE__).'/../../src/vecMegamenuSubmenuItemClass.php';
 class AdminVecMegamenuSubmenuController extends ModuleAdminController {
     public function __construct() {
 		$this->bootstrap = true;

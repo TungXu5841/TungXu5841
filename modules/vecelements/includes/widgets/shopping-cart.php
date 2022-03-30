@@ -56,19 +56,27 @@ class WidgetShoppingCart extends WidgetBase{
 					'prefix_class' => 'button-layout-',
 				]
 			);
+			$icon_options = [
+				'vecicon-bag-outline',
+				'vecicon-cart-outline',
+				'vecicon-bag',
+				'vecicon-handbag',
+				'vecicon-shopping-cart',
+				'vecicon-bag2',
+				'vecicon-shopping-cart-solid',
+				'vecicon-basket-outline',
+				'vecicon-shopping-basket-solid',
+				'vecicon-FullShoppingCart',
+				'vecicon-ShoppingCart'
+			];
 			$this->addControl(
 				'cart_icon',
 				[
 					'label' => __('Cart icon'),
-					'type' => ControlsManager::SELECT,
-					'default' => 'Icon 4',
-					'options' => [
-						'vecicon-cart-outline' => __('Icon 1'),
-						'vecicon-FullShoppingCart' => __('Icon 2'),
-						'vecicon-bag2' => __('Icon 3'),
-						'vecicon-bag' => __('Icon 4'),
-						'vecicon-basket-outline' => __('Icon 5'),
-					],
+					'type' => ControlsManager::ICON,
+					'default' => 'vecicon-bag-outline',
+					'icon_type' => 'vecicon',
+					'include' => $icon_options,
 					'condition' => array(
 	                    'button_layout!' => 'text',
 	                ),

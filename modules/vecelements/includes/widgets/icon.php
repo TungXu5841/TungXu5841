@@ -113,13 +113,41 @@ class WidgetIcon extends WidgetBase
                 'label' => __('Icon'),
             ]
         );
+        $this->addControl(
+            'icon_source',
+            [
+                'label' => __('Icon source'),
+                'type' => ControlsManager::SELECT,
+                'options' => [
+                    'vecicon' => __('Theme icon'),
+                    'awesome' => __('Awesome icon'),
+                ],
+                'default' => 'vecicon',
+            ]
+        );
+        $this->addControl(
+            'vecicon',
+            [
+                'label' => __('Icon'),
+                'type' => ControlsManager::ICON,
+                'default' => 'vecicon-heart',
+                'type_icon' => 'vecicon',
+                'condition' => [
+                    'icon_source' => 'vecicon',
+                ],
+            ]
+        );
 
         $this->addControl(
             'icon',
             [
                 'label' => __('Icon'),
                 'type' => ControlsManager::ICON,
+                'type_icon' => 'awesome',
                 'default' => 'fa fa-star',
+                'condition' => [
+                    'icon_source' => 'awesome',
+                ],
             ]
         );
 
@@ -416,8 +444,12 @@ class WidgetIcon extends WidgetBase
             }
         }
 
-        if (!empty($settings['icon'])) {
+        if ($settings['icon_source'] == 'awesome' && !empty($settings['icon'])) {
             $this->addRenderAttribute('icon', 'class', $settings['icon']);
+            $this->addRenderAttribute('icon', 'aria-hidden', 'true');
+        }
+        if ($settings['icon_source'] == 'vecicon' && !empty($settings['vecicon'])) {
+            $this->addRenderAttribute('icon', 'class', $settings['vecicon']);
             $this->addRenderAttribute('icon', 'aria-hidden', 'true');
         }
 
@@ -447,7 +479,12 @@ class WidgetIcon extends WidgetBase
         #>
         <div class="elementor-icon-wrapper">
             <{{{ iconTag }}} class="elementor-icon elementor-animation-{{ settings.hover_animation }}" {{{ link }}}>
+                <# if(settings.icon_source == 'awesome'){ #>
                 <i class="{{ settings.icon }}" aria-hidden="true"></i>
+                <# } #>
+                <# if(settings.icon_source == 'vecicon'){ #>
+                <i class="{{ settings.vecicon }}" aria-hidden="true"></i>
+                <# } #>
             </{{{ iconTag }}}>
         </div>
         <?php

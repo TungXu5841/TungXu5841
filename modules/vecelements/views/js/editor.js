@@ -13433,18 +13433,31 @@ ControlIconView = ControlSelect2View.extend({
 	},
 
 	filterIcons: function filterIcons() {
-		var icons = this.model.get('options'),
+		
+		var icons1 = this.model.get('options1'),
+			icons2 = this.model.get('options2'),
+			typeIcon = this.model.get('type_icon'),
 		    include = this.model.get('include'),
 		    exclude = this.model.get('exclude');
-
+		if(typeIcon == 'awesome'){
+			var icons = icons1;
+		}
+		if(typeIcon == 'vecicon'){
+			var icons = icons2;
+		}
 		if (include) {
 			var filteredIcons = {};
 
 			_.each(include, function (iconKey) {
 				filteredIcons[iconKey] = icons[iconKey];
 			});
-
-			this.model.set('options', filteredIcons);
+			if(typeIcon == 'awesome'){
+				this.model.set('options1', filteredIcons);
+			}
+			if(typeIcon == 'vecicon'){
+				this.model.set('options2', filteredIcons);
+			}
+			
 			return;
 		}
 

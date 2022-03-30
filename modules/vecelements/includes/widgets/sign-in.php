@@ -50,17 +50,20 @@ class WidgetSignIn extends WidgetBase {
 					'prefix_class' => 'button-layout-'
 				]
 			);
+			$icon_options = [
+				'vecicon-user',
+				'vecicon-person-circle-outline',
+				'vecicon-person-outline',
+				'vecicon-user-circle',
+			];
 			$this->addControl(
 				'account_icon',
 				[
 					'label' => __( 'Account icon'),
-					'type' => ControlsManager::SELECT,
+					'type' => ControlsManager::ICON,
 					'default' => 'vecicon-user',
-					'options' => [
-						'vecicon-user' => __( 'Icon 1'),
-						'vecicon-person-circle-outline' => __( 'Icon 2'),
-						'vecicon-person-outline' => __( 'Icon 3')
-					],
+					'icon_type' => 'vecicon',
+					'include' => $icon_options,
 					'condition' => array(
 	                    'button_layout!' => 'text',
 	                ),

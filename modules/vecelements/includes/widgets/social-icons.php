@@ -98,12 +98,63 @@ class WidgetSocialIcons extends WidgetBase
         $repeater = new Repeater();
 
         $repeater->addControl(
+            'icon_source',
+            [
+                'label' => __('Icon source'),
+                'type' => ControlsManager::SELECT,
+                'options' => [
+                    'vecicon' => __('Theme icon'),
+                    'awesome' => __('Awesome icon'),
+                ],
+                'default' => 'vecicon',
+            ]
+        );
+        $repeater->addControl(
+            'vecicon',
+            [
+                'label' => __('Icon'),
+                'type' => ControlsManager::ICON,
+                'default' => 'vecicon-logo-facebook',
+                'type_icon' => 'vecicon',
+                'condition' => [
+                    'icon_source' => 'vecicon',
+                ],
+                'include' => [
+                    'vecicon-logo-facebook',
+                    'vecicon-logo-google',
+                    'vecicon-logo-pinterest',
+                    'vecicon-logo-twitter',
+                    'vecicon-logo-youtube',
+                    'vecicon-logo-instagram',
+                    'vecicon-logo-linkedin',
+                    'vecicon-logo-rss',
+                    'vecicon-logo-twitch',
+                    'vecicon-logo-behance',
+                    'vecicon-logo-flickr',
+                    'vecicon-logo-foursquare',
+                    'vecicon-logo-github',
+                    'vecicon-logo-skype',
+                    'vecicon-logo-snapchat',
+                    'vecicon-logo-soundcloud',
+                    'vecicon-logo-tumblr',
+                    'vecicon-logo-vimeo',
+                    'vecicon-logo-wechat',
+                    'vecicon-logo-weibo',
+                    'vecicon-logo-tiktok',
+                ],
+            ]
+        );
+
+        $repeater->addControl(
             'social',
             [
                 'label' => __('Icon'),
                 'type' => ControlsManager::ICON,
-                'label_block' => true,
-                'default' => 'fa fa-instagram',
+                'type_icon' => 'awesome',
+                'default' => 'fa fa-android',
+                'condition' => [
+                    'icon_source' => 'awesome',
+                ],
                 'include' => [
                     'fa fa-android',
                     'fa fa-apple',
@@ -177,7 +228,7 @@ class WidgetSocialIcons extends WidgetBase
                 'placeholder' => __('https://your-link.com'),
             ]
         );
-
+        
         $this->addControl(
             'social_icon_list',
             [
@@ -259,7 +310,6 @@ class WidgetSocialIcons extends WidgetBase
                 'tab' => ControlsManager::TAB_STYLE,
             ]
         );
-
         $this->addControl(
             'icon_color',
             [
@@ -395,36 +445,6 @@ class WidgetSocialIcons extends WidgetBase
         );
 
         $this->addControl(
-            'hover_primary_color',
-            [
-                'label' => __('Primary Color'),
-                'type' => ControlsManager::COLOR,
-                'default' => '',
-                'condition' => [
-                    'icon_color' => 'custom',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-social-icon:hover' => 'background-color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->addControl(
-            'hover_secondary_color',
-            [
-                'label' => __('Secondary Color'),
-                'type' => ControlsManager::COLOR,
-                'default' => '',
-                'condition' => [
-                    'icon_color' => 'custom',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-social-icon:hover i' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->addControl(
             'hover_border_color',
             [
                 'label' => __('Border Color'),
@@ -471,9 +491,12 @@ class WidgetSocialIcons extends WidgetBase
         <div class="elementor-social-icons-wrapper">
         <?php foreach ($settings['social_icon_list'] as $index => $item) :
             $link_key = 'link_' . $index;
-
-            $social = str_replace('fa fa-', '', $item['social']);
-
+            if($item['icon_source'] == 'awesome'){
+                $social = str_replace('fa fa-', '', $item['social']);
+            }
+            if($item['icon_source'] == 'vecicon'){
+                $social = str_replace('vecicon-logo-', '', $item['vecicon']);
+            }
             $this->addRenderAttribute($link_key, [
                 'class' => 'elementor-icon elementor-social-icon elementor-social-icon-' . $social . $class_animation,
                 'href' => $item['link']['url'],
@@ -488,8 +511,12 @@ class WidgetSocialIcons extends WidgetBase
             }
             ?>
             <a <?= $this->getRenderAttributeString($link_key) ?>>
-                <span class="elementor-screen-only"><?= ucwords($social) ?></span>
+                <?php if($item['icon_source'] == 'awesome') : ?>
                 <i class="<?= $item['social'] ?>"></i>
+                <?php endif; ?>
+                <?php if($item['icon_source'] == 'vecicon') : ?>
+                <i class="<?= $item['vecicon'] ?>"></i>
+                <?php endif; ?>
             </a>
         <?php endforeach ?>
         </div>
@@ -509,12 +536,21 @@ class WidgetSocialIcons extends WidgetBase
         ?>
         <div class="elementor-social-icons-wrapper">
         <# _.each( settings.social_icon_list, function( item ) {
-            var social = item.social.replace( 'fa fa-', '' ),
-                link = item.link ? item.link.url : '',
+            if(item.icon_source === 'awesome'){ 
+                var social = item.social.replace( 'fa fa-', '' );
+            }
+            if(item.icon_source === 'vecicon'){ 
+                var social = item.vecicon.replace( 'vecicon-logo-', '' );
+            }
+            var link = item.link ? item.link.url : '',
                 linkClass = 'elementor-icon elementor-social-icon elementor-social-icon-' + social; #>
             <a class="{{ linkClass }} elementor-animation-{{ settings.hover_animation }}" href="{{ link }}">
-                <span class="elementor-screen-only">{{{ social }}}</span>
+                <# if(item.icon_source === 'awesome'){ #>
                 <i class="{{ item.social }}"></i>
+                <# } #>
+                <# if(item.icon_source === 'vecicon'){ #>
+                <i class="{{ item.vecicon }}"></i>
+                <# } #>
             </a>
         <# } ); #>
         </div>

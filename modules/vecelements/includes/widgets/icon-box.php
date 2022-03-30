@@ -98,11 +98,40 @@ class WidgetIconBox extends WidgetBase
         );
 
         $this->addControl(
+            'icon_source',
+            [
+                'label' => __('Icon source'),
+                'type' => ControlsManager::SELECT,
+                'options' => [
+                    'vecicon' => __('Theme icon'),
+                    'awesome' => __('Awesome icon'),
+                ],
+                'default' => 'vecicon',
+            ]
+        );
+        $this->addControl(
+            'vecicon',
+            [
+                'label' => __('Icon'),
+                'type' => ControlsManager::ICON,
+                'default' => 'vecicon-heart',
+                'type_icon' => 'vecicon',
+                'condition' => [
+                    'icon_source' => 'vecicon',
+                ],
+            ]
+        );
+
+        $this->addControl(
             'icon',
             [
                 'label' => __('Icon'),
                 'type' => ControlsManager::ICON,
+                'type_icon' => 'awesome',
                 'default' => 'fa fa-star',
+                'condition' => [
+                    'icon_source' => 'awesome',
+                ],
             ]
         );
 
@@ -460,19 +489,19 @@ class WidgetIconBox extends WidgetBase
                 'options' => [
                     'left' => [
                         'title' => __('Left'),
-                        'icon' => 'fa fa-align-left',
+                        'icon' => 'vecicon-align-left',
                     ],
                     'center' => [
                         'title' => __('Center'),
-                        'icon' => 'fa fa-align-center',
+                        'icon' => 'vecicon-align-center',
                     ],
                     'right' => [
                         'title' => __('Right'),
-                        'icon' => 'fa fa-align-right',
+                        'icon' => 'vecicon-align-right',
                     ],
                     'justify' => [
                         'title' => __('Justified'),
-                        'icon' => 'fa fa-align-justify',
+                        'icon' => 'vecicon-align-justify',
                     ],
                 ],
                 'selectors' => [
@@ -599,7 +628,7 @@ class WidgetIconBox extends WidgetBase
         $this->addRenderAttribute('icon', 'class', ['elementor-icon', 'elementor-animation-' . $settings['hover_animation']]);
 
         $icon_tag = 'span';
-        $has_icon = !empty($settings['icon']);
+        $has_icon = !empty($settings['icon']) || !empty($settings['vecicon']) ;
 
         if (!empty($settings['link']['url'])) {
             $this->addRenderAttribute('link', 'href', $settings['link']['url']);
@@ -615,7 +644,12 @@ class WidgetIconBox extends WidgetBase
         }
 
         if ($has_icon) {
-            $this->addRenderAttribute('i', 'class', $settings['icon']);
+            if($settings['icon_source'] == 'awesome'){
+                $this->addRenderAttribute('i', 'class', $settings['icon']);
+            }
+            if($settings['icon_source'] == 'vecicon'){
+                $this->addRenderAttribute('i', 'class', $settings['vecicon']);
+            }
             $this->addRenderAttribute('i', 'aria-hidden', 'true');
         }
 
@@ -667,10 +701,17 @@ class WidgetIconBox extends WidgetBase
         view.addInlineEditingAttributes( 'description_text' );
         #>
         <div class="elementor-icon-box-wrapper">
-        <# if ( settings.icon ) { #>
+        <# if ( settings.icon_source === 'awesome' && settings.icon ) { #>
             <div class="elementor-icon-box-icon">
                 <{{{ iconTag + ' ' + link }}} class="elementor-icon elementor-animation-{{ settings.hover_animation }}">
                     <i class="{{ settings.icon }}" aria-hidden="true"></i>
+                </{{{ iconTag }}}>
+            </div>
+        <# } #>
+        <# if ( settings.icon_source === 'vecicon' && settings.vecicon ) { #>
+            <div class="elementor-icon-box-icon">
+                <{{{ iconTag + ' ' + link }}} class="elementor-icon elementor-animation-{{ settings.hover_animation }}">
+                    <i class="{{ settings.vecicon }}" aria-hidden="true"></i>
                 </{{{ iconTag }}}>
             </div>
         <# } #>

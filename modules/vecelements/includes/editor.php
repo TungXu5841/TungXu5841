@@ -755,6 +755,13 @@ class Editor
         );
 
         wp_register_style(
+            'font-themevec',
+            _VEC_ASSETS_URL_ . 'lib/font-themevec/css/vecthemes-icon' . $suffix . '.css',
+            [],
+            '1.0.0'
+        );
+
+        wp_register_style(
             'elementor-select2',
             _VEC_ASSETS_URL_ . 'lib/e-select2/css/e-select2' . $suffix . '.css',
             [],
@@ -781,6 +788,7 @@ class Editor
             [
                 'elementor-common',
                 'font-awesome',
+                'font-themevec',
                 'elementor-select2',
                 'elementor-icons',
                 'ce-icons',

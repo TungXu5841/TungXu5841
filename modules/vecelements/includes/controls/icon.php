@@ -48,7 +48,7 @@ class ControlIcon extends BaseDataControl
      *
      * @return array Available icons.
      */
-    public static function getIcons()
+    public static function getIconsAwesome()
     {
         return [
             'fa fa-500px' => '500px',
@@ -842,6 +842,182 @@ class ControlIcon extends BaseDataControl
         ];
     }
 
+    public static function getIconsVec()
+    {
+        return [
+            'vecicon-bag-outline' => 'bag-outline',
+            'vecicon-cart-outline' => 'cart-outline',
+            'vecicon-bag' => 'bag',
+            'vecicon-handbag' => 'hanbag',
+            'vecicon-shopping-cart' => 'shopping-cart',
+            'vecicon-bag2' => 'bag2',
+            'vecicon-shopping-cart-solid' => 'shopping-cart-solid',
+            'vecicon-basket-outline' => 'basket-outline',
+            'vecicon-shopping-basket-solid' => 'shopping-basket-solid',
+            'vecicon-FullShoppingCart' => 'FullShoppingCart',
+            'vecicon-ShoppingCart' => 'ShoppingCart',
+            'vecicon-heart' => 'heart',
+            'vecicon-heart2' => 'heart2',
+            'vecicon-heart-solid' => 'heart-solid',
+            'vecicon-heart-outline' => 'heart-outline',
+            'vecicon-ios-heart-outline' => 'ios-heart-outline',
+            'vecicon-Heart' => 'Heart',
+            'vecicon-shuffle' => 'shuffle',
+            'vecicon-refresh' => 'refresh',
+            'vecicon-ios-shuffle' => 'ios-shuffle',
+            'vecicon-ios-shuffle-strong' => 'ios-shuffle-strong',
+            'vecicon-repeat-outline' => 'repeat-outline',
+            'vecicon-sync-alt-solid' => 'sync-alt-solid',
+            'vecicon-star2' => 'star2',
+            'vecicon-star-solid' => 'star-solid',
+            'vecicon-star-half-alt-solid' => 'star-half',
+            'vecicon-search' => 'search',
+            'vecicon-magnifier' => 'magnifier',
+            'vecicon-search1' => 'search1',
+            'vecicon-search2' => 'search2',
+            'vecicon-Search' => 'search3',
+            'vecicon-loupe' => 'loupe',
+            'vecicon-eye-outline' => 'eye-outline',
+            'vecicon-eye' => 'eye',
+            'vecicon-look' => 'look',
+            'vecicon-eye2' => 'eye2',
+            'vecicon-Eye' => 'eye3',
+            'vecicon-bars-solid' => 'bars-solid',
+            'vecicon-menu-outline' => 'menu-outline',
+            'vecicon-navicon-round' => 'navicon-round',
+            'vecicon-grid-outline' => 'grid-outline',
+            'vecicon-grid' => 'grid',
+            'vecicon-grid2' => 'grid2',
+            'vecicon-apps-outline' => 'apps-outline',
+            'vecicon-apps-sharp' => 'apps-sharp',
+            'vecicon-list' => 'list',
+            'vecicon-list-outline' => 'list-outline',
+            'vecicon-list-solid' => 'list-solid',
+            'vecicon-arrow-down' => 'arrow-down',
+            'vecicon-arrow-left' => 'arrow-left',
+            'vecicon-arrow-right' => 'arrow-right',
+            'vecicon-arrow-up' => 'arrow-up',
+            'vecicon-logo-facebook' => 'logo-facebook',
+            'vecicon-logo-google' => 'logo-google',
+            'vecicon-logo-pinterest' => 'logo-pinterest',
+            'vecicon-logo-twitter' => 'logo-twitter',
+            'vecicon-logo-youtube' => 'logo-youtube',
+            'vecicon-logo-instagram' => 'logo-instagram',
+            'vecicon-logo-linkedin' => 'logo-linkedin',
+            'vecicon-logo-rss' => 'logo-rss',
+            'vecicon-logo-twitch' => 'logo-twitch',
+            'vecicon-0-facebook2' => 'logo-facebook2',
+            'vecicon-1-twitter2' => 'logo-twitter2',
+            'vecicon-2-youtube2' => 'logo-youtube2',
+            'vecicon-3-dribbble' => 'logo-dribbble',
+            'vecicon-4-facebook-f' => 'logo-facebook',
+            'vecicon-5-google-plus-g' => 'logo-google+',
+            'vecicon-6-pinterest-p' => 'logo-pinterest',
+            'vecicon-logo-tiktok' => 'logo-tiktok',
+            'vecicon-close-outline' => 'close-outline',
+            'vecicon-close-circle' => 'close-circle',
+            'vecicon-close-circle-outline' => 'close-circle-outline',
+            'vecicon-person-outline' => 'person-outline',
+            'vecicon-person-circle-outline' => 'person-circle-outline',
+            'vecicon-user' => 'user',
+            'vecicon-user-circle' => 'user-circle',
+            'vecicon-call-outline' => 'call-outline',
+            'vecicon-call-sharp' => 'call-sharp',
+            'vecicon-headphones' => 'headphones',
+            'vecicon-headphones-mic' => 'headphones-mic',
+            'vecicon-headphones2' => 'headphones2',
+            'vecicon-phone-volume-solid' => 'phone-volume-solid',
+            'vecicon-phone-call' => 'phone-call',
+            'vecicon-headset-outline' => 'headset-outline',
+            'vecicon-settings-outline' => 'settings-outline',
+            'vecicon-settings' => 'settings',
+            'vecicon-shipping-fast-solid' => 'shipping-fast-solid',
+            'vecicon-truck-solid' => 'truck-solid',
+            'vecicon-ship-solid' => 'ship-solid',
+            'vecicon-boat-outline' => 'boat-outline',
+            'vecicon-rocket' => 'rocket',
+            'vecicon-rocket-outline' => 'rocket-outline',
+            'vecicon-location-pin' => 'location-pin',
+            'vecicon-map-marked-alt-solid' => 'map-marked-alt-solid',
+            'vecicon-location-outline' => 'location-outline',
+            'vecicon-mail-outline' => 'mail-outline',
+            'vecicon-mail-open-outline' => 'mail-open-outline',
+            'vecicon-globe-solid' => 'globe-solid',
+            'vecicon-globe-alt' => 'globe-alt',
+            'vecicon-scan-outline' => 'scan-outline',
+            'vecicon-expand-outline' => 'expand-outline',
+            'vecicon-checkmark' => 'checkmark',
+            'vecicon-card-outline' => 'card-outline',
+            'vecicon-credit-card-solid' => 'credit-card-solid',
+            'vecicon-money-bill-wave-solid' => 'money-bill-wave-solid',
+            'vecicon-cash-outline' => 'cash-outline',
+            'vecicon-gift-outline' => 'gift-outline',
+            'vecicon-gift-solid' => 'gift-solid',
+            'vecicon-gifts-solid' => 'gifts-solid',
+            'vecicon-ribbon-outline' => 'ribbon-outline',
+            'vecicon-time-outline' => 'time-outline',
+            'vecicon-help-buoy-outline' => 'help-buoy-outline',
+            'vecicon-exchange-1' => 'exchange-1',
+            'vecicon-call-center-24-7' => 'call-center-24-7',
+            'vecicon-headphone-24-7' => 'headphone-24-7',
+            'vecicon-credit-card-secure1' => 'credit-card-secure1',
+            'vecicon-payment-security' => 'payment-security',
+            'vecicon-logo-vk' => 'logo-vk',
+            'vecicon-logo-whatsapp' => 'logo-whatsapp',
+            'vecicon-logo-telegram' => 'logo-telegram',
+            'vecicon-play-outline' => 'play-outline',
+            'vecicon-videocam-outline' => 'videocam-outline',
+            'vecicon-play-circle' => 'play-circle',
+            'vecicon-home-outline' => 'home-outline',
+            'vecicon-diamond-outline' => 'diamond-outline',
+            'vecicon-camera-outline' => 'camera-outline',
+            'vecicon-fitness-outline' => 'fitness-outline',
+            'vecicon-medkit-outline' => 'medkit-outline',
+            'vecicon-nuclear-outline' => 'nuclear-outline',
+            'vecicon-shirt-outline' => 'shirt-outline',
+            'vecicon-watch-outline' => 'watch-outline',
+            'vecicon-couch-solid' => 'couch-solid',
+            'vecicon-filter-outline' => 'filter-outline',
+            'vecicon-options-outline' => 'options-outline',
+            'vecicon-chatbox-outline' => 'chatbox-outline',
+            'vecicon-chatbubble-outline' => 'chatbubble-outline',
+            'vecicon-logo-behance' => 'logo-behance',
+            'vecicon-logo-flickr' => 'logo-flickr',
+            'vecicon-logo-foursquare' => 'logo-foursquare',
+            'vecicon-logo-github' => 'logo-github',
+            'vecicon-logo-skype' => 'logo-skype',
+            'vecicon-logo-snapchat' => 'logo-snapchat',
+            'vecicon-logo-soundcloud' => 'logo-soundcloud',
+            'vecicon-logo-tumblr' => 'logo-tumblr',
+            'vecicon-logo-vimeo' => 'logo-vimeo',
+            'vecicon-logo-wechat' => 'logo-wechat',
+            'vecicon-logo-weibo' => 'logo-weibo',
+            'vecicon-add-outline' => 'add-outline',
+            'vecicon-remove-outline' => 'remove-outline',
+            'vecicon-left-quotes-sign' => 'left-quotes-sign',
+            'vecicon-right-quotes-symbol' => 'right-quotes-symbol',
+            'vecicon-arrow-left-solid' => 'arrow-left-solid',
+            'vecicon-arrow-right-solid' => 'arrow-right-solid',
+            'vecicon-cauliflower' => 'cauliflower',
+            'vecicon-bread' => 'bread',
+            'vecicon-meat' => 'meat',
+            'vecicon-anise-candy' => 'anise-candy',
+            'vecicon-snowflake' => 'snowflake',
+            'vecicon-coffee-cup' => 'coffee-cup',
+            'vecicon-almond' => 'almond',
+            'vecicon-egg' => 'egg',
+            'vecicon-MusicMixer' => 'MusicMixer',
+            'vecicon-Blog' => 'Blog',
+            'vecicon-Agenda' => 'Agenda',
+            'vecicon-Edit' => 'Edit',
+            'vecicon-Settings' => 'Settings',
+            'vecicon-Mouse' => 'Mouse',
+            'vecicon-android-arrow-dropleft-circle' => 'android-arrow-dropleft-circle',
+            'vecicon-android-arrow-dropright-circle' => 'android-arrow-dropright-circle',
+            
+        ];
+    }
+
     /**
      * Get icons control default settings.
      *
@@ -856,7 +1032,9 @@ class ControlIcon extends BaseDataControl
     protected function getDefaultSettings()
     {
         return [
-            'options' => self::getIcons(),
+            'options1' => self::getIconsAwesome(),
+            'options2' => self::getIconsVec(),
+            'type_icon' => 'vecicon',
             'include' => '',
             'exclude' => '',
         ];
@@ -882,9 +1060,16 @@ class ControlIcon extends BaseDataControl
                 <select id="<?= $control_uid ?>" class="elementor-control-icon"
                     data-setting="{{ data.name }}" data-placeholder="<?= __('Select Icon') ?>">
                     <option value=""><?= __('Select Icon') ?></option>
-                    <# _.each( data.options, function( option_title, option_value ) { #>
-                        <option value="{{ option_value }}">{{{ option_title }}}</option>
-                    <# } ); #>
+                    <# if(data.type_icon === 'awesome'){ #>
+                        <# _.each( data.options1, function( option_title, option_value ) { #>
+                            <option value="{{ option_value }}">{{{ option_title }}}</option>
+                        <# } ); #>
+                    <# } #>
+                    <# if(data.type_icon === 'vecicon'){ #>
+                        <# _.each( data.options2, function( option_title, option_value ) { #>
+                            <option value="{{ option_value }}">{{{ option_title }}}</option>
+                        <# } ); #>
+                    <# } #>
                 </select>
             </div>
         </div>

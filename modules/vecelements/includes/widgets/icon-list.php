@@ -138,12 +138,40 @@ class WidgetIconList extends WidgetBase
         );
 
         $repeater->addControl(
+            'icon_source',
+            [
+                'label' => __('Icon source'),
+                'type' => ControlsManager::SELECT,
+                'options' => [
+                    'vecicon' => __('Theme icon'),
+                    'awesome' => __('Awesome icon'),
+                ],
+                'default' => 'vecicon',
+            ]
+        );
+        $repeater->addControl(
+            'vecicon',
+            [
+                'label' => __('Icon'),
+                'type' => ControlsManager::ICON,
+                'default' => 'vecicon-heart',
+                'type_icon' => 'vecicon',
+                'condition' => [
+                    'icon_source' => 'vecicon',
+                ],
+            ]
+        );
+
+        $repeater->addControl(
             'icon',
             [
                 'label' => __('Icon'),
                 'type' => ControlsManager::ICON,
-                'label_block' => true,
-                'default' => 'fa fa-check',
+                'type_icon' => 'awesome',
+                'default' => 'fa fa-star',
+                'condition' => [
+                    'icon_source' => 'awesome',
+                ],
             ]
         );
 
@@ -589,7 +617,12 @@ class WidgetIconList extends WidgetBase
                     ?>
                     <?php if (!empty($item['icon'])) : ?>
                         <span class="elementor-icon-list-icon">
-                            <i class="<?= esc_attr($item['icon']) ?>" aria-hidden="true"></i>
+                            <?php if($item['icon_source'] == 'awesome') : ?>
+                                <i class="<?= esc_attr($item['icon']) ?>" aria-hidden="true"></i>
+                            <?php endif; ?>
+                            <?php if($item['icon_source'] == 'vecicon') : ?>
+                                <i class="<?= esc_attr($item['vecicon']) ?>" aria-hidden="true"></i>
+                            <?php endif; ?>
                         </span>
                     <?php endif ?>
                     <span <?= $this->getRenderAttributeString($repeater_setting_key) ?>><?= $item['text'] ?></span>
@@ -637,9 +670,14 @@ class WidgetIconList extends WidgetBase
                     <# if ( item.link && item.link.url ) { #>
                         <a href="{{ item.link.url }}">
                     <# } #>
-                    <# if ( item.icon ) { #>
+                    <# if ( item.icon_source === 'awesome' && item.icon ) { #>
                     <span class="elementor-icon-list-icon">
                         <i class="{{ item.icon }}" aria-hidden="true"></i>
+                    </span>
+                    <# } #>
+                    <# if ( item.icon_source === 'vecicon' && item.vecicon ) { #>
+                    <span class="elementor-icon-list-icon">
+                        <i class="{{ item.vecicon }}" aria-hidden="true"></i>
                     </span>
                     <# } #>
                     <span {{{ view.getRenderAttributeString( iconTextKey ) }}}>{{{ item.text }}}</span>

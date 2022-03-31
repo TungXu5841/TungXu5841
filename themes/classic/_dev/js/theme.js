@@ -44,6 +44,7 @@ import Form from './components/form';
 import ProductMinitature from './components/product-miniature';
 import ProductSelect from './components/product-select';
 import './lib/slick.min';
+import './lib/countdown.min';
 
 import './lib/bootstrap-filestyle.min';
 import './lib/jquery.scrollbox.min';
@@ -83,5 +84,31 @@ $(document).ready(() => {
     },
     allowPageScroll: 'vertical',
   });
+  //specificPriceCountdown();
 
 });
+
+function specificPriceCountdown(){
+	$( ".specific-prices-timer" ).each(function( index ) {
+		
+		var date_y = $(this).attr('data-date-y');
+		var date_m = $(this).attr('data-date-m');
+		var date_d = $(this).attr('data-date-d');
+		var date_h = $(this).attr('data-date-h');
+		var date_mi= $(this).attr('data-date-mi');
+		var date_s = $(this).attr('data-date-s');
+
+		$(this).countdown({
+			until: new Date(date_y,date_m-1,date_d,date_h,date_mi,date_s),
+			labels: ['Years', 'Months', 'Weeks', vectheme.cd_days_text, vectheme.cd_hours_text, vectheme.cd_mins_text, vectheme.cd_secs_text],
+			labels1: ['Year', 'Month', 'Week', vectheme.cd_day_text, vectheme.cd_hour_text, vectheme.cd_min_text, vectheme.cd_sec_text],
+		});
+
+	});
+	var end_date = $('.block-countdown').data('end-date');
+	$('.block-countdown').countdown({
+		until: new Date(end_date),
+		labels: ['Years', 'Months', 'Weeks', vectheme.cd_days_text, vectheme.cd_hours_text, vectheme.cd_mins_text, vectheme.cd_secs_text],
+		labels1: ['Year', 'Month', 'Week', vectheme.cd_day_text, vectheme.cd_hour_text, vectheme.cd_min_text, vectheme.cd_sec_text],
+	})
+}

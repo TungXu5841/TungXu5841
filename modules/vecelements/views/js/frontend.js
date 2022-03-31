@@ -2426,13 +2426,13 @@ module.exports = function ($) {
 		'product-carousel.default': __webpack_require__(193),
 		'v-smartblog.default': __webpack_require__(193),
 		'trustedshops-reviews.default': __webpack_require__(193),
-		'product-sale.default': __webpack_require__(193),
 		'text-editor.default': __webpack_require__(194),
 		'contact-form.default': __webpack_require__(200),
 		'email-subscription.default': __webpack_require__(200),
 		'slideshow.default': __webpack_require__(201),
 		'product-tab.default': __webpack_require__(202),
 		'promo.default': __webpack_require__(203),
+		'product-sale.default': __webpack_require__(204),
 	};
 
 	var handlersInstances = {};
@@ -2444,8 +2444,10 @@ module.exports = function ($) {
 	var addElementsHandlers = function addElementsHandlers() {
 		$.each(handlers, function (elementName, funcCallback) {
 			ceFrontend.hooks.addAction('frontend/element_ready/' + elementName, funcCallback);
+			if(elementName == 'product-sale.default'){
+				ceFrontend.hooks.addAction('frontend/element_ready/product-sale.default', __webpack_require__(193));
+			}
 		});
-
 		// Sticky
 		ceFrontend.hooks.addAction('frontend/element_ready/section', __webpack_require__(10));
 		ceFrontend.hooks.addAction('frontend/element_ready/widget', __webpack_require__(10));
@@ -3151,6 +3153,13 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 
 	onInit: function onInit() {
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
+		var elementCarousel = this.elements.$carousel;
+		elementCarousel.on('init', function(event, slick, currentSlide){
+			var slideToShow = $(this).find('.slick-slide.slick-active').length - 1;
+			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
+			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
+		});
 
 		var elementSettings = this.getElementSettings(),
 			slidesToShow = +elementSettings.slides_to_show || elementSettings.default_slides_desktop,
@@ -3218,6 +3227,13 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		}
 
 		this.elements.$carousel.slick(slickOptions);
+
+		elementCarousel.on('afterChange', function(event, slick, currentSlide){
+			var slideToShow = $(this).find('.slick-slide.slick-active').length - 1;
+			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
+			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
+		});
 	}
 });
 
@@ -4236,6 +4252,13 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	initSlider: function initSlider($target){
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 
+		$target.on('init', function(event, slick, currentSlide){
+			var slideToShow = $(this).find('.slick-slide.slick-active').length - 1;
+			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
+			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
+		});
+
 		var elementSettings = this.getElementSettings(),
 			slidesToShow = +elementSettings.slides_to_show || elementSettings.default_slides_desktop,
 			isSingleSlide = 1 === slidesToShow,
@@ -4302,6 +4325,13 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 		}
 
 		$target.slick(slickOptions);
+
+		$target.on('afterChange', function(event, slick, currentSlide){
+			var slideToShow = $(this).find('.slick-slide.slick-active').length - 1;
+			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
+			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
+		});
 	},
 	loadTab: function loadTab(tabData, $this, idTab, tabs, cache , height, callback){
 		if( cache[idTab] ) {
@@ -4400,6 +4430,56 @@ var PromoHandler = elementorModules.frontend.handlers.Base.extend({
 module.exports = function ($scope) {
 	ceFrontend.elementsHandler.addHandler(PromoHandler, { $element: $scope });
 };
+
+/***/ }),
+/***/ 204:
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var SaleHandler = elementorModules.frontend.handlers.Base.extend({
+		getDefaultSettings: function getDefaultSettings() {
+			return {
+				selectors: {
+					carousel: '.product-sale-widget'
+				}
+			};
+		},
+	
+		getDefaultElements: function getDefaultElements() {
+			var selectors = this.getSettings('selectors');
+	
+			return {
+				$carousel: this.$element.find(selectors.carousel)
+			};
+		},
+		onInit: function onInit() {
+			var _this = this,
+				saleWidget = this.$element.find('.product-sale-widget'),
+				countDownSelector = saleWidget.find('.specific-prices-timer');
+			
+			_this.initCountDown(countDownSelector);	
+		},
+		initCountDown: function initCountDown($target){
+			var date_y = $target.attr('data-date-y'),
+				date_m = $target.attr('data-date-m'),
+				date_d = $target.attr('data-date-d'),
+				date_h = $target.attr('data-date-h'),
+				date_mi= $target.attr('data-date-mi'),
+				date_s = $target.attr('data-date-s');
+
+			$target.countdown({
+				until: new Date(date_y,date_m-1,date_d,date_h,date_mi,date_s),
+				labels: ['Years', 'Months', 'Weeks', vectheme.cd_days_text, vectheme.cd_hours_text, vectheme.cd_mins_text, vectheme.cd_secs_text],
+				labels1: ['Year', 'Month', 'Week', vectheme.cd_day_text, vectheme.cd_hour_text, vectheme.cd_min_text, vectheme.cd_sec_text],
+			});
+		},
+		
+	});
+	
+	module.exports = function ($scope) {
+		ceFrontend.elementsHandler.addHandler(SaleHandler, { $element: $scope });
+	};
 
 /***/ }),
 /******/ });

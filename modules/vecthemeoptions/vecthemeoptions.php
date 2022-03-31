@@ -649,6 +649,14 @@ class VecThemeoptions extends Module implements WidgetInterface
         Media::addJsDef(array(
             'vectheme' => array(
                 'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
+                'cd_days_text' => 'days',
+                'cd_day_text' => 'day',
+                'cd_hours_text' => 'hours',
+                'cd_hour_text' => 'hour',
+                'cd_mins_text' => 'mins',
+                'cd_min_text' => 'min',
+                'cd_secs_text' => 'secs',
+                'cd_sec_text' => 'sec',
             )
         ));
 	}

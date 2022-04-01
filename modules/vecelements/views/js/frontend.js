@@ -3170,6 +3170,7 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 			breakpoints = ceFrontend.config.breakpoints;
 
 		var slickOptions = {
+			rows : elementSettings.rows,
 			touchThreshold: 100,
 			slidesToShow: slidesToShow,
 			slidesToScroll: +elementSettings.slides_to_scroll || 1,
@@ -4162,6 +4163,7 @@ var SlideshowCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		});
 	},
 	onInit: function onInit() {
+		var _this = this;
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 
 		var elementSettings = this.getElementSettings(),

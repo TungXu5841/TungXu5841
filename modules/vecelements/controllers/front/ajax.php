@@ -106,7 +106,7 @@ class VecElementsAjaxModuleFrontController extends ModuleFrontController
         $this->context->smarty->assign(array(
             'products' => $products,
         ));
-        $template = _VEC_TEMPLATES_ . 'front/widgets/products.tpl';
+        $template = _VEC_TEMPLATES_ . 'front/widgets/product-tab.tpl';
 
         if (!$template){
             $template = $this->module->l('No template found', 'ajax');

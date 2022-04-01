@@ -77,13 +77,13 @@ class WidgetsManager
             'shortcode',
             'html',
             'menu-anchor',
-            'links-list',
+            
 
             'slideshow',
-            'product-grid',
             'product-carousel',
             'product-sale',
             'product-tab',
+            'links-list',
             'call-to-action',
             'flip-box',
             'animated-headline',

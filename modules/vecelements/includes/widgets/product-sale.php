@@ -245,6 +245,8 @@ class WidgetProductSale extends WidgetProductBase
             $settings['category_id'],
             $settings['products']
 		);
+
+		$settings['widget_name'] = 'product-sale-widget';
 		
 		if ( ! $products ) {
 			echo '<p>There is no sale product.</p>'; return false;

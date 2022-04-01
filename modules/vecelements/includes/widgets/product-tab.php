@@ -220,43 +220,33 @@ class WidgetProductTab extends WidgetProductBase
 				]
 			);
 			$this->addResponsiveControl(
-				'columns',
-				[
-					'label' => __( 'Columns' ),
-					'type' => ControlsManager::SLIDER,
-					'devices' => [ 'desktop', 'tablet', 'mobile' ],
-					'size_units' => ['item'],
-					'range' => [
-						'item' => [
-							'min' => 1,
-							'max' => 6,
-							'step' => 1,
-						],
-					],
-					'desktop_default' => [
-						'size' => 4,
-						'unit' => 'item',
-					],
-					'tablet_default' => [
-						'size' => 3,
-						'unit' => 'item',
-					],
-					'mobile_default' => [
-						'size' => 2,
-						'unit' => 'item',
-					],
-					'condition' 	=> [
-						'enable_slider!' => 'yes',
-					],
-				]
-			);
+                'grid_column',
+                [
+                    'label' => __('Grid column'),
+                    'type' => ControlsManager::SELECT,
+                    'options' => [
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4',
+                        '5' => '5',
+                        '6' => '6',
+                    ],
+                    'default' => '4',
+                    'condition' => [
+                        'enable_slider!' => 'yes',
+                    ],
+                ]
+            );
 			$product_display = array(
-				'default' => 'Default',
-				'grid1' => 'Grid 1',
-				'grid2' => 'Grid 2',
-				'grid3' => 'Grid 3',
-				'grid4' => 'Grid 4',
-				'list'  => 'List',
+				'0' => 'Default',
+				'grid1' => 'Style 1',
+				'grid2' => 'Style 2',
+				'grid3' => 'Style 3',
+				'grid4' => 'Style 4',
+				'grid5' => 'Style 5',
+				'grid6' => 'Style 6',
+				'list' => 'Style 7'
 			);
 			$this->addControl(
 				'product_display',
@@ -264,8 +254,8 @@ class WidgetProductTab extends WidgetProductBase
 					'label' => __( 'Product display' ),
 					'type' => ControlsManager::SELECT,
 					'options' => $product_display,
-					'default' => 'default',
-					'description' => __('Default: use themesettings configuration')
+					'default' => '0',
+					'description' => __('Default: use setting from theme options module.'),
 				]
 			);
 		$this->endControlsSection();
@@ -529,18 +519,40 @@ class WidgetProductTab extends WidgetProductBase
             return;
         }
 		$settings = $this->getSettingsForDisplay();
+
+		$grid_type = 'grid1';
+        if($settings['product_display']){
+            $grid_type = $settings['product_display'];
+        }else{
+            $option_product = \Configuration::get('vecthemeoptionsgrid_type');
+            if($option_product){
+                $grid_type = 'grid'. $option_product;
+            }
+        }
+
+		$option_rotator = \Configuration::get('vecthemeoptionssecond_img');
+        $this->context->smarty->assign('vectheme', array(
+            'rotator' => $option_rotator,
+            'grid_type' => $grid_type
+        ));
 		
         $ajaxtab = false;
         if($settings['enable_ajax']){
         	$ajaxtab = true;
         }
         $class_tab = [];
+
         if($settings['enable_slider']){
         	$class_tab[]= 'elementor-block-carousel';
-        }
-        $class_tab[] = 'items-desktop-'. ($settings['slides_to_show'] ? $settings['slides_to_show'] : $settings['default_slides_desktop']);
-        $class_tab[] = 'items-tablet-'. ($settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : $settings['default_slides_tablet']);
-        $class_tab[] = 'items-mobile-'. ($settings['slides_to_show_mobile'] ? $settings['slides_to_show_mobile'] : $settings['default_slides_mobile']);
+			$class_tab[] = 'items-desktop-'. ($settings['slides_to_show'] ? $settings['slides_to_show'] : $settings['default_slides_desktop']);
+			$class_tab[] = 'items-tablet-'. ($settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : $settings['default_slides_tablet']);
+			$class_tab[] = 'items-mobile-'. ($settings['slides_to_show_mobile'] ? $settings['slides_to_show_mobile'] : $settings['default_slides_mobile']);
+        }else{
+			$class_tab[] = 'items-desktop-'. ($settings['grid_column'] ? $settings['grid_column'] : 4);
+			$class_tab[] = 'items-tablet-'. ($settings['grid_column_tablet'] ? $settings['grid_column_tablet'] : 3);
+			$class_tab[] = 'items-mobile-'. ($settings['grid_column_mobile'] ? $settings['grid_column_mobile'] : 2);
+		}
+
 		?>
 		<div class="product-tabs-widget" data-ajax="<?= $ajaxtab; ?>">
 			<ul class="nav nav-tabs">
@@ -584,7 +596,7 @@ class WidgetProductTab extends WidgetProductBase
 						<?php 
 							if($products): ?>
 							<div class="<?= implode(' ', $class_tab)?>">
-								<?php echo $this->context->smarty->fetch( _VEC_PATH_ . 'views/templates/front/widgets/products.tpl', ['products' => $products] ); ?>
+								<?php echo $this->context->smarty->fetch( _VEC_PATH_ . 'views/templates/front/widgets/product-tab.tpl', ['products' => $products] ); ?>
 							</div>	
 							<?php endif;
 						?>

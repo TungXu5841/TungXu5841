@@ -63,6 +63,15 @@ trait CarouselTrait
         $slides_to_show = range(1, 10);
         $slides_to_show = array_combine($slides_to_show, $slides_to_show);
 
+        $self->addControl(
+            'rows',
+            [
+                'label' => __('Rows'),
+                'type' => ControlsManager::NUMBER,
+                'default' => 1,
+                'frontend_available' => true,
+            ]
+        );
         $self->addResponsiveControl(
             'slides_to_show',
             [

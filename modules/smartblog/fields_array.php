@@ -85,6 +85,26 @@ $this->fields_form[]['form'] = array(
             ],
         ),
         array(
+            'type'     => 'switch',
+            'label'    => $this->trans('Show Category', [], 'Modules.Smartblog.Smartblog'),
+            'name'     => 'smartdisablecatimg',
+            'required' => false,
+            'desc'     => 'Show category image and description on category page',
+            'is_bool'  => true,
+            'values'   => array(
+                array(
+                    'id'    => 'active_on',
+                    'value' => 1,
+                    'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
+                ),
+                array(
+                    'id'    => 'active_off',
+                    'value' => 0,
+                    'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
+                ),
+            ),
+        ),
+        array(
             'type' => 'infoheading',
             'label' => $this->l('Blog single'),
             'name'=> 'blog-single'
@@ -391,26 +411,7 @@ $this->fields_form[]['form'] = array(
                 ),
             ),
         ),
-        array(
-            'type'     => 'switch',
-            'label'    => $this->trans('Show Category', [], 'Modules.Smartblog.Smartblog'),
-            'name'     => 'smartdisablecatimg',
-            'required' => false,
-            'desc'     => 'Show category image and description on category page',
-            'is_bool'  => true,
-            'values'   => array(
-                array(
-                    'id'    => 'active_on',
-                    'value' => 1,
-                    'label' => $this->trans('Enabled', [], 'Modules.Smartblog.Smartblog'),
-                ),
-                array(
-                    'id'    => 'active_off',
-                    'value' => 0,
-                    'label' => $this->trans('Disabled', [], 'Modules.Smartblog.Smartblog'),
-                ),
-            ),
-        ),
+        
 
     ),
     'submit' => array(

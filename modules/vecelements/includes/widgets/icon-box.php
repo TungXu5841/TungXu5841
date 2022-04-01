@@ -489,19 +489,19 @@ class WidgetIconBox extends WidgetBase
                 'options' => [
                     'left' => [
                         'title' => __('Left'),
-                        'icon' => 'vecicon-align-left',
+                        'icon' => 'fa fa-align-left',
                     ],
                     'center' => [
                         'title' => __('Center'),
-                        'icon' => 'vecicon-align-center',
+                        'icon' => 'fa fa-align-center',
                     ],
                     'right' => [
                         'title' => __('Right'),
-                        'icon' => 'vecicon-align-right',
+                        'icon' => 'fa fa-align-right',
                     ],
                     'justify' => [
                         'title' => __('Justified'),
-                        'icon' => 'vecicon-align-justify',
+                        'icon' => 'fa fa-align-justify', 
                     ],
                 ],
                 'selectors' => [

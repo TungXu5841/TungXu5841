@@ -1,10 +1,10 @@
-<article class="thumbnail-container style_product_1 product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
-    <div class="img_block">
+<article class="thumbnail-container grid-sale product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
+    <div class="img-block">
         {block name='product_thumbnail'}
             {if $product.cover}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
                 <img class="first-image lazyload"
-                data-src = "{$product.cover.bySize.large_default.url}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                src = "{$product.cover.bySize.large_default.url}" data-src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
                 alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
                 data-full-size-image-url = "{$product.cover.large.url}"
                 >
@@ -16,13 +16,11 @@
                 </a>
             {/if}
             {/block}
-                <div class="quick-view">
-                {block name='quick_view'}
-                <a class="quick_view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
-                    <span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
-                </a>
+            {block name='quick_view'}
+            <a class="quick-view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
+                <span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
+            </a>
                 {/block}
-            </div>
             {block name='product_flags'}
             <ul class="product-flag">
             {foreach from=$product.flags item=flag}
@@ -31,18 +29,18 @@
             </ul>
         {/block}
     </div>
-    <div class="product_desc">
-        <div class="inner_desc">
+    <div class="product-content">
+        <div class="inner-content">
             {if isset($product.id_manufacturer)}
                 <div class="manufacturer"><a href="{url entity='manufacturer' id=$product.id_manufacturer }">{Manufacturer::getnamebyid($product.id_manufacturer)}</a></div>
             {/if}
-            {block name='product_name'}
-                <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:50:'...'}</a></h3> 
-            {/block}
-                {block name='product_reviews'}
+            {block name='product_reviews'}
                 <div class="hook-reviews">
                 {hook h='displayProductListReviews' product=$product}
                 </div>
+            {/block}
+            {block name='product_name'}
+                <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:50:'...'}</a></h3> 
             {/block}
             {block name='product_price_and_shipping'}
                 {if $product.show_price}
@@ -76,28 +74,21 @@
                 </div>
                 {/if}
             {/block}
-            <div class="cart">
+            <div class="box-hover">
+                <div class="product-cart">
                 {include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
-            </div>
+                </div>
+                <div class="add-links">					
+                    {hook h='displayProductListFunctionalButtons' product=$product}
+                    {hook h='displayWishlistButton' product=$product}
+                </div>
+            </div> 
         </div>	
-        <div class="availability"> 
-        {if $product.show_availability }
-            {if $product.quantity > 0}
-            <div class="availability-list in-stock">{l s='Availability' d='Shop.Theme.Actions'}: <span>{$product.quantity} {l s='In Stock' d='Shop.Theme.Actions'}</span></div>
-
-            {else}
-
-            <div class="availability-list out-of-stock">{l s='Availability' d='Shop.Theme.Actions'}: <span>{l s='Out of stock' d='Shop.Theme.Actions'}</span></div> 
-            {/if}
-        {/if}
-        </div>
-        <div class="variant-links">
         {block name='product_variants'}
         {if $product.main_variants}
         {include file='catalog/_partials/variant-links.tpl' variants=$product.main_variants}
         {/if}
         {/block} 
-        </div>
         {if isset($product.specific_prices.to) && $product.specific_prices.to|strtotime > $smarty.now && $product.specific_prices.from|strtotime < $smarty.now}
         <div class="countdown" >
             <div class="title_countdown">{$title}</div>

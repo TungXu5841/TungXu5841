@@ -139,7 +139,7 @@ class WidgetBanner extends WidgetBase {
 							'icon' => 'fa fa-align-right',
 						],
 					],
-					'default' => 'center',
+					'default' => 'left',
 					'toggle' => true,
 					'selectors' => [
 						'{{WRAPPER}} .banner-content' => 'text-align: {{VALUE}};',
@@ -152,23 +152,23 @@ class WidgetBanner extends WidgetBase {
 					'label' => __('Vertical Alignment'),
 					'type' => ControlsManager::CHOOSE,
 					'options' => [
-						'left' => [
+						'flex-start' => [
 							'title' => __('Top'),
-							'icon' => 'ceicon-v-align-top',
+							'icon' => 'eicon-v-align-top',
 						],
 						'center' => [
 							'title' => __('Middle'),
-							'icon' => 'ceicon-v-align-middle',
+							'icon' => 'eicon-v-align-middle',
 						],
-						'right' => [
+						'flex-end' => [
 							'title' => __('Bottom'),
-							'icon' => 'ceicon-v-align-bottom',
+							'icon' => 'eicon-v-align-bottom',
 						],
 					],
 					'default' => 'center',
 					'toggle' => true,
 					'selectors' => [
-						'{{WRAPPER}} .banner-content' => 'vertical-align: {{VALUE}};',
+						'{{WRAPPER}} .banner-content' => 'justify-content: {{VALUE}};',
 					],
 				]
 			);
@@ -454,7 +454,7 @@ class WidgetBanner extends WidgetBase {
         $this->startControlsSection(
 			'section_hover',
 			[
-				'label' 		=> $this->l('Hover'),
+				'label' 		=> $this->l('Hover image'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
@@ -530,9 +530,9 @@ class WidgetBanner extends WidgetBase {
 					$html .= '<div '. $this->getRenderAttributeString('content').'>';
 						$html .= '<p '. $this->getRenderAttributeString('title') .'>'. $title .'</p>';
 						$html .= '<p '. $this->getRenderAttributeString('title2') .'>'. $title2 .'</p>';
-						$html .= '<div '. $this->getRenderAttributeString('subtitle') .'>'. $subtitle .'</div>';
+						$html .= '<p '. $this->getRenderAttributeString('subtitle') .'>'. $subtitle .'</p>';
 						if(!empty($button_link) && !empty($link['url'])) { 
-							$html .= '<a class="banner-button" href="'. $link['url'] .'">'. $button_link .'</a>';
+							$html .= '<div><a class="banner-button" href="'. $link['url'] .'">'. $button_link .'</a></div>';
 						}
 					$html .= '</div>';
 				$html .= '</figcaption>';

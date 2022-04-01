@@ -85,7 +85,8 @@
 							<span class="smart-blog-single-comments">
 							&nbsp;<i class="vecicon-logo-wechat"></i>&nbsp;
 							{l s=' Comments'  d='Modules.Smartblog.Posts'}
-							<span class="comment-count-number">{if $countcomment != ''}{$countcomment|escape:'htmlall':'UTF-8'}{else}{l s='0'  d='Modules.Smartblog.Posts'}{/if}</span>
+							{$countcomment}}
+							<span class="comment-count-number">{if $countcomment != ''}{$countcomment|escape:'htmlall':'UTF-8'}{else}0{/if}</span>
 							</span>
 							{/if}
 						</span>

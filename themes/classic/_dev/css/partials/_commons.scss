@@ -25,6 +25,11 @@ a{
   @include vec-transition(300ms); 
   &:hover {
     text-decoration: none;
+    color: var(--hovercolor); 
+  }
+  &:focus {
+    outline: none;
+    outline-offset: 0;
   }
 }
 img {

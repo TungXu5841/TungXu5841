@@ -452,7 +452,7 @@ class WidgetSlideshow extends WidgetBase {
 					GroupControlTypography::getType(),
 					[
 						'name' => 'button_typography',
-						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .button',
+						'selector' => '{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} a.slideshow-button',
 						'separator' => 'none',
 					]
 				);

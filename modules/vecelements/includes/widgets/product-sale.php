@@ -245,13 +245,13 @@ class WidgetProductSale extends WidgetProductBase
             $settings['category_id'],
             $settings['products']
 		);
-
+		
 		if ( ! $products ) {
 			echo '<p>There is no sale product.</p>'; return false;
 		}
 
 		$tpl = _VEC_TEMPLATES_ . 'front/widgets/product-sale/'. $settings['product_display'] .'.tpl';
-
+		$this->context->smarty->assign('title', $settings['title']);
 		// Store product temporary if exists
 		isset($this->context->smarty->tpl_vars['product']) && $tmp = $this->context->smarty->tpl_vars['product'];
 
@@ -262,6 +262,7 @@ class WidgetProductSale extends WidgetProductBase
 		// Restore product if exists
 		isset($tmp) && $this->context->smarty->tpl_vars['product'] = $tmp;
 		
+		$this->context->smarty->assign('title', $settings['title']);
 
 		$this->renderCarousel($settings, $slides);
 		

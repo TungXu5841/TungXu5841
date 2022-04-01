@@ -4149,7 +4149,18 @@ var SlideshowCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 			$carousel: this.$element.find(selectors.carousel)
 		};
 	},
-
+	doAnimations: function doAnimations( elems ) {
+		//Cache the animationend event in a variable
+		var animEndEv = 'webkitAnimationEnd animationend';
+		
+		elems.each(function () {
+			var $this = $(this),
+				$animationType = $this.data('animation');
+			$this.addClass($animationType).one(animEndEv, function () {
+				$this.removeClass($animationType);
+			});
+		});
+	},
 	onInit: function onInit() {
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 
@@ -4179,6 +4190,16 @@ var SlideshowCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		};
 
 		this.elements.$carousel.slick(slickOptions);
+		
+		var ncarousel = this.elements.$carousel;
+		var $firstAnimatingElems = ncarousel.find('.slideshow-content').find("[data-animation ^= 'animated']");
+		//Animate captions in first slide on page load 
+		_this.doAnimations($firstAnimatingElems);
+		ncarousel.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+			var $firstAnimatingElems = ncarousel.find('.slideshow-content').find("[data-animation ^= 'animated']");
+			//Animate captions in first slide on page load 
+			_this.doAnimations($firstAnimatingElems);
+		});
 	}
 });
 

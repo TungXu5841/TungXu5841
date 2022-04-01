@@ -830,17 +830,6 @@ form#searchbox .button.button-small i {
     bottom: -10px;
     background: #253237;
 }
-.smart-blog-posts-title{
-    font-weight: 600;
-    font-size: 18px;
-}
-.smart-blog-posts-title a{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-	display: block;
-}
-
 .smart-blog-posts-header-area .smart-blog-posts-info {
     font-weight: 400;
     font-size: 13px;
@@ -871,7 +860,7 @@ form#searchbox .button.button-small i {
     margin-top: 20px;
     margin-bottom: 25px;
 	display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis; 

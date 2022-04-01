@@ -3,7 +3,7 @@
     <name>vecvegamenu</name>
     <displayName><![CDATA[Vec - Vertical Menu]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[Vertical menu custommer module]]></description>
+    <description><![CDATA[Vertical megamenu custommer module]]></description>
     <author><![CDATA[ThemeVec]]></author>
     <tab><![CDATA[front_office_features]]></tab>
     <is_configurable>1</is_configurable>

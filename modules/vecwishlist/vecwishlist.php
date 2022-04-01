@@ -98,8 +98,12 @@ class VecWishlist extends Module implements WidgetInterface
     {
         $this->context->controller->registerStylesheet($this->name.'-css', 'modules/'.$this->name.'/views/css/front.css', ['media' => 'all', 'priority' => 998]);
         $this->context->controller->registerJavascript($this->name.'-js', 'modules/'.$this->name.'/views/js/front.js', ['position' => 'bottom', 'priority' => 150]);
-		
-        $productsIds = VecWishlistProduct::getWishlistProductsIds((int)$this->context->customer->id);
+		if ($this->context->customer->isLogged()){
+            $productsIds = VecWishlistProduct::getWishlistProductsIds((int)$this->context->customer->id);
+        }else{
+            $productsIds = [];
+        }
+        
 
         Media::addJsDef(array(
 			'wishListVar' => array(

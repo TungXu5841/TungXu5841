@@ -1360,7 +1360,7 @@
 				}
                 .menu-dropdown {
 					position: absolute;
-					z-index: 9;
+					z-index: 10;
 					visibility: hidden;
 					opacity: 0;
 					text-align: left;
@@ -1579,7 +1579,7 @@
 			left: 0;
 			padding: 0;
             border: 1px solid $border-gray;
-            z-index: 1;
+            z-index: 9;
 			min-width: 240px;
 			@media (max-width: 1440px) {
 				min-width: 220px; 
@@ -2405,7 +2405,9 @@
 }
 //blog
 .elementor-widget-v-smartblog {
-    margin: 0 -10px;
+    .elementor-image-carousel-wrapper {
+        margin: 0 -10px;
+    }
     .slick-slide {
         padding: 0 10px;
     }
@@ -2447,6 +2449,7 @@
             pointer-events: none;
         }
         img {
+            width: 100%;
             @include vec-transition(300ms);
             @include vec-transform(scale(1));
         }

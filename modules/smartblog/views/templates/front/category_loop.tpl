@@ -25,11 +25,11 @@
 {if $columns == '1'}
     {assign var="class" value="col-xs-12"}
 {else if $columns == '2'}
-    {assign var="class" value="col-lg-6 col-md-6 col-sm-6 col-xs-12"}
+    {assign var="class" value="col-lg-6 col-md-6 col-sm-12 col-xs-12"}
 {else if $columns == '3'}
-    {assign var="class" value="col-lg-4 col-md-6 col-sm-6 col-xs-12"}
+    {assign var="class" value="col-lg-4 col-md-6 col-sm-12 col-xs-12"}
 {else}
-    {assign var="class" value="col-lg-3 col-md-6 col-sm-6 col-xs-12"}
+    {assign var="class" value="col-lg-3 col-md-6 col-sm-12 col-xs-12"}
 {/if}
 {if $post_style == '1'}
     {include file="module:smartblog/views/templates/front/post/style1.tpl" postcategory=$postcategory class=$class}

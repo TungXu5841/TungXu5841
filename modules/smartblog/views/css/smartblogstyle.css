@@ -3,8 +3,7 @@
     overflow: hidden;
 }
 .sdsarticleCat,.addthis_toolbox  {
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+    margin-bottom: 50px;
 }
 .sdsarticleHeader i.icon{
     vertical-align: middle;
@@ -634,33 +633,12 @@ form#searchbox .button.button-small i {
 .block.smart-block {
     margin-bottom: 3.75rem;
 }
-.smart-block .smart_blog_sidebar_title a{
-    font-size: 1.25rem;
-    line-height: 1;
-    color: #253237;
-    padding-bottom: 1.125rem;
-    margin-bottom: 30px;
-    font-weight: 600;
-    position: relative;
-    display: block;
-    border-bottom: 1px solid #ebebeb;
-    text-transform: capitalize;
-    overflow: visible;
-}
-.smart-block .smart_blog_sidebar_title a:hover{
-	color: var(--hovercolor);
-}
-.smart-block .smart_blog_sidebar_title a:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 3.75rem;
-    height: 2px;
-    background: var(--hovercolor);
+.smart_blog_sidebar_title {
+	text-transform: uppercase;
+	margin-bottom: 1rem;
 }
 #sdssearch_block_top .smart_blog_search_bar {
-    background-color: #f5f5f5;
+    background-color: #f6f6f6;
     border-color: transparent;
     width: 100%;
     height: 50px;
@@ -669,7 +647,6 @@ form#searchbox .button.button-small i {
     line-height: 18px;
     color: rgba(0, 0, 0, .5);
     padding-right: 38px;
-	border-radius:5px;
 }
 #sdssearch_block_top .smart_blog_search_bar::placeholder {
   color: #B0B0B0;
@@ -689,11 +666,11 @@ form#searchbox .button.button-small i {
     height: 100%;
     overflow: hidden;
     background: transparent;
-	font-size:26px;
+	padding: 0;
 }
 #sdssearch_block_top .smart_blog_search_button .search{
-    color:#253237;
-    font-size: 26px;
+    color:#0c0c0c;
+    font-size: 24px;
 	-webkit-transition: all 300ms linear;
     -moz-transition: all 300ms linear;
     -ms-transition: all 300ms linear;
@@ -730,7 +707,7 @@ form#searchbox .button.button-small i {
     overflow: hidden;
 }
 .smart-blog-post-title-date .title{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
     line-height: 16.5px;
 	display:block;
@@ -742,22 +719,21 @@ form#searchbox .button.button-small i {
     padding-top: 6px;
 }
 .smart-block .smart_blog_block_content a{
-    padding: 10px 25px;
+    padding: 8px 20px;
     font-size: 14px;
     line-height: 20px;
     color: #555;
     font-weight: 400;
-    border: 1px solid #ebebeb;
-    border-radius: 3px;
+    border: 1px solid #e5e5e5;
     background: #fff;
     margin-bottom: 10px;
     margin-right: 5px;
 	display: inline-block;
 }
 .smart-block .smart_blog_block_content a:hover{
-    color: #FFFFFF;
-    background:var(--hovercolor);
-	border-color:var(--hovercolor);
+     background: var(--buttonhoverbackground);
+	 color: var(--buttonhovercolor);
+	border-color: var(--buttonhoverbackground);
 }
 .smart-block .category-sub-menu > li > a {
     font-weight: 500 !important;
@@ -828,11 +804,11 @@ form#searchbox .button.button-small i {
     height: 1px;
     left: 0px;
     bottom: -10px;
-    background: #253237;
+    background: #0c0c0c;
 }
 .smart-blog-posts-header-area .smart-blog-posts-info {
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 24px;
     color: #888888;
     display: flex;
@@ -846,8 +822,9 @@ form#searchbox .button.button-small i {
 	margin-bottom:0;
 }
 .smart-blog-posts-header-area .smart-blog-posts-info span{
-    font-weight: 500;
+    font-weight: 400;
     color: #666666;
+	margin-right:10px;
 }
 .smart-blog-posts-header-area .smart-blog-posts-info span i{
    vertical-align:-1px;
@@ -883,7 +860,7 @@ form#searchbox .button.button-small i {
     margin-top: -6px;
 }
 .smart-blog-lcomments-text .smart-blog-authorl-name{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     line-height: 20px;
     color: #696969;
@@ -932,13 +909,17 @@ form#searchbox .button.button-small i {
 	flex: 0 0 auto;
 	float:none;
 }
-
+@media (min-width: 768px) and (max-width: 991px) {
+	.row-sdsarticleCat .sdsarticleCat {
+		width:100%;
+	}
+}
 /* Smart Blog Post single */
 .smart-blog-single-post-title {
-    font-weight: 700;
-    font-size: 30px;
+    font-weight: 500;
+    font-size: 34px;
     line-height:1;
-    color: #253237;
+    color: #0c0c0c;
 }
 .smart-blog-sing-blog-content > p > span{
     font-weight: 400 !important;
@@ -954,32 +935,31 @@ form#searchbox .button.button-small i {
 }
 
 .sdstags-update.smart-blog-post-tags .tags > span{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
-    color: #253237;
+    color: #0c0c0c;
 }
 .sdstags-update.smart-blog-post-tags .smart-blog-single-tag-item{
-    padding: 10px 25px;
+    padding: 8px 20px;
     font-size: 14px;
     line-height: 20px;
     color: #555;
     font-weight: 400;
-    border: 1px solid #ebebeb;
-    border-radius: 3px;
+    border: 1px solid #e5e5e5;
     background: #fff;
     margin-bottom: 10px;
     margin-right: 5px;
 	display: inline-block;
 }
 .sdstags-update.smart-blog-post-tags .smart-blog-single-tag-item:hover{
-	color: rgb(255, 255, 255);
-    background: var(--hovercolor);
-    border-color: var(--hovercolor);
+	 background: var(--buttonhoverbackground);
+	 color: var(--buttonhovercolor);
+	border-color: var(--buttonhoverbackground);
 }
 .smart-blog-article-share-button p{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
-    color: #253237;
+    color: #0c0c0c;
     margin-bottom: 20px;
 }
 .smart-blog-article-share-social-icon{
@@ -1041,7 +1021,7 @@ form#searchbox .button.button-small i {
     margin-top: 30px;
 }
 .smart-blog-commentform-area .comment-reply-title{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
     color: #252B42;
 }
@@ -1069,7 +1049,7 @@ form#searchbox .button.button-small i {
     outline: none;
 }
 .smart-blog-comm-button-area .submit .smart-blog-comment-btn{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 15px;
     border-radius: 2px;
     padding: 15px 40px;
@@ -1078,7 +1058,7 @@ form#searchbox .button.button-small i {
     margin-bottom: 10px;
 }
 .smart-blog-post-comments-view-area .smart-blog-comments-title{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
 }
 .smart-blog-comment-time-reply-area {
@@ -1086,7 +1066,7 @@ form#searchbox .button.button-small i {
     align-items: center;
 }
 .smart-blog-comment-time-reply-area .created, .smart-blog-comment-time-reply-area .reply{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 12px;
     color: #C4C4C4;
     margin-right: 10px;
@@ -1100,7 +1080,7 @@ form#searchbox .button.button-small i {
     color: #3CB9D7;
 }
 .commentList li .name, .commentList li .name a {
-    font-weight: 600;
+    font-weight: 500;
     color: #333333;
     cursor: default;
     font-size: 15px;
@@ -1144,13 +1124,13 @@ span.smart-blog-reply-icon {
     margin-right: 15px;
 }
 .smart-blog-page-not-found h1{
-    font-weight: 600;
+    font-weight: 500;
     line-height: 40px;
     color: #6E6D7A;
     font-size: 27px;
 }
 .smart-blog-page-not-found p {
-    font-weight: 600;
+    font-weight: 500;
     line-height: 25px;
     color: #6E6D7A;
     padding-top: 10px;
@@ -1200,16 +1180,16 @@ span.smart-blog-reply-icon {
     overflow: hidden;
 }
 .smart-latest-news-block .title_block{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     line-height: 24px;
-    color: #253237;
+    color: #0c0c0c;
 }
 .smart-blog-bottom-pagination .pagination li .page-link{
     font-weight: 400;
     font-size: 16px;
     border: none;
-    color: #253237;
+    color: #0c0c0c;
 	background:#f6f6f6;
     border-radius: 50%;
     padding:0;
@@ -1240,9 +1220,9 @@ span.smart-blog-reply-icon {
     padding-bottom: 40px;
 }
 .smart-blog-home-latest-news .title_block {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 24px;
-    color: #253237;
+    color: #0c0c0c;
     margin-bottom: 20px;
 }
 .smart-title-shape-full-width {
@@ -1268,7 +1248,7 @@ span.smart-blog-reply-icon {
     background: #3CB9D7;
 }
 .smart-blog-home-news-date{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     color: #82868C;
     padding-top: 15px;
@@ -1280,9 +1260,9 @@ span.smart-blog-reply-icon {
     padding-top: 15px;
 }
 .smart-blog-home-latest-news .sds_post_title.sds_post_title_home a{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 15px;
-    color: #253237;
+    color: #0c0c0c;
     line-height: 22px;
 }
 .smart-blog-news-box-content .news_module_image_holder.news_home_image_holder{
@@ -1365,10 +1345,10 @@ span.smart-blog-reply-icon {
     text-align: center;
 }
 .smart-blog-category-banner-content-title{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 24px;
     line-height: 36px;
-    color: #253237;
+    color: #0c0c0c;
     padding-bottom: 8px;
     text-transform: capitalize;
 }

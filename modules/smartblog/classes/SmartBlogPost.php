@@ -354,6 +354,7 @@ class SmartBlogPost extends ObjectModel
 			$employee                          = new Employee($post['id_author']);
 			$result[$i]['lastname']  = $employee->lastname;
 			$result[$i]['firstname'] = $employee->firstname;
+			$result[$i]['date_added']        = Smartblog::displayDate($post['created']);
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
 				$image                    = $post['id_smart_blog_post'];
 				$result[$i]['post_img'] = $image;

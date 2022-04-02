@@ -30,7 +30,7 @@
 
 {if $vectheme.404_content == 'default'}
   {capture assign="errorContent"}
-    <div class="404-image">
+    <div class="image-404">
     {if $vectheme.404_image}
       <img src="{$vectheme.404_image}" alt="404" />
     {else}

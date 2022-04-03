@@ -5,6 +5,9 @@
 .hidden{
   display: none !important;
 }
+.first-active .js-product-miniature:after{
+  left: 0;
+}
  .slick-block:not(.slick-initialized){
    white-space: nowrap;
    overflow: hidden;

@@ -174,7 +174,7 @@ class WidgetProductCarousel extends WidgetProductBase
 
             foreach ($products as &$product) {
                 $this->context->smarty->assign('product', $product);
-                $slides[] = '<div class="slick-slide-inner">' . $this->context->smarty->fetch($tpl) . '</div>';
+                $slides[] = $this->context->smarty->fetch($tpl);
             }
             // Restore product if exists
             isset($tmp) && $this->context->smarty->tpl_vars['product'] = $tmp;

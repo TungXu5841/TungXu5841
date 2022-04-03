@@ -434,9 +434,7 @@ trait CarouselTrait
         <div class="elementor-image-carousel-wrapper elementor-slick-slider" dir="<?= $settings['direction'] ?>">
             <div <?= $self->getRenderAttributeString('carousel') ?>>
             <?php foreach ($slides as &$slide) : ?>
-                <div class="slick-slide">
-                    <?= $slide ?>
-                </div>
+                <?= $slide ?>
             <?php endforeach ?>
             </div>
         </div>

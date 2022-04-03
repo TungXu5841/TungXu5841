@@ -547,6 +547,7 @@ class WidgetProductTab extends WidgetProductBase
 			$class_tab[] = 'items-desktop-'. ($settings['slides_to_show'] ? $settings['slides_to_show'] : $settings['default_slides_desktop']);
 			$class_tab[] = 'items-tablet-'. ($settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : $settings['default_slides_tablet']);
 			$class_tab[] = 'items-mobile-'. ($settings['slides_to_show_mobile'] ? $settings['slides_to_show_mobile'] : $settings['default_slides_mobile']);
+			$class_tab[] = 'slick-arrows-' . $settings['arrows_position'];
         }else{
 			$class_tab[] = 'items-desktop-'. ($settings['grid_column'] ? $settings['grid_column'] : 4);
 			$class_tab[] = 'items-tablet-'. ($settings['grid_column_tablet'] ? $settings['grid_column_tablet'] : 3);

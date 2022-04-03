@@ -3152,6 +3152,7 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 	},
 
 	onInit: function onInit() {
+		var _this = this;
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 		var elementCarousel = this.elements.$carousel;
 		elementCarousel.on('init', function(event, slick, currentSlide){
@@ -3159,6 +3160,13 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
 			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
 			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
+			
+			var elementMatchHeight = $(this).find('.js-product-miniature .product-content');
+			if(elementMatchHeight.length > 0){
+				elementMatchHeight.addClass('match_height');
+				_this.matchHeight($(this));
+			}
+			
 		});
 
 		var elementSettings = this.getElementSettings(),
@@ -3235,6 +3243,48 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
 			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
 		});
+		elementCarousel.on('reInit', function(event, slick, currentSlide){
+			var slideToShow = $(this).find('.slick-slide.slick-active').length - 1;
+			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+			$(this).find('.slick-slide.slick-active').eq(0).addClass('first-active');
+			$(this).find('.slick-slide.slick-active').eq(slideToShow).addClass('last-active');
+			
+			var elementMatchHeight = $(this).find('.js-product-miniature .product-content');
+			if(elementMatchHeight.length > 0){
+				elementMatchHeight.addClass('match_height');
+				_this.matchHeight($(this));
+			}
+			
+		});
+	},
+	matchHeight: function matchHeight(pos_content = null){
+		function init(pos_content) {
+			eventListeners(pos_content);
+			matchItemHeight(pos_content);
+		}
+		
+		function eventListeners(pos_content){
+			$(window).on('resize', function() {
+				matchItemHeight(pos_content);
+			});
+		}
+		
+		function matchItemHeight(pos_content){
+			
+			var groupName = pos_content.find('.match_height');
+			var groupHeights = [];
+			if(groupName.length <= 0) return;
+			groupName.css('min-height', 'auto');
+			
+			groupName.each(function() {
+				groupHeights.push($(this).outerHeight());
+			});
+			var maxHeight = Math.max.apply(null, groupHeights);
+			groupName.css('min-height', maxHeight);
+		};
+		
+		init(pos_content);
+		
 	}
 });
 

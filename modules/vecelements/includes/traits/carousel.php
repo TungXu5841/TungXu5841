@@ -199,9 +199,9 @@ trait CarouselTrait
             [
                 'label' => __('Infinite Loop'),
                 'type' => ControlsManager::SELECT,
-                'default' => 'yes',
-                'tablet_default' => 'yes',
-                'mobile_default' => 'yes',
+                'default' => '',
+                'tablet_default' => '',
+                'mobile_default' => '',
                 'options' => [
                     'yes' => __('Yes'),
                     '' => __('No'),

@@ -84,25 +84,11 @@ class VecSearchbar extends Module implements WidgetInterface
         Configuration::updateValue($this->name.'_suggest_title', $values['suggest_title']);
 
         return parent::install()
-            && $this->installTab() 
+            && $this->_createMenu() 
             && $this->registerHook('productSearchProvider')
             && $this->registerHook('displaySearch')
             && $this->registerHook('header')
         ;
-    }
-    public function installTab(){
-        $response = true;
-        $tab = new Tab();
-        $tab->active = 1;
-        $tab->class_name = "AdminVecSearchBar";
-        $tab->name = array();
-        foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Ajax Search";
-        }
-        $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
-        $tab->module = $this->name;
-        $response &= $tab->add();
-        return $response;
     }
 
     public function uninstall(){
@@ -113,15 +99,75 @@ class VecSearchbar extends Module implements WidgetInterface
         Configuration::deleteByName($this->name.'_suggest_status');
         Configuration::deleteByName($this->name.'_keywords_title');
         Configuration::deleteByName($this->name.'_suggest_title');
-        return parent::uninstall() && $this->uninstallTab();
+        return parent::uninstall() && $this->_deleteMenu();
     }
-    public function uninstallTab(){
-        $result = true;
+   
+    protected function _createMenu() {
+        $response = true;
+        // First check for parent tab
+        $parentTabID = Tab::getIdFromClassName('VecThemeMenu');
+        if($parentTabID){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $parentconfigure = Tab::getIdFromClassName('IMPROVE');
+            $parentTab = new Tab();
+            $parentTab->active = 1;
+            $parentTab->name = array();
+            $parentTab->class_name = "VecThemeMenu";
+            foreach (Language::getLanguages() as $lang) {
+                $parentTab->name[$lang['id_lang']] = "THEMEVEC";
+            }
+            $parentTab->id_parent = 0;
+            $response &= $parentTab->add();
+        }
+        
+        //Add parent tab: modules
+        $parentTabID2 = Tab::getIdFromClassName('VecModules');
+        if($parentTabID2){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $tab = new Tab();
+            $tab->active = 1;
+            $tab->class_name = "VecModules";
+            $tab->name = array();
+            foreach (Language::getLanguages(true) as $lang) {
+                $tab->name[$lang['id_lang']] = "Modules";
+            }
+            $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
+            $tab->module = $this->name;
+            $tab->icon = 'open_with';
+            $response &= $tab->add();
+        }
+        //Add tab
+        $tab = new Tab();
+        $tab->active = 1;
+        $tab->class_name = "AdminVecSearchBar";
+        $tab->name = array();
+        foreach (Language::getLanguages(true) as $lang) {
+            $tab->name[$lang['id_lang']] = "- Ajax search";
+        }
+        $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
+        $tab->module = $this->name;
+        $response &= $tab->add();
+
+        return $response;
+    }
+
+    protected function _deleteMenu() {
+        $parentTabID = Tab::getIdFromClassName('VecModules');
+
+        // Get the number of tabs inside our parent tab
+        $tabCount = Tab::getNbTabs($parentTabID);
+        if ($tabCount == 0) {
+            $parentTab = new Tab($parentTabID);
+            $parentTab->delete();
+        }
+        
         $id_tab = (int)Tab::getIdFromClassName('AdminVecSearchBar');
         $tab = new Tab($id_tab);
-        $result = $tab->delete();
+        $tab->delete();
 
-        return $result;
+        return true;
     }
 
     public function getContent(){

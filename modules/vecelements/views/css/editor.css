@@ -4136,3 +4136,14 @@ label.elementor-template-library-order-label {
 
 .elementor-navigator__element-section {
   background-color: #fff; }
+
+
+.select2-results{
+    max-height: 250px;
+}
+.select2-container--default .select2-results>.select2-results__options{
+    max-height: 250px;
+}
+.select2-results i{
+    font-size: 20px;
+}

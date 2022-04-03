@@ -2,7 +2,9 @@
  * Custom code goes here.
  * A template should always ship with an empty custom.css
  */
-
+.hidden{
+  display: none !important;
+}
  .slick-block:not(.slick-initialized){
    white-space: nowrap;
    overflow: hidden;

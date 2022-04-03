@@ -143,18 +143,29 @@
 		<div class="col-lg-9">
 			<select id="type_icon" name="type_icon" class="form-control fixed-width-xl" data-default="0">
                 <option value="0" {if $menu->type_icon == 0}selected="selected" {/if}>{l s='No' mod='vecmegamenu'}</option>
-                <option value="1" {if $menu->type_icon == 1}selected="selected" {/if}>{l s='Font-Awesome Icon' mod='vecmegamenu'}</option>
-                <option value="2" {if $menu->type_icon == 2}selected="selected" {/if}>{l s='Image Icon' mod='vecmegamenu'}</option>
+                <option value="1" {if $menu->type_icon == 1}selected="selected" {/if}>{l s='Theme & Awesome icons' mod='vecmegamenu'}</option>
+                <option value="2" {if $menu->type_icon == 2}selected="selected" {/if}>{l s='Image icon' mod='vecmegamenu'}</option>
             </select>
 		</div>
 	</div>
 	
 	<div class="form-group lab-fw-icon">
-		<label class="control-label col-lg-3">{l s='Font-Awesome Icon' mod='vecmegamenu'}</label>
-		<div class="col-lg-9">
-			<input type="text" class="icon_class fixed-width-xl" id="icon_class" name="icon_class" value="{$menu->icon_class|escape:'html':'UTF-8'}"/>
-			<p>{l s='Put class icon of Font-Awesome at :' mod='vecmegamenu'} <a href="http://fortawesome.github.io/Font-Awesome/3.2.1/icons/">http://fortawesome.github.io/Font-Awesome/3.2.1/icons/.</a> ex: <span>&lt;i class="</span>fab fa-angellist<span>"&gt;&lt;/i&gt;</span></p> 
+		<label class="control-label col-lg-3">{l s='Vecicon & Awesome Icon' mod='vecmegamenu'}</label>
+		<div class="col-lg-3">
+			<select class="icon_class" id="icon_class" name="icon_class">
+				<optgroup label="Theme icons">
+				{foreach from=$vecicons key=key item=value}
+				<option value="{$key}" {if $menu->icon_class == $key}selected{/if}>{$value}</option>
+				{/foreach}
+				</optgroup>
+				<optgroup label="Awesome icons">
+				{foreach from=$awesomeicons key=key item=value}
+				<option value="{$key}" {if $menu->icon_class == $key}selected{/if}>{$value}</option>
+				{/foreach}
+				</optgroup>
+			</select>
 		</div>
+		<p class="help-block col-lg-9 col-lg-offset-3">{l s='Add link to page view icons' mod='vecmegamenu'}</p>
 	</div>
 	<div class="form-group lab-img-icon">
 		<label class="control-label col-lg-3">{l s='Image Icon' mod='vecmegamenu'}</label>
@@ -218,7 +229,6 @@
                 <option value="1" {if $menu->submenu_type == 1}selected="selected" {/if}>{l s='Flyout' mod='vecmegamenu'}</option>
                 <option value="2" {if $menu->submenu_type == 2}selected="selected" {/if}>{l s='None' mod='vecmegamenu'}</option>
             </select>
-            <p class="help-block">{l s='Flyout only is available when you select category in Type Link' mod='vecmegamenu'}</p>
         </div>
     </div>
 	<div class="form-group">
@@ -226,6 +236,7 @@
 		<div class="col-lg-5">
 			<input type="text" class="item_class" id="item_class" name="item_class" value="{if $menu->item_class}{$menu->item_class|escape:'html':'UTF-8'}{/if}"/>
 		</div>
+		<p class="help-block col-lg-9 col-lg-offset-3">{l s='Add a specific class to make different style for this item.' mod='vecmegamenu'}</p>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-lg-3">{l s='New window' mod='vecmegamenu'}</label>

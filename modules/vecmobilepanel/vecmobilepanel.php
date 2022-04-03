@@ -147,7 +147,7 @@ class vecMobilePanel extends Module implements WidgetInterface
 
         // Hooks
         if (parent::install() &&
-            $this->installTab() &&
+            $this->_createMenu() &&
             $this->registerHook('displayAfterBodyOpeningTag') &&
             $this->registerHook('header') &&
             $this->registerHook('actionFrontControllerSetMedia')
@@ -158,23 +158,6 @@ class vecMobilePanel extends Module implements WidgetInterface
         $this->_errors[] = $this->trans('There was an error during the installation. Please contact us through Addons website.', [], 'Modules.Blockreassurance.Admin');
 
         return false;
-    }
-
-    public function installTab(){
-        $response = true;
-
-        $tab = new Tab();
-        $tab->active = 1;
-        $tab->class_name = "AdminMobilepanelListing";
-        $tab->name = array();
-        foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Mobile panel";
-        }
-        $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
-        $tab->module = $this->name;
-        $response &= $tab->add();
-
-        return $response;
     }
 
     /**
@@ -195,13 +178,81 @@ class vecMobilePanel extends Module implements WidgetInterface
         Configuration::deleteByName('QM_SHOW_TEXT');
         Configuration::deleteByName('QM_TEXT_COLOR');
 
-        if (parent::uninstall()) {
+        if (parent::uninstall() && $this->_deleteMenu()) {
             return true;
         }
 
         $this->_errors[] = $this->trans('There was an error during the uninstallation. Please contact us through Addons website.', [], 'Modules.Blockreassurance.Admin');
 
         return false;
+    }
+
+    protected function _createMenu() {
+        $response = true;
+        // First check for parent tab
+        $parentTabID = Tab::getIdFromClassName('VecThemeMenu');
+        if($parentTabID){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $parentconfigure = Tab::getIdFromClassName('IMPROVE');
+            $parentTab = new Tab();
+            $parentTab->active = 1;
+            $parentTab->name = array();
+            $parentTab->class_name = "VecThemeMenu";
+            foreach (Language::getLanguages() as $lang) {
+                $parentTab->name[$lang['id_lang']] = "THEMEVEC";
+            }
+            $parentTab->id_parent = 0;
+            $response &= $parentTab->add();
+        }
+        
+        //Add parent tab: modules
+        $parentTabID2 = Tab::getIdFromClassName('VecModules');
+        if($parentTabID2){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $tab = new Tab();
+            $tab->active = 1;
+            $tab->class_name = "VecModules";
+            $tab->name = array();
+            foreach (Language::getLanguages(true) as $lang) {
+                $tab->name[$lang['id_lang']] = "Modules";
+            }
+            $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
+            $tab->module = $this->name;
+            $tab->icon = 'open_with';
+            $response &= $tab->add();
+        }
+        //Add tab
+        $tab = new Tab();
+        $tab->active = 1;
+        $tab->class_name = "AdminMobilepanelListing";
+        $tab->name = array();
+        foreach (Language::getLanguages(true) as $lang) {
+            $tab->name[$lang['id_lang']] = "- Mobile bottom panel";
+        }
+        $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
+        $tab->module = $this->name;
+        $response &= $tab->add();
+
+        return $response;
+    }
+
+    protected function _deleteMenu() {
+        $parentTabID = Tab::getIdFromClassName('VecModules');
+
+        // Get the number of tabs inside our parent tab
+        $tabCount = Tab::getNbTabs($parentTabID);
+        if ($tabCount == 0) {
+            $parentTab = new Tab($parentTabID);
+            $parentTab->delete();
+        }
+        
+        $id_tab = (int)Tab::getIdFromClassName('AdminMobilepanelListing');
+        $tab = new Tab($id_tab);
+        $tab->delete();
+
+        return true;
     }
 
     /**

@@ -142,30 +142,40 @@ class VecThemeoptions extends Module implements WidgetInterface
     protected function _createMenu() {
         $response = true;
         // First check for parent tab
+        $parentTabID = Tab::getIdFromClassName('VecThemeMenu');
+        if($parentTabID){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $parentconfigure = Tab::getIdFromClassName('IMPROVE');
+            $parentTab = new Tab();
+            $parentTab->active = 1;
+            $parentTab->name = array();
+            $parentTab->class_name = "VecThemeMenu";
+            foreach (Language::getLanguages() as $lang) {
+                $parentTab->name[$lang['id_lang']] = "THEMEVEC";
+            }
+            $parentTab->id_parent = 0;
+            $response &= $parentTab->add();
+        }
         
-        $parentconfigure = Tab::getIdFromClassName('IMPROVE');
-        $parentTab = new Tab();
-        $parentTab->active = 1;
-        $parentTab->name = array();
-        $parentTab->class_name = "VecThemeMenu";
-        foreach (Language::getLanguages() as $lang) {
-            $parentTab->name[$lang['id_lang']] = "THEMEVEC";
+        //Add parent tab: modules
+        $parentTabID2 = Tab::getIdFromClassName('VecModules');
+        if($parentTabID2){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $tab = new Tab();
+            $tab->active = 1;
+            $tab->class_name = "VecModules";
+            $tab->name = array();
+            foreach (Language::getLanguages(true) as $lang) {
+                $tab->name[$lang['id_lang']] = "Modules";
+            }
+            $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
+            $tab->module = $this->name;
+            $tab->icon = 'open_with';
+            $response &= $tab->add();
         }
-        $parentTab->id_parent = 0;
-        $response &= $parentTab->add();
-
-        $tab = new Tab();
-        $tab->active = 1;
-        $tab->class_name = "VecModules";
-        $tab->name = array();
-        foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "Modules";
-        }
-        $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
-        $tab->module = $this->name;
-        $tab->icon = 'open_with';
-        $response &= $tab->add();
-
+        //Add tab
         $tab = new Tab();
         $tab->active = 1;
         $tab->class_name = "AdminVecThemeoptions";
@@ -181,7 +191,7 @@ class VecThemeoptions extends Module implements WidgetInterface
     }
 
     protected function _deleteMenu() {
-        $parentTabID = Tab::getIdFromClassName('PosThemeMenu');
+        $parentTabID = Tab::getIdFromClassName('VecModules');
 
         // Get the number of tabs inside our parent tab
         $tabCount = Tab::getNbTabs($parentTabID);

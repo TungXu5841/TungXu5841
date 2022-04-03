@@ -78,7 +78,7 @@ class VecProductComments extends Module implements WidgetInterface
 
 		if (parent::install() == false ||
 			!$this->registerHook('displayProductTab') ||
-			!$this->installTab() ||
+			!$this->_createMenu() ||
 			!$this->registerHook('displayProductTabContent') ||
 			!$this->registerHook('header') ||
 			!$this->registerHook('displayHeader') ||
@@ -90,20 +90,6 @@ class VecProductComments extends Module implements WidgetInterface
 			return false;
 		return true;
 	}
-	public function installTab(){
-        $response = true;
-        $tab = new Tab();
-        $tab->active = 1;
-        $tab->class_name = "AdminVecProductComments";
-        $tab->name = array();
-        foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Product comments";
-        }
-        $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
-        $tab->module = $this->name;
-        $response &= $tab->add();
-        return $response;
-    }
 
 	public function uninstall($keep = true)
 	{
@@ -115,18 +101,78 @@ class VecProductComments extends Module implements WidgetInterface
 			!$this->unregisterHook('displayProductTabContent') ||
 			!$this->unregisterHook('header') ||
 			!$this->unregisterHook('displayProductTab') ||
-			!$this->uninstallTab() || 
+			!$this->_deleteMenu() || 
 			!$this->unregisterHook('displayProductListReviews'))
 			return false;
 		return true;
 	}
-	public function uninstallTab(){
-		$result = true;
-		$id_tab = (int)Tab::getIdFromClassName('AdminVecProductComments');
-        $tab = new Tab($id_tab);
-        $result = $tab->delete();
 
-        return $result;
+	protected function _createMenu() {
+        $response = true;
+        // First check for parent tab
+        $parentTabID = Tab::getIdFromClassName('VecThemeMenu');
+        if($parentTabID){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $parentconfigure = Tab::getIdFromClassName('IMPROVE');
+            $parentTab = new Tab();
+            $parentTab->active = 1;
+            $parentTab->name = array();
+            $parentTab->class_name = "VecThemeMenu";
+            foreach (Language::getLanguages() as $lang) {
+                $parentTab->name[$lang['id_lang']] = "THEMEVEC";
+            }
+            $parentTab->id_parent = 0;
+            $response &= $parentTab->add();
+        }
+        
+        //Add parent tab: modules
+        $parentTabID2 = Tab::getIdFromClassName('VecModules');
+        if($parentTabID2){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $tab = new Tab();
+            $tab->active = 1;
+            $tab->class_name = "VecModules";
+            $tab->name = array();
+            foreach (Language::getLanguages(true) as $lang) {
+                $tab->name[$lang['id_lang']] = "Modules";
+            }
+            $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
+            $tab->module = $this->name;
+            $tab->icon = 'open_with';
+            $response &= $tab->add();
+        }
+        //Add tab
+        $tab = new Tab();
+        $tab->active = 1;
+        $tab->class_name = "AdminVecProductComments";
+        $tab->name = array();
+        foreach (Language::getLanguages(true) as $lang) {
+            $tab->name[$lang['id_lang']] = "- Product comments";
+        }
+        $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
+        $tab->module = $this->name;
+        $response &= $tab->add();
+
+        return $response;
+    }
+
+    protected function _deleteMenu() {
+        $parentTabID = Tab::getIdFromClassName('VecModules');
+
+        // Get the number of tabs inside our parent tab
+        $tabCount = Tab::getNbTabs($parentTabID);
+        if ($tabCount == 0) {
+            $parentTab = new Tab($parentTabID);
+            $parentTab->delete();
+        }
+        
+        $id_tab = (int)Tab::getIdFromClassName('AdminVecProductComments');
+        $tab = new Tab($id_tab);
+        $tab->delete();
+
+        return true;
     }
 
 	public function reset()

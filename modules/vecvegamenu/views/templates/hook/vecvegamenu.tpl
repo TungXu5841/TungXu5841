@@ -34,7 +34,7 @@
 						{if $menu.type_icon == 2 && $menu.icon != ''}
 						<img class="img-icon" src="{$menu.icon|escape:'html':'UTF-8'}" alt=""/>
 						{elseif $menu.type_icon == 1}
-							{$menu.icon_class|escape:'html':'UTF-8' nofilter}
+							<i class="{$menu.icon_class|escape:'html':'UTF-8'}"></i>
 						{/if}
 						<span>{$menu.title|escape:'html':'UTF-8'}</span>
 						{if $menu.subtitle != ''}<span class="menu-subtitle">{$menu.subtitle|escape:'html':'UTF-8'}</span>{/if}

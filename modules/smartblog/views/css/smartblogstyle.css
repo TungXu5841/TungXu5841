@@ -2,9 +2,7 @@
     margin-bottom: 0px;
     overflow: hidden;
 }
-.sdsarticleCat,.addthis_toolbox  {
-    margin-bottom: 50px;
-}
+
 .sdsarticleHeader i.icon{
     vertical-align: middle;
 }
@@ -908,6 +906,7 @@ form#searchbox .button.button-small i {
 .row-sdsarticleCat .sdsarticleCat{
 	flex: 0 0 auto;
 	float:none;
+	margin-bottom: 50px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
 	.row-sdsarticleCat .sdsarticleCat {
@@ -1373,5 +1372,13 @@ span.smart-blog-reply-icon {
   }
   .smartblog-full-width #main{
     margin-bottom: 30px !important;
-  }
-  
+  } 
+.blog-categories ul li a{
+	display: block;
+	border-bottom: 1px dashed #ebebeb;
+	line-height:36px;
+}  
+.blog-categories ul li a.unvisible{
+	display: none;
+
+} 

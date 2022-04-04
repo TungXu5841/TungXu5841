@@ -275,6 +275,7 @@ class WidgetProductTab extends WidgetProductBase
 					'label' => __( 'Title type' ),
 					'type' => ControlsManager::SELECT,
 					'default' => 'normal',
+					'prefix_class' => 'title-',
 					'options' => [
 						'normal'  => __( 'Normal' ),
 						'absolute' => __( 'Absolute' ),
@@ -295,10 +296,10 @@ class WidgetProductTab extends WidgetProductBase
 					],
 					'default' => [
 						'unit' => 'px',
-						'size' => -20,
+						'size' => -45,
 					],
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles' => 'top: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .nav-tabs' => 'top: {{SIZE}}{{UNIT}};',
 					],
 					'condition'    	=> [
 						'title_type' => 'absolute',
@@ -326,7 +327,7 @@ class WidgetProductTab extends WidgetProductBase
 					],
 					'default' => 'left',
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles' => 'text-align: {{VALUE}};',
+						'{{WRAPPER}} .nav-tabs' => 'text-align: {{VALUE}};',
 					],
 				]
 			);
@@ -347,7 +348,7 @@ class WidgetProductTab extends WidgetProductBase
 						'size' => 15,
 					],
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles li a' => 'font-size: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .nav-tabs li a' => 'font-size: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -358,7 +359,7 @@ class WidgetProductTab extends WidgetProductBase
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px', 'em', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .nav-tabs li a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 					'separator' => 'before',
 				]
@@ -380,7 +381,7 @@ class WidgetProductTab extends WidgetProductBase
 						'size' => 20,
 					],
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles li a' => 'margin-right: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .nav-tabs li a' => 'margin-right: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -401,7 +402,7 @@ class WidgetProductTab extends WidgetProductBase
 						'size' => 25,
 					],
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+						'{{WRAPPER}} .nav-tabs' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 					],
 				]
 			);
@@ -419,7 +420,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .tab-titles li a' => 'fill: {{VALUE}}; color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a' => 'fill: {{VALUE}}; color: {{VALUE}};',
 							],
 						]
 					);
@@ -430,7 +431,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .tab-titles li a' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a' => 'background-color: {{VALUE}};',
 							],
 						]
 					);
@@ -448,7 +449,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .tab-titles li.active a, {{WRAPPER}} .tab-titles li:hover a' => 'fill: {{VALUE}}; color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li.active a, {{WRAPPER}} .nav-tabs li:hover a' => 'fill: {{VALUE}}; color: {{VALUE}};',
 							],
 						]
 					);
@@ -459,7 +460,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .tab-titles li.active a, {{WRAPPER}} .tab-titles li:hover a' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li.active a, {{WRAPPER}} .nav-tabs li:hover a' => 'background-color: {{VALUE}};',
 							],
 						]
 					);
@@ -470,7 +471,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .tab-titles li.active a, {{WRAPPER}} .tab-titles li:hover a' => 'border-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li.active a, {{WRAPPER}} .nav-tabs li:hover a' => 'border-color: {{VALUE}};',
 							],
 						]
 					);
@@ -481,7 +482,7 @@ class WidgetProductTab extends WidgetProductBase
 	            GroupControlBorder::getType(),
 	            [
 	                'name' => 'border',
-	                'selector' => '{{WRAPPER}} .tab-titles li a',
+	                'selector' => '{{WRAPPER}} .nav-tabs li a',
 	            ]
 	        );
 			$this->addControl(
@@ -491,7 +492,7 @@ class WidgetProductTab extends WidgetProductBase
 					'type' => ControlsManager::DIMENSIONS,
 					'size_units' => [ 'px', '%' ],
 					'selectors' => [
-						'{{WRAPPER}} .tab-titles li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						'{{WRAPPER}} .nav-tabs li a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
 				]
 			);
@@ -499,7 +500,7 @@ class WidgetProductTab extends WidgetProductBase
 				GroupControlBoxShadow::getType(),
 				[
 					'name' => 'button_box_shadow',
-					'selector' => '{{WRAPPER}} .tab-titles li',
+					'selector' => '{{WRAPPER}} .nav-tabs li a',
 				]
 			);
 			
@@ -593,7 +594,7 @@ class WidgetProductTab extends WidgetProductBase
 					}					
 
 					?>
-					<div class="tab-pane <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $tab['_id'] ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
+					<div class="tab-pane <?php if($settings['enable_slider']): ?>elementor-image-carousel-wrapper elementor-slick-slider<?php endif; ?> <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $tab['_id'] ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
 						<?php 
 							if($products): ?>
 							<div class="<?= implode(' ', $class_tab)?>">

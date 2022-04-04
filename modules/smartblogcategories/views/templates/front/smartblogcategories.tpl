@@ -56,10 +56,8 @@
 {/function}
 
 {if $blockCategTree.children}
-	<div class="widget block-categories">
-		<div class="widget-content">
-			<div class="widget-title h3"><span>{l s='Blog Category' mod='smartblogcategories'}</span></div>
-			<div class="block_content">{blockCategTree nodes=$blockCategTree.children}</div>
-		</div>
+	<div class="block blog-categories smart-block">
+		<h4 class="smart_blog_sidebar_title"><span>{l s='Blog Category' mod='smartblogcategories'}</span></h4> 
+		<div class="block_content">{blockCategTree nodes=$blockCategTree.children}</div> 
 	</div>
 {/if}

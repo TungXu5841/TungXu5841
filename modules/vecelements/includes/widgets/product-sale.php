@@ -169,8 +169,8 @@ class WidgetProductSale extends WidgetProductBase
 					'label' => __( 'Product display' ),
 					'type' => ControlsManager::SELECT,
 					'options' 		=> [
-						'design1' 			=> __('Design 1'),
-						'design2' 			=> __('Design 2'),
+						'design1' 			=> __('Grid'),
+						'design2' 			=> __('List'),
 					],
 					'default' => 'design1',
 					'toggle' => true,

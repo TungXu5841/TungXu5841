@@ -2425,7 +2425,8 @@ module.exports = function ($) {
 		'testimonial-carousel.default': __webpack_require__(193),
 		'product-carousel.default': __webpack_require__(193),
 		'v-smartblog.default': __webpack_require__(193),
-		'trustedshops-reviews.default': __webpack_require__(193),
+		'brand-carousel.default': __webpack_require__(193),
+		'categories.default': __webpack_require__(193),
 		'text-editor.default': __webpack_require__(194),
 		'contact-form.default': __webpack_require__(200),
 		'email-subscription.default': __webpack_require__(200),
@@ -4316,7 +4317,7 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	        _this.loadTab(tabData , $this, idTab, tabContent , cache, height, function(data) {
 	            if( data ) {
 	                tabContent.find('#tab-pane-' + idTab).append(data.html);
-	                _this.initSlider($('#tab-pane-'+ idTab));
+	                _this.initSlider($('#tab-pane-'+ idTab).find('.elementor-block-carousel'));
 	            }
 	        });
 			

@@ -83,7 +83,9 @@ class WidgetsManager
             'product-carousel',
             'product-sale',
             'product-tab',
+            'categories',
             'links-list',
+            'brand-carousel',
             'call-to-action',
             'flip-box',
             'animated-headline',
@@ -94,7 +96,6 @@ class WidgetsManager
             'testimonial-carousel',
             'facebook-page',
             'facebook-button',
-            'trustedshops-reviews',
 
             'site-logo',
             'megamenu',

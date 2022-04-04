@@ -105,6 +105,7 @@ class VecElementsAjaxModuleFrontController extends ModuleFrontController
         $products = $this->module->getProducts($listing, $order_by, $order_dir, $limit, $id_category, $products);
         $this->context->smarty->assign(array(
             'products' => $products,
+            'tab_class' => $tab_data['tab_class']
         ));
         $template = _VEC_TEMPLATES_ . 'front/widgets/product-tab.tpl';
 

@@ -554,7 +554,8 @@ class WidgetProductTab extends WidgetProductBase
 			$class_tab[] = 'items-tablet-'. ($settings['grid_column_tablet'] ? $settings['grid_column_tablet'] : 3);
 			$class_tab[] = 'items-mobile-'. ($settings['grid_column_mobile'] ? $settings['grid_column_mobile'] : 2);
 		}
-
+		$tab_class = implode(' ', $class_tab);
+		$this->context->smarty->assign('tab_class', $tab_class);
 		?>
 		<div class="product-tabs-widget" data-ajax="<?= $ajaxtab; ?>">
 			<ul class="nav nav-tabs">
@@ -577,12 +578,12 @@ class WidgetProductTab extends WidgetProductBase
 							'limit' => $tab['limit'],
 							'category_id' => $tab['category_id'],
 							'products' => $tab['products'],
+							'tab_class' => $tab_class
 						);
 					}else{
 						if ($tab['randomize'] && ('category' === $tab['listing'] || 'products' === $tab['listing'])) {
 				            $tab['order_by'] = 'rand';
 				        }
-
 				        $products = $this->getProducts(
 				            $tab['listing'],
 				            $tab['order_by'],
@@ -596,11 +597,9 @@ class WidgetProductTab extends WidgetProductBase
 					?>
 					<div class="tab-pane <?php if($settings['enable_slider']): ?>elementor-image-carousel-wrapper elementor-slick-slider<?php endif; ?> <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $tab['_id'] ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
 						<?php 
-							if($products): ?>
-							<div class="<?= implode(' ', $class_tab)?>">
-								<?php echo $this->context->smarty->fetch( _VEC_PATH_ . 'views/templates/front/widgets/product-tab.tpl', ['products' => $products] ); ?>
-							</div>	
-							<?php endif;
+							if($products){ 
+								echo $this->context->smarty->fetch( _VEC_PATH_ . 'views/templates/front/widgets/product-tab.tpl', ['products' => $products] ); 
+							}
 						?>
 					</div>
 				<?php endforeach; ?>

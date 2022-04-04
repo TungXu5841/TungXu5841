@@ -146,11 +146,21 @@ class WidgetTestimonialCarousel extends WidgetBase
                 ],
             ]
         );
+        $this->addControl(
+            'enable_slider',
+            [
+                'label' => __('Use carousel'),
+                'type' => ControlsManager::HIDDEN,
+                'default' => 'yes',
+            ]
+        );
 
         $this->endControlsSection();
 
         $this->registerCarouselSection([
-            'default_slides_count' => 1,
+            'default_slides_desktop' => 2,
+            'default_slides_tablet' => 2,
+            'default_slides_mobile' => 1,
         ]);
 
         $this->startControlsSection(

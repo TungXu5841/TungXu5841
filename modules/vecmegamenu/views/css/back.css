@@ -40,6 +40,133 @@
 }
 /* Vecicon*/ 
 @font-face {font-family: 'vecthemes-icon';src: url("../fonts/vecthemes-icon.eot?txsi0l");src: url("../fonts/vecthemes-icon.eot?txsi0l#iefix") format("embedded-opentype"), url("../fonts/vecthemes-icon.ttf?txsi0l") format("truetype"), url("../fonts/vecthemes-icon.woff?txsi0l") format("woff"), url("../fonts/vecthemes-icon.svg?txsi0l#vecthemes-icon") format("svg");font-weight: normal;font-style: normal;font-display: block;}[class^="vecicon-"], [class*=" vecicon-"] {font-family: 'vecthemes-icon' !important;speak: never;font-style: normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}.vecicon-bag-outline:before {content: "\e900";}.vecicon-cart-outline:before {content: "\e901";}.vecicon-bag:before {content: "\e902";}.vecicon-handbag:before {content: "\e903";}.vecicon-shopping-cart:before {content: "\e904";}.vecicon-bag2:before {content: "\e905";}.vecicon-shopping-cart-solid:before {content: "\e906";}.vecicon-basket-outline:before {content: "\e907";}.vecicon-shopping-basket-solid:before {content: "\e908";}.vecicon-heart:before {content: "\e909";}.vecicon-heart2:before {content: "\e90a";}.vecicon-heart-solid:before {content: "\e90b";}.vecicon-heart-outline:before {content: "\e90c";}.vecicon-ios-heart-outline:before {content: "\e90d";}.vecicon-shuffle:before {content: "\e90e";}.vecicon-refresh:before {content: "\e90f";}.vecicon-ios-shuffle:before {content: "\e910";}.vecicon-ios-shuffle-strong:before {content: "\e911";}.vecicon-repeat-outline:before {content: "\e912";}.vecicon-sync-alt-solid:before {content: "\e913";}.vecicon-star2:before {content: "\e914";}.vecicon-star-solid:before {content: "\e915";}.vecicon-star-half-alt-solid:before {content: "\e916";}.vecicon-search:before {content: "\e917";}.vecicon-magnifier:before {content: "\e918";}.vecicon-search2:before {content: "\e919";}.vecicon-loupe:before {content: "\e91a";}.vecicon-search1:before {content: "\e91b";}.vecicon-eye-outline:before {content: "\e91c";}.vecicon-eye:before {content: "\e91d";}.vecicon-look:before {content: "\e91e";}.vecicon-eye2:before {content: "\e91f";}.vecicon-bars-solid:before {content: "\e920";}.vecicon-menu-outline:before {content: "\e921";}.vecicon-navicon-round:before {content: "\e922";}.vecicon-grid-outline:before {content: "\e923";}.vecicon-grid:before {content: "\e924";}.vecicon-grid2:before {content: "\e925";}.vecicon-apps-outline:before {content: "\e926";}.vecicon-apps-sharp:before {content: "\e927";}.vecicon-list:before {content: "\e928";}.vecicon-list-outline:before {content: "\e929";}.vecicon-list-solid:before {content: "\e92a";}.vecicon-arrow-down:before {content: "\e92b";}.vecicon-arrow-left:before {content: "\e92c";}.vecicon-arrow-right:before {content: "\e92d";}.vecicon-arrow-up:before {content: "\e92e";}.vecicon-logo-facebook:before {content: "\e92f";}.vecicon-logo-google:before {content: "\e930";}.vecicon-logo-pinterest:before {content: "\e931";}.vecicon-logo-twitter:before {content: "\e932";}.vecicon-logo-youtube:before {content: "\e933";}.vecicon-logo-instagram:before {content: "\e934";}.vecicon-logo-linkedin:before {content: "\e935";}.vecicon-logo-rss:before {content: "\e936";}.vecicon-logo-twitch:before {content: "\e937";}.vecicon-0-facebook2:before {content: "\e938";}.vecicon-1-twitter2:before {content: "\e939";}.vecicon-2-youtube2:before {content: "\e93a";}.vecicon-3-dribbble:before {content: "\e93b";}.vecicon-4-facebook-f:before {content: "\e93c";}.vecicon-5-google-plus-g:before {content: "\e93d";}.vecicon-6-pinterest-p:before {content: "\e93e";}.vecicon-close-outline:before {content: "\e93f";}.vecicon-close-circle:before {content: "\e940";}.vecicon-close-circle-outline:before {content: "\e941";}.vecicon-person-outline:before {content: "\e942";}.vecicon-person-circle-outline:before {content: "\e943";}.vecicon-user:before {content: "\e944";}.vecicon-user-circle:before {content: "\e945";}.vecicon-call-outline:before {content: "\e946";}.vecicon-call-sharp:before {content: "\e947";}.vecicon-headphones:before {content: "\e948";}.vecicon-headphones-mic:before {content: "\e949";}.vecicon-headphones2:before {content: "\e94a";}.vecicon-phone-volume-solid:before {content: "\e94b";}.vecicon-phone-call:before {content: "\e94c";}.vecicon-headset-outline:before {content: "\e94d";}.vecicon-settings-outline:before {content: "\e94e";}.vecicon-settings:before {content: "\e94f";}.vecicon-shipping-fast-solid:before {content: "\e950";}.vecicon-truck-solid:before {content: "\e951";}.vecicon-ship-solid:before {content: "\e952";}.vecicon-boat-outline:before {content: "\e953";}.vecicon-rocket:before {content: "\e954";}.vecicon-rocket-outline:before {content: "\e955";}.vecicon-location-pin:before {content: "\e956";}.vecicon-map-marked-alt-solid:before {content: "\e957";}.vecicon-location-outline:before {content: "\e958";}.vecicon-mail-outline:before {content: "\e959";}.vecicon-mail-open-outline:before {content: "\e95a";}.vecicon-globe-solid:before {content: "\e95b";}.vecicon-globe-alt:before {content: "\e95c";}.vecicon-scan-outline:before {content: "\e95d";}.vecicon-expand-outline:before {content: "\e95e";}.vecicon-checkmark:before {content: "\e95f";}.vecicon-card-outline:before {content: "\e960";}.vecicon-credit-card-solid:before {content: "\e961";}.vecicon-money-bill-wave-solid:before {content: "\e962";}.vecicon-cash-outline:before {content: "\e963";}.vecicon-gift-outline:before {content: "\e964";}.vecicon-gift-solid:before {content: "\e965";}.vecicon-gifts-solid:before {content: "\e966";}.vecicon-ribbon-outline:before {content: "\e967";}.vecicon-time-outline:before {content: "\e968";}.vecicon-help-buoy-outline:before {content: "\e969";}.vecicon-exchange-1:before {content: "\e96a";}.vecicon-call-center-24-7:before {content: "\e96b";}.vecicon-headphone-24-7:before {content: "\e96c";}.vecicon-credit-card-secure1:before {content: "\e96d";}.vecicon-payment-security:before {content: "\e96e";}.vecicon-logo-vk:before {content: "\e96f";}.vecicon-logo-whatsapp:before {content: "\e970";}.vecicon-logo-telegram:before {content: "\e971";}.vecicon-play-outline:before {content: "\e972";}.vecicon-videocam-outline:before {content: "\e973";}.vecicon-play-circle:before {content: "\e974";}.vecicon-home-outline:before {content: "\e975";}.vecicon-diamond-outline:before {content: "\e976";}.vecicon-camera-outline:before {content: "\e977";}.vecicon-fitness-outline:before {content: "\e978";}.vecicon-medkit-outline:before {content: "\e979";}.vecicon-nuclear-outline:before {content: "\e97a";}.vecicon-shirt-outline:before {content: "\e97b";}.vecicon-watch-outline:before {content: "\e97c";}.vecicon-couch-solid:before {content: "\e97d";}.vecicon-filter-outline:before {content: "\e97e";}.vecicon-options-outline:before {content: "\e97f";}.vecicon-chatbox-outline:before {content: "\e980";}.vecicon-chatbubble-outline:before {content: "\e981";}.vecicon-logo-behance:before {content: "\e982";}.vecicon-logo-flickr:before {content: "\e983";}.vecicon-logo-foursquare:before {content: "\e984";}.vecicon-logo-github:before {content: "\e985";}.vecicon-logo-skype:before {content: "\e986";}.vecicon-logo-snapchat:before {content: "\e987";}.vecicon-logo-soundcloud:before {content: "\e988";}.vecicon-logo-tumblr:before {content: "\e989";}.vecicon-logo-vimeo:before {content: "\e98a";}.vecicon-logo-wechat:before {content: "\e98b";}.vecicon-logo-weibo:before {content: "\e98c";}.vecicon-add-outline:before {content: "\e98d";}.vecicon-remove-outline:before {content: "\e98e";}.vecicon-left-quotes-sign:before {content: "\e98f";}.vecicon-right-quotes-symbol:before {content: "\e990";}.vecicon-arrow-left-solid:before {content: "\e991";}.vecicon-arrow-right-solid:before {content: "\e992";}.vecicon-cauliflower:before {content: "\e993";}.vecicon-bread:before {content: "\e994";}.vecicon-meat:before {content: "\e995";}.vecicon-anise-candy:before {content: "\e996";}.vecicon-snowflake:before {content: "\e997";}.vecicon-coffee-cup:before {content: "\e998";}.vecicon-almond:before {content: "\e999";}.vecicon-egg:before {content: "\e99a";}.vecicon-Search:before {content: "\e99b";}.vecicon-FullShoppingCart:before {content: "\e99c";}.vecicon-ShoppingCart:before {content: "\e99d";}.vecicon-Heart:before {content: "\e99e";}.vecicon-MusicMixer:before {content: "\e99f";}.vecicon-Eye:before {content: "\e9a0";}.vecicon-Blog:before {content: "\e9a1";}.vecicon-Agenda:before {content: "\e9a2";}.vecicon-Edit:before {content: "\e9a3";}.vecicon-Settings:before {content: "\e9a4";}.vecicon-Mouse:before {content: "\e9a5";}.vecicon-android-arrow-dropleft-circle:before {content: "\e9a6";}.vecicon-android-arrow-dropright-circle:before {content: "\e9a7";}.vecicon-logo-tiktok:before {content: "\e9a8";}
+/* Vec - Switch */
+.vec-switch.vec-switch-2{
+    -webkit-box-shadow: rgb(0 0 0 / 15%) 0 1px 4px 1px inset;
+    background-color: #eee;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 4px 1px rgb(0 0 0 / 15%);
+    color: #333;
+    margin-top: 3px;
+    text-align: center;
+    display: block;
+    height: 26px;
+    position: relative;
+    width: 200px !important;
+}
+.vec-switch.vec-switch-2 input{
+    opacity: 0;
+    position: absolute;
+}
+.vec-switch.vec-switch-2 label {
+    display: inline-block;
+    -webkit-transition: color .2s ease-out;
+    color: #bbb;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: color .2s ease-out;
+    float: left;
+    height: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    line-height: 26px;
+    z-index: 2;
+}
+.vec-switch.vec-switch-2 a {
+    -webkit-box-shadow: "#1B7088" 0 -1px 0 inset;
+    background-color: #2eacce;
+    border: 1px solid #279cbb;
+    box-shadow: inset 0 -1px 0 "#1B7088";
+    color: #fff;
+    height: 100%;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    z-index: 1;
+    transition: all .3s ease-out;
+    display: block;
+}
+.vec-switch.vec-switch-2 input:checked+label {
+    color: #fff;
+}
+.vec-switch.vec-switch-2 input:last-of-type:checked~a {
+    -webkit-box-shadow: "#5C5C5C" 0 -1px 0 inset;
+    box-shadow: inset 0 -1px 0 "#5C5C5C";
+    left: 50%;
+}
+
+.vec-switch.vec-switch-3{
+    -webkit-box-shadow: rgb(0 0 0 / 15%) 0 1px 4px 1px inset;
+    background-color: #eee;
+    border-radius: 0px;
+    box-shadow: inset 0 1px 4px 1px rgb(0 0 0 / 15%);
+    color: #333;
+    margin-top: 3px;
+    text-align: center;
+    display: block;
+    height: 26px;
+    position: relative;
+    width: 300px !important;
+}
+.vec-switch.vec-switch-3 input{
+    opacity: 0;
+    position: absolute;
+}
+.vec-switch.vec-switch-3 label {
+    display: inline-block;
+    -webkit-transition: color .2s ease-out;
+    color: #bbb;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: color .2s ease-out;
+    float: left;
+    height: 100%;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    width: 33.33%;
+    line-height: 26px;
+    z-index: 2;
+}
+.vec-switch.vec-switch-3 a {
+    -webkit-box-shadow: "#1B7088" 0 -1px 0 inset;
+    background-color: #2eacce;
+    border: 1px solid #279cbb;
+    box-shadow: inset 0 -1px 0 "#1B7088";
+    color: #fff;
+    height: 100%;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 33.33%;
+    z-index: 1;
+    transition: all .3s ease-out;
+    display: block;
+	border-radius: 0;
+}
+.vec-switch.vec-switch-3 input:checked+label {
+    color: #fff;
+}
+.vec-switch.vec-switch-3 input:last-of-type:checked~a {
+    -webkit-box-shadow: "#5C5C5C" 0 -1px 0 inset;
+    box-shadow: inset 0 -1px 0 "#5C5C5C";
+    left: 66.66%;
+}
+
+.vec-switch.vec-switch-3 input:nth-of-type(2):checked~a {
+    left: 33.33%;
+}
+.vec-switch.vec-switch-3 input:checked~a {
+    left: 0;
+}
+
 
 #vecmegamenu-list, #vecmegamenu-config {
 	max-width: 1200px; 

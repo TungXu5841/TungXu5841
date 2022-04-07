@@ -532,9 +532,12 @@ class WidgetProductTab extends WidgetProductBase
         }
 
 		$option_rotator = \Configuration::get('vecthemeoptionssecond_img');
+		$name_length = \Configuration::get('vecthemeoptionsgrid_name_length');
+        $name_cut = \Configuration::get('vecthemeoptionsgrid_name_cut');
         $this->context->smarty->assign('vectheme', array(
             'rotator' => $option_rotator,
-            'grid_type' => $grid_type
+            'grid_type' => $grid_type,
+			'name_length' => ($name_length == 'cut' && $name_cut > 0 ) ? $name_cut : 128,
         ));
 		
         $ajaxtab = false;

@@ -606,7 +606,7 @@ class VecThemeoptions extends Module implements WidgetInterface
             //Product grid
 			'grid_type'                     => isset($_GET['grid']) ? $_GET['grid'] : Configuration::get($this->name . 'grid_type'),
 			'rotator'                       => Configuration::get($this->name . 'second_img'),
-			'name_length'                   => Configuration::get($this->name . 'p_name_length'),
+			'name_length'                   => (Configuration::get($this->name . 'grid_name_length') == 'cut' && Configuration::get($this->name . 'grid_name_length') > 0) ? (Configuration::get($this->name . 'grid_name_length')) : 128,
             //Page title
             'ptitle_size'                   => Configuration::get($this->name . 'ptitle_size'),
             //Category page

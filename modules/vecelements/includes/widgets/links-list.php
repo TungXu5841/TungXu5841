@@ -165,7 +165,7 @@ class WidgetLinksList extends WidgetBase {
 	            ]
 	        );
 			$this->addControl(
-			'display_link',
+				'display_link',
 				[
 					'label' => __('Display'),
 					'type' => ControlsManager::SELECT,
@@ -175,8 +175,6 @@ class WidgetLinksList extends WidgetBase {
 						'inline' => __('Inline (auto)')
 					],
 					'prefix_class' => 'display-',
-					'render_type' => 'template',
-					'frontend_available' => true
 				]
 			);
 		$this->endControlsSection();

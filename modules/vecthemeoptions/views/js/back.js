@@ -35,6 +35,18 @@ $(document).ready(function(){
 			$('.button_border_colorh').show();
 	   	}     
     });
+	//Product grid
+	var cateLayout = $('input[name="grid_name_length"]:checked').val();
+	if(cateLayout != 'cut'){
+		$('.grid_name_cut').hide();
+	}
+	$('input[name="grid_name_length"]').change(function() {
+		if($(this).val() == 'full') {
+        	$('.grid_name_cut').hide();
+	   	}else{
+	   		$('.grid_name_cut').show();
+	   	}     
+    });
 	//Category desciption
 	var cateDesc = $('input[name="category_description"]:checked').val();
 	if(cateDesc == 'hide' || typeof(cateDesc) == 'undefined'){

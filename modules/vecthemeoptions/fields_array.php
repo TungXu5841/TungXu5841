@@ -263,23 +263,31 @@ $this->fields_form[]['form'] = array(
             'suffix' => 'px',
         ),
         array(
-            'type' => 'radio',
+            'type' => 'vec-switch',
             'label' => $this->l('Product name length'),
             'name' => 'grid_name_length',
-            'default_value' => 0,
+            'class' => 'fixed-width-xs',
+            'default' => 'cut',
+            'multi' => 2,
             'values' => array(
                 array(
-                    'id' => 'p_name_length_0',
-                    'value' => 0,
-                    'label' => $this->l('1 line, product name is cut.'),
-                    ),
+                    'id' => 'cut',
+                    'value' => 'cut',
+                    'label' => $this->l('Cut name'),
+                ),
                 array(
-                    'id' => 'p_name_length_1',
-                    'value' => 1,
-                    'label' => $this->l('2 lines, product name is full'),
-                    ),
-
+                    'id' => 'full',
+                    'value' => 'full',
+                    'label' => $this->l('Full name'),
+                ),
             ),
+        ), 
+        array(
+            'type' => 'text',
+            'label' => $this->l('Number of name length'),
+            'name' => 'grid_name_cut',
+            'class' => 'fixed-width-sm',
+            'suffix' => 'characters',
             'validation' => 'isUnsignedInt',
         ),
         array(

@@ -44,7 +44,7 @@
 				</div>
 			{/block}
 			{block name='product_name'}
-				<h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:50:'...'}</a></h3> 
+				<h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:$vectheme.name_length:'...'}</a></h3> 
 			{/block}
 			<div class="inner-content">
 				<div class="left-content">

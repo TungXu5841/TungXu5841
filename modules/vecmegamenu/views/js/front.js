@@ -101,7 +101,7 @@ function vecInitHorizontalMegamenu() {
             if (dropdownOffset.left + dropdownWidth >= viewportWidth) { 
 				toRight = dropdownOffset.left + dropdownWidth - viewportWidth;
 				$dropdown.css({
-					left: -toRight + 15
+					left: -toRight
 				})
 			}
             $li.addClass('menu_initialized')

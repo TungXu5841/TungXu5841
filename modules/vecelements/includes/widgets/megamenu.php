@@ -511,7 +511,55 @@ class WidgetMegamenu extends WidgetBase {
 				]
 			);
 		$this->endControlsSection();
-		
+		$this->startControlsSection(
+			'section_subtitle',
+			[
+				'label' => __( 'Subtitle style' ),
+				'type' => ControlsManager::SECTION,
+				'tab' => ControlsManager::TAB_STYLE,
+			]
+		);
+			$this->addGroupControl(
+				GroupControlTypography::getType(), 
+				[
+					'name' => 'subtitle_typography',
+					'selector' => '{{WRAPPER}} .vec-menu-horizontal .menu-item > a .menu-subtitle, {{WRAPPER}} .vec-menu-vertical .menu-item > a .menu-subtitle',
+				]
+			);
+			$this->addControl(
+				'subtitle_padding',
+				[
+					'label' => __( 'Padding' ),
+					'type' => ControlsManager::DIMENSIONS,
+					'size_units' => [ 'px', 'em', '%' ],
+					'selectors' => [
+						'{{WRAPPER}} .vec-menu-horizontal .menu-item > a .menu-subtitle, {{WRAPPER}} .vec-menu-vertical .menu-item > a .menu-subtitle' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+					'separator' => 'before',
+				]
+			);
+			$this->addControl(
+				'subtitle_positi',
+				[
+					'label' => __('Horizontal position'),
+					'type' => ControlsManager::SLIDER,
+					'range' => [
+						'%' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'default' => [
+						'size' => 0,
+						'unit' => '%', 
+					],
+					'size_units' => ['%'],
+					'selectors' => [
+						'{{WRAPPER}} .vec-menu-horizontal .menu-item > a .menu-subtitle, {{WRAPPER}} .vec-menu-vertical .menu-item > a .menu-subtitle' => 'left: {{SIZE}}{{UNIT}}',
+					],
+				]
+			);
+		$this->endControlsSection();
 	}
 
 	/**

@@ -27,11 +27,23 @@
 <div class="panel"><h3><i class="icon-list-ul"></i> {l s='Menu Item' mod='vecvegamenu'}</h3>
 	
 	<div class="form-group">
+		<label class="control-label col-lg-3">{l s='Active' mod='vecvegamenu'}</label>
+		<div class="col-lg-9">
+			<span class="switch prestashop-switch fixed-width-lg">
+				<input type="radio" name="active" id="active_on" value="1" {if (isset($menu->active) &&  $menu->active != 0) || !$menu->active}checked="checked"{/if}>
+				<label for="active_on">Yes</label>
+				<input type="radio" name="active" id="active_off" value="0" {if isset($menu->active) && $menu->active == 0}checked="checked"{/if}>
+				<label for="active_off">No</label>
+				<a class="slide-button btn"></a>
+			</span>	
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="control-label col-lg-3">{l s='Title' mod='vecvegamenu'}</label>
 		<div class="col-lg-9">
 			{foreach from=$languages item=language}
 				{if $languages|count > 1}
-					<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
+					<div class="row translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
 				{/if}
 				<div class="col-lg-6">
 				<input type="text" class="title" id="title_{$language.id_lang|intval}" name="title_{$language.id_lang|intval}" value="{if isset($menu->title[$language.id_lang|intval])}{$menu->title[$language.id_lang|intval]}{else}menu title{/if}"/>
@@ -53,7 +65,6 @@
 					</div>
 				{/if}
 			{/foreach}
-			<p class="help-block" style="clear:both;">{l s='Note: If use Prestashop link and want to use Prestashop title, leave it empty.' mod='vecvegamenu'}</p>
 		</div>
 	</div>
 	<div class="form-group lab-type-link">
@@ -72,7 +83,7 @@
 		<div class="col-lg-9">
 			{foreach from=$languages item=language}
 				{if $languages|count > 1}
-					<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
+					<div class="row translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
 				{/if}
 				<div class="col-lg-6">
 				<input type="text" id="custom_link_{$language.id_lang|intval}" name="custom_link_{$language.id_lang|intval}" value="{if isset($menu->custom_link[$language.id_lang|intval])}{$menu->custom_link[$language.id_lang|intval]}{else}#{/if}"/>
@@ -109,35 +120,6 @@
 			</script>
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-3">{l s='Sub Title' mod='vecvegamenu'}</label>
-		<div class="col-lg-9">
-			{foreach from=$languages item=language}
-				{if $languages|count > 1}
-					<div class="translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
-				{/if}
-				<div class="col-lg-6">
-				<input type="text" class="subtitle" id="subtitle_{$language.id_lang|intval}" name="subtitle_{$language.id_lang|intval}" value="{if isset($menu->subtitle[$language.id_lang]) && $menu->subtitle[$language.id_lang]}{$menu->subtitle[$language.id_lang|intval]}{/if}"/>
-				</div>
-				{if $languages|count > 1}
-					<div class="col-lg-2">
-						<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
-							{$language.iso_code|escape:'html':'UTF-8'}
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							{foreach from=$languages item=lang}
-							<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
-							{/foreach}
-						</ul>
-					</div>
-				{/if}
-				{if $languages|count > 1}
-					</div>
-				{/if}
-			{/foreach}
-		</div>
-	</div>
 	<div class="form-group lab-type-icon">
 		<label class="control-label col-lg-3">{l s='Use icon' mod='vecvegamenu'}</label>
 		<div class="col-lg-9">
@@ -170,21 +152,53 @@
 	<div class="form-group lab-img-icon">
 		<label class="control-label col-lg-3">{l s='Image Icon' mod='vecvegamenu'}</label>
 		<div class="col-lg-9">
-            <div class="col-lg-7">
-                <input type="text" id="icon_img" name="icon_img" value="{if $menu->icon}{$menu->icon}{/if}"/>
-                <a href="filemanager/dialog.php?type=1&field_id=icon_img" class="btn btn-default iframe-column-upload"  data-input-name="icon_img" type="button">{l s='Select image' mod='vecvegamenu'} <i class="icon-angle-right"></i></a>
-                {if $menu->icon}<img src="{$menu->icon}" style="display: block; max-width: 200px;"/>{/if}
-            </div>
+			<div class="row">
+				<div class="col-lg-6">
+					<input type="text" id="icon_img" name="icon_img" value="{if $menu->icon}{$menu->icon}{/if}"/>
+					<a href="filemanager/dialog.php?type=1&field_id=icon_img" class="btn btn-default iframe-column-upload"  data-input-name="icon_img" type="button">{l s='Select image' mod='vecvegamenu'} <i class="icon-angle-right"></i></a>
+					{if $menu->icon}<img src="{$menu->icon}" style="display: block; max-width: 200px;"/>{/if}
+				</div>
+			</div>
         </div>
 	</div>
 	
 	<div style="clear:both;"></div>
 	<div class="form-group">
+		<label class="control-label col-lg-3">{l s='Sub Title' mod='vecvegamenu'}</label>
+		<div class="col-lg-9">
+			{foreach from=$languages item=language}
+				{if $languages|count > 1}
+					<div class="row translatable-field lang-{$language.id_lang|intval}" {if $language.id_lang != $id_language}style="display:none"{/if}>
+				{/if}
+				<div class="col-lg-6">
+				<input type="text" class="subtitle" id="subtitle_{$language.id_lang|intval}" name="subtitle_{$language.id_lang|intval}" value="{if isset($menu->subtitle[$language.id_lang]) && $menu->subtitle[$language.id_lang]}{$menu->subtitle[$language.id_lang|intval]}{/if}"/>
+				</div>
+				{if $languages|count > 1}
+					<div class="col-lg-2">
+						<button type="button" class="btn btn-default dropdown-toggle" tabindex="-1" data-toggle="dropdown">
+							{$language.iso_code|escape:'html':'UTF-8'}
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							{foreach from=$languages item=lang}
+							<li><a href="javascript:hideOtherLanguage({$lang.id_lang|intval});javascript:changeLangInfor({$lang.id_lang|intval});" tabindex="-1">{$lang.name|escape:'html':'UTF-8'}</a></li>
+							{/foreach}
+						</ul>
+					</div>
+				{/if}
+				{if $languages|count > 1}
+					</div>
+				{/if}
+			{/foreach}
+		</div>
+		<p class="help-block col-lg-9 col-lg-offset-3">{l s='Add highlight to menu item.' mod='vecvegamenu'}</p>
+	</div>
+	<div class="form-group">
 		<label class="control-label col-lg-3" for="">{l s='Subtitle style' mod='vecvegamenu'}</label>
 		<div class="col-lg-9">
 			<div class="row">
 				
-				<div class="form-group col-lg-3" style="width: 23%;">
+				<div class="form-group col-lg-3" style="clear: both;">
 	                <label class="control-label col-lg-6" for="subtitle_color">{l s='Color' mod='vecvegamenu'}</label>
 	                <div class="col-lg-6">
 	                    <div class="input-group">
@@ -192,7 +206,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <div class="form-group col-lg-3" style="width: 23%;">
+	            <div class="form-group col-lg-3" style="clear: both;">
 	                <label class="control-label col-lg-6" for="subtitle_bgcolor">{l s='Background color' mod='vecvegamenu'}</label>
 	                <div class="col-lg-6">
 	                    <div class="input-group">
@@ -200,38 +214,9 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <div class="form-group col-lg-2">
-	                <label class="control-label col-lg-6" for="subtitle_fontsize">{l s='Font size' mod='vecvegamenu'}</label>
-	                <div class="col-lg-6">
-	                    <div class="input-group">
-	                        <input class="" data-default="" data-serializable="true" name="subtitle_fontsize" value="{if $menu->subtitle_fontsize}{$menu->subtitle_fontsize}{/if}" id="subtitle_fontsize" type="text">
-	                        <span class="input-group-addon">px</span>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="form-group col-lg-2">
-	                <label class="control-label col-lg-6" for="subtitle_lineheight">{l s='Line height' mod='vecvegamenu'}</label>
-	                <div class="col-lg-6">
-	                    <div class="input-group">
-	                        <input class="" data-default="" data-serializable="true" name="subtitle_lineheight" value="{if $menu->subtitle_lineheight}{$menu->subtitle_lineheight}{/if}" id="subtitle_lineheight" type="text">
-	                        <span class="input-group-addon">px</span>
-	                    </div>
-	                </div>
-	            </div>
 		    </div>
 		</div>
 	</div>
-	<div class="form-group" id="item_type_form">
-        <label class="control-label col-lg-3" for="submenu_type">{l s='Submenu type' mod='vecvegamenu'}</label>
-        <div class="col-lg-9">
-            <select id="submenu_type" name="submenu_type" class="form-control fixed-width-lg" data-default="1">
-                <option value="0" {if $menu->submenu_type == 0}selected="selected" {/if}>{l s='Mega' mod='vecvegamenu'}</option>
-                <option value="1" {if $menu->submenu_type == 1}selected="selected" {/if}>{l s='Flyout' mod='vecvegamenu'}</option>
-                <option value="2" {if $menu->submenu_type == 2}selected="selected" {/if}>{l s='None' mod='vecvegamenu'}</option>
-            </select>
-            <p class="help-block">{l s='Flyout only is available when you select category in Type Link' mod='vecvegamenu'}</p>
-        </div>
-    </div>
 	<div class="form-group">
 		<label class="control-label col-lg-3">{l s='Add specific class' mod='vecvegamenu'}</label>
 		<div class="col-lg-5">
@@ -251,18 +236,28 @@
 			</span>	
 		</div>
 	</div>
-	<div class="form-group">
-		<label class="control-label col-lg-3">{l s='Active' mod='vecvegamenu'}</label>
-		<div class="col-lg-9">
-			<span class="switch prestashop-switch fixed-width-lg">
-				<input type="radio" name="active" id="active_on" value="1" {if (isset($menu->active) &&  $menu->active != 0) || !$menu->active}checked="checked"{/if}>
-				<label for="active_on">Yes</label>
-				<input type="radio" name="active" id="active_off" value="0" {if isset($menu->active) && $menu->active == 0}checked="checked"{/if}>
-				<label for="active_off">No</label>
+	<hr></hr>
+	<h4 class="col-lg-offset-3">Submenu</h4>
+	<div class="form-group" id="item_type_form">
+        <label class="control-label col-lg-3" for="submenu_type">{l s='Submenu type' mod='vecvegamenu'}</label>
+        <div class="col-lg-9">
+			<span class="vec-switch vec-switch-3 col-lg-9">
+				<input type="radio" name="submenu_type" id="submenu_type_0" value="0" {if !isset($menu->submenu_type ) || $menu->submenu_type == 0} checked="checked"{/if}/>
+				<label for="submenu_type_0">
+					{l s='Mega' mod='vecvegamenu'}
+				</label>
+				<input type="radio" name="submenu_type" id="submenu_type_1" value="1" {if $menu->submenu_type == 1} checked="checked"{/if}/>
+				<label for="submenu_type_1">
+					{l s='Flyout' mod='vecvegamenu'}
+				</label>
+				<input type="radio" name="submenu_type" id="submenu_type_2" value="2" {if $menu->submenu_type == 2} checked="checked"{/if}/>
+				<label for="submenu_type_2">
+					{l s='None' mod='vecvegamenu'}
+				</label>	
 				<a class="slide-button btn"></a>
-			</span>	
-		</div>
-	</div>
+			</span>
+        </div>
+    </div>
 	
 	<div class="panel-footer">
 		<input type="hidden" name="id_vecvegamenu_item" id="id_vecvegamenu_item" value="{if isset($menu->id)}{$menu->id|intval}{/if}"/>

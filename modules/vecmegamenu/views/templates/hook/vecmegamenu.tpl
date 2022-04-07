@@ -25,8 +25,9 @@
 <div id="_desktop_megamenu" class="vec-menu-content">
 <div class="vec-menu-horizontal">
 	<ul class="menu-content"> 
-		{foreach from=$menus item=menu name=menus}	 			
-				<li class="{if $menu.link == {$urls.pages.index} && $page.page_name == 'index'}home{/if} menu-item menu-item{$menu.id_vecmegamenu_item} {$menu.item_class|escape:'html':'UTF-8'} {if count($menu.sub_menu) > 0}hasChild{/if} {if isset($menu.selected_item) && $menu.selected_item == 1}active{/if}">
+		{foreach from=$menus item=menu name=menus}	 	
+			
+				<li class="{if $menu.link == {$urls.pages.index} && $page.page_name == 'index'}home{/if} menu-item menu-item{$menu.id_vecmegamenu_item} {$menu.item_class|escape:'html':'UTF-8'} {if $menu.submenu_type != 2 && !empty($menu.sub_menu.info_rows) > 0}hasChild{/if} {if isset($menu.selected_item) && $menu.selected_item == 1}active{/if}">
 					
 						<a href="{if $menu.link}{$menu.link|escape:'html':'UTF-8'}{elseif $menu.custom_link}{$menu.custom_link|escape:'html':'UTF-8'}{else}javascript:void(0){/if}" {if $menu.new_window == 1} target="_blank" {/if}>
 						
@@ -37,12 +38,12 @@
 						{/if}
 						<span>{$menu.title|escape:'html':'UTF-8'}</span>
 						{if $menu.subtitle != ''}<span class="menu-subtitle">{$menu.subtitle|escape:'html':'UTF-8'}</span>{/if}
-						{if count($menu.sub_menu) > 0} <i class="hidden-md-down vecicon-arrow-down"></i>{/if}
+						{if $menu.submenu_type != 2 && !empty($menu.sub_menu.info_rows) > 0} <i class="hidden-md-down vecicon-arrow-down"></i>{/if}
 					</a>
 					{if $menu.submenu_type == 0}
 						{if isset($menu.sub_menu) && count($menu.sub_menu.info_rows) > 0}
 						
-						{if count($menu.sub_menu) > 0}<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>{/if}
+						{if !empty($menu.sub_menu.info_rows) > 0}<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>{/if}
 						<div class="vec-sub-menu menu-dropdown {$menu.sub_menu.submenu_config.submenu_class|escape:'html':'UTF-8'}" data-width="{$menu.sub_menu.submenu_config.submenu_width|escape:'html':'UTF-8'}">
 						
 						<div class="vec-sub-inner">

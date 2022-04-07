@@ -108,6 +108,7 @@ class WidgetCategories extends WidgetProductBase
 					'label' => __('Image position'),
 					'type' => ControlsManager::SELECT,
 					'default' => 'left',
+					'prefix_class' => 'image-position-',
 					'options' => [
 						'left' => __('Left'),
 						'right' => __('Right'),
@@ -115,6 +116,18 @@ class WidgetCategories extends WidgetProductBase
 					'condition' => [
 						'layout' => '1'
 					],
+				]
+			);
+			$this->addControl(
+				'layout_style',
+				[
+					'label' 		=> __('No-padding layout style'),
+					'type' 			=> ControlsManager::SWITCHER,
+					'return_value' 	=> 'yes',
+					'default' 		=> '', 
+					'label_on'      => __('Yes'),
+                    'label_off'     => __('No'),
+					'prefix_class' => 'style-no-padding-',
 				]
 			);
 			$this->addControl(
@@ -205,6 +218,9 @@ class WidgetCategories extends WidgetProductBase
 					'selectors' => [
 						'{{WRAPPER}} .elementor-categories-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					],
+					'condition' => [
+						'layout_style!' => 'yes'
+					],
 				]
 			);
 			$this->addGroupControl(
@@ -213,6 +229,9 @@ class WidgetCategories extends WidgetProductBase
 					'name' => 'border',
 					'selector' => '{{WRAPPER}} .elementor-categories-item',
 					'separator' => 'before',
+					'condition' => [
+						'layout_style!' => 'yes'
+					],
 				]
 			);
 			$this->addControl(
@@ -225,6 +244,9 @@ class WidgetCategories extends WidgetProductBase
 					],
 					'selectors' => [
 						'{{WRAPPER}} .elementor-categories-item:hover, {{WRAPPER}} .elementor-categories-item:focus' => 'border-color: {{VALUE}};',
+					],
+					'condition' => [
+						'layout_style!' => 'yes'
 					],
 				]
 			);
@@ -264,10 +286,6 @@ class WidgetCategories extends WidgetProductBase
 							'min' => 0,
 							'max' => 100,
 						],
-					],
-					'default' => [
-						'size' => 45,
-						'unit' => '%', 
 					],
 					'size_units' => ['px', '%'],
 					'selectors' => [
@@ -314,7 +332,8 @@ class WidgetCategories extends WidgetProductBase
 				[
 					'label' => __('Vertical Align'),
 					'type' => ControlsManager::SELECT,
-					'default' => 'top',
+					'default' => 'middle',
+					'prefix_class' => 'content-position-',
 					'options' => [
 						'top' => __('Top'),
 						'middle' => __('Middle'),

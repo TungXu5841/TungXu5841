@@ -86,7 +86,7 @@ class WidgetLinksList extends WidgetBase {
 	                    ],
 	                ],
 	                'selectors' => [
-	                    '{{WRAPPER}} .pos-links-widget' => 'text-align: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-links-widget' => 'text-align: {{VALUE}};',
 	                ],
 	            ]
 	        );
@@ -164,6 +164,21 @@ class WidgetLinksList extends WidgetBase {
 	                'title_field' => '{{{ title }}}',
 	            ]
 	        );
+			$this->addControl(
+			'display_link',
+				[
+					'label' => __('Display'),
+					'type' => ControlsManager::SELECT,
+					'default' => 'block',
+					'options' => [ 
+						'block' => __('Block'),
+						'inline' => __('Inline (auto)')
+					],
+					'prefix_class' => 'display-',
+					'render_type' => 'template',
+					'frontend_available' => true
+				]
+			);
 		$this->endControlsSection();
 		
 		$this->startControlsSection(
@@ -216,7 +231,7 @@ class WidgetLinksList extends WidgetBase {
 						'unit' => 'px',
 					],
 					'selectors' => [
-						'{{WRAPPER}} .pos-links-widget .links-widget-title' => 'margin-bottom: {{SIZE}}{{UNIT}}'
+						'{{WRAPPER}} .vec-links-widget .links-widget-title' => 'margin-bottom: {{SIZE}}{{UNIT}}'
 					],
 					'separator' => 'none'
 				]
@@ -225,7 +240,7 @@ class WidgetLinksList extends WidgetBase {
 				GroupControlTypography::getType(),
 				[
 					'name' 			=> 'title_typo',
-					'selector' 		=> '{{WRAPPER}} .pos-links-widget .links-widget-title',
+					'selector' 		=> '{{WRAPPER}} .vec-links-widget .links-widget-title',
 				]
 			);
 			$this->addControl(
@@ -235,7 +250,7 @@ class WidgetLinksList extends WidgetBase {
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-links-widget .links-widget-title a,{{WRAPPER}} .pos-links-widget .links-widget-title span' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-links-widget .links-widget-title a,{{WRAPPER}} .vec-links-widget .links-widget-title span' => 'color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -251,9 +266,53 @@ class WidgetLinksList extends WidgetBase {
 				GroupControlTypography::getType(),
 				[
 					'name' 			=> 'links_typo',
-					'selector' 		=> '{{WRAPPER}} .pos-links-widget .links-widget-content a',
+					'selector' 		=> '{{WRAPPER}} .vec-links-widget .links-widget-content a',
 				]
 			);
+			$this->addControl(
+	            'padding_links',
+	            array(
+	                'label' => __( 'Padding' ),
+					'type' => ControlsManager::DIMENSIONS,
+					'size_units' => [ 'px', '%', 'em' ],
+					'selectors' => [
+						'{{WRAPPER}} .vec-links-widget .links-widget-content a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', 
+					],
+	            )
+	        ); 
+			$this->addControl(
+	            'margin_links',
+	            array(
+					'label' => __( 'margin' ),
+					'type' => ControlsManager::DIMENSIONS,
+					'size_units' => [ 'px', '%', 'em' ],
+					'selectors' => [
+						'{{WRAPPER}} .vec-links-widget .links-widget-content a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					],
+	            )
+	        );
+			$this->addGroupControl(
+	            GroupControlBorder::getType(),
+	            array(
+	                'name' => 'border_links',
+	                'label' => __('Border'),
+	                'placeholder' => '1px',
+	                'default' => '1px',
+	                'selector' => '{{WRAPPER}} .vec-links-widget .links-widget-content a'
+	            )
+	        );
+			 $this->addControl(
+	            'link_border_radius_links',
+	            array(
+	                'label' => __('Border Radius', 'elementor'),
+	                'type' => ControlsManager::DIMENSIONS,
+	                'size_units' => array('px', '%'),
+	                'selectors' => array(
+	                    '{{WRAPPER}} .vec-links-widget .links-widget-content a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+	                ),
+	            )
+	        );
+		
 			$this->startControlsTabs('tabs_button_style');
 
 	        $this->startControlsTab(
@@ -270,7 +329,7 @@ class WidgetLinksList extends WidgetBase {
 	                'type' => ControlsManager::COLOR,
 	                'default' => '',
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-links-widget .links-widget-content a' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-links-widget .links-widget-content a' => 'color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -281,7 +340,7 @@ class WidgetLinksList extends WidgetBase {
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-links-widget .links-widget-content a' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-links-widget .links-widget-content a' => 'background-color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -301,7 +360,7 @@ class WidgetLinksList extends WidgetBase {
 	                'label' => __('Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-links-widget .links-widget-content a:hover' => 'color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-links-widget .links-widget-content a:hover' => 'color: {{VALUE}};',
 	                ),
 	            )
 	        );
@@ -312,13 +371,14 @@ class WidgetLinksList extends WidgetBase {
 	                'label' => __('Background Color'),
 	                'type' => ControlsManager::COLOR,
 	                'selectors' => array(
-	                    '{{WRAPPER}} .pos-links-widget .links-widget-content a:hover' => 'background-color: {{VALUE}};',
+	                    '{{WRAPPER}} .vec-links-widget .links-widget-content a:hover' => 'background-color: {{VALUE}};',
 	                ),
 	            )
 	        );
 	        $this->endControlsTab();
 
 	        $this->endControlsTabs();
+			
 		$this->endControlsSection();
 
 	}

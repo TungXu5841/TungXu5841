@@ -191,8 +191,8 @@ class WidgetVSmartBlog extends WidgetBase
         }
         $classes = 'columns-desktop-'. ($settings['slides_to_scroll'] ? $settings['slides_to_scroll'] : $settings['default_slides_desktop']);
         $classes .= ' columns-tablet-'. ($settings['slides_to_scroll_tablet'] ? $settings['slides_to_scroll_tablet'] : $settings['default_slides_tablet']);
-        $classes .= ' columns-mobile-'. ($settings['slides_to_scroll_mobile'] ? $settings['slides_to_scroll_mobile'] : $settings['default_slides_mobile']);
-        $classes .= 'slick-arrows-' . $settings['arrows_position'];
+        $classes .= ' columns-mobile-'. ($settings['slides_to_scroll_mobile'] ? $settings['slides_to_scroll_mobile'] : $settings['default_slides_mobile']); 
+        $classes .= ' slick-arrows-' . $settings['arrows_position'];
         
         $context->smarty->assign(
             array(

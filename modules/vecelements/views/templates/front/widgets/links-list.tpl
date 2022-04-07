@@ -1,9 +1,11 @@
-<div class="pos-links-widget">
+<div class="vec-links-widget">
+	{if $title}	
 	<h2 class="links-widget-title hidden-sm-down">
 		{if $title_url.url}<a href="{$title_url.url}">{/if}
 			<span>{$title}</span>
 		{if $title_url}</a>{/if}
 	</h2>
+	
     <h2 class="links-widget-title hidden-md-up" data-target="#footer_linkslist_{$id}" data-toggle="collapse" aria-expanded="false">
         {if $title_url.url}<a href="{$title_url.url}">{/if}
 			<span>{$title}</span>
@@ -13,7 +15,8 @@
 			<i class="material-icons remove">&#xE316;</i>
 		</span>
     </h2>
-	<ul id="footer_linkslist_{$id}" class="links-widget-content">
+	{/if}
+	<ul id="footer_linkslist_{$id}" class="{if !$title}not-title-links{/if} links-widget-content collapse">
 		{foreach from=$links item=link}
 		<li>
 			{if $link.title}

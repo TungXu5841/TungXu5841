@@ -106,7 +106,7 @@ class WidgetSocialIcons extends WidgetBase
                     'vecicon' => __('Theme icon'),
                     'awesome' => __('Awesome icon'),
                 ],
-                'default' => 'vecicon',
+                'default' => 'awesome',
             ]
         );
         $repeater->addControl(
@@ -347,6 +347,33 @@ class WidgetSocialIcons extends WidgetBase
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .elementor-social-icon:not(:hover) i' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->addControl(
+            'icon_primary_color_hover',
+            [
+                'label' => __('Primary Color Hover'),
+                'type' => ControlsManager::COLOR,
+                'condition' => [
+                    'icon_color' => 'custom',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-social-icon:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->addControl(
+            'icon_secondary_color_hover',
+            [
+                'label' => __('Secondary Color Hover'),
+                'type' => ControlsManager::COLOR,
+                'condition' => [
+                    'icon_color' => 'custom',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-social-icon:hover i' => 'color: {{VALUE}};',
                 ],
             ]
         );

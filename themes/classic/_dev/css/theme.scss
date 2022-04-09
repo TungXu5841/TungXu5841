@@ -113,6 +113,19 @@
 		margin-bottom: 0;
 	}
 }
+#checkout,
+#cart {
+    #content > .row,
+    .cart-grid.row {
+      margin-left: -30px;
+      margin-right: -30px;
+      .cart-grid-body,
+      .cart-grid-right {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+  }
 .row { 
 	.cart-grid-body ,.cart-grid-right {
 		padding-top: 3.75rem; 
@@ -125,8 +138,7 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			bottom: 0;
-			background: #f6f6f6;
+			bottom: -9999rem;
 			z-index: -1;
 			-webkit-box-shadow: 0 -1px 0 #e1e1e1 inset;
 			box-shadow: 0 -1px 0 #e1e1e1 inset;
@@ -137,6 +149,10 @@
 		.cart-summary {
 			background: transparent;
 		}
+        .card-block {
+            padding-left: 0;
+            padding-right: 0;
+        }
 	}
 }
 .customer-account-content {
@@ -1369,7 +1385,7 @@
 					-o-transform: translateY(20px);
 					transform: translateY(20px);
 				}
-				&:hover > .menu-dropdown {
+				&.menu_initialized:hover > .menu-dropdown {
 					opacity: 1;
 					visibility: visible;
 					-webkit-transform: translateY(0);
@@ -1384,7 +1400,7 @@
 				}
                 .menu-dropdown {
 					position: absolute;
-					z-index: 10;
+					z-index: 12;
 					visibility: hidden;
 					opacity: 0;
 					text-align: left;
@@ -1603,7 +1619,7 @@
 			left: 0;
 			padding: 0;
             border: 1px solid $border-gray;
-            z-index: 9;
+            z-index: 11;
 			min-width: 240px;
 			@media (max-width: 1440px) {
 				min-width: 220px; 
@@ -1703,7 +1719,7 @@
 					-o-transform: translateY(20px);
 					transform: translateY(20px);
 				}
-				&:hover > .menu-dropdown {
+				&.menu_initialized:hover > .menu-dropdown {
 					opacity: 1;
 					visibility: visible;
 					-webkit-transform: translateY(0);
@@ -2400,17 +2416,31 @@
 }
 //products
 body:not(.elementor-editor-active) {
+    .elementor-widget-product-tab, 
     .elementor-widget-product-sale,
     .elementor-widget-product-carousel {
+        &:hover {
+            z-index: 1; 
+        }
         .elementor-slick-slider {
             .slick-list {
-                z-index: 1;
+                margin-bottom: -96px;
+                padding-bottom: 96px;
             }
             .slick-dotted {
                 margin-bottom: 0 !important; 
                 .slick-dots {
                     bottom: auto;
                     margin-top: 10px;  
+                    pointer-events: none;
+                    > * {
+                        pointer-events: auto;
+                    }
+                }
+            }
+            .slick-arrows-inside {
+                .slick-arrow { 
+                    margin-top: -48px;
                 }
             }
         }
@@ -3415,7 +3445,7 @@ body:not(.elementor-editor-active) {
                 a {
                     display: block;
                     &:hover {
-                        @include vec-transform(translateX(10px));
+                       text-decoration: underline !important;
                     }
                 }
                 &:not(:last-child) a{

@@ -10,20 +10,26 @@
   }
 
   .block {
-    height: auto;
-    overflow: hidden;
-
+    @include flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
     .icon {
-      float: left;
-      width: 3.5rem;
-
+      margin-right: .625rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: white;
+      background: $gray-dark;
       i {
-        font-size: 2rem;
+        font-size: 1.25rem;
       }
     }
 
     .data {
-      width: auto;
+      flex: 1;
       overflow: hidden;
       font-size: $font-size-sm;
       color: $gray-darker;
@@ -43,10 +49,11 @@
     }
   }
 }
-
+#contact .page-content  {
+  padding: 0;
+}
 .contact-form {
   width: 100%;
-  padding: 1rem;
   color: $gray;
   background: $white;
 

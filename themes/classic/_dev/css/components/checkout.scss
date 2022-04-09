@@ -88,13 +88,12 @@ body#checkout {
   section.checkout-step {
     padding: 0.625rem 0;
     background-color: $white;
-    max-width: 800px;
     &:last-child {
       border: 0;
     }
 
     .step-title {
-      padding-bottom: 1.25rem;  
+      padding-bottom: 1.125rem;  
       margin-bottom: 0;
       font-size: 1.125rem;
       font-weight: $headings-font-weight;
@@ -597,7 +596,6 @@ body#checkout {
   }
 
   #footer {
-    padding: 0.9375rem;
     color: $gray;
     background: $white;
   }

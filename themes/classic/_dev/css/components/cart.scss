@@ -199,9 +199,8 @@
 .block-promo {
   margin-bottom: 1rem;
   .promo-code {
-    padding: 1.25rem;
     background: $white;
-    border: 1px solid $border-gray;
+    position: relative;
     .alert-danger {
       position: relative;
       display: none;
@@ -273,7 +272,7 @@
 
   .promo-code-button {
     display: block;
-    padding: 0 0 1rem;
+    padding: 0 0 1rem 0; 
     text-align: center;
 
     &.with-discounts {
@@ -283,11 +282,24 @@
     &.cancel-promo {
       margin-bottom: 0;
       color: $brand-primary;
+      position: absolute;
+      right: 0;
+      top: -1.875rem;
+      font-size: 0;
+      &:hover {
+        color: var(--hovercolor);
+      }
+      &::before {
+        content: "";
+        font-family: $font-icon;
+        content: "\e93f";
+        font-size: 1.25rem; 
+        line-height: 1;
+      }
 
       &[aria-expanded="true"] {
         display: block;
         padding: 0;
-        margin-top: 1rem;
       }
     }
   }

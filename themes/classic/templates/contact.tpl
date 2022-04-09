@@ -23,9 +23,17 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {extends file='page.tpl'}
-
-{block name='page_header_container'}{/block}
-
+{block name='page_header_container'}
+  <div class="page-title-wrapper">
+  <div class="container">
+  {block name='page_title'}
+    <header class="page-header">
+      <h1>{l s='Contact us' d='Shop.Theme.Global'}</h1>
+    </header>
+  {/block}
+  </div>
+  </div>
+{/block}
 {if $layout === 'layouts/layout-left-column.tpl'}
   {block name="left_column"}
     <div id="left-column" class="col-xs-12 col-md-4 col-lg-3">

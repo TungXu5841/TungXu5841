@@ -1,33 +1,27 @@
 #stores {
   .page-stores {
-    width: 85%;
     margin: 0 auto;
-
     .store-item {
-      padding-right: 0.75rem;
-      padding-left: 0.75rem;
+      border-bottom:  1px solid $border-gray;
+      padding-bottom: 1.25rem;
+      margin-bottom: 20px;
     }
-
     .store-picture {
       img {
         max-width: 100%;
       }
     }
-
     .store-item-container {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding: $large-space 0;
-
+      margin: 0 -15px;
       ul {
         margin-bottom: 0;
         font-size: $font-size-lg;
       }
 
       .divide-left {
-        border-left: $gray-light 1px solid;
-
         tr {
           height: 1.563rem;
         }
@@ -37,12 +31,16 @@
         }
 
         th {
-          text-align: right;
+          color: $gray-dark;
+          font-weight: 500;
         }
       }
 
       .store-description {
         font-size: $base-font-size;
+        .address {
+          margin-bottom: 0;
+        }
       }
     }
 

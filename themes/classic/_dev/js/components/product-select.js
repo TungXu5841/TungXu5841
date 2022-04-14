@@ -33,6 +33,15 @@ export default class ProductSelect {
     const $thumbnails = $('.js-modal-product-images');
     let $wrapper = $('#wrapper');
 
+    $wrapper.on('shown.bs.modal', '#product-modal', function (e) {
+      var $thumbnails_modal = $('.product-images-modal');
+      $thumbnails_modal
+      .on('init', function(event, slick) {$(this).find('.slick-slide.slick-current').addClass('is-active');})
+      .slick({
+        slidesToShow: $thumbnails_modal.data('item'),
+      });
+    })
+
     $('body')
       .on('click', '.js-modal-thumb', (event) => {
         if ($('.js-modal-thumb').hasClass('selected')) {
@@ -42,19 +51,15 @@ export default class ProductSelect {
         $('.js-modal-product-cover').attr('src', $(event.target).data('image-large-src'));
         $('.js-modal-product-cover').attr('title', $(event.target).attr('title'));
         $('.js-modal-product-cover').attr('alt', $(event.target).attr('alt'));
+        $('.product-images-modal').find('.slick-slide').removeClass('is-active')
+        $(event.currentTarget).closest('.slick-slide').addClass('is-active');
       })
       .on('click', 'aside#thumbnails', (event) => {
         if (event.target.id === 'thumbnails') {
           $('#product-modal').modal('hide');
         }
       });
-      $wrapper.on('shown.bs.modal', '#product-modal', function (e) {
-        var $thumbnails_modal = $('.product-images-modal');
-        $thumbnails_modal.slick({
-          slidesToShow: $thumbnails_modal.data('item'),
-        });
-      })
-    
+
   }
 
  

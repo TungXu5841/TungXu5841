@@ -27,6 +27,7 @@ import prestashop from 'prestashop';
 // eslint-disable-next-line
 import "velocity-animate";
 
+import Product from './product';
 import ProductMinitature from './components/product-miniature';
 import infiniteScroll from './components/infinite-scroll';
 import loadMore from './components/load-more';
@@ -80,6 +81,7 @@ $(document).ready(() => {
   })
 
   prestashop.on('clickQuickView', (elm) => {
+    $('.js-quick-view').addClass('loading');
     const data = {
       action: 'quickview',
       id_product: elm.dataset.idProduct,
@@ -92,7 +94,12 @@ $(document).ready(() => {
           `#quickview-modal-${resp.product.id}-${resp.product.id_product_attribute}`,
         );
         productModal.modal('show');
+        $('.js-quick-view').removeClass('loading');
         productConfig(productModal);
+        
+        const productPage = new Product();
+        productPage.productImageSlider();
+
         productModal.on('hidden.bs.modal', () => {
           productModal.remove();
         });

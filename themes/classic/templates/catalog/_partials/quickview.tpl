@@ -36,6 +36,9 @@
           {block name='product_cover_thumbnails'}
             {include file='catalog/_partials/product-cover-thumbnails.tpl'}
           {/block}
+          <div class="product-additional-info js-product-additional-info">
+            {hook h='displayProductAdditionalInfo' product=$product}
+          </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12">
           <h1 class="h1 namne_details h1">{$product.name}</h1>
@@ -68,11 +71,6 @@
         </div>
       </div>
      </div>
-     <div class="modal-footer">
-        <div class="product-additional-info js-product-additional-info">
-          {hook h='displayProductAdditionalInfo' product=$product}
-        </div>
-    </div>
    </div>
  </div>
 </div>

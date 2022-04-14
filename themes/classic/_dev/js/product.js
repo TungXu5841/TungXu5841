@@ -27,38 +27,16 @@ import prestashop from 'prestashop';
 import ProductSelect from './components/product-select';
 import './lib/easyzoom.min';
 
-$(document).ready(() => {
-  createProductSpin();
-  createInputFile();
-  productImageSlider();
-  addJsProductTabActiveSelector();
-  productImageZoom();
-
-  prestashop.on('updatedProduct', (event) => {
-    createInputFile();
-    productImageSlider();
-    if (event && event.product_minimal_quantity) {
-      const minimalProductQuantity = parseInt(event.product_minimal_quantity, 10);
-      const quantityInputSelector = prestashop.selectors.quantityWanted;
-      const quantityInput = $(quantityInputSelector);
-      // @see http://www.virtuosoft.eu/code/bootstrap-touchspin/ about Bootstrap TouchSpin
-      quantityInput.trigger('touchspin.updatesettings', {
-        min: minimalProductQuantity,
-      });
-    }
-    $($(prestashop.themeSelectors.product.activeTabs).attr('href')).addClass('active').removeClass('fade');
-    $(prestashop.themeSelectors.product.imagesModal).replaceWith(event.product_images_modal);
-    $('.box_button').empty();
-    $('.box_button').append($(event.product_add_to_cart).find('.box_button').html());
-    const productSelect = new ProductSelect();
-    productSelect.init();
-  });
-  function productImageSlider(){
+export default class Product {
+  productImageSlider(){
 		var $imageContainer = $('.images-container'),
 			$images = $('.product-images.slick-block'),
-			$thumbnails = $('.product-thumbs.slick-block');
-    
-		if($imageContainer.hasClass('horizontal-thumb')){
+			$thumbnails = $('.product-thumbs.slick-block'),
+      isQuickview = false;
+    if($('.quickview').length > 0){
+      isQuickview = true;
+    }
+		if($imageContainer.hasClass('horizontal-thumb') || isQuickview){
 			var item = $thumbnails.data('item');
 			$images.not('.slick-initialized').slick({
 				infinite: false,
@@ -70,7 +48,7 @@ $(document).ready(() => {
 					infinite: false,
 				});
 		};
-		if($imageContainer.hasClass('vertical-left') || $imageContainer.hasClass('vertical-right')){
+		if(($imageContainer.hasClass('vertical-left') || $imageContainer.hasClass('vertical-right')) && !isQuickview){
 			var item = $thumbnails.data('item');
 			$images.not('.slick-initialized').slick({
 				infinite: false,
@@ -116,12 +94,43 @@ $(document).ready(() => {
 
 		 	$images.slick('slickGoTo', goToSingleSlide);
 		});
-		// $('.images-container .slick-block').slickLightbox({
-		// 	src: 'src',
-		// 	itemSelector: '.cover-item img'
-		// });
-	 
+		if(isQuickview){
+      $images.slick('refresh');
+      $thumbnails.slick('refresh');
+      $('.product-thumbs.slick-block .slick-slide.slick-current').addClass('is-active');
+    }
+
 	};
+}
+
+$(document).ready(() => {
+  createProductSpin();
+  createInputFile();
+  addJsProductTabActiveSelector();
+  productImageZoom();
+
+  const productPage = new Product();
+  productPage.productImageSlider();
+
+  prestashop.on('updatedProduct', (event) => {
+    createInputFile();
+    productPage.productImageSlider();
+    if (event && event.product_minimal_quantity) {
+      const minimalProductQuantity = parseInt(event.product_minimal_quantity, 10);
+      const quantityInputSelector = prestashop.selectors.quantityWanted;
+      const quantityInput = $(quantityInputSelector);
+      // @see http://www.virtuosoft.eu/code/bootstrap-touchspin/ about Bootstrap TouchSpin
+      quantityInput.trigger('touchspin.updatesettings', {
+        min: minimalProductQuantity,
+      });
+    }
+    $($(prestashop.themeSelectors.product.activeTabs).attr('href')).addClass('active').removeClass('fade');
+    $(prestashop.themeSelectors.product.imagesModal).replaceWith(event.product_images_modal);
+    $('.box_button').empty();
+    $('.box_button').append($(event.product_add_to_cart).find('.box_button').html());
+    const productSelect = new ProductSelect();
+    productSelect.init();
+  });
 
   function createInputFile() {
     $(prestashop.themeSelectors.fileInput).on('change', (event) => {

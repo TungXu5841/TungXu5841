@@ -28,6 +28,8 @@ import 'bootstrap/dist/js/bootstrap.min';
 import 'flexibility';
 import 'bootstrap-touchspin';
 import 'jquery-touchswipe';
+import './lib/slick.min';
+import './lib/countdown.min';
 import './selectors';
 
 import './responsive';
@@ -43,8 +45,6 @@ import DropDown from './components/drop-down';
 import Form from './components/form';
 import ProductMinitature from './components/product-miniature';
 import ProductSelect from './components/product-select';
-import './lib/slick.min';
-import './lib/countdown.min';
 
 import './lib/bootstrap-filestyle.min';
 import './lib/jquery.scrollbox.min';

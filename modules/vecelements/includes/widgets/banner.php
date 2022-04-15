@@ -55,6 +55,10 @@ class WidgetBanner extends WidgetBase {
 			[
 				'label'   		=> $this->l('Image'),
 				'type'    		=> ControlsManager::MEDIA,
+				'seo'			=> true,
+				'dynamic' => [
+                    'active' => true,
+                ],
 				'default' 		=> [
 					'url' => Utils::getPlaceholderImageSrc()
 				],

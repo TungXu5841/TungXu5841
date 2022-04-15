@@ -32,5 +32,13 @@
       </div>
     {/if}
   {/block}
+  {if isset($product_manufacturer->id) && isset($manufacturer_image_url)}
+    <div class="product-brand">
+      <label class="label">{l s='Brand' d='Shop.Theme.Catalog'} </label>: 
+        <a href="{$product_brand_url}">
+        {$product_manufacturer->name}
+        </a>
+    </div>
+  {/if}
   {hook h='displayProductAdditionalInfo' product=$product}
 </div>

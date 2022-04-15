@@ -3,8 +3,8 @@
         {block name='product_thumbnail'}
             {if $product.cover}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
-                <img class="first-image lazyload"
-                src = "{$product.cover.bySize.large_default.url}" data-src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                <img class="first-image" loading="lazy"
+                data-src="{$product.cover.bySize.large_default.url}" src="{$product.cover.bySize.home_default.url}" width="{$product.cover.bySize.home_default.width}" height="{$product.cover.bySize.home_default.height}" 
                 alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
                 data-full-size-image-url = "{$product.cover.large.url}"
                 >
@@ -40,7 +40,7 @@
                 </div>
             {/block}
             {block name='product_name'}
-                <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:50:'...'}</a></h3> 
+                <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name}</a></h3> 
             {/block}
             {block name='product_price_and_shipping'}
                 {if $product.show_price}

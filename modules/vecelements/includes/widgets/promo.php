@@ -346,9 +346,9 @@ class WidgetPromo extends WidgetBase
         }
 
         ?>
-        <div class="promo-widget">
+        <div class="elementor-promo promo-widget">
             <div class="promo-inner">
-                <div class="elementor-block-carousel">
+                <div class="elementor-block-carousel slick-block items-desktop-1 items-tablet-1 items-mobile-1">
                     <?php foreach($settings['promos'] as $promo): ?>
                     <div class="promo-item">
                         <?= $promo['promo_content']; ?>

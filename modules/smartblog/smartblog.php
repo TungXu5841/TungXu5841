@@ -349,21 +349,15 @@ class smartblog extends Module
 			);
 		}
 
-		for ($i = 1; $i <= 2; $i++) {
-			if ($i == 1) :
-				$type_name = 'home-default';
-				$width     = '470';
-				$height    = '289';
-				$type      = 'Category';
-			elseif ($i == 2) :
-				$type_name = 'single-default';
-				$width     = '1050';
-				$height    = '646';
-				$type      = 'Category';
-			endif;
-			$damiimgtype = 'INSERT INTO ' . _DB_PREFIX_ . "smart_blog_imagetype (type_name,width,height,type,active) VALUES ('" . $type_name . "','" . $width . "','" . $height . "','" . $type . "',1);";
-			$ret        &= Db::getInstance()->execute($damiimgtype);
-		}
+		
+		$type_name = 'category-default';
+		$width     = '470';
+		$height    = '289';
+		$type      = 'Category';
+
+		$damiimgtype = 'INSERT INTO ' . _DB_PREFIX_ . "smart_blog_imagetype (type_name,width,height,type,active) VALUES ('" . $type_name . "','" . $width . "','" . $height . "','" . $type . "',1);";
+		$ret        &= Db::getInstance()->execute($damiimgtype);
+		
 		return $ret;
 	}
 

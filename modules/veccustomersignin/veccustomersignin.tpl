@@ -30,21 +30,22 @@
 		  	<span class="text-account">{l s='My account' mod='veccustomersignin'}</span>
 		</button>
 		<ul class="dropdown-menu">
-			<li>
-				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{$customerName}</a>
+			<li class="welcome-user">
+				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='Welcome' mod='veccustomersignin'} , {$customerName}</a>
 			</li>
 			<li>
-				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' mod='veccustomersignin'}</a>
+				<i class="vecicon-user"></i><a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' mod='veccustomersignin'}</a>
 			</li>
 			<li>
-				<a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' mod='veccustomersignin'}</a>
+				<i class="vecicon-magnifier"></i><a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' mod='veccustomersignin'}</a>
 			</li>
 			<li>
-				<a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' mod='veccustomersignin'}</a>
+				<i class="vecicon-gift-solid"></i><a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' mod='veccustomersignin'}</a>
 			</li>
-			<li>
-				<a class="logout dropdown-item" href="{$urls.actions.logout}" rel="nofollow">
-					{l s='Sign out' mod='veccustomersignin'}
+			<li class="logout">
+				<a href="{$urls.actions.logout}" rel="nofollow">
+					<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><path d="M17,8l-1.41,1.41L17.17,11H9v2h8.17l-1.58,1.58L17,16l4-4L17,8z M5,5h7V3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h7v-2H5V5z"/></g></svg>
+					<span>{l s='Sign out' mod='veccustomersignin'}</span>
 				</a>
 			</li>
 		</ul>

@@ -1,6 +1,6 @@
 {if isset($posts) AND !empty($posts)}
 <div class="elementor-image-carousel-wrapper elementor-slick-slider">
-<div class="elementor-image-carousel {$classes}">
+<div class="elementor-image-carousel slick-block {$classes}">
 	{foreach from=$posts item=post}
     	{include file="$style" class="" postcategory=$post}
     {/foreach}

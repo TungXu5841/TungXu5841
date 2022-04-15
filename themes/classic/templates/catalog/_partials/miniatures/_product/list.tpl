@@ -4,13 +4,27 @@
 	<article class="thumbnail-container style_product_list product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
 		<div class="img_block">
 		  {block name='product_thumbnail'}
-			<a href="{$product.url}" class="thumbnail product-thumbnail">
+			<a href="{$product.url}" class="thumbnail product-thumbnail rotator-animation-{$vectheme.rotator}">
 			  <img class="first-image lazyload"
-				data-src = "{$product.cover.bySize.home_default.url}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+			  	src="{$product.cover.bySize.cart_default.url}" width="{$product.cover.bySize.cart_default.width}" height="{$product.cover.bySize.cart_default.height}" 
 				alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
 				data-full-size-image-url = "{$product.cover.large.url}"
 			  >
-			   {hook h="rotatorImg" product=$product}	
+			  {if $vectheme.rotator}
+				{foreach from=$product.images item=image}
+					{if !$image.cover}
+						<img
+							src="{$image.bySize.cart_default.url}"
+							data-src="{$image.bySize.cart_default.url}"
+							width="{$image.bySize.cart_default.width}"
+							height="{$image.bySize.cart_default.height}"
+							alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if} 2"
+							class="lazy-product-image product-thumbnail-rotator"  loading="lazy"
+						>
+						{break}
+					{/if}
+				{/foreach}
+		   {/if}
 			</a>
 		  {/block}
 		</div>
@@ -24,7 +38,7 @@
 				</div>
 			{/block}
 			{block name='product_name'}
-			  <h3 itemprop="name"><a href="{$product.url}" class="product_name {if $name_length ==0 }one_line{/if}" title="{$product.name}">{$product.name|truncate:$vectheme.name_length:'...'}</a></h3> 
+			  <h3 itemprop="name"><a href="{$product.url}" class="product_name {if $name_length ==0 }one_line{/if}" title="{$product.name}">{$product.name}</a></h3> 
 			{/block}
 			
 			{block name='product_price_and_shipping'}

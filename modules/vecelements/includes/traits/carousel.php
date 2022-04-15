@@ -419,7 +419,7 @@ trait CarouselTrait
         if(isset($settings['widget_name'])){
             $widget_name = $settings['widget_name'];
         }
-        $self->addRenderAttribute('carousel', 'class', 'elementor-image-carousel '. $widget_name .' items-desktop-'. $item_desktop . ' items-tablet-' . $item_tablet . ' items-mobile-'. $item_mobile);
+        $self->addRenderAttribute('carousel', 'class', 'elementor-image-carousel slick-block '. $widget_name .' items-desktop-'. $item_desktop . ' items-tablet-' . $item_tablet . ' items-mobile-'. $item_mobile);
 
         if ('none' !== $settings['navigation']) {
             if ('dots' !== $settings['navigation']) {

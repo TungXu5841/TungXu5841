@@ -604,9 +604,9 @@ class VecThemeoptions extends Module implements WidgetInterface
         $options = array(
             'header_sticky'                 => Configuration::get($this->name . 'header_sticky'),
             //Product grid
-			'grid_type'                     => isset($_GET['grid']) ? $_GET['grid'] : Configuration::get($this->name . 'grid_type'),
+			'grid_type'                     => isset($_GET['grid_type']) ? $_GET['grid_type'] : Configuration::get($this->name . 'grid_type'),
 			'rotator'                       => Configuration::get($this->name . 'second_img'),
-			'name_length'                   => (Configuration::get($this->name . 'grid_name_length') == 'cut' && Configuration::get($this->name . 'grid_name_length') > 0) ? (Configuration::get($this->name . 'grid_name_length')) : 128,
+			'name_length'                   => (Configuration::get($this->name . 'grid_name_length') == 'cut' && Configuration::get($this->name . 'grid_name_cut') > 0) ? (Configuration::get($this->name . 'grid_name_cut')) : 128,
             //Page title
             'ptitle_size'                   => Configuration::get($this->name . 'ptitle_size'),
             //Category page
@@ -619,10 +619,13 @@ class VecThemeoptions extends Module implements WidgetInterface
             'category_filter'               => Configuration::get($this->name . 'category_filter'),
             'category_column'               => isset($_GET['column']) ? $_GET['column'] : Configuration::get($this->name . 'category_column'),
             //Product page
-            'product_layout'                => Configuration::get($this->name . 'product_layout'),
-            'main_layout'                   => Configuration::get($this->name . 'main_layout'),
-            'product_image'                 => Configuration::get($this->name . 'product_image'),
-            'information_layout'            => Configuration::get($this->name . 'information_layout'),
+            'product_layout'                => isset($_GET['product_layout']) ? $_GET['product_layout'] : Configuration::get($this->name . 'product_layout'),
+            'main_layout'                   => isset($_GET['product_main']) ? $_GET['product_main'] : Configuration::get($this->name . 'main_layout'),
+            'product_image'                 => isset($_GET['product_image']) ? $_GET['product_image'] : Configuration::get($this->name . 'product_image'),
+            'information_layout'            => isset($_GET['product_infor']) ? $_GET['product_infor'] : Configuration::get($this->name . 'information_layout'),
+
+            'zoom_active'                   => Configuration::get($this->name . 'zoom'),
+            'thumbnail_items'               => (int)Configuration::get($this->name . 'thumbnail_items') ? Configuration::get($this->name . 'thumbnail_items'): 4,
             //404 page
             '404_content'                   => Configuration::get($this->name . '404_content'),
             '404_image'                     => Configuration::get($this->name . '404_image') ? Configuration::get($this->name . '404_image') : '',

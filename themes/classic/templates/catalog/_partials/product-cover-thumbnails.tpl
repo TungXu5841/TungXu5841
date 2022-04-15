@@ -25,7 +25,7 @@
 {if $product.default_image}
   <meta itemprop="image" content="{$product.default_image.bySize.medium_default.url}">
 {/if}
-<div class="images-container js-images-container {if $vectheme.product_image == 'horizontal'}horizontal-thumb{else if $vectheme.product_image == 'left'} vertical-left{else}vertical-right{/if}">
+<div class="images-container js-images-container">
   {block name='product_cover'}
     <div class="product-images-cover">
       {if $product.default_image}
@@ -57,7 +57,7 @@
 
   {block name='product_images'}
     <div class="product-images-thumb">
-      <div class="product-thumbs js-qv-product-images slick-block column-desktop-5 column-tablet-4 column-mobile-3" data-item="4">
+      <div class="product-thumbs js-qv-product-images slick-block column-desktop-5 column-tablet-4 column-mobile-3" data-item="{$vectheme.thumbnail_items}">
         {foreach from=$product.images item=image}
           <div class="thumb-item js-thumb-container">
             <img

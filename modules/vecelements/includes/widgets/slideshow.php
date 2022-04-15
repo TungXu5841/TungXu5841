@@ -683,7 +683,7 @@ class WidgetSlideshow extends WidgetBase {
 		$this->addRenderAttribute(
 			'slideshow', 
 			[
-				'class' => ['elementor-slideshow', 'column-desktop-1', 'column-tablet-1', 'column-mobile-1'],
+				'class' => ['elementor-slideshow', 'slick-block', 'items-desktop-1', 'items-tablet-1', 'items-mobile-1'],
 			]
 		);
 

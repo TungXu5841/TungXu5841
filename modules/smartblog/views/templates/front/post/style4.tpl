@@ -7,10 +7,9 @@
                 title="{$post.meta_title|escape:'htmlall':'UTF-8'}" class="imageFeaturedLink">
 
             {/if}
-            {assign var="img_link" value=$smartbloglink->getImageLink($post.link_rewrite, $post.id_post, 'home-default')}
-            {if $img_link != 'false'}
+            {if $post.image.url}
                 <img itemprop="image" alt="{$post.meta_title|escape:'htmlall':'UTF-8'}"
-                    src="{$img_link}"
+                    src="{$post.image.url}" width="{$post.image.width}" height="{$post.image.height}" loading="lazy"
                     class="imageFeatured"> 
             {/if}
 

@@ -50,7 +50,7 @@
 
   <section id="main" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="url" content="{$product.url}">
-    <div class="row product-container product-layout-{$vectheme.main_layout}">
+    <div class="row product-container product-layout-{$vectheme.main_layout} {if $vectheme.product_image == 'horizontal'}horizontal-thumb{else if $vectheme.product_image == 'left'} vertical-left{else}vertical-right{/if}">
       {if $vectheme.main_layout == '1'}
         {include file='catalog/detail/product-layout-1.tpl'}
       {else if $vectheme.main_layout == '2'}
@@ -60,7 +60,13 @@
       {/if}
       <div class="col-md-12">
         {block name='product_tabs'}
-          {include file='catalog/_partials/product-tab.tpl'}
+          {if $vectheme.information_layout == '2' || $vectheme.information_layout == '3'}
+            {include file='catalog/_partials/product-tab.tpl'}
+          {else if $vectheme.information_layout == '4'}
+            {include file='catalog/_partials/product-tab-accordion.tpl'}
+          {else}
+            {include file='catalog/_partials/product-tab-specific.tpl'}
+          {/if}
         {/block}
       </div>
     </div>

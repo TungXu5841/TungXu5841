@@ -321,6 +321,9 @@ class SmartBlogPost extends ObjectModel
 		}
 		$BlogCategory = new BlogCategory();
 		$i            = 0;
+		$smartbloglink = new SmartBlogLink();
+		$blogimagetype = new BlogImageType();
+		$image_data = $blogimagetype->GetImageByType('home-default');
 		foreach ($posts as $post) {
 			$link_rewrite = $post['link_rewrite'];
 			if ($link_rewrite == '') {
@@ -356,11 +359,12 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['firstname'] = $employee->firstname;
 			$result[$i]['date_added']        = Smartblog::displayDate($post['created']);
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
-				$image                    = $post['id_smart_blog_post'];
-				$result[$i]['post_img'] = $image;
+				$result[$i]['image']['url'] = $smartbloglink->getImageLink($post['link_rewrite'], $post['id_smart_blog_post'], 'home-default');
 			} else {
-				$result[$i]['post_img'] = 'no';
+				$result[$i]['image']['url'] = '';
 			}
+			$result[$i]['image']['width'] = $image_data[0]['width'];
+			$result[$i]['image']['height'] = $image_data[0]['height'];
 			$result[$i]['created'] = $post['created'];
 			$i++;
 		}
@@ -587,6 +591,9 @@ class SmartBlogPost extends ObjectModel
 		}
 		$BlogCategory = new BlogCategory();
 		$i            = 0;
+		$smartbloglink = new SmartBlogLink();
+		$blogimagetype = new BlogImageType();
+		$image_data = $blogimagetype->GetImageByType('home-default');
 		foreach ($posts as $post) {
 			$result[$i]['id_post']           = $post['id_smart_blog_post'];
 			$result[$i]['viewed']            = $post['viewed'];
@@ -607,11 +614,12 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['lastname']  = $employee->lastname;
 			$result[$i]['firstname'] = $employee->firstname;
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
-				$image                    = $post['id_smart_blog_post'];
-				$result[$i]['post_img'] = $image;
+				$result[$i]['image']['url'] = $smartbloglink->getImageLink($post['link_rewrite'], $post['id_smart_blog_post'], 'home-default');
 			} else {
-				$result[$i]['post_img'] = 'no';
+				$result[$i]['image']['url'] = '';
 			}
+			$result[$i]['image']['width'] = $image_data[0]['width'];
+			$result[$i]['image']['height'] = $image_data[0]['height'];
 			$result[$i]['created'] = $post['created'];
 			$i++;
 		}
@@ -653,6 +661,9 @@ class SmartBlogPost extends ObjectModel
 		}
 		$BlogCategory = new BlogCategory();
 		$i            = 0;
+		$smartbloglink = new SmartBlogLink();
+		$blogimagetype = new BlogImageType();
+		$image_data = $blogimagetype->GetImageByType('home-default');
 		foreach ($posts as $post) {
 			$result[$i]['id_post']           = $post['id_smart_blog_post'];
 			$result[$i]['viewed']            = $post['viewed'];
@@ -669,12 +680,14 @@ class SmartBlogPost extends ObjectModel
 			$employee                          = new Employee($post['id_author']);
 			$result[$i]['lastname']  = $employee->lastname;
 			$result[$i]['firstname'] = $employee->firstname;
+
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
-				$image                    = $post['id_smart_blog_post'];
-				$result[$i]['post_img'] = $image;
+				$result[$i]['image']['url'] = $smartbloglink->getImageLink($post['link_rewrite'], $post['id_smart_blog_post'], 'home-default');
 			} else {
-				$result[$i]['post_img'] = 'no';
+				$result[$i]['image']['url'] = '';
 			}
+			$result[$i]['image']['width'] = $image_data[0]['width'];
+			$result[$i]['image']['height'] = $image_data[0]['height'];
 			$result[$i]['created'] = $post['created'];
 			$i++;
 		}
@@ -808,7 +821,9 @@ class SmartBlogPost extends ObjectModel
 		$i            = 0;
 
 		$result = array();
-
+		$smartbloglink = new SmartBlogLink();
+		$blogimagetype = new BlogImageType();
+		$image_data = $blogimagetype->GetImageByType('home-default');
 		foreach ($posts as $post) {
 
 			$result[$i]['id_post']           = $post['id_smart_blog_post'];
@@ -828,11 +843,12 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['lastname']  = $employee->lastname;
 			$result[$i]['firstname'] = $employee->firstname;
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
-				$image                    = $post['id_smart_blog_post'];
-				$result[$i]['post_img'] = $image;
+				$result[$i]['image']['url'] = $smartbloglink->getImageLink($post['link_rewrite'], $post['id_smart_blog_post'], 'home-default');
 			} else {
-				$result[$i]['post_img'] = 'no';
+				$result[$i]['image']['url'] = '';
 			}
+			$result[$i]['image']['width'] = $image_data[0]['width'];
+			$result[$i]['image']['height'] = $image_data[0]['height'];
 			$result[$i]['created'] = Smartblog::displayDate($post['created']);
 			$i++;
 		}
@@ -978,6 +994,9 @@ class SmartBlogPost extends ObjectModel
 		}*/
 		$i = 0;
 		$author_conf = Configuration::get('smartshowauthorstyle');
+		$smartbloglink = new SmartBlogLink();
+		$blogimagetype = new BlogImageType();
+		$image_data = $blogimagetype->GetImageByType('home-default');
 		foreach ($posts as $post) {
 			$employee = new Employee($post['id_author']);
 			if($author_conf){
@@ -1011,11 +1030,12 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['totalcomment'] = $blogcomment->getToltalComment( $post['id_smart_blog_post'] );
 			
 			if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
-				$image                    = $post['id_smart_blog_post'];
-				$result[$i]['post_img'] = $image;
+				$result[$i]['image']['url'] = $smartbloglink->getImageLink($post['link_rewrite'], $post['id_smart_blog_post'], 'home-default');
 			} else {
-				$result[$i]['post_img'] = 'no';
+				$result[$i]['image']['url'] = '';
 			}
+			$result[$i]['image']['width'] = $image_data[0]['width'];
+			$result[$i]['image']['height'] = $image_data[0]['height'];
 			$i++;
 		}
 		return $result;

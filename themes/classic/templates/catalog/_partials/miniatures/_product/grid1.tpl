@@ -3,11 +3,11 @@
 		<div class="img-block">
 		    {block name='product_thumbnail'}
 				{if $product.cover}
-				<a href="{$product.url}" class="thumbnail product-thumbnail">
-				  <img class="first-image lazyload"
-					src="{$product.cover.bySize.home_default.url}" data-src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+				<a href="{$product.url}" class="thumbnail product-thumbnail rotator-animation-{$vectheme.rotator}">
+				  <img class="first-image"
+					src="{$product.cover.bySize.home_default.url}" width="{$product.cover.bySize.home_default.width}" height="{$product.cover.bySize.home_default.height}"
 					alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
-					data-full-size-image-url = "{$product.cover.large.url}"
+					data-full-size-image-url = "{$product.cover.large.url}" loading="lazy"
 				  >
 				   {if $vectheme.rotator}
 						{foreach from=$product.images item=image}
@@ -18,7 +18,7 @@
 									width="{$image.bySize.home_default.width}"
 									height="{$image.bySize.home_default.height}"
 									alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if} 2"
-									class="lazy-product-image product-thumbnail-rotator"
+									class="lazy-product-image product-thumbnail-rotator"  loading="lazy"
 								>
 								{break}
 							{/if}

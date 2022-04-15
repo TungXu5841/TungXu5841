@@ -29,14 +29,14 @@ import './lib/easyzoom.min';
 
 export default class Product {
   productImageSlider(){
-		var $imageContainer = $('.images-container'),
+		var $productContainer = $('.product-container'),
 			$images = $('.product-images.slick-block'),
 			$thumbnails = $('.product-thumbs.slick-block'),
       isQuickview = false;
     if($('.quickview').length > 0){
       isQuickview = true;
     }
-		if($imageContainer.hasClass('horizontal-thumb') || isQuickview){
+		if($productContainer.hasClass('horizontal-thumb') || isQuickview){
 			var item = $thumbnails.data('item');
 			$images.not('.slick-initialized').slick({
 				infinite: false,
@@ -48,7 +48,7 @@ export default class Product {
 					infinite: false,
 				});
 		};
-		if(($imageContainer.hasClass('vertical-left') || $imageContainer.hasClass('vertical-right')) && !isQuickview){
+		if(($productContainer.hasClass('vertical-left') || $productContainer.hasClass('vertical-right')) && !isQuickview){
 			var item = $thumbnails.data('item');
 			$images.not('.slick-initialized').slick({
 				infinite: false,

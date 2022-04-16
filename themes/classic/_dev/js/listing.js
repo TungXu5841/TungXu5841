@@ -36,6 +36,12 @@ $(document).ready(() => {
   const history = window.location.href;
   let $productDiv = $('#products');
 
+  var gridProducts = $productDiv.find('.js-product-miniature:not(.product-miniature-list) .product-content');
+  if(gridProducts.length > 0){
+    gridProducts.addClass('match_height');
+    matchHeight($productDiv);
+  }
+
   infiniteScroll($productDiv);
   if($('.widget-productlist-trigger.loadmore').length > 0){
     loadMore();
@@ -61,6 +67,7 @@ $(document).ready(() => {
 
   $('body').on('click', '.filter-button a', function(e){
       e.preventDefault();
+      e.stopPropagation();
       $('.filters-canvas').addClass('filter-open');
       $('.vec-overlay').addClass('open');
   })
@@ -283,6 +290,35 @@ function vecScrollTop(element){
   $('html, body').animate({
     scrollTop: element.offset().top
   }, 500);
+}
+function matchHeight(vec_content = null){
+  function init(vec_content) {
+    eventListeners(vec_content);
+    matchItemHeight(vec_content);
+  }
+  
+  function eventListeners(vec_content){
+    $(window).on('resize', function() {
+      matchItemHeight(vec_content);
+    });
+  }
+  
+  function matchItemHeight(vec_content){
+    
+    var groupName = vec_content.find('.match_height');
+    var groupHeights = [];
+    if(groupName.length <= 0) return;
+    groupName.css('min-height', 'auto');
+    
+    groupName.each(function() {
+      groupHeights.push($(this).outerHeight());
+    });
+    var maxHeight = Math.max.apply(null, groupHeights);
+    groupName.css('min-height', maxHeight);
+  };
+  
+  init(vec_content);
+  
 }
 
 function updateProductListDOM(data) {

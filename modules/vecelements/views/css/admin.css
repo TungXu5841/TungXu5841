@@ -28,14 +28,14 @@
 .ce-edit a.dropdown-toggle:after,
 .adminvectemplates .btn-back-to-ps,
 .adminvecheader .btn-back-to-ps,
-.adminveccefooter .btn-back-to-ps,
+.adminvecfooter .btn-back-to-ps,
 .adminvechome .btn-back-to-ps,
 .adminveccontent .btn-back-to-ps {
 	display: none;
 }
 .adminvecheader #vec_theme_form .form-group label.col-lg-4,
 .adminvechome #vec_theme_form .form-group label.col-lg-4,
-.adminveccefooter #vec_theme_form .form-group label.col-lg-4,
+.adminvecfooter #vec_theme_form .form-group label.col-lg-4,
 .adminveccontent #vec_content_form .form-group label.col-lg-4{
 	width: 25%;
 }

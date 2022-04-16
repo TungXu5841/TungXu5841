@@ -32,11 +32,15 @@
         <div class="product-images slick-block column-desktop-1 column-tablet-1 column-mobile-1">
             {foreach from=$product.images item=image}
               <div class="cover-item">
+                {if $vectheme.zoom_active}
                 <div class="easyzoom easyzoom--overlay">
                   <a href="{$image.bySize.large_default.url}">
                     <img class="" src="{$image.bySize.large_default.url}" alt="{$image.legend}" title="{$image.legend}" itemprop="image">
                   </a>
                 </div>
+                {else}
+                  <img class="" src="{$image.bySize.large_default.url}" alt="{$image.legend}" title="{$image.legend}" itemprop="image">
+                {/if}
               </div>
             {/foreach}
         </div>

@@ -38,7 +38,7 @@ var ajaxSearch = function(){
     searchInput
         .on('click', function(e){
             e.stopPropagation();
-            $('.vec-overlay').show();
+            $('.vec-overlay').addClass('open');
 			$('body').addClass('search-open');
             var resultShow = searchSuggest.find('.suggest-ajax-results');
             if(searchContainer.hasClass('search-classic') || searchContainer.hasClass('search-minimal')){
@@ -113,9 +113,9 @@ var ajaxSearch = function(){
         $(this).addClass('unvisible');
     });
 
-    $('body').on('click', function() {
+    $('body').on('click', function(e) {
         searchSuggest.addClass('unvisible');
-		$('.vec-overlay').hide();
+		$('.vec-overlay').removeClass('open');
 		$('body').removeClass('search-open');
     });
 };

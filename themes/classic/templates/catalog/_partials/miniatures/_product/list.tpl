@@ -38,7 +38,7 @@
 				</div>
 			{/block}
 			{block name='product_name'}
-			  <h3 itemprop="name"><a href="{$product.url}" class="product_name {if $name_length ==0 }one_line{/if}" title="{$product.name}">{$product.name}</a></h3> 
+			  <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name}</a></h3> 
 			{/block}
 			
 			{block name='product_price_and_shipping'}

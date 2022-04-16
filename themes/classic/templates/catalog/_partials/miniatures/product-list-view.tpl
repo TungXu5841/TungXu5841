@@ -33,7 +33,21 @@
 				alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
 				data-full-size-image-url = "{$product.cover.large.url}"
 			  >
-			   {hook h="rotatorImg" product=$product}	
+			  {if $vectheme.rotator}
+				{foreach from=$product.images item=image}
+					{if !$image.cover}
+						<img
+							src="{$image.bySize.cart_default.url}"
+							data-src="{$image.bySize.cart_default.url}"
+							width="{$image.bySize.cart_default.width}"
+							height="{$image.bySize.cart_default.height}"
+							alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if} 2"
+							class="lazy-product-image product-thumbnail-rotator"  loading="lazy"
+						>
+						{break}
+					{/if}
+				{/foreach}
+		   	  {/if}
 			</a>
 		  {/block}
 		</div>
@@ -42,7 +56,7 @@
 			 <div class="manufacturer"><a href="{url entity='manufacturer' id=$product.id_manufacturer }">{Manufacturer::getnamebyid($product.id_manufacturer)}</a></div>
 			{/if}
 			{block name='product_name'}
-			  <h3 itemprop="name"><a href="{$product.url}" class="product_name {if $name_length ==0 }one_line{/if}" title="{$product.name}">{$product.name|truncate:50:'...'}</a></h3> 
+			  <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name}</a></h3> 
 			{/block}
 			{block name='product_reviews'}
 				<div class="hook-reviews">

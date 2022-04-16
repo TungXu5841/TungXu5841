@@ -272,21 +272,8 @@ $(document).ready(() => {
     return false;
   });
 
-  const $timeoutEffect = 400;
+  
 
-  $body.on('hidden.bs.collapse', prestashop.themeSelectors.cart.promoCode, () => {
-    $(prestashop.themeSelectors.cart.displayPromo).show($timeoutEffect);
-  });
-
-  $body.on('click', prestashop.themeSelectors.cart.promoCodeButton, (event) => {
-    event.preventDefault();
-
-    $(prestashop.themeSelectors.cart.promoCode).collapse('toggle');
-  });
-
-  $body.on('click', prestashop.themeSelectors.cart.displayPromo, (event) => {
-    $(event.currentTarget).hide($timeoutEffect);
-  });
 
   $body.on('click', prestashop.themeSelectors.cart.discountCode, (event) => {
     event.stopPropagation();
@@ -295,9 +282,6 @@ $(document).ready(() => {
     const $discountInput = $(prestashop.themeSelectors.cart.discountName);
 
     $discountInput.val($code.text());
-    // Show promo code field
-    $(prestashop.themeSelectors.cart.promoCode).collapse('show');
-    $(prestashop.themeSelectors.cart.displayPromo).hide($timeoutEffect);
 
     return false;
   });

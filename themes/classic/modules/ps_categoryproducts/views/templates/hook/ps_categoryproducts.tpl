@@ -22,13 +22,23 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-<section class="featured-products clearfix mt-3">
-  <h2>
-    {if $products|@count == 1}
-      {l s='%s other product in the same category:' sprintf=[$products|@count] d='Shop.Theme.Catalog'}
-    {else}
-      {l s='%s other products in the same category:' sprintf=[$products|@count] d='Shop.Theme.Catalog'}
-    {/if}
-  </h2>
-  {include file="catalog/_partials/productlist.tpl" products=$products productClass="col-xs-6 col-lg-4 col-xl-3"}
-</section>
+<div class="categoryproducts">
+	<div class="product-title">
+		<h2>
+		{if $products|@count == 1}
+		  {l s='%s other product in the same category:' sprintf=[$products|@count] d='Shop.Theme.Catalog'}
+		{else}
+		  {l s='%s other products in the same category:' sprintf=[$products|@count] d='Shop.Theme.Catalog'}
+		{/if}
+		</h2>
+	</div>
+	<div class="elementor-slick-slider">
+	  <div class="product-categoryslide slick-arrows-inside">
+		{foreach from=$products item="product"}
+		<div>
+		{include file="catalog/_partials/miniatures/product.tpl" product=$product}
+		</div>
+		{/foreach}
+	  </div>
+	</div>
+</div>

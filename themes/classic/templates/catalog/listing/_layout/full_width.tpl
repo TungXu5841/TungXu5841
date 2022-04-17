@@ -23,7 +23,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 {block name="content_wrapper"}
-  <div id="content-wrapper" class="js-content-wrapper no-column col-xs-12 col-lg-12">
+  <div id="content-wrapper" class="js-content-wrapper no-column col-xs-12">
   {hook h="displayContentWrapperTop"}
   {block name='content'}
     <section id="main">

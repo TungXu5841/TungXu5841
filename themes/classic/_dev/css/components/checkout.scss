@@ -22,13 +22,16 @@ body#checkout {
   }
 
   .cart-grid-right {
+    .block-promo .cart-voucher {
+      margin-top: -0.625rem; 
+    }
     .card {
       border: 0;
       box-shadow: none;
 
       .cart-total {
         background-color: inherit;
-		padding: 0;
+		    padding: 0;
       }
 
       .cart-summary-subtotals-container {

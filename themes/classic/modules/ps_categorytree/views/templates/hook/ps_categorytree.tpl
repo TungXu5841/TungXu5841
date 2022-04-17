@@ -43,9 +43,9 @@
             {else}
               <a class="category-sub-link" href="{$node.link}">{$node.name}</a>
               {if $node.children}
-                <span class="arrows" data-toggle="collapse" data-target="#exCollapsingNavbar{$node.id}">
-                  <i class="material-icons arrow-right">&#xE315;</i>
-                  <i class="material-icons arrow-down">&#xE313;</i>
+                <span class="navbar-toggler collapse-icons" data-toggle="collapse" data-target="#exCollapsingNavbar{$node.id}">
+                  <i class="material-icons add">&#xE145;</i>
+                  <i class="material-icons remove">&#xE15B;</i>
                 </span>
                 <div class="collapse" id="exCollapsingNavbar{$node.id}">
                   {categories nodes=$node.children depth=$depth+1}

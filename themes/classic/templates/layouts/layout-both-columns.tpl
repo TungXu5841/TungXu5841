@@ -52,13 +52,9 @@
       </header>
 
       <section id="wrapper">
-        {assign var="background" value=""}
-        {if $page.page_name == 'category' && isset($category.image.large.url)  }
-          {assign var="background" value="{$category.image.large.url}"}
-        {/if}
         {if $page.page_name != 'index' && $page.page_name != 'module-vecelements-preview'}
         {block name='page_header_container'}
-        <div class=" page-title-wrapper {if $vectheme.ptitle_size == 'small'}v_tilte_small{elseif $vectheme.ptitle_size == 'big'}v_tilte_big{/if}" {if $background} style="background: url('{$background}') no-repeat;" {/if}>
+        <div class=" page-title-wrapper {if $vectheme.ptitle_size == 'small'}v_tilte_small{elseif $vectheme.ptitle_size == 'big'}v_tilte_big{/if}">
           <div class="container">
             {block name='page_title'}
             <header class="page-header">
@@ -80,7 +76,7 @@
         <div class="container">
           <div class="row row-wrapper">
             {block name="left_column"}
-              <div id="left-column" class="col-xs-12 col-md-4 col-lg-3">
+              <div id="left-column" class="col-xs-12 col-xl-3">
                 {if $page.page_name == 'product'}
                   {hook h='displayLeftColumnProduct'}
                 {else}
@@ -90,7 +86,7 @@
             {/block}
 
             {block name="content_wrapper"}
-              <div id="content-wrapper" class="js-content-wrapper left-column right-column col-md-4 col-lg-6">
+              <div id="content-wrapper" class="js-content-wrapper left-column right-column col-xs-12 col-xl-6">
                 {hook h="displayContentWrapperTop"}
                 {block name="content"}
                   <p>Hello world! This is HTML5 Boilerplate.</p>
@@ -100,7 +96,7 @@
             {/block}
 
             {block name="right_column"}
-              <div id="right-column" class="col-xs-12 col-md-4 col-lg-3">
+              <div id="right-column" class="col-xs-12 col-xl-3">
                 {if $page.page_name == 'product'}
                   {hook h='displayRightColumnProduct'}
                 {else}
@@ -109,6 +105,31 @@
               </div>
             {/block}
           </div>
+		  {if $page.page_name == 'product'}
+				{block name='product_accessories'}
+					{if $accessories}
+					<section class="products-accessories clearfix">
+						<div class="product-title">
+							<h2>{l s='You might also like' d='Shop.Theme.Catalog'}</h2>
+						</div>
+						<div class="elementor-slick-slider">
+							<div class="product-accessoriesslide slick-arrows-inside">
+							{foreach from=$accessories item="product_accessory"}
+							{block name='product_miniature'}
+							<div>
+							{include file='catalog/_partials/miniatures/product.tpl' product=$product_accessory}
+							</div>
+							{/block}
+							{/foreach}
+							</div>
+						</div>
+					</section>
+					{/if}
+				{/block}
+				{block name='product_footer'}
+				  {hook h='displayFooterProduct' product=$product category=$category}
+				{/block}
+			{/if}
         </div>
         {hook h="displayWrapperBottom"}
       </section>

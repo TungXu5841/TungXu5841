@@ -112,7 +112,7 @@
 			  </div>
 			  <div class="add-links">
 				{block name='quick_view'}	
-				<a class="quick_view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
+				<a class="quick-view" href="#" data-link-action="quickview" title="{l s='Quick view' d='Shop.Theme.Actions'}">
 				<span>{l s='Quick view' d='Shop.Theme.Actions'}</span>
 				</a>
 				{/block}					

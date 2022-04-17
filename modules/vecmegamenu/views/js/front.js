@@ -29,7 +29,7 @@
 $(document).ready(function()
 {	
 	activeMobileMenu();
-	if($(window).width() < 992)
+	if($(window).width() < 1025)
 	{
 		$('.vec-menu-horizontal').addClass('vec-mobile-menu');
 		$('#_mobile_megamenu img').parent('a').addClass("img_banner"); 
@@ -41,7 +41,7 @@ $(document).ready(function()
 		$('.vec-menu-horizontal .menu-dropdown').show(); 		
 	}	
 	$(window).resize(function(){
-		if($(window).width() < 992)
+		if($(window).width() < 1025)
 		{
 			$('.vec-menu-horizontal').addClass('vec-mobile-menu');
 			$('#_mobile_megamenu img').parent('a').addClass("img_banner"); 

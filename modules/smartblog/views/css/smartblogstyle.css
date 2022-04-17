@@ -908,11 +908,6 @@ form#searchbox .button.button-small i {
 	float:none;
 	margin-bottom: 50px;
 }
-@media (min-width: 768px) and (max-width: 991px) {
-	.row-sdsarticleCat .sdsarticleCat {
-		width:100%;
-	}
-}
 /* Smart Blog Post single */
 .smart-blog-single-post-title {
     font-weight: 500;

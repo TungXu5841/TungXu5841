@@ -384,6 +384,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $grid_name_transform = $this->convertTransform(Configuration::get($this->name . 'grid_name_transform'));
         $grid_price_color = Configuration::get($this->name . 'grid_price_color');
         $grid_price_size = Configuration::get($this->name . 'grid_price_size');
+        $ptitle_color = Configuration::get($this->name . 'ptitle_color');
         if($button_border != 'none'){
             $css .= '.btn, .btn-primary, .btn-secondary, .btn-tertiary {';
                 if($button_border != 'none'){
@@ -399,12 +400,18 @@ class VecThemeoptions extends Module implements WidgetInterface
          :root {  
             --hovercolor: '.$main_color.';
             --pricecolor: '.$grid_price_color.';
+            --pricesize: '.$grid_price_size.'px;
+            --namecolor: '.$grid_name_color.';
+            --namehovercolor: '.$grid_name_colorh.';
+            --nametransform: '.$grid_name_transform.';
+            --namesize: '.$grid_name_size.'px;
             --buttoncolor: '.$button_color.'; 
             --buttonbackground: '.$button_background.'; 
             --buttonborder: '.$button_border_color.'; 
             --buttonhovercolor: '.$button_colorh.'; 
             --buttonhoverbackground: '.$button_backgroundh.'; 
             --buttonhoverborder: '.$button_border_colorh.';  
+            --pagetitlecolor: '.$ptitle_color.'; 
         }';
         $body_font_family = Configuration::get($this->name . 'g_body_gfont_name');
         $body_font_size = Configuration::get($this->name . 'g_body_font_size');
@@ -429,29 +436,10 @@ class VecThemeoptions extends Module implements WidgetInterface
         $ptitle_color = Configuration::get($this->name . 'ptitle_color');
         if($ptitle_bg_image){
             $css .= '.page-title-wrapper{  
-                background-image: '.$ptitle_bg_image.';   
+                background-image: url('.$ptitle_bg_image.');   
             }';
         }
-        if($ptitle_color){
-            $css .= '.page-header h1,.breadcrumb{  
-                color: '.$ptitle_color.';   
-            }';
-        }
-        
-
         //Product grid
-        $css .= '.js-product-miniature .product_desc .product_name{
-            color: '.$grid_name_color.';
-            font-size: '.$grid_name_size.'px;
-            text-transform: '.$grid_name_transform.';
-        }';
-        $css .= '.js-product-miniature .product_desc .product_name:hover{
-            color: '.$grid_name_colorh.';
-        }';
-        $css .= '.product-price-and-shipping .price{
-            font-size: '.$grid_price_size.'px;
-        }';
-
         $product_name_color = Configuration::get($this->name . 'product_name_color');
         $product_name_size = Configuration::get($this->name . 'product_name_size');
         $product_name_transform = $this->convertTransform(Configuration::get($this->name . 'product_name_transform'));
@@ -473,17 +461,17 @@ class VecThemeoptions extends Module implements WidgetInterface
         $pack_bgcolor = Configuration::get($this->name . 'pack_bgcolor');
         $pack_color = Configuration::get($this->name . 'pack_color');
         if($new_bgcolor || $new_color){
-            $css .= '.new-label{';
+            $css .= '.product-flag .new{';
                 if($new_bgcolor){
                     $css .= 'background: '. $new_bgcolor . ';';
                 }
                 if($new_color){
-                    $css .= 'color: '. $new_bgcolor . ';';
+                    $css .= 'color: '. $new_color . ';';
                 }    
             $css .= '}';
         }
         if($sale_bgcolor || $sale_color){
-            $css .= '.sale-label{';
+            $css .= '.product-flag .discount, .product-flag .sale{';
                 if($sale_bgcolor){
                     $css .= 'background: '. $sale_bgcolor . ';';
                 }
@@ -493,7 +481,7 @@ class VecThemeoptions extends Module implements WidgetInterface
             $css .= '}';
         }
         if($pack_bgcolor || $pack_color){
-            $css .= '.oack-label{';
+            $css .= '.product-flag .pack{';
                 if($pack_bgcolor){
                     $css .= 'background: '. $pack_bgcolor . ';';
                 }

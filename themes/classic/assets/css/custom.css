@@ -147,44 +147,7 @@ label.has-value + div > #field-birthday:-ms-input-placeholder {
   color: #aaa !important;  
 }
 
-
-
-
 #product-modal .modal-content .modal-body{
   display: block !important;
 }
-.vec-customersignin li{
-  padding: 0 15px;
-  line-height: 20px;
-}
-.vec-customersignin li i{
-  display: inline;
-  padding-right: 10px;
-  vertical-align: text-bottom;
-}
-.vec-customersignin .dropdown-menu li a{
-  display: inline-block;
-  width: auto;
-  font-size: 14px;
-}
-.vec-customersignin li.welcome-user{
-  text-align: center;
-  padding: 15px 0;
-}
-.vec-customersignin li.logout{
-  text-align: center;
-  margin-top: 10px;
-}
-.vec-customersignin li.logout a{
-  padding: 5px 10px 0;
-  margin-bottom: 10px;
-  background: #f5f5f5;
-}
-.vec-customersignin li.logout a:hover{
-  background: #fab529;
-  color: #0c0c0c;
-}
-.vec-customersignin li.logout span{
-  vertical-align: top;
-  line-height: 25px;
-}
+

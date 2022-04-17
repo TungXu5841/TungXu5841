@@ -27,7 +27,7 @@
     <div class="sort-by-row">
       <div class="sort-by-left">	
         {if $page.page_name == 'category'}
-        <div class="filter-button {if (isset($vectheme.category_filter) && $vectheme.category_filter != 'canvas') || $vectheme.category_layout != '2'}hidden-md-up{/if}">
+        <div class="filter-button {if (isset($vectheme.category_filter) && $vectheme.category_filter != 'canvas') || $vectheme.category_layout != '2'}hidden-xl-up{/if}">
           <a href="#">{l s='Filter' d='Shop.Theme.Actions'}</a>
         </div>
         {/if}

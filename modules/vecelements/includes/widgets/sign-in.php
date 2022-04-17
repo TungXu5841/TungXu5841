@@ -256,11 +256,11 @@ class WidgetSignIn extends WidgetBase {
 						],
 					],
 					'default' => [
-						'size' => 130,
+						'size' => 170,
 						'unit' => 'px',
 					], 
 	                'selectors' => [
-	                    '{{WRAPPER}} .vec-customersignin .dropdown-menu' => 'width: {{SIZE}}{{UNIT}}',
+	                    '{{WRAPPER}} .vec-customersignin .dropdown-menu' => 'min-width: {{SIZE}}{{UNIT}}',
 	                ],
 	            ]
 	        );

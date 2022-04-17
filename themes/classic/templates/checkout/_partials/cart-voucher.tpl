@@ -31,7 +31,7 @@
           {l s='Promo code' d='Shop.Theme.Checkout'}
         </p>
 
-        <div id="promo-code" class="collapse{if $cart.discounts|count > 0} in{/if}">
+        <div id="promo-code">
           <div class="promo-code">
             {block name='cart_voucher_form'}
               <form action="{$urls.pages.cart}" data-link-action="add-voucher" method="post">
@@ -51,7 +51,7 @@
         </div>
 
         {if $cart.discounts|count > 0}
-          <p class="block-promo promo-highlighted">
+          <p class="promo-highlighted">
             {l s='Take advantage of our exclusive offers:' d='Shop.Theme.Actions'}
           </p>
           <ul class="js-discount card-block promo-discounts">

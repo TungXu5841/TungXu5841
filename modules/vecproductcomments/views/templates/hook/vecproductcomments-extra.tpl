@@ -37,7 +37,7 @@
 	{/if}
 	{if $nbComments_extra != 0}
 		<a href="#product_comments_block_tab" class="reviews" >
-			{$ratings.avg} | {$nbComments_extra} {l s='Reviews' mod='vecproductcomments'}
+			{$ratings.avg|round:2} | {$nbComments_extra} {l s='Reviews' mod='vecproductcomments'}
 		</a>
 	{/if}
 </div>

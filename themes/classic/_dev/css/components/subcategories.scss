@@ -1,7 +1,6 @@
 #subcategories {
-  margin-bottom: 20px;
-  border-top: 1px solid $gray-light;
-  padding: 1.25rem 0;
+  margin-bottom: 0;
+  padding: 0 0 1.25rem 0;
   .subcategory-heading {
     margin-bottom: 20px;
     font-weight: 500;
@@ -18,16 +17,11 @@
       width: calc(100% / 5 - 20px);
       min-width: 150px;
       margin: 0 10px;
-      text-align: center;
-
       .subcategory-image {
         padding: 0 0 8px;
 
         a {
           display: block;
-          padding: 9px;
-          border: 1px solid $gray-light;
-
           img {
             max-width: 100%;
             vertical-align: top;
@@ -39,6 +33,7 @@
       .subcategory-name {
         text-transform: uppercase;
         color: $gray-dark;
+        font-size: .8125rem;
         &:hover {
           color: var(--hovercolor);
         }
@@ -61,10 +56,3 @@
   }
 }
 
-@include media-breakpoint-down(sm) {
-  #subcategories {
-    ul {
-      justify-content: center;
-    }
-  }
-}

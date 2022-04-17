@@ -24,7 +24,7 @@
  *}
 
 {block name="content_wrapper"}
-  <div id="content-wrapper" class="js-content-wrapper left-column col-xs-12 col-md-8 col-lg-9">
+  <div id="content-wrapper" class="js-content-wrapper left-column col-xs-12 col-xl-9">
   {hook h="displayContentWrapperTop"}
   {block name='content'}
     <section id="main">
@@ -82,7 +82,7 @@
   </div>
 {/block}
 {block name="left_column"}
-  <div id="left-column" class="col-xs-12 col-md-4 col-lg-3">
+  <div id="left-column" class="col-xs-12 col-xl-3">
     <div id="left-content">
       {block name="left_content"}
         {hook h="displayLeftColumn"}

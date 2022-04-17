@@ -15,6 +15,7 @@
         font-size: 2rem;
         font-weight: $headings-font-weight;
         margin-bottom: 0; 
+        color: var(--pagetitlecolor);
       }
     }
     &.v_tilte_small {
@@ -53,22 +54,24 @@
 
       &::after {
         margin: 0.3125rem;
-        color: $gray;
+        color: var(--pagetitlecolor);
         content: "/";
       }
 
       &:last-child {
         margin: 0;
-        color: $gray;
-        content: "/";
-
+        color: var(--pagetitlecolor);
+        opacity: 0.75; 
         &::after {
           content: "";
         }
       }
 
       a {
-        color: $gray-darker;
+        color: var(--pagetitlecolor);
+        &:hover {
+          color: var(--hovercolor); 
+        }
       }
     }
   }

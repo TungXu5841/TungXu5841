@@ -29,7 +29,7 @@
   {block name='product_cover'}
     <div class="product-images-cover">
       {if $product.default_image}
-        <div class="product-images slick-block column-desktop-1 column-tablet-1 column-mobile-1">
+        <div class="product-images slick-block items-desktop-1 items-tablet-1 items-mobile-1">
             {foreach from=$product.images item=image}
               <div class="cover-item">
                 {if $vectheme.zoom_active}
@@ -61,7 +61,7 @@
 
   {block name='product_images'}
     <div class="product-images-thumb">
-      <div class="product-thumbs js-qv-product-images slick-block column-desktop-5 column-tablet-4 column-mobile-3" data-item="{$vectheme.thumbnail_items}">
+      <div class="product-thumbs js-qv-product-images slick-block items-desktop-5 items-tablet-4 items-mobile-3" data-item="{$vectheme.thumbnail_items}">
         {foreach from=$product.images item=image}
           <div class="thumb-item js-thumb-container">
             <img

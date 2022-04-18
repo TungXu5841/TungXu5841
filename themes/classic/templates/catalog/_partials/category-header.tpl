@@ -31,7 +31,7 @@
             <div class="block-category-inner">
                 {if !empty($category.image.large.url) && isset($vectheme.category_thumbnail) && $vectheme.category_thumbnail}
                     <div class="category-cover">
-                        <img src="{$category.image.large.url}" alt="{if !empty($category.image.legend)}{$category.image.legend}{else}{$category.name}{/if}" loading="lazy" width="141" height="180">
+                        <img src="{$category.image.large.url}" alt="{if !empty($category.image.legend)}{$category.image.legend}{else}{$category.name}{/if}" loading="lazy">
                     </div>
                 {/if}
                 {if $category.description && $vectheme.category_description != 'hide' && !$vectheme.category_description_bottom}

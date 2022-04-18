@@ -1179,11 +1179,15 @@ class VecMegamenu extends Module
 			}';
 			$submenu_config = VecMegamenuSubmenuClass::getSubmenuConfig($submenus[$key]['id_vecmegamenu_item']);
 			if($submenu_config['submenu_bg'] == 2 && $submenu_config['submenu_bg_color'] != ''){
-				$css .= '#_desktop_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown{
+				$css .= '#_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown .vec-sub-inner,
+                #_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown.menu-flyout .vec-sub-inner ul,
+                #_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown.menu-flyout .column_flyout{
 					'.($submenu_config['submenu_bg_color'] != '' ? 'background: '.$submenu_config['submenu_bg_color'].';' : '').'
 				}';
 			}elseif($submenu_config['submenu_bg'] == 3 && $submenu_config['submenu_bg_image'] != ''){
-				$css .= '#_desktop_megamenu .pos-menu-horizontal .menu-content  .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown{
+				$css .= '#_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown .vec-sub-inner,
+                #_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown.menu-flyout .vec-sub-inner ul,
+                #_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown.menu-flyout .column_flyout{
 					'.($submenu_config['submenu_bg_image'] != '' ? 'background-image: url("'.$submenu_config['submenu_bg_image'].'");' : '').'
 					background-repeat: '.$this->convertBgRepeat($submenu_config['submenu_bg_repeat']).';
 					background-position: '.$this->convertBgPosition($submenu_config['submenu_bg_position']).';

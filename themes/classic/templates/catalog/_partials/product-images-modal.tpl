@@ -50,7 +50,7 @@
         </figure>
         <div id="thumbnails" class="thumbnails js-thumbnails text-sm-center">
           {block name='product_images'}
-              <div class="product-images-modal js-modal-product-images slick-block column-desktop-6 column-tablet-6 column-mobile-4" data-item="6">
+              <div class="product-images-modal js-modal-product-images slick-block items-desktop-6 items-tablet-6 items-mobile-4" data-item="6">
                 {foreach from=$product.images item=image}
                   <div class="thumb-container js-thumb-container">
                     <img

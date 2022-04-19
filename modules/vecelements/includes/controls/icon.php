@@ -854,6 +854,8 @@ class ControlIcon extends BaseDataControl
             'vecicon-arrow_left' => 'arrow_left',
             'vecicon-arrow_right' => 'arrow_right',
             'vecicon-arrow_upward' => 'arrow_upward',
+            'vecicon-angle_up' => 'angle_up',
+            'vecicon-angle_down' => 'angle_down',
             'vecicon-behance' => 'behance',
             'vecicon-cake' => 'cake',
             'vecicon-calendar1' => 'calendar1',

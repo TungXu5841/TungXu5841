@@ -120,27 +120,26 @@ class WidgetSocialIcons extends WidgetBase
                     'icon_source' => 'vecicon',
                 ],
                 'include' => [
-                    'vecicon-logo-facebook',
-                    'vecicon-logo-google',
-                    'vecicon-logo-pinterest',
-                    'vecicon-logo-twitter',
-                    'vecicon-logo-youtube',
-                    'vecicon-logo-instagram',
-                    'vecicon-logo-linkedin',
-                    'vecicon-logo-rss',
-                    'vecicon-logo-twitch',
-                    'vecicon-logo-behance',
-                    'vecicon-logo-flickr',
-                    'vecicon-logo-foursquare',
-                    'vecicon-logo-github',
-                    'vecicon-logo-skype',
-                    'vecicon-logo-snapchat',
-                    'vecicon-logo-soundcloud',
-                    'vecicon-logo-tumblr',
-                    'vecicon-logo-vimeo',
-                    'vecicon-logo-wechat',
-                    'vecicon-logo-weibo',
-                    'vecicon-logo-tiktok',
+                    'vecicon-facebook',
+                    'vecicon-google',
+                    'vecicon-instagram',
+                    'vecicon-line' ,
+                    'vecicon-linkedin',
+                    'vecicon-meta',
+                    'vecicon-pinterest',
+                    'vecicon-skype',
+                    'vecicon-snapchat',
+                    'vecicon-telegram',
+                    'vecicon-tumblr',
+                    'vecicon-twitter',
+                    'vecicon-vk',
+                    'vecicon-whatsapp',
+                    'vecicon-xing' ,
+                    'vecicon-youtube',
+                    'vecicon-tiktok',
+                    'vecicon-behance',
+                    'vecicon-discord',
+                    'vecicon-dribbble',
                 ],
             ]
         );
@@ -522,7 +521,7 @@ class WidgetSocialIcons extends WidgetBase
                 $social = str_replace('fa fa-', '', $item['social']);
             }
             if($item['icon_source'] == 'vecicon'){
-                $social = str_replace('vecicon-logo-', '', $item['vecicon']);
+                $social = str_replace('vecicon-', '', $item['vecicon']);
             }
             $this->addRenderAttribute($link_key, [
                 'class' => 'elementor-icon elementor-social-icon elementor-social-icon-' . $social . $class_animation,
@@ -567,7 +566,7 @@ class WidgetSocialIcons extends WidgetBase
                 var social = item.social.replace( 'fa fa-', '' );
             }
             if(item.icon_source === 'vecicon'){ 
-                var social = item.vecicon.replace( 'vecicon-logo-', '' );
+                var social = item.vecicon.replace( 'vecicon-', '' );
             }
             var link = item.link ? item.link.url : '',
                 linkClass = 'elementor-icon elementor-social-icon elementor-social-icon-' + social; #>

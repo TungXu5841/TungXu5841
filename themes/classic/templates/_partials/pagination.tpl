@@ -37,9 +37,9 @@
                 class="{if $page.type === 'previous'}previous {elseif $page.type === 'next'}next {/if}{['disabled' => !$page.clickable, 'js-search-link' => true]|classnames}"
               >
                 {if $page.type === 'previous'}
-                  <i class="vecicon-arrow-left-solid"></i>
+                  <i class="vecicon-arrow_back"></i>
                 {elseif $page.type === 'next'}
-                 <i class="vecicon-arrow-right-solid"></i>
+                 <i class="vecicon-arrow_forward"></i>
                 {else}
                   {$page.page}
                 {/if}

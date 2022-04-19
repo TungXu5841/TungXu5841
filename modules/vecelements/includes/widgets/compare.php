@@ -56,19 +56,22 @@ class WidgetCompare extends WidgetBase
 				]
 			);
 			$icon_options = [
-				'vecicon-ios-shuffle-strong',
-				'vecicon-repeat-outline',
-				'vecicon-sync-alt-solid',
-				'vecicon-ios-shuffle',
-				'vecicon-refresh',
-				'vecicon-shuffle',
+				'vecicon-refresh1',
+				'vecicon-repeat1',
+				'vecicon-repeat2',
+				'vecicon-sync',
+				'vecicon-sync2',
+				'vecicon-shuffle1',
+				'vecicon-shuffle2',
+				'vecicon-shuffle3',
 			];
 			$this->addControl(
 				'compare_icon',
 				[
 					'label' => __( 'Compare icon'),
 					'type' => ControlsManager::ICON,
-					'default' => 'vecicon-ios-shuffle-strong',
+					'default' => 'vecicon-repeat1',
+					'label_block' => true,
 					'icon_type' => 'vecicon',
 					'include' => $icon_options,
 					'condition' => array(

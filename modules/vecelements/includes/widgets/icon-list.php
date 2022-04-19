@@ -154,8 +154,9 @@ class WidgetIconList extends WidgetBase
             [
                 'label' => __('Icon'),
                 'type' => ControlsManager::ICON,
-                'default' => 'vecicon-heart',
+                'default' => 'vecicon-heart1',
                 'type_icon' => 'vecicon',
+                'label_block' => true,
                 'condition' => [
                     'icon_source' => 'vecicon',
                 ],
@@ -169,6 +170,7 @@ class WidgetIconList extends WidgetBase
                 'type' => ControlsManager::ICON,
                 'type_icon' => 'awesome',
                 'default' => 'fa fa-star',
+                'label_block' => true,
                 'condition' => [
                     'icon_source' => 'awesome',
                 ],

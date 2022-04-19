@@ -52,6 +52,9 @@ class BlogPostCategory extends ObjectModel
             return false;
         $context = Context::getContext();
         $i = 0;
+        $smartbloglink = new SmartBlogLink();
+		$blogimagetype = new BlogImageType();
+		$image_data = $blogimagetype->GetImageByType('home-default');
 //        $BlogCategory = new BlogCategory();
         foreach ($posts as $post) {
 
@@ -84,11 +87,12 @@ class BlogPostCategory extends ObjectModel
             $result[$i]['lastname'] = $employee->lastname;
             $result[$i]['firstname'] = $employee->firstname;
             if (file_exists(_PS_MODULE_DIR_ . 'smartblog/images/' . $post['id_smart_blog_post'] . '.jpg')) {
-                $image = $post['id_smart_blog_post'];
-                $result[$i]['post_img'] = $image;
-            } else {
-                $result[$i]['post_img'] = 'no';
-            }
+				$result[$i]['image']['url'] = $smartbloglink->getImageLink($post['link_rewrite'], $post['id_smart_blog_post'], 'home-default');
+			} else {
+				$result[$i]['image']['url'] = '';
+			}
+			$result[$i]['image']['width'] = $image_data[0]['width'];
+			$result[$i]['image']['height'] = $image_data[0]['height'];
             $result[$i]['created'] = $post['created'];
             
             

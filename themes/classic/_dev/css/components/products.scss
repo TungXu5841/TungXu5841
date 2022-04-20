@@ -164,13 +164,13 @@
       &.slick-prev {
         left: 0;
         &:before{
-          content: "\e92c";
+          content: "\e903";
         }
       }
       &.slick-next {
         right: 0;
         &:before{
-          content: "\e92d";
+          content: "\e905";
         }
       }
     }
@@ -223,13 +223,13 @@
             &.slick-prev {
               top: -10px;
               &:before{
-                content: "\e92c";
+                content: "\e903";
               }
             }
             &.slick-next {
               bottom: -10px;
               &:before{
-                content: "\e92d";
+                content: "\e905";
               }
             }
           }  
@@ -432,19 +432,21 @@
         &.bootstrap-touchspin-up {
             right: 0;
             i:after {
-                content: '\e145';
+                content: '\e97a'; 
             }
         }
         &.bootstrap-touchspin-down {
             left: 0;
             i:after {
-                content: '\e15b';
+                content: '\e967';
             }
         }
         i {
             position: static;
-            font-size: .9375rem; 
+            font-size: 1.125rem; 
             margin: 0;
+            font-family: $font-icon;
+            font-style: normal;
         }
     }
   }
@@ -734,7 +736,7 @@
       &:before {
         content: '\e92e';
         font-family: $font-icon;
-        font-size: 0.75rem;
+        font-size: 1rem;
         position: absolute;
         right: 1.25rem;
         top: 50%;
@@ -743,7 +745,7 @@
       }
       &.collapsed {
         &:before {
-            content: '\e92b';
+            content: '\e9c9';
         }
       }
     }
@@ -1295,19 +1297,19 @@
     &.facebook {
       background: #3b5998;
       a:before {
-        content: '\e93c';
+        content: '\e92e';
       }
     }
     &.twitter  {
       background: #1da1f2;
       a:before {
-        content: '\e932';
+        content: '\e9b9';
       }
     }
     &.pinterest {
       background: #e60023;
       a:before {
-        content: '\e93e';
+        content: '\e977';
       }
     }
     a {

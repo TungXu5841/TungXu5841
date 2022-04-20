@@ -64,7 +64,7 @@
      <div class="popup_cart popup-sidebar">
 		<div class="title-cart flex-layout space-between">
 			<span>{l s='My cart' d='Shop.Theme.Actions'}</span>
-			<a href="javascript:void(0)" class="close-cart"><i class="vecicon-close-outline"></i></a>
+			<a href="javascript:void(0)" class="close-cart"><i class="vecicon-cross"></i></a>
 		</div>
 		<div class="content-sidebar">
 			{if $cart.products_count != '0'}
@@ -91,7 +91,7 @@
 			  </div>
 			{else}
 				<div class="empty-cart">
-					<i class="vecicon-handbag"></i>
+					<i class="vecicon-shopping_bag3"></i>
 					{l s='Your cart is empty.' d='Shop.Theme.Actions'}
 				</div>
 			{/if}

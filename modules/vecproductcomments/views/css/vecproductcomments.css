@@ -68,7 +68,7 @@ form#sendComment h3 {
 }
 
 div.star:after {
-  content: "\e915";
+  content: "\e9a6";
   font-family: "vecthemes-icon";
   display: inline-block;
   color: #acacac;
@@ -81,7 +81,7 @@ div.star.star_on {
   display: block;
 }
 div.star.star_on:after {
-  content: "\e915";
+  content: "\e9a6";
    font-family: "vecthemes-icon";
   display: inline-block;
   color: #f9b223;
@@ -91,7 +91,7 @@ div.star.star_on:after {
 }
 
 div.star.star_hover:after {
-  content: "\e915";
+  content: "\e9a6";
    font-family: "vecthemes-icon";
   display: inline-block;
   color: #f9b223;
@@ -204,7 +204,7 @@ div.star a:hover {
   margin-top: 1px;
 }
 #product_comments_block_extra div.star:after {
-  content: "\e915";
+  content: "\e9a6";
    font-family: "vecthemes-icon";
   display: inline-block;
   color: #acacac;
@@ -213,7 +213,7 @@ div.star a:hover {
   vertical-align:top;
 }
 #product_comments_block_extra div.star_on:after {
-  content: "\e915";
+  content: "\e9a6";
    font-family: "vecthemes-icon";
   display: inline-block;
   color: #f9b223;
@@ -389,7 +389,7 @@ div.star a:hover {
   }
 }
 #product_comments_block_tab div.star:after {
-  content: "\e915";
+  content: "\e9a6";
    font-family: "vecthemes-icon";
   display: inline-block;
   color: #acacac;
@@ -398,7 +398,7 @@ div.star a:hover {
   vertical-align: top;
 }
 #product_comments_block_tab div.star_on:after {
-  content: "\e915";
+  content: "\e9a6";
    font-family: "vecthemes-icon";
   display: inline-block;
   color: #f9b223;

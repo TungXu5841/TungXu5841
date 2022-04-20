@@ -31,7 +31,6 @@ body#checkout {
 
       .cart-total {
         background-color: inherit;
-		    padding: 0;
       }
 
       .cart-summary-subtotals-container {
@@ -391,6 +390,7 @@ body#checkout {
 
         i {
           font-size: $font-size-lg;
+          vertical-align: -2px;
         }
       }
     }

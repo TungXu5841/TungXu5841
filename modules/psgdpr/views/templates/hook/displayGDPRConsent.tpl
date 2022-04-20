@@ -21,7 +21,7 @@
     <span class="custom-checkbox">
         <label class="psgdpr_consent_message">
             <input id="psgdpr_consent_checkbox_{$psgdpr_id_module|escape:'htmlall':'UTF-8'}" name="psgdpr_consent_checkbox" type="checkbox" value="1" class="psgdpr_consent_checkboxes_{$psgdpr_id_module|escape:'htmlall':'UTF-8'}">
-            <span><i class="material-icons rtl-no-flip checkbox-checked psgdpr_consent_icon"></i></span>
+            <span><i class="vecicon-check rtl-no-flip checkbox-checked"></i></span>
             <span>{$psgdpr_consent_message nofilter}</span>{* html data *}
         </label>
     </span>

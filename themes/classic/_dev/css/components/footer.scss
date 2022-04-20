@@ -1,7 +1,9 @@
 #footer {
   margin-top: 3.75rem; 
 }
-
+#index #footer {
+  margin-top: 0;
+}
 .block-contact {
   font-size: 0.875rem;
   color: $gray;

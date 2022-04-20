@@ -1,8 +1,8 @@
-<div id="menu-icon"><i class="vecicon-bars-solid"></i></div> 
+<div id="menu-icon"><i class="vecicon-bars"></i></div> 
 <div class="menu-mobile-content" id="mobile_menu_wrapper">
 	{hook h='displayMegamenuMobileTop'} 
 	<div class="menu-close"> 
-		{l s='close' d='Shop.Theme.Global'} <i class="vecicon-close-outline float-xs-right"></i>
+		{l s='close' d='Shop.Theme.Global'} <i class="vecicon-cross float-xs-right"></i>
 	</div>
 	{if $vmenu}
 	<ul class="nav nav-mobile-menu" role="tablist"> 

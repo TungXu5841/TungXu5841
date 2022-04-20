@@ -39,10 +39,6 @@
 #header .elementor-widget-wrap {
     line-height: 1;
 }
-.borrder-section {
-    margin-left: 10px;
-    margin-right: 10px;
-}
 .container {
     max-width: 1320px; 
     width: auto;
@@ -51,25 +47,6 @@
         padding-right: 10px;
     }
    
-}
-.elementor-section {
-    &.elementor-section-full_width {
-        .elementor-column-gap-default {
-            margin: 0 -10px;
-        }
-        .elementor-column-gap-wide {
-            margin: 0 -20px;
-        }
-        .elementor-column-gap-extended {
-            margin: 0 -15px;
-        }
-        .elementor-column-gap-narrow {
-            margin: 0 -5px;
-        }
-        .elementor-column-gap-wider {
-            margin: 0 -30px;
-        }
-    }
 }
 .flex-layout {
 	@include flex;
@@ -318,7 +295,7 @@
             font-size: 16px;
             letter-spacing: 1px;
             line-height: 1;
-            content: "\e915" "\e915" "\e915" "\e915" "\e915";
+            content: "\e9a6" "\e9a6" "\e9a6" "\e9a6" "\e9a6";
             display: block;
             font-style: normal;
             font-weight: 400;
@@ -336,7 +313,7 @@
                 font-size: 16px;
                 letter-spacing: 1px;
                 line-height: 1;
-                content: "\e915" "\e915" "\e915" "\e915" "\e915";
+                content: "\e9a6" "\e9a6" "\e9a6" "\e9a6" "\e9a6"; 
                 display: block;
                 font-style: normal;
                 font-weight: 400;
@@ -364,8 +341,8 @@
 		cursor: pointer;
 		&:before {
 			font-family: $font-icon;
-			content: '\e93f';	
-			font-size: 1.75rem;
+			content: '\e920';	
+			font-size: 1.25rem;
 		}
 		&:hover {
 			color: var(--hovercolor);
@@ -556,7 +533,7 @@
                     }
                 }
                 i {
-                    font-size: 1.5rem;
+                    font-size: 1rem;
                 }
             }
         }
@@ -635,7 +612,7 @@
                         top: 0;
                         right: 1px;
                         color: #707070;
-                        font-size: 1.125rem;
+                        font-size: .8125rem;
                         &:hover {
                             color: $gray-dark;
                         }
@@ -968,6 +945,10 @@
             vertical-align: -1px;
             margin-right: .1875rem;
         }
+        .icon-toggle {
+            font-size: .75rem;
+            vertical-align: -2px;
+        }
     }
     .vec-dropdown-menu {
         position: absolute;
@@ -1037,7 +1018,7 @@
                     @include vec-transform(translateY(-50%));
                     &:before {
                         font-family: $font-icon;
-                        content: '\e93f';
+                        content: '\e920';
                         display: inline-block;
                         width: 0.875rem;
                         height: 0.875rem;
@@ -1130,7 +1111,7 @@
                 position: absolute;
                 top: .625rem;
                 color: $gray-dark;
-                font-size: 1.875rem;
+                font-size: 1.25rem;
                 opacity: 1;
                 &:hover {
                     color: var(--hovercolor);
@@ -1313,11 +1294,6 @@
         .icon-drop-mobile {
             display: none;
         }
-        i.vecicon-arrow-right {
-            font-size: 9px;
-            float: right;
-            line-height: inherit; 
-        }
         .menu-content {
             @include flex;
             width: 100%;
@@ -1391,7 +1367,8 @@
                         line-height: 1;
 						vertical-align: 0px; 
                         &.hidden-md-down {
-                            font-size: 9px;
+                            font-size: 11px;
+                            vertical-align: -1px;
                         }
                     }
                 }
@@ -1460,6 +1437,11 @@
 					.ul-column:not(.column_dropdown) .submenu-item > a:hover{
 						color:var(--hovercolor);
 					}
+                    .ul-column.column_dropdown {
+                        .submenu-item {
+                            margin-bottom: 0;
+                        }
+                    }
 					.ul-column.column_dropdown .submenu-item > a,
 					.submenu-item .category-sub-menu a {
 						color: #4e4c4c;
@@ -1603,11 +1585,6 @@
 		.icon-drop-mobile {
 			display: none;
 		}
-        i.vecicon-arrow-right {
-            font-size: 9px;
-            float: right;
-            line-height: inherit; 
-        }
 		.title_vertical {
 			font-size: 0.875rem;
 			font-weight: $headings-font-weight;
@@ -1620,16 +1597,16 @@
 			display: flex;
 			align-items: center;
 			&:after {
-				content: '\e92b';
+				content: '\e9c9';
 				display: inline-block;
-				font-size: 0.625rem;
+				font-size: .875rem;
 				font-family: $font-icon;
 				flex: 1;
 				font-weight: 400;
 				margin-left: 0.625rem;
 			}
 			i {
-				font-size: 24px;
+				font-size: 1.3125rem;
 				margin-right: 0.625rem;
 			}
 		}
@@ -1706,17 +1683,19 @@
 				i {
 					display: inline-block;
 					vertical-align: middle;
-					font-size: 1rem;
 					vertical-align:-1px;
-					&.fa {
-						min-width: 1rem;
+                    &:not(.hidden-md-down) {
+                        min-width: 1rem;
 						text-align: center; 
 						margin-right: 5px;
-					}
+                        font-size: 1.125rem;
+                        vertical-align: -2px;
+                    }
 					&.hidden-md-down {
                         font-size: 9px;
                         float: right;
                         line-height: inherit;
+                        font-size: 11px;
 					}
 				}
 				.icon_sub {
@@ -1795,6 +1774,11 @@
 					.ul-column:not(.column_dropdown) .submenu-item > a:hover{
 						color:var(--hovercolor);
 					}
+                    .ul-column.column_dropdown {
+                        .submenu-item {
+                            margin-bottom: 0;
+                        }
+                    }
 					.ul-column.column_dropdown .submenu-item > a,
 					.submenu-item .category-sub-menu a {
 						color: #4e4c4c;
@@ -2295,7 +2279,7 @@
                 left: 5px;
             }
             &:before{
-                content: "\e92c";
+                content: "\e903";
             }
         }
         .slick-next {
@@ -2304,7 +2288,7 @@
                 right: 5px;
             }
             &:before{
-                content: "\e92d";
+                content: "\e905";
             }
         }
     
@@ -2529,12 +2513,12 @@ body:not(.elementor-editor-active) {
             }
             .slick-prev {
                 &:before{
-                    content: "\e92c";
+                    content: "\e903";
                 }
             }
             .slick-next {
                 &:before{
-                    content: "\e92d";
+                    content: "\e905";
                 }
             }
             &.slick-arrows-inside {
@@ -3063,7 +3047,7 @@ body:not(.elementor-editor-active) {
             &::before {
                 font-family: $font-icon;
                 font-size: 1rem;
-                content: '\e91a'; 
+                content: '\e988'; 
             }
         }
         .box-hover {
@@ -3095,7 +3079,7 @@ body:not(.elementor-editor-active) {
                   color: var(--hovercolor);
                 }
                 &::before {
-                  content: '\e912'; 
+                  content: '\e97e'; 
                   font-size: 1.125rem;
                 }
               }
@@ -3104,7 +3088,7 @@ body:not(.elementor-editor-active) {
                   color: var(--hovercolor);
                 }
                 &::before {
-                  content: '\e909'; 
+                  content: '\e942'; 
                 }
               }
               &:hover {
@@ -3390,20 +3374,7 @@ body:not(.elementor-editor-active) {
     }
 }
 //footer
-.column-before {
-    @media (min-width: 768px) {
-        &:after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: -20px;
-            border: 11px solid transparent;
-            border-left: 11px solid #ddd;
-            border-bottom: 11px solid #ddd;
-            z-index: -1;
-        }
-    }
-}
+
 //links-list
 .elementor-widget-links_list {
 	&.display-inline {

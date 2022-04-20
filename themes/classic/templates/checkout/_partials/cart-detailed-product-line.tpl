@@ -147,7 +147,7 @@
                  data-id-customization       = "{$product.id_customization|escape:'javascript'}"
              >
                {if !isset($product.is_gift) || !$product.is_gift}
-               <i class="vecicon-close-outline"></i>
+               <i class="vecicon-cross"></i>
                {/if}
              </a>
 

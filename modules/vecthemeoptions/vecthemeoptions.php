@@ -598,13 +598,13 @@ class VecThemeoptions extends Module implements WidgetInterface
             //Page title
             'ptitle_size'                   => Configuration::get($this->name . 'ptitle_size'),
             //Category page
-            'category_layout'               => Configuration::get($this->name . 'category_layout'),
-            'category_thumbnail'            => Configuration::get($this->name . 'category_thumbnail'),
-            'category_description'          => Configuration::get($this->name . 'category_description'),
-            'category_description_bottom'   => Configuration::get($this->name . 'category_description_bottom'),
-            'category_sub'                  => Configuration::get($this->name . 'category_sub'),
-            'category_pagination'           => Configuration::get($this->name . 'category_pagination'),
-            'category_filter'               => Configuration::get($this->name . 'category_filter'),
+            'category_layout'               => isset($_GET['category_layout']) ? $_GET['category_layout'] : Configuration::get($this->name . 'category_layout'),
+            'category_thumbnail'            => isset($_GET['category_thumbnail']) ? $_GET['category_thumbnail'] : Configuration::get($this->name . 'category_thumbnail'),
+            'category_description'          => isset($_GET['category_description']) ? $_GET['category_description'] : Configuration::get($this->name . 'category_description'),
+            'category_description_bottom'   => isset($_GET['category_description_bottom']) ? $_GET['category_description_bottom'] : Configuration::get($this->name . 'category_description_bottom'),
+            'category_sub'                  => isset($_GET['category_sub']) ? $_GET['category_sub'] : Configuration::get($this->name . 'category_sub'),
+            'category_pagination'           => isset($_GET['category_pagination']) ? $_GET['category_pagination'] : Configuration::get($this->name . 'category_pagination'),
+            'category_filter'               => isset($_GET['category_filter']) ? $_GET['category_filter'] : Configuration::get($this->name . 'category_filter'),
             'category_column'               => isset($_GET['column']) ? $_GET['column'] : Configuration::get($this->name . 'category_column'),
             //Product page
             'product_layout'                => isset($_GET['product_layout']) ? $_GET['product_layout'] : Configuration::get($this->name . 'product_layout'),
@@ -623,6 +623,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         if (isset($this->context->cookie->shop_view)) {
             $options['shop_view'] = $this->context->cookie->shop_view;
         }
+        //echo '<pre>'; print_r($options);die;
         return $options;
     }
 

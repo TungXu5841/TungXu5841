@@ -28,7 +28,7 @@
           <li class="filter-block">
             {l s='%1$s:' d='Shop.Theme.Catalog' sprintf=[$filter.facetLabel]}
             {$filter.label}
-            <a class="js-search-link" href="{$filter.nextEncodedFacetsURL}"><i class="material-icons close">&#xE5CD;</i></a>
+            <a class="js-search-link" href="{$filter.nextEncodedFacetsURL}"><i class="vecicon-cross"></i></a>
           </li>
         {/block}
       {/foreach}
@@ -38,7 +38,7 @@
     {if $activeFilters|count}
       <div>
         <button data-search-url="{$clear_all_link}" class="btn btn-tertiary js-search-filters-clear-all">
-          <i class="material-icons">&#xE14C;</i>
+         <i class="vecicon-cross"></i>
           {l s='Clear all' d='Shop.Theme.Actions'}
         </button>
       </div>

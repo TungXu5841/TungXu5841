@@ -33,8 +33,8 @@
               <a href="{$node.link}">{$node.name}</a>
               {if $node.children}
                 <div class="navbar-toggler collapse-icons" data-toggle="collapse" data-target="#exCollapsingNavbar{$node.id}">
-                  <i class="material-icons add">&#xE145;</i>
-                  <i class="material-icons remove">&#xE15B;</i>
+                  <i class="vecicon-plus add"></i>
+                  <i class="vecicon-minus remove"></i>
                 </div>
                 <div class="collapse" id="exCollapsingNavbar{$node.id}">
                   {categories nodes=$node.children depth=$depth+1}
@@ -44,8 +44,8 @@
               <a class="category-sub-link" href="{$node.link}">{$node.name}</a>
               {if $node.children}
                 <span class="navbar-toggler collapse-icons" data-toggle="collapse" data-target="#exCollapsingNavbar{$node.id}">
-                  <i class="material-icons add">&#xE145;</i>
-                  <i class="material-icons remove">&#xE15B;</i>
+                  <i class="vecicon-plus add"></i>
+                  <i class="vecicon-minus remove"></i>
                 </span>
                 <div class="collapse" id="exCollapsingNavbar{$node.id}">
                   {categories nodes=$node.children depth=$depth+1}

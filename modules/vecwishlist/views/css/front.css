@@ -23,7 +23,7 @@
 }
 
 .wishlist-table-wrapper .shop_table .product-remove a {
-	font-size: 20px;
+	font-size: 16px;
 	width: 30px;
 	height: 30px;
 	position: relative;
@@ -38,6 +38,7 @@
 }
 .wishlist-table-wrapper .shop_table .product-button button{
 	width:100%;
+	line-height:1;
 }
 @media (max-width: 767px) {
 	.wishlist-table-wrapper .shop_table tr {

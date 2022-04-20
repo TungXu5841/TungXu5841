@@ -36,7 +36,7 @@
       <span class="step-number">{$position}</span>
       {$title}
       <span class="step-edit text-muted"><i class="material-icons edit">mode_edit</i> {l s='Edit' d='Shop.Theme.Actions'}</span>
-      <i class="material-icons rtl-no-flip done">&#xE876;</i>
+      <i class="vecicon-check rtl-no-flip done"></i>
     </h1>
 
     <div class="content">

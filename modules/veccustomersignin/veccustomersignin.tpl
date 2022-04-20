@@ -34,13 +34,13 @@
 				<a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='Welcome' mod='veccustomersignin'} , {$customerName}</a>
 			</li>
 			<li>
-				<i class="vecicon-user"></i><a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' mod='veccustomersignin'}</a>
+				<i class="vecicon-person3"></i><a href="{$urls.pages.my_account}" rel="nofollow" class="dropdown-item">{l s='My account' mod='veccustomersignin'}</a>
 			</li>
 			<li>
-				<i class="vecicon-magnifier"></i><a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' mod='veccustomersignin'}</a>
+				<i class="vecicon-search4"></i><a href="{$urls.pages.history}" rel="nofollow" class="dropdown-item">{l s='Order history' mod='veccustomersignin'}</a>
 			</li>
 			<li>
-				<i class="vecicon-gift-solid"></i><a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' mod='veccustomersignin'}</a>
+				<i class="vecicon-gift2"></i><a href="{$urls.pages.discount}" rel="nofollow" class="dropdown-item">{l s='My voucher' mod='veccustomersignin'}</a>
 			</li>
 			<li class="logout">
 				<a href="{$urls.actions.logout}" rel="nofollow">

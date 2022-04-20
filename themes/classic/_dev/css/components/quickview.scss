@@ -156,13 +156,13 @@
     &.slick-prev {
       left: 0;
       &:before{
-        content: "\e92c";
+        content: "\e903";
       }
     }
     &.slick-next {
       right: 0;
       &:before{
-        content: "\e92d";
+        content: "\e905";
       }
     }
   }

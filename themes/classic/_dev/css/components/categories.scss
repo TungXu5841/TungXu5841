@@ -56,7 +56,7 @@
   .filter-close-btn {
     border: none;
     padding: 0;
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     background: none;
     color: $gray-dark;
     cursor: pointer;
@@ -94,9 +94,9 @@
       margin: 0 !important;
       cursor: pointer;
       &::after {
-        content: '\e92b';
+        content: '\e9c9';
         font-family: $font-icon;
-        font-size: .625rem;
+        font-size: .8125rem;
         margin-left: .9375rem;
       }
     }
@@ -494,7 +494,7 @@
         }
         &.quick-view { 
           &::before {
-            content: '\e91a'; 
+            content: '\e988'; 
           }
         }
         &.compare-button {
@@ -504,7 +504,7 @@
             border-color: var(--buttonborder);
           }
           &::before {
-            content: '\e912'; 
+            content: '\e97e'; 
             font-size: 1.125rem;
           }
         }
@@ -515,7 +515,7 @@
             border-color: var(--buttonborder);  
           }
           &::before {
-            content: '\e909'; 
+            content: '\e942'; 
           }
         }
         &:hover {
@@ -596,7 +596,7 @@
             border-color: var(--buttonborder);
           }
           &::before {
-            content: '\e91a'; 
+            content: '\e988'; 
             font-family: $font-icon;
             font-size: 1.125rem;
           }
@@ -640,7 +640,7 @@
             color: var(--hovercolor);
           }
           &::before {
-            content: '\e912'; 
+            content: '\e97e'; 
             font-size: 1.125rem;
           }
         }
@@ -649,7 +649,7 @@
             color: var(--hovercolor);
           }
           &::before {
-            content: '\e909'; 
+            content: '\e942'; 
           }
         }
         &:hover {
@@ -789,7 +789,7 @@
         }
         &.quick-view {
           &::before {
-            content: '\e91a'; 
+            content: '\e988'; 
           }
         }
         &.compare-button {
@@ -799,7 +799,7 @@
             border-color: var(--buttonborder);  
           }
           &::before {
-            content: '\e912'; 
+            content: '\e97e'; 
             font-size: 1.125rem;
           }
         }
@@ -810,7 +810,7 @@
             border-color: var(--buttonborder);  
           }
           &::before {
-            content: '\e909'; 
+            content: '\e942'; 
           }
         }
         &:hover {
@@ -835,7 +835,7 @@
       &::before {
         font-family: $font-icon;
         font-size: 1rem;
-        content: '\e902'; 
+        content: '\e999'; 
       }
       &:hover {
         background: var(--buttonbackground);
@@ -886,7 +886,7 @@
       &::before {
         font-family: $font-icon;
         font-size: 1rem;
-        content: '\e902'; 
+        content: '\e999'; 
       }
       &:hover {
         background: var(--buttonhoverbackground);
@@ -956,7 +956,7 @@
             border-color: var(--buttonborder);  
           }
           &::before {
-            content: '\e912'; 
+            content: '\e97e'; 
             font-size: 1.125rem;
           }
         }
@@ -967,7 +967,7 @@
             border-color: var(--buttonborder);  
           }
           &::before {
-            content: '\e909'; 
+            content: '\e942'; 
           }
         }
         &:hover {
@@ -1068,18 +1068,18 @@
         }
         &.quick-view { 
           &::before {
-            content: '\e91a'; 
+            content: '\e988'; 
           }
         }
         &.compare-button {
           &::before {
-            content: '\e912'; 
+            content: '\e97e'; 
             font-size: 1.125rem;
           }
         }
         &.btn-wishlist {
           &::before {
-            content: '\e909'; 
+            content: '\e942'; 
           }
         }
         &:hover {
@@ -1162,12 +1162,12 @@
     }
     &:after {
       font-family: $font-icon;
-      font-size: .5625rem;
+      font-size: .8125rem;
       margin-left: .9375rem;
     }
     &.btn-more {
       &:after {
-        content: '\e92b';
+        content: '\e9c9';
       }
     }
     &.btn-less {
@@ -1270,7 +1270,7 @@
       font-size: 1.25rem;
       color: #686a6d;
       &:not(:last-child){
-        margin-right: .625rem;  
+        margin-right: 1.25rem;  
       }
     }
   }
@@ -1278,10 +1278,17 @@
     padding: 0.5rem 1.25rem;
     color: $gray-dark;
     background: $gray-light;
-    font-size: .8125rem;
+    font-size: 1rem;
     cursor: pointer;
     line-height: 1.5rem;
     display: inline-block;
+    &::before {
+      font-family: $font-icon;
+      content: '\e930';
+      font-size: 1rem;
+      margin-right: .3125rem;
+      vertical-align: -2px;
+    }
     &:hover {
       background: var(--buttonbackground);
       color: var(--buttoncolor);
@@ -1322,7 +1329,7 @@
     border: none;
     line-height: 1.5rem;
     i{
-      font-size: .625rem;
+      font-size: .8125rem;
       margin-left: .9375rem; 
     }
   }
@@ -1592,8 +1599,8 @@
     padding: .3125rem 0.625rem;
     line-height: 1.3125rem;
     &:not(:hover) {
-      background: $brand-primary;
-      color: $gray-dark;
+      background: var(--buttonbackground);
+      color: var(--buttoncolor);
     }
   }
   .filter-block {
@@ -1610,6 +1617,10 @@
       font-size: $font-size-lg;
       color: $gray-darker;
       opacity: 1;
+    }
+    i {
+      font-size: .75rem;
+      vertical-align: -2px;
     }
   }
 }

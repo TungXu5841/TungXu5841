@@ -25,10 +25,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-angle_up:before {
+.vecicon-angle_up:before {
   content: "\e9c8";
 }
-.icon-angle_down:before {
+.vecicon-angle_down:before {
   content: "\e9c9";
 }
 .vecicon-apps:before {

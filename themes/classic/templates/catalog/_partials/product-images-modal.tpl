@@ -26,7 +26,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
-        <i class="material-icons">close</i>
+        <i class="vecicon-cross"></i>
       </button>
       <div class="modal-body">
         {assign var=imagesCount value=$product.images|count}
@@ -48,7 +48,7 @@
             <img src="{$urls.no_picture_image.bySize.large_default.url}" loading="lazy" width="{$urls.no_picture_image.bySize.large_default.width}" height="{$urls.no_picture_image.bySize.large_default.height}" />
           {/if}
         </figure>
-        <div id="thumbnails" class="thumbnails js-thumbnails text-sm-center">
+        <div id="thumbnails" class="thumbnails js-thumbnails">
           {block name='product_images'}
               <div class="product-images-modal js-modal-product-images slick-block items-desktop-6 items-tablet-6 items-mobile-4" data-item="6">
                 {foreach from=$product.images item=image}

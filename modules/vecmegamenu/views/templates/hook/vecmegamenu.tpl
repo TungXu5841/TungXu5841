@@ -38,12 +38,12 @@
 						{/if}
 						<span>{$menu.title|escape:'html':'UTF-8'}</span>
 						{if $menu.subtitle != ''}<span class="menu-subtitle">{$menu.subtitle|escape:'html':'UTF-8'}</span>{/if}
-						{if $menu.submenu_type != 2 && !empty($menu.sub_menu.info_rows) > 0} <i class="hidden-md-down vecicon-arrow-down"></i>{/if}
+						{if $menu.submenu_type != 2 && !empty($menu.sub_menu.info_rows) > 0} <i class="hidden-md-down vecicon-angle_down"></i>{/if}
 					</a>
 					{if $menu.submenu_type == 0}
 						{if isset($menu.sub_menu) && count($menu.sub_menu.info_rows) > 0}
 						
-						{if !empty($menu.sub_menu.info_rows) > 0}<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>{/if}
+						{if !empty($menu.sub_menu.info_rows) > 0}<span class="icon-drop-mobile"><i class="vecicon-plus add"></i><i class="vecicon-minus remove"></i></span>{/if}
 						<div class="vec-sub-menu menu-dropdown {$menu.sub_menu.submenu_config.submenu_class|escape:'html':'UTF-8'}" data-width="{$menu.sub_menu.submenu_config.submenu_width|escape:'html':'UTF-8'}">
 						
 						<div class="vec-sub-inner">
@@ -65,7 +65,7 @@
 												{else}
 													<h4 class="column_title">{$menu_col.title}</h4>
 												{/if}
-												<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>
+												<span class="icon-drop-mobile"><i class="vecicon-plus add"></i><i class="vecicon-minus remove"></i></span>
 											{/if}
 											{if count($menu_col.list_menu_item) > 0}
 												<ul class="ul-column {if $menu_col.title}column_dropdown {/if}">
@@ -73,7 +73,7 @@
 													<li class="submenu-item {if !$sub_menu_item.active_mobile}hidden-mobile{/if}">
 														{if $sub_menu_item.type_link == 1}
 															<a href="{$sub_menu_item.categories.link}">{$sub_menu_item.categories.name}</a>
-																{if $sub_menu_item.categories.children}<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>{/if}
+																{if $sub_menu_item.categories.children}<span class="icon-drop-mobile"><i class="vecicon-plus add"></i><i class="vecicon-minus remove"></i></span>{/if}
 															{if $sub_menu_item.categories.children}
 														    <ul class="category-sub-menu">
 														        {foreach from=$sub_menu_item.categories.children item=node}
@@ -151,7 +151,7 @@
 					{else if $menu.submenu_type == 1}
 						{if isset($menu.sub_menu) && count($menu.sub_menu.info_rows) > 0}
 						
-						{if count($menu.sub_menu) > 0}<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>{/if}
+						{if count($menu.sub_menu) > 0}<span class="icon-drop-mobile"><i class="vecicon-plus add"></i><i class="vecicon-minus remove"></i></span>{/if}
 						<div class="vec-sub-menu menu-dropdown menu-flyout {$menu.sub_menu.submenu_config.submenu_class|escape:'html':'UTF-8'}" data-width="{$menu.sub_menu.submenu_config.submenu_width|escape:'html':'UTF-8'}">
 						<div class="vec-sub-inner">
 						{foreach from=$menu.sub_menu.info_rows item= menu_row name=menu_row}
@@ -162,27 +162,27 @@
 										{if $menu_col.title}<div class="column_flyout">{/if}
 											{if $menu_col.title}
 												{if $menu_col.type_link == 0}
-													<a href="{$menu_col.link}" class="column_title">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow-right hidden-md-down"></i>{/if}</a>
+													<a href="{$menu_col.link}" class="column_title">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow_forward hidden-md-down"></i>{/if}</a>
 												{else if $menu_col.type_link == 1}
 													{if $menu_col.custom_link}
-														<a href="{$menu_col.custom_link}">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow-right hidden-md-down"></i>{/if}</a>
+														<a href="{$menu_col.custom_link}">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow_forward hidden-md-down"></i>{/if}</a>
 													{else}
-														<h4 class="column_title">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow-right hidden-md-down"></i>{/if}</h4>
+														<h4 class="column_title">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow_forward hidden-md-down"></i>{/if}</h4>
 													{/if}
 												{else}
-													<h4 class="column_title">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow-right hidden-md-down"></i>{/if}</h4>
+													<h4 class="column_title">{$menu_col.title}{if count($menu_col.list_menu_item) > 0}<i class="vecicon-arrow_forward hidden-md-down"></i>{/if}</h4>
 												{/if}
 
-												<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>
+												<span class="icon-drop-mobile"><i class="vecicon-plus add"></i><i class="vecicon-minus remove"></i></span>
 											{/if}
 											{if count($menu_col.list_menu_item) > 0}
 												<ul class="ul-column {if $menu_col.title}column_dropdown {/if}">
 												{foreach from=$menu_col.list_menu_item item= sub_menu_item name=sub_menu_item}
 													<li class="submenu-item {if !$sub_menu_item.active_mobile}hidden-mobile{/if}{if $sub_menu_item.category_tree}category-tree{/if}">
 														{if $sub_menu_item.type_link == 1}
-															<a href="{$sub_menu_item.categories.link}">{$sub_menu_item.categories.name}{if $sub_menu_item.categories.children}<i class="vecicon-arrow-right hidden-md-down"></i>{/if}</a>
+															<a href="{$sub_menu_item.categories.link}">{$sub_menu_item.categories.name}{if $sub_menu_item.categories.children}<i class="vecicon-arrow_forward hidden-md-down"></i>{/if}</a>
 																{if $sub_menu_item.categories.children}		
-																<span class="icon-drop-mobile"><i class="material-icons add">add </i><i class="material-icons remove">remove </i></span>
+																<span class="icon-drop-mobile"><i class="vecicon-plus add"></i><i class="vecicon-minus remove"></i></span>
 																{/if}
 															{if $sub_menu_item.categories.children}
 														    <ul class="category-sub-menu">

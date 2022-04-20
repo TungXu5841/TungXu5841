@@ -4,7 +4,7 @@
 		{if $use_symbol}<span class="currency-symbol">{$current_currency.symbol}</span>{/if}
 		{if $use_iso}<span class="currency-isocode">{$current_currency.iso_code}</span>{/if}
 		{if $use_name}<span class="currency-name">{$current_currency.name}</span>{/if}
-		<span class="icon-toggle fa fa-angle-down"></span>
+		<span class="icon-toggle vecicon-angle_down"></span>
 	</div>
 	<div class="dropdown-menu vec-dropdown-menu">
 		{foreach from=$currencies item=currency}

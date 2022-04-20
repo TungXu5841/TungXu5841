@@ -73,7 +73,7 @@
         {/block}
 
         {hook h="displayWrapperTop"}
-        <div class="container">
+        <div class="{if $page.page_name != 'index' && $page.page_name != 'module-vecelements-preview'} container {/if}">
           <div class="row row-wrapper">
             {block name="left_column"}
               <div id="left-column" class="col-xs-12 col-xl-3">

@@ -26,7 +26,7 @@
   <button data-toggle="dropdown" class="btn-unstyle" aria-haspopup="true" aria-expanded="false" aria-label="{l s='Language dropdown' d='Shop.Theme.Global'}">
 	<img src="{$urls.img_lang_url}{$current_language.id_lang}.jpg" alt="" width="16" height="11" />
 	<span class="expand-more">{$current_language.name_simple}</span>
-	<i class="fa fa-angle-down"></i> 
+	<i class="vecicon-angle_down"></i> 
   </button>
   <ul class="dropdown-menu" aria-labelledby="language-selector-label">
 	{foreach from=$languages item=language}

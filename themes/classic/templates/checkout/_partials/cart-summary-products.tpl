@@ -28,7 +28,7 @@
   <strong>{$cart.summary_string}</strong>
   <a href="#" data-toggle="collapse" data-target="#cart-summary-product-list" class="js-show-details">
       {l s='show details' d='Shop.Theme.Actions'}
-      <i class="material-icons">expand_more</i>
+      <i class="vecicon-angle_down"></i>
    </a>
    </div>
   {block name='cart_summary_product_list'}

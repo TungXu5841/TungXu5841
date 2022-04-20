@@ -34,7 +34,7 @@
           <li class="filter-block">
             {l s='%1$s:' d='Shop.Theme.Catalog' sprintf=[$filter.facetLabel]}
             {$filter.label}
-            <a class="js-search-link" href="{$filter.nextEncodedFacetsURL}"><i class="material-icons close">&#xE5CD;</i></a>
+            <a class="js-search-link" href="{$filter.nextEncodedFacetsURL}"><i class="vecicon-cross"></i></a>
           </li>
         {/block}
       {/foreach}

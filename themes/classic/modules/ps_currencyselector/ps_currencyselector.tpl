@@ -26,7 +26,7 @@
 <div class="currency-selector dropdown js-dropdown">
 <button data-toggle="dropdown" class="btn-unstyle" aria-haspopup="true" aria-expanded="false" aria-label="{l s='Currency dropdown' d='Shop.Theme.Global'}">
   <span class="expand-more _gray-darker">{$current_currency.iso_code}{if $current_currency.iso_code !== $current_currency.sign} {$current_currency.sign}{/if}</span>
-  <i class="fa fa-angle-down"></i>
+  <i class="vecicon-angle_down"></i>
 </button>
 <ul class="dropdown-menu" aria-labelledby="currency-selector-label">
   {foreach from=$currencies item=currency}

@@ -11,8 +11,8 @@
 			<span>{$title}</span>
 		{if $title_url}</a>{/if}
 		<span class="navbar-toggler collapse-icons">
-			<i class="material-icons add">&#xE313;</i>
-			<i class="material-icons remove">&#xE316;</i>
+			<i class="vecicon-angle_down add"></i>
+			<i class="vecicon-angle_up remove"></i> 
 		</span>
     </h2>
 	{/if}

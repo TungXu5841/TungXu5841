@@ -100,7 +100,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'vecvegamenu_submenu_column`
 $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'vecvegamenu_submenu_column_lang` (
 	  `id_vecvegamenu_submenu_column` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	  `title` varchar(64) NULL,
-	  `custom_link` varchar(64) NULL,
+	  `custom_link` varchar(255) NULL,
 	  `id_lang` int(10) unsigned NOT NULL,
 	  PRIMARY KEY (`id_vecvegamenu_submenu_column`,`id_lang`)
 	) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=UTF8;';
@@ -122,7 +122,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'vecvegamenu_submenu_item_la
 	  `id_vecvegamenu_submenu_item` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	  `id_lang` int(10) unsigned NOT NULL,
 	  `customlink_title` varchar(64) NULL,
-	  `customlink_link` varchar(64) NULL,
+	  `customlink_link` varchar(255) NULL,
 	  `htmlcontent` text NULL,
 	  `image` varchar(255) NULL,
 	  `image_link` varchar(255) NULL,

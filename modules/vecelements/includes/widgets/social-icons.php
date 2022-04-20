@@ -245,8 +245,13 @@ class WidgetSocialIcons extends WidgetBase
                         'social' => 'fa fa-google-plus',
                     ],
                 ],
-                'title_field' => '<i class="{{ social }}"></i> {{{ social.replace( "fa fa-", "" )' .
-                    '.replace( "-", " " ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}',
+                'title_field' => '<# if ( icon_source == "social" ) { #>
+                    <i class="{{ social }}"></i>  {{{ social.replace( "fa fa-", "" )' .
+                        '.replace( "-", " " ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}
+                    <# }else{ #>
+                        <i class="{{ vecicon }}"></i>  {{{ vecicon.replace( "vecicon-", "" )' .
+                            '.replace( "-", " " ) }}}
+                    <# } #>',
             ]
         );
 

@@ -90,8 +90,8 @@ class AdminVECSettingsController extends ModuleAdminController
                 _VEC_TEMPLATES_ . 'admin/admin.tpl',
                 'ce_modal_replace_url',
                 $this->l('It is strongly recommended that you backup your database before using Replace URL.'),
-                $this->l('http://old-url.com'),
-                $this->l('http://new-url.com'),
+                'http://old-url.com',
+                'http://new-url.com',
                 $this->l('Enter your old and new URLs for your PrestaShop installation, to update all V-Elements data (Relevant for domain transfers or move to \'HTTPS\').'),
                 $this->l('Replace URL')
             ),

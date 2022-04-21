@@ -110,6 +110,7 @@ class VecThemeoptions extends Module implements WidgetInterface
 
         return parent::install()
         && $this->registerHook('header')
+        && $this->registerHook('displayBackofficeHeader')
         && $this->registerHook('productSearchProvider')
         && $this->registerHook('actionProductSearchComplete')
         && $this->_createMenu();
@@ -661,6 +662,11 @@ class VecThemeoptions extends Module implements WidgetInterface
                 'cd_sec_text' => 'sec',
             )
         ));
+	}
+
+    public function hookDisplayBackOfficeHeader($params)
+	{
+		$this->context->controller->addCSS($this->_path . 'views/css/vecthemes-icon.css');
 	}
 	protected function getWarningMultishopHtml()
     {

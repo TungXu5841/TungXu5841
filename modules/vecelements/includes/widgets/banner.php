@@ -46,14 +46,14 @@ class WidgetBanner extends WidgetBase {
 		$this->startControlsSection(
 			'section_banner',
 			[
-				'label' 		=> $this->l('Banner'),
+				'label' 		=> __('Banner'),
 			]
 		);
 
 		$this->addControl(
 			'image',
 			[
-				'label'   		=> $this->l('Image'),
+				'label'   		=> __('Image'),
 				'type'    		=> ControlsManager::MEDIA,
 				'seo'			=> true,
 				'dynamic' => [
@@ -67,7 +67,7 @@ class WidgetBanner extends WidgetBase {
 		$this->addControl(
 			'title',
 			[
-				'label'   		=> $this->l('Title'),
+				'label'   		=> __('Title'),
 				'type'    		=> ControlsManager::TEXT,
 				'label_block' 	=> true,
 				'default'		=> 'Title 1'
@@ -77,7 +77,7 @@ class WidgetBanner extends WidgetBase {
 		$this->addControl(
 			'title2',
 			[
-				'label'   		=> $this->l('Title 2'),
+				'label'   		=> __('Title 2'),
 				'type'    		=> ControlsManager::TEXT,
 				'label_block' 	=> true,
 				'default'		=> 'Title 2'
@@ -87,7 +87,7 @@ class WidgetBanner extends WidgetBase {
 		$this->addControl(
 			'subtitle',
 			[
-				'label'   		=> $this->l('Subtitle'),
+				'label'   		=> __('Subtitle'),
 				'type'    		=> ControlsManager::TEXTAREA,
 				'default'		=> 'Subtitle'
 			]
@@ -96,9 +96,9 @@ class WidgetBanner extends WidgetBase {
 		$this->addControl(
 			'link',
 			[
-				'label'   		=> $this->l('Link'),
+				'label'   		=> __('Link'),
 				'type'    		=> ControlsManager::URL,
-				'placeholder' 	=> $this->l('https://your-link.com'),
+				'placeholder' 	=> __('https://your-link.com'),
 				'default'		=> array(
 					'url' => '#',
 				)
@@ -107,10 +107,10 @@ class WidgetBanner extends WidgetBase {
 		$this->addControl(
 			'button_link',
 			[
-				'label'   		=> $this->l('Button text'),
+				'label'   		=> __('Button text'),
 				'type'    		=> ControlsManager::TEXT,
 				'label_block' 	=> true,
-				'description'   => $this->l('Leave it empty if you dont want to use button link.'),
+				'description'   => __('Leave it empty if you dont want to use button link.'),
 				'default'		=> 'Button'
 			]
 		);
@@ -120,7 +120,7 @@ class WidgetBanner extends WidgetBase {
 		$this->startControlsSection(
 			'section_style',
 			[
-				'label' 		=> $this->l('General'),
+				'label' 		=> __('General'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
@@ -195,7 +195,7 @@ class WidgetBanner extends WidgetBase {
 		$this->startControlsSection(
 			'section_title_style',
 			[
-				'label' 		=> $this->l('Title 1'),
+				'label' 		=> __('Title 1'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
@@ -203,7 +203,7 @@ class WidgetBanner extends WidgetBase {
 			$this->addControl(
 				'title_color',
 				[
-					'label' 		=> $this->l('Color'),
+					'label' 		=> __('Color'),
 					'type' 			=> ControlsManager::COLOR,
 					'selectors' 	=> [
 						'{{WRAPPER}} .home-banner .banner-title' => 'color: {{VALUE}};',
@@ -243,7 +243,7 @@ class WidgetBanner extends WidgetBase {
 		$this->startControlsSection(
 			'section_title2_style',
 			[
-				'label' 		=> $this->l('Title 2'),
+				'label' 		=> __('Title 2'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
@@ -251,7 +251,7 @@ class WidgetBanner extends WidgetBase {
 			$this->addControl(
 				'title2_color',
 				[
-					'label' 		=> $this->l('Color'),
+					'label' 		=> __('Color'),
 					'type' 			=> ControlsManager::COLOR,
 					'selectors' 	=> [
 						'{{WRAPPER}} .home-banner .banner-title2' => 'color: {{VALUE}};',
@@ -293,7 +293,7 @@ class WidgetBanner extends WidgetBase {
 		$this->startControlsSection(
 			'section_subtitle_style',
 			[
-				'label' 		=> $this->l('Subtitle'),
+				'label' 		=> __('Subtitle'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
@@ -301,7 +301,7 @@ class WidgetBanner extends WidgetBase {
 			$this->addControl(
 				'subtitle_color',
 				[
-					'label' 		=> $this->l('Color'),
+					'label' 		=> __('Color'),
 					'type' 			=> ControlsManager::COLOR,
 					'selectors' 	=> [
 						'{{WRAPPER}} .home-banner .banner-text' => 'color: {{VALUE}};',
@@ -343,7 +343,7 @@ class WidgetBanner extends WidgetBase {
         $this->startControlsSection(
 			'section_button',
 			[
-				'label' 		=> $this->l('Button link'),
+				'label' 		=> __('Button link'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
@@ -357,7 +357,7 @@ class WidgetBanner extends WidgetBase {
 			$this->addResponsiveControl(
 				'button_padding',
 				[
-					'label' 		=> $this->l('Padding'),
+					'label' 		=> __('Padding'),
 					'type' 			=> ControlsManager::DIMENSIONS,
 					'size_units' 	=> [ 'px', '%' ],
 					'selectors' 	=> [
@@ -368,7 +368,7 @@ class WidgetBanner extends WidgetBase {
 			$this->addResponsiveControl(
 				'button_border_radius',
 				[
-					'label' 		=> $this->l('Border Radius'),
+					'label' 		=> __('Border Radius'),
 					'type' 			=> ControlsManager::DIMENSIONS,
 					'size_units' 	=> [ 'px', '%' ],
 					'selectors' 	=> [
@@ -387,13 +387,13 @@ class WidgetBanner extends WidgetBase {
 				$this->startControlsTab(
 					'tab_button_normal',
 					[
-						'label' 		=> $this->l('Normal'),
+						'label' 		=> __('Normal'),
 					]
 				);
 					$this->addControl(
 						'button_color',
 						[
-							'label' 		=> $this->l('Color'),
+							'label' 		=> __('Color'),
 							'type' 			=> ControlsManager::COLOR,
 							'selectors' 	=> [
 								'{{WRAPPER}} .home-banner .banner-button' => 'color: {{VALUE}};',
@@ -404,7 +404,7 @@ class WidgetBanner extends WidgetBase {
 					$this->addControl(
 						'button_background',
 						[
-							'label' 		=> $this->l('Background color'),
+							'label' 		=> __('Background color'),
 							'type' 			=> ControlsManager::COLOR,
 							'selectors' 	=> [
 								'{{WRAPPER}} .home-banner .banner-button' => 'background-color: {{VALUE}};',
@@ -417,13 +417,13 @@ class WidgetBanner extends WidgetBase {
 				$this->startControlsTab(
 					'tab_hover_normal',
 					[
-						'label' 		=> $this->l('Hover'),
+						'label' 		=> __('Hover'),
 					]
 				);
 					$this->addControl(
 						'button_hover_color',
 						[
-							'label' 		=> $this->l('Color'),
+							'label' 		=> __('Color'),
 							'type' 			=> ControlsManager::COLOR,
 							'selectors' 	=> [
 								'{{WRAPPER}} .home-banner .banner-button:hover , {{WRAPPER}} .home-banner .banner-button:focus' => 'color: {{VALUE}};',
@@ -433,7 +433,7 @@ class WidgetBanner extends WidgetBase {
 					$this->addControl(
 						'button_hover_background',
 						[
-							'label' 		=> $this->l('Background color'),
+							'label' 		=> __('Background color'),
 							'type' 			=> ControlsManager::COLOR,
 							'selectors' 	=> [
 								'{{WRAPPER}} .home-banner .banner-button:hover, {{WRAPPER}} .home-banner .banner-button:focus' => 'background-color: {{VALUE}};',
@@ -443,7 +443,7 @@ class WidgetBanner extends WidgetBase {
 					$this->addControl(
 						'button_hover_border_color',
 						[
-							'label' 		=> $this->l('Border color'),
+							'label' 		=> __('Border color'),
 							'type' 			=> ControlsManager::COLOR,
 							'selectors' 	=> [
 								'{{WRAPPER}} .home-banner .banner-button:hover, {{WRAPPER}} .home-banner .banner-button:focus' => 'border-color: {{VALUE}};',
@@ -458,14 +458,14 @@ class WidgetBanner extends WidgetBase {
         $this->startControlsSection(
 			'section_hover',
 			[
-				'label' 		=> $this->l('Hover image'),
+				'label' 		=> __('Hover image'),
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
 			$this->addControl(
 				'hover_opacity',
 				[
-					'label' 		=> $this->l('Opacity'),
+					'label' 		=> __('Opacity'),
 					'type' 			=> ControlsManager::SLIDER,
 					'range' 		=> [
 						'px' => [

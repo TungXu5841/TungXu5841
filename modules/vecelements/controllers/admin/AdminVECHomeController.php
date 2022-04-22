@@ -97,9 +97,9 @@ class AdminVECHomeController extends ModuleAdminController
 
         $this->context->smarty->assign('icon', 'icon-list');
 
-        $this->toolbar_title[] = $this->l(
-            'add' === $this->display ? 'Add New Template' : ('edit' === $this->display ? 'Edit Template' : 'Homepage List')
-        );
+        $this->toolbar_title[] = 
+            'add' === $this->display ? $this->l('Add New Template') : ('edit' === $this->display ? $this->l('Edit Template') : $this->l('Homepage List'))
+        ;
     }
 
     public function initPageHeaderToolbar()

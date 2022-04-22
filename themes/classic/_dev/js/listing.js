@@ -283,6 +283,12 @@ $(document).ready(() => {
     $('.filters-canvas').removeClass('filter-open');
     $('.vec-overlay').removeClass('open');
     vecScrollTop($('#vec-use-scroll'));
+    
+    let gridProducts = $productDiv.find('.js-product-miniature:not(.product-miniature-list) .product-content');
+    if(gridProducts.length > 0){
+      gridProducts.addClass('match_height');
+      matchHeight($productDiv);
+    }
   });
 });
 

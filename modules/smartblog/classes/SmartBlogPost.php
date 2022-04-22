@@ -603,6 +603,7 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['meta_description']  = $post['meta_description'];
 			$result[$i]['content']           = $post['content'];
 			$result[$i]['meta_keyword']      = $post['meta_keyword'];
+			$result[$i]['date_added']        = Smartblog::displayDate($post['created']);
 			// $result[$i]['id_category'] = $post['id_category'];
 			$result[$i]['id_category']  = 1;
 			$result[$i]['link_rewrite'] = $post['link_rewrite'];
@@ -675,6 +676,7 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['meta_keyword']      = $post['meta_keyword'];
 			$result[$i]['id_category']       = $post['id_category'];
 			$result[$i]['link_rewrite']      = $post['link_rewrite'];
+			$result[$i]['date_added']        = Smartblog::displayDate($post['created']);
 			//$result[ $i ]['cat_name']          = $BlogCategory->getCatName( $post['id_smart_blog_post'] );
 			$result[$i]['cat_link_rewrite']  = $BlogCategory->getCatLinkRewrite($post['id_smart_blog_post']);
 			$employee                          = new Employee($post['id_author']);
@@ -836,6 +838,7 @@ class SmartBlogPost extends ObjectModel
 			$result[$i]['meta_keyword']      = $post['meta_keyword'];
 			$result[$i]['id_category']       = $post['id_category'];
 			$result[$i]['link_rewrite']      = $post['link_rewrite'];
+			$result[$i]['date_added']        = Smartblog::displayDate($post['created']);
 			//$result[ $i ]['cat_name']          = $BlogCategory->getCatName(  $post['id_smart_blog_post'] );
 			$result[$i]['cat_link_rewrite']  = $BlogCategory->getCatLinkRewrite($post['id_smart_blog_post']);
 			$employee                          = new Employee($post['id_author']);

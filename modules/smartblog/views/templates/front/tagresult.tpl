@@ -53,7 +53,7 @@
                  <p class="error">{l s='No Post in This Tag'  d='Modules.Smartblog.Tagresult'}</p>
         {else}
    
-        <div id="smartblogcat" class="block">
+        <div id="smartblogcat" class="block row">
 		{foreach from=$postcategory item=post}
 			{include file="module:smartblog/views/templates/front/category_loop.tpl" post=$post smartbloglink = $smartbloglink}
 		{/foreach}

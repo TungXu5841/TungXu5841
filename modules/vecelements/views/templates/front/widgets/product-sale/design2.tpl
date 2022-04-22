@@ -34,14 +34,22 @@
             {if isset($product.id_manufacturer)}
                 <div class="manufacturer"><a href="{url entity='manufacturer' id=$product.id_manufacturer }">{Manufacturer::getnamebyid($product.id_manufacturer)}</a></div>
             {/if}
+            {block name='product_name'}
+                <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name}</a></h3> 
+            {/block}
             {block name='product_reviews'}
                 <div class="hook-reviews">
                 {hook h='displayProductListReviews' product=$product}
                 </div>
             {/block}
-            {block name='product_name'}
-                <h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name}</a></h3> 
-            {/block}
+            {if isset($product.specific_prices.to) && $product.specific_prices.to|strtotime > $smarty.now && $product.specific_prices.from|strtotime < $smarty.now}
+            <div class="countdown" >
+                <div class="title_countdown">{$title}</div>
+                <div class="time_count_down">
+                <span class="specific-prices-timer" data-date-y ='{$product.specific_prices.to|date_format:"%Y"}' data-date-m ='{$product.specific_prices.to|date_format:"%m"}' data-date-d='{$product.specific_prices.to|date_format:"%d"}' data-date-h = '{$product.specific_prices.to|date_format:"%H"}' data-date-mi = '{$product.specific_prices.to|date_format:"%M"}' data-date-s= '{$product.specific_prices.to|date_format:"%S"}' ></span>
+                </div>
+            </div>
+            {/if}
             {block name='product_price_and_shipping'}
                 {if $product.show_price}
                 <div class="product-price-and-shipping">
@@ -84,14 +92,6 @@
                 </div>
             </div> 
         </div>	
-        {if isset($product.specific_prices.to) && $product.specific_prices.to|strtotime > $smarty.now && $product.specific_prices.from|strtotime < $smarty.now}
-        <div class="countdown" >
-            <div class="title_countdown">{$title}</div>
-            <div class="time_count_down">
-            <span class="specific-prices-timer" data-date-y ='{$product.specific_prices.to|date_format:"%Y"}' data-date-m ='{$product.specific_prices.to|date_format:"%m"}' data-date-d='{$product.specific_prices.to|date_format:"%d"}' data-date-h = '{$product.specific_prices.to|date_format:"%H"}' data-date-mi = '{$product.specific_prices.to|date_format:"%M"}' data-date-s= '{$product.specific_prices.to|date_format:"%S"}' ></span>
-            </div>
-        </div>
-        {/if}
         {block name='product_variants'}
         {if $product.main_variants}
         {include file='catalog/_partials/variant-links.tpl' variants=$product.main_variants}

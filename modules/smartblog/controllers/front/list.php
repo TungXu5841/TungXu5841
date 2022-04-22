@@ -205,10 +205,10 @@ class smartblogListModuleFrontController extends smartblogModuleFrontController
 				'pagenums'             => $totalpages - 1,
 				'totalpages'           => $totalpages,
 				'columns'			   => Configuration::get('smartpostperrow'),
-				'post_style'		   => Configuration::get('smartstyle')
+				'post_style'		   => isset($_GET['smartstyle']) ? $_GET['smartstyle'] : Configuration::get('smartstyle')
 			)
 		);
-
+		
 		if ($overridden_template = Hook::exec(
 			'DisplayOverrideSmartBlogTemplate',
 			[

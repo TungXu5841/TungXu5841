@@ -141,7 +141,7 @@
       </footer>
 
     </main>
-
+    <div class="back-top"><a href= "#"><i class="vecicon-arrow_upward"></i></a></div>   
     {block name='javascript_bottom'}
       {include file="_partials/javascript.tpl" javascript=$javascript.bottom}
     {/block}

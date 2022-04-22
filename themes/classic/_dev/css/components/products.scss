@@ -805,8 +805,7 @@
             @include vec-transition(300ms);
           }
         }
-        &.slick-current, 
-        &.is-active, 
+        &.is-active,  
         &:hover {
           .thumb-container {
             img {

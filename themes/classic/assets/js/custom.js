@@ -52,6 +52,20 @@ $(document).ready(function(){
 		$(this).parents('body') .find( '#mobile_menu_wrapper' ) .removeClass('box-menu');
 		$(this).parents('body').find( '#menu-icon' ).removeClass('open-menu');
 	});	
+	$(".back-top").hide();
+	$(window).scroll(function () {
+		if ($(this).scrollTop() > 150) {
+			$('.back-top').fadeIn();
+		} else {
+			$('.back-top').fadeOut();
+		}
+	});
+	$('.back-top').click(function () {
+		$('body,html').animate({
+			scrollTop: 0
+		}, 1000);
+		return false; 
+	});
 	$('.product-accessoriesslide').on('init', function(event, slick, currentSlide){
 		var slideToShow = $(this).find('.slick-active').length - 1;
 		$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');

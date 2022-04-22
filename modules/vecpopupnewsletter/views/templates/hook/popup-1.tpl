@@ -1,16 +1,14 @@
-<div id="vecpopupnewsletter" class="modal popup-type-1 popup-text-color-{$vecpopup.VEC_NEWSLETTER_TEXT_COLOR}" tabindex="-1" role="dialog"><div class="modal-dialog" role="document" style="{if $vecpopup.VEC_NEWSLETTER_BG == 1 && !empty($vecpopup.VEC_NEWSLETTER_BG_IMAGE)}background-image: url({$vecpopup.VEC_NEWSLETTER_BG_IMAGE});{/if}">
+<div id="vecpopupnewsletter" class="modal popup-type-1 popup-text-color-{$vecpopup.VEC_NEWSLETTER_TEXT_COLOR}" tabindex="-1" role="dialog"><div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
-			<span aria-hidden="true">×</span>
+			<i class="vecicon-cross"></i>
 		</button>
-		{if $vecpopup.VEC_NEWSLETTER_FORM == 1 && Module::isEnabled('ps_emailsubscription')}
-			<div class="wrapper-popup">
+		<div class="wrapper-popup" style="{if $vecpopup.VEC_NEWSLETTER_BG == 1 && !empty($vecpopup.VEC_NEWSLETTER_BG_IMAGE)}background-image: url({$vecpopup.VEC_NEWSLETTER_BG_IMAGE});{/if}">
+			{if $vecpopup.VEC_NEWSLETTER_FORM == 1 && Module::isEnabled('ps_emailsubscription')}
 				<div class="popup-content">
-					<div class="popup_icon">
-						<i class="las la-envelope"></i>
-					</div>
 					{if $vecpopup.VEC_NEWSLETTER_TITLE}
-						<div class="popup_title h3">
+						<div class="popup_title">
+							<i class="popup_icon vecicon-mail_close"></i>
 							{$vecpopup.VEC_NEWSLETTER_TITLE|stripslashes nofilter}
 						</div>
 					{/if}
@@ -35,13 +33,13 @@
 					<div class="newsletter_block_popup-bottom custom-checkbox">
 						<label>
 							<input id="newsletter_popup_dont_show_again" type="checkbox">
-							<span><i class="las la-check checkbox-checked"></i></span>
+							<span><i class="vecicon-check rtl-no-flip checkbox-checked"></i></span>
 							<span>{l s='Don\'t show this popup again' mod='vecpopupnewsletter'}</span>
 						</label>
 					</div>
 				</div>
-			</div>
-		{/if}
+			{/if} 
+		</div>	
 	</div><!-- /.modal-content -->
 </div><!-- /.modal-dialog --></div><!-- /.modal -->
 

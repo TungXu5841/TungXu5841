@@ -31,7 +31,7 @@
 			{if $node.name != ''}
 				<li data-depth="{$depth}">
 				{if $depth===0}
-				<a href="{$node.link}" title="{$node.name}" {if $depth == 0}class="unvisible"{/if}>{$node.name}</a>
+				<a href="{$node.link}" title="{$node.name}">{$node.name}</a>
 					{if $node.children}
 					
 					

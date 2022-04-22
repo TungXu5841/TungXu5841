@@ -906,7 +906,9 @@ form#searchbox .button.button-small i {
 .row-sdsarticleCat .sdsarticleCat{
 	flex: 0 0 auto;
 	float:none;
-	margin-bottom: 50px;
+}
+.row .sdsarticleCat{
+    margin-bottom: 30px;
 }
 /* Smart Blog Post single */
 .smart-blog-single-post-title {
@@ -1114,8 +1116,6 @@ span.smart-blog-reply-icon {
     text-align: center;
     margin-top: 40px;
     margin-bottom: 40px;
-    margin-left: 15px;
-    margin-right: 15px;
 }
 .smart-blog-page-not-found h1{
     font-weight: 500;
@@ -1144,8 +1144,6 @@ span.smart-blog-reply-icon {
     font-size: 18px;
     height: 50px;
     width: 100px;
-    background: #3CB9D7;
-    color: #fff;
     text-transform: uppercase;
 }
 .smart-blog-page-not-found .smart-go-back-home {
@@ -1155,8 +1153,6 @@ span.smart-blog-reply-icon {
 .smart-blog-page-not-found .smart-go-back-home a{
     font-weight: 500;
     font-size: 16px;
-    line-height:22px;
-    color:#3CB9D7;
 }
 .smart-blog-page-not-found .smart-go-back-home a span i {
     margin-right: 5px;

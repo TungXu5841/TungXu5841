@@ -124,6 +124,7 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 500;
   text-transform: uppercase;
   font-size: .875rem;
+  line-height: 1.25rem; 
   border: none;
   background: var(--buttonbackground);
   color: var(--buttoncolor);
@@ -199,6 +200,10 @@ small.value {
     font-weight: 400;
     color: #999;
     transition: 0.3s;
+  
+  }
+  .cl-id_gender .form-control-label {
+    position: static;
   }
   .form-group .form-control-label.has-value{
     top: -6px;
@@ -682,8 +687,8 @@ form {
   }
   .close {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: -3px;
+    top: -3px;
     width: 1.875rem;
     height: 1.875rem;
     display: inline-flex;

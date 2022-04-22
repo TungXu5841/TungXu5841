@@ -61,7 +61,7 @@
     {if $postcategory == ''}
         {include file="module:smartblog/views/templates/front/search-not-found.tpl" postcategory=$postcategory}
     {else}
-        <div id="smartblogcat" class="block">
+        <div id="smartblogcat" class="block row">
             {foreach from=$postcategory item=post}
                 {include file="module:smartblog/views/templates/front/category_loop.tpl" postcategory=$postcategory}
             {/foreach}

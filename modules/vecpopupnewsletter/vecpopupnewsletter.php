@@ -319,11 +319,6 @@ class VecPopupNewsletter extends Module
 									'name' => $this->l('Type 3'),
 									'img' => 'style3.jpg',
 									),
-								array(
-									'id_option' => 4,
-									'name' => $this->l('Type 4'),
-									'img' => 'style4.jpg',
-									),
 							),
 							'id' => 'id_option',
 							'name' => 'name',

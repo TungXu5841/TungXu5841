@@ -1,4 +1,4 @@
-#vecpopupnewsletter .modal-dialog{
+/* #vecpopupnewsletter .modal-dialog{
 	padding: 0;
 	background-position: left top;
 	background-repeat: no-repeat;
@@ -53,7 +53,7 @@
     border: 1px solid rgba(255,255,255,0.2);
 }
 
-/**************************type 1******************************/
+/**************************type 1******************************
 
 #vecpopupnewsletter.popup-type-1 .modal-dialog {
 	max-width: 510px;
@@ -116,7 +116,7 @@
 	}
 }
 
-/**************************type 2******************************/
+/**************************type 2******************************
 
 #vecpopupnewsletter.popup-type-2 .wrapper-popup {
     display: flex;
@@ -197,7 +197,7 @@
 	max-width: 770px;
 }
 
-/**************************type 3******************************/
+/**************************type 3******************************
 
 #vecpopupnewsletter.popup-type-3 .wrapper-popup {
     display: flex;
@@ -281,7 +281,7 @@
 	max-width: 520px;
 }
 
-/**************************type 4******************************/
+/**************************type 4******************************
 
 #vecpopupnewsletter.popup-type-4 .wrapper-popup {
     display: flex;
@@ -380,4 +380,4 @@
 	#vecpopupnewsletter.popup-type-4 .modal-dialog {
 		max-width: 510px;
 	}
-}
+} */

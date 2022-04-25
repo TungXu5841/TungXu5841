@@ -94,20 +94,22 @@
 						{/if}
 					</form>
 					<div class="search-suggest {if $search_type == 'classic' || $search_type == 'minimal'} unvisible{/if}">
-						<div class="suggest-ajax-results"></div>
-						<div class="suggest-content">
-							{if $keywords}
-							<h5 class="search-dropdown-title search-keywords-title">{$keywords_title}</h5>
-							<div class="search-keywords">
-								{foreach from=$keywords item="keyword"}
-									<a href="{$search_controller_url}?controller=search&s={$keyword}"><span>{$keyword}</span></a>
-								{/foreach}
+						<div class="search-suggest-container">
+							<div class="suggest-ajax-results"></div>
+							<div class="suggest-content">
+								{if $keywords}
+								<h5 class="search-dropdown-title search-keywords-title">{$keywords_title}</h5>
+								<div class="search-keywords">
+									{foreach from=$keywords item="keyword"}
+										<a href="{$search_controller_url}?controller=search&s={$keyword}"><span>{$keyword}</span></a>
+									{/foreach}
+								</div>
+								{/if}
+								{if $suggest_status && $suggest_ids}
+								<h5 class="search-suggest-title">{$suggest_title}</h5>
+								<div class="search-suggest-products" data-id_products="{$suggest_ids}"></div>
+								{/if}
 							</div>
-							{/if}
-							{if $suggest_status && $suggest_ids}
-							<h5 class="search-suggest-title">{$suggest_title}</h5>
-							<div class="search-suggest-products" data-id_products="{$suggest_ids}"></div>
-							{/if}
 						</div>
 					</div>
 				</div>

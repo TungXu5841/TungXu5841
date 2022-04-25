@@ -144,7 +144,7 @@ class VecSearchbar extends Module implements WidgetInterface
         $tab->class_name = "AdminVecSearchBar";
         $tab->name = array();
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Ajax search";
+            $tab->name[$lang['id_lang']] = "Ajax search";
         }
         $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
         $tab->module = $this->name;

@@ -60,25 +60,99 @@ class VecElements extends Module
 
     public function install()
     {
-        require_once _VEC_PATH_ . 'classes/VECDatabase.php';
+        require_once _VEC_PATH_ . 'install/VecElementInstall.php';
 
         if (Shop::isFeatureActive()) {
             Shop::setContext(Shop::CONTEXT_ALL);
         }
-        VECDatabase::initConfigs();
+        VecElementInstall::initConfigs();
 
-        if (!VECDatabase::createTables()) {
+        if (!VecElementInstall::createTables()) {
             $this->_errors[] = Db::getInstance()->getMsgError();
             return false;
         }
 
-        if ($res = parent::install() && VECDatabase::updateTabs()) {
-            foreach (VECDatabase::getHooks() as $hook) {
+        if ($res = parent::install()) {
+            foreach (VecElementInstall::getHooks() as $hook) {
                 $res = $res && $this->registerHook($hook, null, 1);
             }
         }
 
-        return $res;
+        return $res && $this->_createAdminMenu();
+    }
+
+    protected function _createAdminMenu() {
+        $response = true;
+        // First check for parent tab
+        $parentTabID = Tab::getIdFromClassName('VecThemeMenu');
+        if($parentTabID){
+            $parentTab = new Tab($parentTabID);
+        }else{
+            $parentconfigure = Tab::getIdFromClassName('IMPROVE');
+            $parentTab = new Tab();
+            $parentTab->active = 1;
+            $parentTab->name = array();
+            $parentTab->class_name = "VecThemeMenu";
+            foreach (Language::getLanguages() as $lang) {
+                $parentTab->name[$lang['id_lang']] = "THEMEVEC";
+            }
+            $parentTab->id_parent = 0;
+            $response &= $parentTab->add();
+        }
+        
+        //Add parent tab: modules
+        $parentTabID2 = Tab::getIdFromClassName('AdminParentVECContent');
+        if($parentTabID2){
+            $parentTab = new Tab($parentTabID2);
+        }else{
+            $tab = new Tab();
+            $tab->active = 1;
+            $tab->class_name = "AdminParentVECContent";
+            $tab->name = array();
+            foreach (Language::getLanguages(true) as $lang) {
+                $tab->name[$lang['id_lang']] = "V-Elements";
+            }
+            $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
+            $tab->module = $this->name;
+            $tab->icon = 'ce';
+            $response &= $tab->add();
+        }
+        //Add tab
+        $this->updateTab('AdminParentVECContent', 1, 'AdminVECHeader', true, 'Header Builder');
+        $this->updateTab('AdminParentVECContent', 2, 'AdminVECHome', true, 'Home Builder');
+        $this->updateTab('AdminParentVECContent', 3, 'AdminVECFooter', true, 'Footer Builder');
+        $this->updateTab('AdminParentVECContent', 4, 'AdminVECContent', true, 'Content to hooks');
+        $this->updateTab('AdminParentVECContent', 5, 'AdminVECEditor', false, 'Live Editor');
+
+        return $response;
+    }
+
+    protected static function updateTab($class_parent, $position, $class, $active, $name, $icon = '')
+    {
+        $id = (int) Tab::getIdFromClassName($class);
+        $tab = new Tab($id);
+        $tab->id_parent = (int) Tab::getIdFromClassName($class_parent);
+        $tab->position = (int) $position;
+        $tab->module = 'vecelements';
+        $tab->class_name = $class;
+        $tab->active = $active;
+        $tab->icon = $icon;
+        $tab->name = [];
+
+        foreach (Language::getLanguages(false) as $lang) {
+            $tab->name[$lang['id_lang']] = $name;
+        }
+
+        if (!$tab->save()) {
+            throw new Exception('Can not save Tab: ' . $class);
+        }
+
+        if (!$id && $tab->position != $position) {
+            $tab->position = (int) $position;
+            $tab->update();
+        }
+
+        return $tab;
     }
 
     public function uninstall()
@@ -662,10 +736,10 @@ class VecElements extends Module
             if (empty($vec_theme)) {
                 Configuration::updateValue('CE_THEME', $theme);
             } elseif ($vec_theme != $theme) {
-                require_once _VEC_PATH_ . 'classes/VECDatabase.php';
+                require_once _VEC_PATH_ . 'install/VecElementInstall.php';
 
                 // register missing hooks after changing theme
-                foreach (VECDatabase::getHooks() as $hook) {
+                foreach (VecElementInstall::getHooks() as $hook) {
                     $this->registerHook($hook, null, 1);
                 }
                 Configuration::updateValue('CE_THEME', $theme);

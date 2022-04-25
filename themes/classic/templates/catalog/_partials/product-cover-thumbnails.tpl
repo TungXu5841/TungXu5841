@@ -61,7 +61,7 @@
 
   {block name='product_images'}
     <div class="product-images-thumb">
-      <div class="product-thumbs js-qv-product-images slick-block items-desktop-5 items-tablet-4 items-mobile-3" data-item="{$vectheme.thumbnail_items}">
+      <div class="product-thumbs js-qv-product-images slick-block items-desktop-{$vectheme.thumbnail_items} items-tablet-4 items-mobile-3" data-item="{$vectheme.thumbnail_items}">
         {foreach from=$product.images item=image}
           <div class="thumb-item js-thumb-container">
             <img

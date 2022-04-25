@@ -96,8 +96,6 @@ export default class Product {
 		 	$images.slick('slickGoTo', goToSingleSlide);
 		});
 		if(isQuickview){
-      $images.slick('refresh');
-      $thumbnails.slick('refresh');
       $('.product-thumbs.slick-block .slick-slide.slick-current').addClass('is-active');
     }
 

@@ -60,7 +60,6 @@ $(document).ready(function () {
   prestashop.on(
     'updateCart',
     function (event) {
-      console.log('xxxxxxxxxxxxxxxxxxxxx');
       var refreshURL = $('.blockcart').data('refresh-url');
       var requestData = {};
       if (event && event.reason && typeof event.resp !== 'undefined' && !event.resp.hasError) {

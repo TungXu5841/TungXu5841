@@ -8,7 +8,7 @@
 
 defined('_PS_VERSION_') or die;
 
-class VECDatabase
+class VecElementInstall
 {
     private static $hooks = [
         'displayBackOfficeHeader',
@@ -168,55 +168,6 @@ class VECDatabase
                 KEY `name` (`name`)
             ) ENGINE=$engine DEFAULT CHARSET=utf8;
         ");
-    }
-
-    public static function updateTabs()
-    {
-        $id = (int) Tab::getIdFromClassName('IMPROVE');
-
-        try {
-            $pos = $id ? 1 : Tab::getInstanceFromClassName('AdminParentModules')->position;
-            $parent = self::updateTab($id, $pos, 'AdminParentVECContent', true, 'V-Elements', 'ce');
-
-            self::updateTab($parent->id, 1, 'AdminVECHeader', true, 'Header Builder');
-            self::updateTab($parent->id, 2, 'AdminVECHome', true, 'Home Builder');
-            self::updateTab($parent->id, 3, 'AdminVECFooter', true, 'Footer Builder');
-            self::updateTab($parent->id, 4, 'AdminVECContent', true, 'Content to hooks');
-            self::updateTab($parent->id, 5, 'AdminVECSettings', false, 'Settings');
-            self::updateTab($parent->id, 6, 'AdminVECEditor', false, 'Live Editor');
-        } catch (Exception $ex) {
-            return false;
-        }
-
-        return true;
-    }
-
-    protected static function updateTab($id_parent, $position, $class, $active, $name, $icon = '')
-    {
-        $id = (int) Tab::getIdFromClassName($class);
-        $tab = new Tab($id);
-        $tab->id_parent = $id_parent;
-        $tab->position = (int) $position;
-        $tab->module = 'vecelements';
-        $tab->class_name = $class;
-        $tab->active = $active;
-        $tab->icon = $icon;
-        $tab->name = [];
-
-        foreach (Language::getLanguages(false) as $lang) {
-            $tab->name[$lang['id_lang']] = $name;
-        }
-
-        if (!$tab->save()) {
-            throw new Exception('Can not save Tab: ' . $class);
-        }
-
-        if (!$id && $tab->position != $position) {
-            $tab->position = (int) $position;
-            $tab->update();
-        }
-
-        return $tab;
     }
 
     public static function getHooks($all = true)

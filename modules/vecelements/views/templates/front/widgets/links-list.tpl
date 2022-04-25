@@ -17,7 +17,7 @@
     </h2>
 	{/if}
 	<ul id="footer_linkslist_{$id}" class="{if !$title}not-title-links{/if} links-widget-content collapse">
-		{foreach from=$links item=link}
+		{foreach from=$list_links item=link}
 		<li>
 			{if $link.title}
 				{if $link.type_link == 'custom'}

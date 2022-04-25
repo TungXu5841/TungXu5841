@@ -149,7 +149,7 @@ class VecProductComments extends Module implements WidgetInterface
         $tab->class_name = "AdminVecProductComments";
         $tab->name = array();
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Product comments";
+            $tab->name[$lang['id_lang']] = "Product comments";
         }
         $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
         $tab->module = $this->name;

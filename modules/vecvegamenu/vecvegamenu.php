@@ -131,7 +131,7 @@ class VecVegamenu extends Module
         $tab->class_name = "AdminVecVegamenu";
         $tab->name = array();
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Vertical menu";
+            $tab->name[$lang['id_lang']] = "Vertical menu";
         }
         $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
         $tab->module = $this->name;

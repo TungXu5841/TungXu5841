@@ -631,3 +631,52 @@
 .vecicon-youtube:before {
   content: "\e9c7";
 }
+
+#subtab-SMARTBLOG > a > span{
+  line-height: 20px;
+}
+#subtab-SMARTBLOG i.mi-announcement{
+  font-size: 0;
+  line-height: 1;
+}
+#subtab-SMARTBLOG i.mi-announcement::before{
+  content: "";
+  background: url("images/blog.svg") no-repeat;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+#subtab-VecModules > a > span{
+  line-height: 20px;
+}
+#subtab-VecModules i.mi-open_with{
+  font-size: 0;
+  line-height: 1;
+}
+#subtab-VecModules i.mi-open_with::before{
+  content: "";
+  background: url("images/modules.svg") no-repeat;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: text-top;
+}
+#subtab-SMARTBLOG ul.submenu,
+#subtab-VecModules ul.submenu,
+#subtab-AdminParentVECContent ul.submenu{
+  padding-left: 2rem;
+}
+#subtab-SMARTBLOG ul.submenu > li > a::before,
+#subtab-VecModules ul.submenu > li > a::before,
+#subtab-AdminParentVECContent ul.submenu > li > a::before{
+  content: '\e905';
+  font-family: 'vecthemes-icon';
+  font-size: 9px;
+  line-height: 12px;
+  padding-right: 5px;
+}
+#subtab-AdminParentVECContent > a > span {
+  padding-left: 13px;
+}

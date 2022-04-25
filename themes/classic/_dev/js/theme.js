@@ -60,6 +60,12 @@ for (const i in EventEmitter.prototype) {
 }
 
 $(document).ready(() => {
+  $('body').on('click', '[data-button-action="add-to-cart"]', (event) => {
+    $(event.target).addClass('loading');
+  })
+  prestashop.on('updatedCart',function (event) {
+    $('[data-button-action="add-to-cart"').removeClass('loading');
+  })
   const dropDownEl = $('.js-dropdown');
   const form = new Form();
   //const topMenuEl = $('.js-top-menu ul[data-depth="0"]');

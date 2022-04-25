@@ -306,6 +306,7 @@ class smartblog extends Module
 			$smarttab->name[$l['id_lang']] = $this->trans('Blog', [], 'Modules.Smartblog.Smartblog');
 		}
 		$smarttab->icon = 'announcement';
+		$smarttab->position = 2;
 		$smarttab->save();
 		$tab_id = $smarttab->id;
 		@copy(dirname(__FILE__) . '/views/img/AdminSmartBlog.gif', _PS_ROOT_DIR_ . '/img/t/AdminSmartBlog.gif');

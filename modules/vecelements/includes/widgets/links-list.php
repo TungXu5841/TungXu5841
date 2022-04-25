@@ -393,7 +393,7 @@ class WidgetLinksList extends WidgetBase {
 			array(
 				'title'         => $settings['title'],
 				'title_url'     => $settings['link'],
-				'links'         => $settings['links'],
+				'list_links'    => $settings['links'],
 				'id'			=> $this->getId()
 			)
 		);

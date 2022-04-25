@@ -29,31 +29,31 @@ $tabvalue = array(
 		'class_name' => 'AdminBlogPost',
 		'id_parent'  => 15,
 		'module'     => 'smartblog',
-		'name'       => '- Post',
+		'name'       => 'Post',
 	),
 	array(
 		'class_name' => 'AdminBlogCategory',
 		'id_parent'  => 15,
 		'module'     => 'smartblog',
-		'name'       => '- Category',
+		'name'       => 'Category',
 	),
 	array(
 		'class_name' => 'AdminBlogcomment',
 		'id_parent'  => 15,
 		'module'     => 'smartblog',
-		'name'       => '- Comments',
+		'name'       => 'Comments',
 	),
 	array(
 		'class_name' => 'AdminImageType',
 		'id_parent'  => 15,
 		'module'     => 'smartblog',
-		'name'       => '- Image Type',
+		'name'       => 'Image Type',
 	),
 	array(
 		'class_name' => 'AdminSmartBlog',
 		'id_parent'  => 15,
 		'module'     => 'smartblog',
-		'name'       => '- Settings',
+		'name'       => 'Settings',
 	),
 );
 

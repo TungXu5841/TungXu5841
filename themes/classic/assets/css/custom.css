@@ -151,3 +151,10 @@ label.has-value + div > #field-birthday:-ms-input-placeholder {
   display: block !important;
 }
 
+.vec-search-widget .search-container.search-topbar.open .search-toggle:before{
+  display: none;
+}
+
+.quickview .images-container .product-images-thumb .thumb-item img{
+  border: 1px solid #e5e5e5;
+}

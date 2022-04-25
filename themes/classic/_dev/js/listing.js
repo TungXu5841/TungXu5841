@@ -105,8 +105,10 @@ $(document).ready(() => {
         productConfig(productModal);
         
         const productPage = new Product();
-        productPage.productImageSlider();
-
+        
+        productModal.on('shown.bs.modal', function (e) {
+          productPage.productImageSlider();
+        })
         productModal.on('hidden.bs.modal', () => {
           productModal.remove();
         });

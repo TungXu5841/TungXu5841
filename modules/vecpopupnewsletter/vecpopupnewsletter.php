@@ -131,7 +131,7 @@ class VecPopupNewsletter extends Module
         $tab->class_name = "AdminPopupNewsletter";
         $tab->name = array();
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Popup newsletter";
+            $tab->name[$lang['id_lang']] = "Popup newsletter";
         }
         $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
         $tab->module = $this->name;

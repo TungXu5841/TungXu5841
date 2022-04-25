@@ -34,7 +34,52 @@
       <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12">
           {block name='product_cover_thumbnails'}
-            {include file='catalog/_partials/product-cover-thumbnails.tpl'}
+            <div class="images-container js-images-container">
+            {block name='product_cover'}
+              <div class="product-images-cover">
+                {if $product.default_image}
+                  <div class="product-images slick-block items-desktop-1 items-tablet-1 items-mobile-1">
+                      {foreach from=$product.images item=image}
+                        <div class="cover-item">
+                            <img class="" src="{$image.bySize.large_default.url}" alt="{$image.legend}" title="{$image.legend}" itemprop="image">
+                        </div>
+                      {/foreach}
+                  </div>
+                {else}
+                  <img
+                    class="img-fluid"
+                    src="{$urls.no_picture_image.bySize.medium_default.url}"
+                    loading="lazy"
+                    width="{$urls.no_picture_image.bySize.medium_default.width}"
+                    height="{$urls.no_picture_image.bySize.medium_default.height}"
+                  >
+                {/if}
+              </div>
+            {/block}
+
+            {block name='product_images'}
+              <div class="product-images-thumb">
+                <div class="product-thumbs js-qv-product-images slick-block items-desktop-{$vectheme.thumbnail_items} items-tablet-4 items-mobile-3" data-item="{$vectheme.thumbnail_items}">
+                  {foreach from=$product.images item=image}
+                    <div class="thumb-item js-thumb-container">
+                      <img
+                        class="thumb js-thumb {if $image.id_image == $product.default_image.id_image} selected js-thumb-selected {/if}"
+                        data-image-medium-src="{$image.bySize.medium_default.url}"
+                        data-image-large-src="{$image.bySize.large_default.url}"
+                        src="{$image.bySize.small_default.url}"
+                        {if !empty($image.legend)}
+                          alt="{$image.legend}"
+                          title="{$image.legend}"
+                        {else}
+                          alt="{$product.name}"
+                        {/if}
+                      >
+                    </div>
+                  {/foreach}
+                </div>
+              </div>
+            {/block}
+          </div>
           {/block}
           <div class="product-additional-info js-product-additional-info">
             {hook h='displayProductAdditionalInfo' product=$product}

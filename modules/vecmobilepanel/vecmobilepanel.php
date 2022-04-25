@@ -229,7 +229,7 @@ class vecMobilePanel extends Module implements WidgetInterface
         $tab->class_name = "AdminMobilepanelListing";
         $tab->name = array();
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Mobile bottom panel";
+            $tab->name[$lang['id_lang']] = "Mobile bottom panel";
         }
         $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
         $tab->module = $this->name;

@@ -182,7 +182,7 @@ class VecThemeoptions extends Module implements WidgetInterface
         $tab->class_name = "AdminVecThemeoptions";
         $tab->name = array();
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[$lang['id_lang']] = "- Theme settings";
+            $tab->name[$lang['id_lang']] = "Theme settings";
         }
         $tab->id_parent = (int)Tab::getIdFromClassName('VecModules');
         $tab->module = $this->name;

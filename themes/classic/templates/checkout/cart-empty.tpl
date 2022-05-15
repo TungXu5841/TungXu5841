@@ -30,7 +30,7 @@
 
 {block name='continue_shopping' append}
   <a class="label btn btn-primary" href="{$urls.pages.index}">
-    <i class="vecicon-arrow-left-solid"></i>{l s='Continue shopping' d='Shop.Theme.Actions'}
+    <i class="vecicon-reply"></i>{l s='Continue shopping' d='Shop.Theme.Actions'}
   </a>
 {/block}
 

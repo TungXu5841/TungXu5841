@@ -428,7 +428,7 @@ class VecThemeoptions extends Module implements WidgetInterface
        
         //header
         $sticky_header_bg = Configuration::get($this->name . 'sticky_background');
-        $css .= '.sticky-inner{  
+        $css .= '#header .sticky-inner.scroll-menu {  
             background-color: '.$sticky_header_bg.';   
         }';
 

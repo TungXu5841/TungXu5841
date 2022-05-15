@@ -29,6 +29,8 @@
   {include file="catalog/_partials/miniatures/_product/grid2.tpl"}
 {elseif $vectheme.grid_type == 3}
   {include file="catalog/_partials/miniatures/_product/grid3.tpl"}
-{else $vectheme.grid_type == 4}
-  {include file="catalog/_partials/miniatures/_product/grid4.tpl"}
+{elseif $vectheme.grid_type == 4}
+  {include file="catalog/_partials/miniatures/_product/grid4.tpl"} 
+{else $vectheme.grid_type == 5}
+  {include file="catalog/_partials/miniatures/_product/grid5.tpl"}
 {/if}

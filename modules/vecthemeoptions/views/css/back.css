@@ -101,7 +101,7 @@ a {
 .image-select input {
     display: none;
 }
-.image-select .image-option-label {
+#vecthemeoptions .image-select .image-option-label {
     cursor: pointer;
     position: absolute;
     display: block;
@@ -111,21 +111,21 @@ a {
     left: 0px;
     z-index: 22;
 }
-.image-select .image-option-check {
+#vecthemeoptions .image-select .image-option-check {
     display: none;
     color: #e25d58;
 }
-.image-select input:checked + .image-option .image-option-title {
+#vecthemeoptions .image-select input:checked + .image-option .image-option-title {
     border-color: #e25d58;
 }
-.image-select input:checked + .image-option .image-option-check {
+#vecthemeoptions .image-select input:checked + .image-option .image-option-check {
     display: inline;
     float: right;
     color: #e25d58;
 }
-.image-select .image-option {
+#vecthemeoptions .image-select .image-option {
     position: relative;
-    display: inline-block;
+	display: inline-flex;
     border: 2px solid #ccc;
     padding: 5px 5px 5px 5px;
     -webkit-transition: all 100ms ease-in;
@@ -133,8 +133,15 @@ a {
     transition: all 100ms ease-in;
     margin: 0px 10px 10px 0px;
     text-align: center;
+	flex-direction: column;
+    justify-content: space-between;
 }
-.image-select input:checked + .image-option {
+#vecthemeoptions .image-select .image-option .image-option-title {
+	margin: 10px 0;
+	font-weight:600;
+	text-transform:uppercase; 
+}
+#vecthemeoptions .image-select input:checked + .image-option {
     -webkit-box-shadow: 0 0 8px 4px rgb(0 0 0 / 25%);
     box-shadow: 0 0 8px 4px rgb(0 0 0 / 25%);
     border: 2px solid #3498DB;

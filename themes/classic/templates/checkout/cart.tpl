@@ -43,7 +43,7 @@
 
         {block name='continue_shopping'}
           <a class="label btn btn-primary" href="{$urls.pages.index}">
-            <i class="vecicon-arrow-left-solid"></i>
+            <i class="vecicon-reply"></i>
             {l s='Continue shopping' d='Shop.Theme.Actions'}
           </a>
         {/block}

@@ -226,6 +226,11 @@ $this->fields_form[]['form'] = array(
                         'name' => $this->l('Grid 4'),
                         'img' => 'img4.png',
                         ),
+                    array(
+                        'id_option' => 5,
+                        'name' => $this->l('Grid 5'),
+                        'img' => 'img5.png',
+                        ),    
                 ),
                 'id' => 'id_option',
                 'name' => 'name',

@@ -92,8 +92,7 @@ class WidgetProductCarousel extends WidgetProductBase
                         'grid3' => 'Style 3',
                         'grid4' => 'Style 4',
                         'grid5' => 'Style 5',
-                        'grid6' => 'Style 6',
-                        'list' => 'Style 7'
+                        'list' => 'list'
                     ],
                     'default' => '0',
                     'separator' => 'before',

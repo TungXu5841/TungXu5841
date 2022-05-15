@@ -68,7 +68,7 @@
 
 {block name='page_footer'}
   <a id="back-to-login" href="{$urls.pages.my_account}" class="account-link btn btn-primary">
-    <i class="vecicon-arrow-left-solid"></i>
+    <i class="vecicon-reply"></i>
     <span>{l s='Back to login' d='Shop.Theme.Actions'}</span>
   </a>
 {/block}

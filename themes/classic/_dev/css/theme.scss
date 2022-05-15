@@ -39,6 +39,31 @@
 #header .elementor-widget-wrap {
     line-height: 1;
 }
+#header {
+    .sticky-inner.scroll-menu { 
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 101;
+        border: none;
+        margin: auto;
+        padding-top: 0;
+        padding-bottom: 0;
+        -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+        -webkit-animation: 0.7s ease-out 0s 1 normal running fadeInDown;
+        -moz-animation: 0.7s ease-out 0s 1 normal running fadeInDown;
+        -ms-animation: 0.7s ease-out 0s 1 normal running fadeInDown;
+        animation: 0.7s ease-out 0s 1 normal running fadeInDown;  
+        @include vec-transition(300ms); 
+		.not-sticky {
+			display: none;  
+		}
+    }
+}
 .container {
     max-width: 1320px; 
     width: auto;

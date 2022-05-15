@@ -52,6 +52,26 @@ $(document).ready(function(){
 		$(this).parents('body') .find( '#mobile_menu_wrapper' ) .removeClass('box-menu');
 		$(this).parents('body').find( '#menu-icon' ).removeClass('open-menu');
 	});	
+	if($('#header').length > 0){
+		var headerSpaceH = $('#header .sticky-inner').outerHeight(true);
+		$('#header .sticky-inner').before('<div class="headerSpace unvisible" style="height: '+headerSpaceH+'px;" ></div>'); 
+		if($('.page-index').length > 0 && $('.sticky-inner.absolute-header').length > 0){
+			$('.headerSpace').remove();
+		} 	
+	}	
+	$(window).scroll(function() {
+		var headerSpaceH = $('#header').outerHeight();
+		var screenWidth = $(window).width();
+		
+		if ($(this).scrollTop() > headerSpaceH && screenWidth >= 1024 ){  
+			  $(".use-sticky").find(".sticky-inner").addClass("scroll-menu"); 
+			   $('.headerSpace').removeClass("unvisible");
+		}
+		else{
+			 $(".use-sticky").find(".sticky-inner").removeClass("scroll-menu");
+			 $(".headerSpace").addClass("unvisible");
+		}
+	});	
 	$(".back-top").hide();
 	$(window).scroll(function () {
 		if ($(this).scrollTop() > 150) {

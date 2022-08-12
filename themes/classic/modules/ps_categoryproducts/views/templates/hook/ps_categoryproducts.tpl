@@ -33,7 +33,7 @@
 		</h2>
 	</div>
 	<div class="elementor-slick-slider">
-	  <div class="product-categoryslide slick-arrows-inside">
+	  <div class="product-categoryslide slick-arrows-inside slick-block items-desktop-5 items-tablet-3 items-mobile-2">
 		{foreach from=$products item="product"}
 		<div>
 		{include file="catalog/_partials/miniatures/product.tpl" product=$product}

@@ -1,5 +1,5 @@
 {block name='product_miniature_item'}
-	<article class="thumbnail-container product-miniature-grid2 product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
+	<article class="thumbnail-container product-miniature-grid2 product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
 		<div class="img-block"> 
 		    {block name='product_thumbnail'} 
 				{if $product.cover}
@@ -55,7 +55,7 @@
 					</div>
 				{/block}
 				{block name='product_name'}
-					<h3 itemprop="name"><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:$vectheme.name_length:'...'}</a></h3> 
+					<h3><a href="{$product.url}" class="product_name" title="{$product.name}">{$product.name|truncate:$vectheme.name_length:'...'}</a></h3> 
 				{/block}			
 				{block name='product_price_and_shipping'}
 				{if $product.show_price}

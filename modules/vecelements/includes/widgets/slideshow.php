@@ -746,9 +746,9 @@ class WidgetSlideshow extends WidgetBase {
 		#>
 		<div class="elementor-slideshow-wrapper">
 			<div class="elementor-slideshow">
-				<# _.each( settings.slideshow_list, function( slide ) { #>
+				<# console.log(settings); _.each( settings.slideshow_list, function( slide ) { #>
 					<div class="slideshow-item elementor-repeater-item-{{{slide._id}}}">
-						<div class="slider-item" style="background: url(http://localhost/framework/{{{ slide.slideshow_image.url }}});background-size: cover; background-position: center;">
+						<div class="slider-item" style="background: url({{{ baseDir + slide.slideshow_image.url }}});background-size: cover; background-position: center;">
 							<div class="desc-banner">
 								<div class="container">
 									<div class="slideshow-content">

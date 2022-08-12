@@ -330,7 +330,7 @@ var vecMegamenu = {
         });
     },
     saveRow: function(){
-        var params = vecMegamenu._getFormDataColumn();
+        var params = vecMegamenu._getFormDataRow();
         $.ajax({
             type: 'POST',
             url: vecMegamenu.ajaxUrl,

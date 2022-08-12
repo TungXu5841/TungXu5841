@@ -107,6 +107,7 @@ $(document).ready(() => {
   createInputFile();
   addJsProductTabActiveSelector();
   productImageZoom();
+  initThemeSliders($('.product-categoryslide'));
 
   const productPage = new Product();
   productPage.productImageSlider();
@@ -203,4 +204,107 @@ $(document).ready(() => {
 			}
 		});
 	}
+  function initThemeSliders(){
+    $('.product-accessoriesslide').on('init', function(event, slick, currentSlide){
+      var slideToShow = $(this).find('.slick-active').length - 1;
+      $(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+      $(this).find('.slick-active').eq(0).addClass('first-active');
+      $(this).find('.slick-active').eq(slideToShow).addClass('last-active');
+    });
+    $('.product-accessoriesslide').not('.slick-initialized').slick({ 
+       slidesToShow: 5,
+       slidesToScroll: 1,
+       dots: false, 
+       arrows: true,  
+       responsive: [
+      {breakpoint: 1199, settings: { slidesToShow: 4}},
+      {breakpoint: 991, settings: { slidesToShow: 3}},
+      {breakpoint: 767, settings: { slidesToShow: 2}},
+      {breakpoint: 575, settings: { slidesToShow: 2}},
+      {breakpoint: 359, settings: { slidesToShow: 1}}
+      ]
+    });
+    $('.product-accessoriesslide').on('afterChange', function(event, slick, currentSlide){
+      var slideToShow = $(this).find('.slick-active').length - 1;
+      $(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+      $(this).find('.slick-active').eq(0).addClass('first-active');
+      $(this).find('.slick-active').eq(slideToShow).addClass('last-active');
+    });
+    $('.product-categoryslide').on('init', function(event, slick, currentSlide){
+      var slideToShow = $(this).find('.slick-active').length - 1;
+      $(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+      $(this).find('.slick-active').eq(0).addClass('first-active');
+      $(this).find('.slick-active').eq(slideToShow).addClass('last-active');
+    });
+    $('.product-categoryslide').not('.slick-initialized').slick({ 
+       slidesToShow: 5,
+       slidesToScroll: 1,
+       dots: false, 
+       arrows: true,  
+       responsive: [
+          {breakpoint: 1199, settings: { slidesToShow: 4}},
+          {breakpoint: 991, settings: { slidesToShow: 3}},
+          {breakpoint: 767, settings: { slidesToShow: 2}},
+          {breakpoint: 575, settings: { slidesToShow: 2}},
+          {breakpoint: 359, settings: { slidesToShow: 1}}
+        ]
+    });
+    $('.product-categoryslide').on('afterChange', function(event, slick, currentSlide){
+      var slideToShow = $(this).find('.slick-active').length - 1;
+      $(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+      $(this).find('.slick-active').eq(0).addClass('first-active');
+      $(this).find('.slick-active').eq(slideToShow).addClass('last-active');
+    });
+
+    var viewedSlick = $('.vec-viewed-products .slick-slider');
+
+    viewedSlick.on('init', function(event, slick, currentSlide){
+      var slideToShow = $(this).find('.slick-active').length - 1;
+      $(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+      $(this).find('.slick-active').eq(0).addClass('first-active');
+      $(this).find('.slick-active').eq(slideToShow).addClass('last-active');
+    });
+    var defaultOptions = {
+          responsive: [
+              {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 4,
+                  }
+                },
+                {
+                  breakpoint: 992,
+                  settings: {
+                    slidesToShow: 3,
+                  }
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 2,
+                  }
+                },
+              {
+                  breakpoint: 568,
+                  settings: {
+                    slidesToShow: 2,
+                  }
+                },
+                {
+                  breakpoint: 360,
+                  settings: {
+                    slidesToShow: 1,
+                  }
+                }
+          ]
+        };
+    var slickOptions = $.extend({}, defaultOptions, viewedSlick.data('slick-options'));
+    viewedSlick.not('.slick-initialized').slick(slickOptions);
+    viewedSlick.on('afterChange', function(event, slick, currentSlide){
+      var slideToShow = $(this).find('.slick-active').length - 1;
+      $(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
+      $(this).find('.slick-active').eq(0).addClass('first-active');
+      $(this).find('.slick-active').eq(slideToShow).addClass('last-active');
+    });
+  }
 });

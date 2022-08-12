@@ -48,8 +48,8 @@
 						
 						<div class="vec-sub-inner">
 						{if $menu.sub_menu.submenu_config.submenu_width == '100vw'}<div class="container">{/if}
-						{foreach from=$menu.sub_menu.info_rows item= menu_row name=menu_row}
-							<div class="vec-menu-row row {$menu.item_class|escape:'html':'UTF-8'}">
+						{foreach from=$menu.sub_menu.info_rows item=menu_row name=menu_row}
+							<div class="vec-menu-row row {$menu_row.class|escape:'html':'UTF-8'}">
 								{if isset($menu_row.list_col) && count($menu_row.list_col) > 0}
 									{foreach from=$menu_row.list_col item= menu_col name=menu_col}
 										<div class="vec-menu-col {if $menu_col.width > 3}col-xs-12{else}col-xs-6{/if} col-sm-{$menu_col.width|escape:'html':'UTF-8'} {$menu_col.class|escape:'html':'UTF-8'} {if !$menu_col.active_mobile}hidden-mobile{/if}">

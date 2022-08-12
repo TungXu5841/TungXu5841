@@ -231,7 +231,7 @@ class AdminVecMegamenuSubmenuController extends ModuleAdminController {
         }
         
         foreach ($data as $param) {
-            if ($param['name'] == 'column_class') {
+            if ($param['name'] == 'row_class') {
                 $model->class = pSQL($param['value']);
             }
  

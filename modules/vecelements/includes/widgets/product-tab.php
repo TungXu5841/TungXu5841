@@ -449,7 +449,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .nav-tabs li.active a, {{WRAPPER}} .nav-tabs li:hover a' => 'fill: {{VALUE}}; color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li:hover a' => 'fill: {{VALUE}}; color: {{VALUE}};',
 							],
 						]
 					);
@@ -460,7 +460,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .nav-tabs li.active a, {{WRAPPER}} .nav-tabs li:hover a' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li:hover a' => 'background-color: {{VALUE}};',
 							],
 						]
 					);
@@ -471,7 +471,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .nav-tabs li.active a, {{WRAPPER}} .nav-tabs li:hover a' => 'border-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li:hover a' => 'border-color: {{VALUE}};',
 							],
 						]
 					);

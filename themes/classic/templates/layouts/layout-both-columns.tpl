@@ -45,7 +45,7 @@
         {include file='catalog/_partials/product-activation.tpl'}
       {/block}
 
-      <header id="header" class="{if $vectheme.header_sticky == 1}use-sticky{/if}"> 
+      <header id="header"> 
         {block name='header'}
           {include file='_partials/header.tpl'}
         {/block}
@@ -113,7 +113,7 @@
 							<h2>{l s='You might also like' d='Shop.Theme.Catalog'}</h2>
 						</div>
 						<div class="elementor-slick-slider">
-							<div class="product-accessoriesslide slick-arrows-inside">
+							<div class="product-accessoriesslide slick-arrows-inside slick-block items-desktop-5 items-tablet-3 items-mobile-2">
 							{foreach from=$accessories item="product_accessory"}
 							{block name='product_miniature'}
 							<div>

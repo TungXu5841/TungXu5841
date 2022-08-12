@@ -63,7 +63,7 @@
 .adminproducts #description .btn-edit-with-ce ~ .mce-tinymce {
 	margin: 0 10px 10px;
 }
-.adminproducts .tab-content .wrapper-edit-with-ce {
+.adminproducts .tab-content .wrapper-edit-with-ve {
 	border: none;
 	border-top: 1px solid #dfdfdf;
 	border-radius: 0;
@@ -97,7 +97,7 @@
 .btn-back-to-ps i.material-icons {
 	vertical-align: middle;
 }
-.wrapper-edit-with-ce {
+.wrapper-edit-with-ve {
 	background: #f5f8f9;
 	border: 1px solid #c7d6db;
 	border-radius: 3px;
@@ -106,7 +106,7 @@
 	cursor: pointer;
 	transition: background 0.05s;
 }
-.wrapper-edit-with-ce:hover {
+.wrapper-edit-with-ve:hover {
 	background: rgba(245, 248, 249, 0.2);
 }
 .btn-edit-with-ce ~ .mce-tinymce {

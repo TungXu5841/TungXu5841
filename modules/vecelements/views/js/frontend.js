@@ -4114,6 +4114,7 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 			breakpoints = ceFrontend.config.breakpoints;
 
 		var slickOptions = {
+			rows : elementSettings.rows,
 			touchThreshold: 100,
 			slidesToShow: slidesToShow,
 			slidesToScroll: +elementSettings.slides_to_scroll || 1,

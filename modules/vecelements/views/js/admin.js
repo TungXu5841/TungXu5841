@@ -103,7 +103,7 @@ window.ceAdmin && document.addEventListener('DOMContentLoaded', function() {
 
 			if (~ceAdmin.hideEditor.indexOf(idLang)) {
 				$(tmplBtnBack).insertBefore($btn).click(ceAdmin.onClickBtnBack)[0].href += '&uid=' + (1*ceAdmin.uid + 100*idLang);
-				$btn.wrap('<div class="wrapper-edit-with-ce">').parent().click(ceAdmin.onClickBtnWrapper);
+				$btn.wrap('<div class="wrapper-edit-with-ve">').parent().click(ceAdmin.onClickBtnWrapper);
 				$(el).hide().next('.maxLength').hide();
 			} else {
 				$btn.after('<br>');

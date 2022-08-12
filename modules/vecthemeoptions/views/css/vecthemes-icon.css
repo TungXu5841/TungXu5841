@@ -678,5 +678,12 @@
   padding-right: 5px;
 }
 #subtab-AdminParentVECContent > a > span {
-  padding-left: 13px;
+  padding-left: 11px;
+}
+i.mi-ve{
+	background: url('images/elementor.png') no-repeat;
+	background-size: 18px 14px;
+}
+#subtab-AdminParentVECContent i.mi-ve{
+  margin-left: 2px;
 }

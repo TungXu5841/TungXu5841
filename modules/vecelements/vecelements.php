@@ -114,7 +114,7 @@ class VecElements extends Module
             }
             $tab->id_parent = (int)Tab::getIdFromClassName('VecThemeMenu');
             $tab->module = $this->name;
-            $tab->icon = 'ce';
+            $tab->icon = 've';
             $response &= $tab->add();
         }
         //Add tab

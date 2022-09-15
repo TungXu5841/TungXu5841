@@ -58,6 +58,13 @@ $(document).ready(function()
 
 	$('#_desktop_megamenu img').parent('a').addClass("img_desktop"); 
 	$('#_mobile_megamenu img').parent('a').addClass("img_banner");
+
+	$('li.menu-item').mouseenter(function(){
+		$(this).addClass('menu-action-hover');
+	})
+	$('li.menu-item').mouseleave(function(){
+		$(this).removeClass('menu-action-hover');
+	})
 });
 
 function vecInitHorizontalMegamenu() {
@@ -65,7 +72,6 @@ function vecInitHorizontalMegamenu() {
     var $list = $menuHorizontal.find('li.hasChild');
 
     $list.hover(function() {
-
         setOffset($(this))
     });
     var setOffset = function($li) {

@@ -51,7 +51,7 @@
         {/block}
       </header>
 
-      <section id="wrapper 1">
+      <section id="wrapper">
         {if $page.page_name != 'index' && $page.page_name != 'module-vecelements-preview'}
         {block name='page_header_container'}
         <div class=" page-title-wrapper {if $vectheme.ptitle_size == 'small'}v_tilte_small{elseif $vectheme.ptitle_size == 'big'}v_tilte_big{/if}">

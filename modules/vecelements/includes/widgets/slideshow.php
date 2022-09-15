@@ -101,6 +101,26 @@ class WidgetSlideshow extends WidgetBase {
 					]
 				);
 				$repeater->addResponsiveControl(
+					'max-width',
+					[
+						'label' => __('Content max width'),
+						'type' => ControlsManager::SLIDER, 
+						'size_units' => array('px', '%'),
+						'range' => array(
+							'px' => array(
+								'min' => 0,
+								'max' => 2000,
+							),
+						),
+						'default' => [
+							'unit' => 'px',
+						],
+						'selectors' => [
+							'{{WRAPPER}} .elementor-slideshow-wrapper {{CURRENT_ITEM}} .desc-banner .slideshow-content' => 'max-width: {{SIZE}}{{UNIT}};',
+						],
+					],
+				);
+				$repeater->addResponsiveControl(
 					'x', 
 					[
 	                    'label' => __('X Position', 'Background Control'),

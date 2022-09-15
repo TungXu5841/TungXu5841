@@ -389,8 +389,27 @@
     text-transform: uppercase;
     padding: .8125rem 2.8125rem;
     width: 100%;
-    .material-icons {
-      line-height: inherit;
+    &.disabled:hover, &:disabled:hover {
+      background: var(--buttonbackground);
+      color: var(--buttoncolor); 
+    }
+    &.loading {
+      &:before {
+        content: '' !important; 
+        border: 1px solid;
+        color: transparent;
+        width: 14px;
+        height: 14px;
+        margin-right: .4375rem;
+        border-radius: 50%;
+        border-color: #5f5f5f #797979 #ccc #fff;
+        line-height: 1;
+        -webkit-animation: spin 0.6s infinite linear;
+        -moz-animation: spin 0.6s infinite linear;
+        -ms-animation: spin 0.6s infinite linear;
+        animation: spin 0.6s infinite linear;
+        display: inline-block;   
+      }
     }
   }
 }

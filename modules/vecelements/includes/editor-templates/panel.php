@@ -128,10 +128,10 @@ $document = Plugin::$instance->documents->get(Plugin::$instance->editor->getPost
         <i class="eicon-navigator" aria-hidden="true"></i>
         <span class="elementor-screen-only"><?= __('Navigator') ?></span>
     </div>
-    <div id="elementor-panel-footer-history" class="elementor-panel-footer-tool elementor-leave-open tooltip-target elementor-toggle-state" data-tooltip="<?= esc_attr__('History') ?>">
+    <!-- <div id="elementor-panel-footer-history" class="elementor-panel-footer-tool elementor-leave-open tooltip-target elementor-toggle-state" data-tooltip="<?= esc_attr__('History') ?>">
         <i class="fa fa-history" aria-hidden="true"></i>
         <span class="elementor-screen-only"><?= __('History') ?></span>
-    </div>
+    </div> -->
     <div id="elementor-panel-footer-responsive" class="elementor-panel-footer-tool elementor-toggle-state">
         <i class="eicon-device-desktop tooltip-target" aria-hidden="true" data-tooltip="<?= esc_attr__('Responsive Mode') ?>"></i>
         <span class="elementor-screen-only">

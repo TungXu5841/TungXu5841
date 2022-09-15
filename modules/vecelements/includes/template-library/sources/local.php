@@ -712,7 +712,7 @@ class TemplateLibraryXSourceLocal extends TemplateLibraryXSourceBase
         if (!isset($content) || !is_array($content)) {
             return new WPError('file_error', 'Invalid File');
         }
-
+        
         $content = $this->processExportImportContent($content, 'onImport');
 
         $page_settings = [];

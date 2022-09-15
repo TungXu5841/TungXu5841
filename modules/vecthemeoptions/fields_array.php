@@ -3,12 +3,12 @@
 $this->fields_form[]['form'] = array(
     'legend' => array(
         'title' => $this->l('General'),
-        'icon' => 'icon-cogs'
+        'icon' => 'icon-binoculars'
     ),
     'input' => array(
         array(
             'type' => 'infoheading',
-            'label' => $this->l('Body background'),
+            'label' => $this->l('General'),
             'name'=> 'body'
         ),
         array(
@@ -577,7 +577,7 @@ $this->fields_form[]['form'] = array(
 $this->fields_form[]['form'] = array(
     'legend' => array(
         'title' => $this->l('Product page settings'),
-        'icon' => 'icon-location-arrow'
+        'icon' => 'icon-delicious'
     ),
     'input' => array(
     	array(
@@ -886,20 +886,48 @@ $this->fields_form[]['form'] = array(
     )
 );
 //Import tab
-$this->fields_form[]['form'] = array(
-    'legend' => array(
-        'title' => $this->l('Demo setup'),
-        'icon' => 'icon-cloud-download'
-    ),
-    'input' => array(
-        array(
-            'type' => 'posthemes',
-            'label' => $this->l('Demo setup'),
-            'name'=> 'posthemes'
-        ),
-    ),
-    
-);
+// $this->fields_form[]['form'] = array(
+//     'legend' => array(
+//         'title' => $this->l('Import demo'),
+//         'icon' => 'icon-files-o'
+//     ),
+//     'input' => array(
+//         array(
+//             'type' => 'image-select',
+//             'label' => $this->l('Demo preset'),
+//             'name' => 'preset',
+//             'options' => array(
+//                 'query' => array(
+//                     array(
+//                         'id_option' => 1,
+//                         'name' => $this->l('Home 1'),
+//                         'img' => '01_Home.jpg'
+//                     ),
+//                     array(
+//                         'id_option' => 2,
+//                         'name' => $this->l('Home 2'),
+//                         'img' => '02_Home.jpg'
+//                     ),
+//                     array(
+//                         'id_option' => 3,
+//                         'name' => $this->l('Home 3'),
+//                         'img' => '03_Home.jpg'
+//                     ),
+//                     array(
+//                         'id_option' => 4,
+//                         'name' => $this->l('Home 4'),
+//                         'img' => '04_Home.jpg'
+//                     ),
+//                 ),
+//                 'id' => 'id_option',
+//                 'name' => 'name',
+//             ),
+//         ),
+//     ),
+//     'submit' => array(
+//         'title' => $this->l('Save'),
+//     )
+// );
 //Support
 $this->fields_form[]['form'] = array(
     'legend' => array(

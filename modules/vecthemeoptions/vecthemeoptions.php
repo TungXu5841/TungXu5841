@@ -678,4 +678,46 @@ class VecThemeoptions extends Module implements WidgetInterface
             return '';
         }
     }
+
+    public function presetDemo($demo){
+        $import_url = 'https://tungxu.site/prestashop/import-data/';
+        
+    	require_once _PS_MODULE_DIR_.$this->parent_module.'/'.$this->parent_module.'.php';
+    	$files = array(
+    	    $layout.'-header.json', $layout.'-home.json', $layout.'-footer.json'
+    	);
+        
+		foreach ($files as $file){
+			$_FILES['file']['tmp_name'] = $import_url. $layout. '/'. $file;
+			$response = \CE\Plugin::instance()->templates_manager->importTemplate();
+
+			if (is_object($response)){
+				$this->ajaxDie(json_encode(array(
+					'success' => false,
+					'data' => [
+						'message' => $this->l('Error!!! Reload and try again.'),
+					]
+				)));
+			}
+		}
+
+        switch ($demo) {
+            case 'home1':
+                //Add changed configure
+                //Import elements
+                break;
+            case 'home2':
+                //Add changed configure
+                //Import elements
+                break;
+            case 'home3':
+                //Add changed configure
+                //Import elements
+                break;
+            case 'home4':
+                //Add changed configure
+                //Import elements
+                break;
+        }
+    }
 }

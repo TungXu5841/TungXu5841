@@ -1,5 +1,9 @@
 <div id="vecthemeoptions">
 <div class="vec-column col-lg-2 col-md-3">
+	<div class="theme-information">
+		<img src="{$base_url}modules/vecthemeoptions/img/logo.jpg" alt="logo" />
+		<p class="version">Version 1.0.0</p>
+	</div>
 	<ul class="tab nav nav-tabs">
 	{$tabk = 0}
 		{foreach $fields as $fkey => $fvalue}
@@ -884,47 +888,6 @@
 									<div class="form-group hr-type">
 									<hr></hr>
 									</div>
-								{elseif $input.type == 'posthemes'}
-								<div class="form-group">
-									<div class="row">
-										<select class="vec-layouts fixed-width-xxl">
-											<option value="digital1">Digital 1</option>
-											<option value="digital2">Digital 2</option>
-											<option value="digital3">Digital 3</option>
-											<option value="digital4">Digital 4</option>
-											<option value="cosmetic1">Cosmetic 1</option>
-											<option value="cosmetic2">Cosmetic 2</option>
-											<option value="cosmetic3">Cosmetic 3</option>
-											<option value="cosmetic4">Cosmetic 4</option>
-										</select>
-										<a href="http://demo.posthemes.com/pos_ecolifedemo/#section-page" class="pos-demos" target="_blank">View our list demo</a>
-										<div class="import-processing"></div>
-										<button class="btn-import"><span>Import demo</span></button>
-									</div>
-									<script>
-										$select = $('select.vec-layouts');
-										$select.select2({
-											tags: false,
-											createTag: function(params) {
-												return {
-													id: params.term,
-													text: params.term,
-													newOption: false
-												};
-											},
-											templateResult: function(data) {
-												var $result = $('<span>').text(data.text);
-
-												if (data.newOption) {
-													$result.append(" <i>(custom)</i>");
-												}
-												return $result;
-											}
-										}).val($select.val())
-											.trigger('change.select2')
-										;
-									</script>
-								</div>
 								{elseif $input.type == 'date'}
 									<div class="row">
 										<div class="input-group col-lg-4">

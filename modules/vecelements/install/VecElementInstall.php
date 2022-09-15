@@ -41,7 +41,7 @@ class VecElementInstall
         $defaults = [
             // General
             'elementor_frontend_edit' => 1,
-            'elementor_max_revisions' => 10,
+            'elementor_max_revisions' => 0,
             // Style
             'elementor_default_generic_fonts' => 'sans-serif',
             'elementor_container_width' => 1140, //update it using themeoptions
@@ -190,4 +190,5 @@ class VecElementInstall
         }
         return $hooks;
     }
+    
 }

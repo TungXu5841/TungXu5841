@@ -164,7 +164,7 @@
 	
 	<div style="clear:both;"></div>
 	<div class="form-group">
-		<label class="control-label col-lg-3">{l s='Sub Title' mod='vecmegamenu'}</label>
+		<label class="control-label col-lg-3">{l s='Item label' mod='vecmegamenu'}</label>
 		<div class="col-lg-9">
 			{foreach from=$languages item=language}
 				{if $languages|count > 1}
@@ -194,7 +194,7 @@
 		<p class="help-block col-lg-9 col-lg-offset-3">{l s='Add highlight to menu item.' mod='vecmegamenu'}</p>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-lg-3" for="">{l s='Subtitle style' mod='vecmegamenu'}</label>
+		<label class="control-label col-lg-3" for="">{l s='Item label style' mod='vecmegamenu'}</label>
 		<div class="col-lg-9">
 			<div class="row">
 				

@@ -14,6 +14,11 @@ define('_VEC_URL_', defined('_PS_BO_ALL_THEMES_DIR_') ? _MODULE_DIR_ . 'veceleme
 define('_VEC_ASSETS_URL_', _VEC_URL_ . 'views/');
 define('_VEC_TEMPLATES_', _VEC_PATH_ . 'views/templates/');
 
+use VEC\UId;
+use VEC\WPPost;
+use VEC\TemplateLibraryXSourceBase;
+
+require_once _VEC_PATH_ . 'classes/wrappers/UId.php';
 require_once _VEC_PATH_ . 'classes/VECTheme.php';
 require_once _VEC_PATH_ . 'classes/VECContent.php';
 require_once _VEC_PATH_ . 'classes/VECTemplate.php';
@@ -71,7 +76,7 @@ class VecElements extends Module
             $this->_errors[] = Db::getInstance()->getMsgError();
             return false;
         }
-
+        $test = $this->installDemoData();
         if ($res = parent::install()) {
             foreach (VecElementInstall::getHooks() as $hook) {
                 $res = $res && $this->registerHook($hook, null, 1);
@@ -931,4 +936,80 @@ class VecElements extends Module
         return $tpls;
     }
     
+    public function installDemoData(){
+        $languages = Language::getLanguages(false);
+				
+        $path = $this->getLocalPath() . 'install/import-data/';
+        $fileList = array(
+            'demo1-header',
+            'demo1-home',
+            'demo1-footer',
+            'demo2-footer',
+            'demo2-home',
+            'demo2-header',
+        );
+        foreach($fileList as $fileName){
+            $postarr = array();        
+            $file = $path.$fileName.'.json';
+
+            if(file_exists($file)){
+                
+                $content = file_get_contents($file, true);
+
+                $uid = new UId(0, UId::THEME);
+
+                $post = WPPost::getInstance($uid);
+                $postarr['post_author'] = \Context::getContext()->employee->id;
+                $postarr['post_title'] = $fileName;
+                $postarr['post_status'] = 'publish';
+                $postarr['post_type'] = 'VECTheme';
+                if (strpos($fileName, 'header') !== false) {
+                    $postarr['template_type'] = 'header'; 
+                }
+                if (strpos($fileName, 'home') !== false) {
+                    $postarr['template_type'] = 'page-index'; 
+                }
+                if (strpos($fileName, 'footer') !== false) {
+                    $postarr['template_type'] = 'footer'; 
+                }
+
+                foreach ($postarr as $key => &$value) {
+                    $post->$key = $value;
+                }
+                if ($post->_obj->add()) {
+                    $uid->id = $post->_obj->id;
+                    $post->ID = "$uid";
+                } else {
+                    $post->ID = 0;
+                }
+                
+                //Insert to vec_meta table
+                $names = [
+                    '_elementor_data',
+                    '_wp_page_template',
+                    '_elementor_edit_mode',
+                ];
+
+                $table = 'vec_meta';
+                $meta_data = array();
+                $meta_data['id'] = $post->ID;
+
+                foreach($names as $name){
+                    $meta_data['name'] = $name;
+                    if($name == '_elementor_data'){
+                        $meta_data['value'] = $content;
+                    }
+                    if($name == '_wp_page_template'){
+                        $meta_data['value'] = 'default';
+                    }
+                    if($name == '_elementor_edit_mode'){
+                        $meta_data['value'] = 'builder';
+                    }
+                    
+                    $result = Db::getInstance()->insert($table,$meta_data);
+                }
+                
+            }
+        }
+    }
 }

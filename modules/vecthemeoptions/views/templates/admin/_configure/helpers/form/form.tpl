@@ -1,7 +1,7 @@
 <div id="vecthemeoptions">
 <div class="vec-column col-lg-2 col-md-3">
 	<div class="theme-information">
-		<img src="{$base_url}modules/vecthemeoptions/img/logo.jpg" alt="logo" />
+		<img src="{$base_url}modules/vecthemeoptions/img/logo.png" alt="logo" />
 		<p class="version">Version 1.0.0</p>
 	</div>
 	<ul class="tab nav nav-tabs">

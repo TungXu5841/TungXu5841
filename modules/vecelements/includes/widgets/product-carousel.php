@@ -157,14 +157,10 @@ class WidgetProductCarousel extends WidgetProductBase
         }
 
         $tpl = 'catalog/_partials/miniatures/_product/'. $grid_type .'.tpl';
-        $option_rotator = \Configuration::get('vecthemeoptionssecond_img');
-        $name_length = \Configuration::get('vecthemeoptionsgrid_name_length');
-        $name_cut = \Configuration::get('vecthemeoptionsgrid_name_cut');
-        $this->context->smarty->assign('vectheme', array(
-            'rotator' => $option_rotator,
-            'grid_type' => $grid_type,
-            'name_length' => ($name_length == 'cut' && $name_cut > 0 ) ? $name_cut : 128,
-        ));
+
+        if(!isset($vectheme))
+            $this->context->smarty->assign('vectheme', $this->getVecthemeOptions());
+        
         if (!file_exists(_PS_THEME_DIR_ . "templates/$tpl") &&
             !file_exists(_PS_ALL_THEMES_DIR_ . "{$this->parentTheme}/templates/$tpl")
         ) {

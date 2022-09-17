@@ -48,6 +48,46 @@ abstract class WidgetProductBase extends WidgetBase
         parent::__construct($data, $args);
     }
 
+    protected function getVecthemeOptions(){
+        $prefix_name = 'vecthemeoptions';
+        $options = array(
+            'header_sticky'                 => \Configuration::get($prefix_name . 'header_sticky'),
+            //Product grid
+			'grid_type'                     => isset($_GET['grid_type']) ? $_GET['grid_type'] : \Configuration::get($prefix_name . 'grid_type'),
+			'rotator'                       => \Configuration::get($prefix_name . 'second_img'),
+			'name_length'                   => (\Configuration::get($prefix_name . 'grid_name_length') == 'cut' && \Configuration::get($prefix_name . 'grid_name_cut') > 0) ? (\Configuration::get($prefix_name . 'grid_name_cut')) : 128,
+            //Page title
+            'ptitle_size'                   => \Configuration::get($prefix_name . 'ptitle_size'),
+            //Category page
+            'category_layout'               => isset($_GET['category_layout']) ? $_GET['category_layout'] : \Configuration::get($prefix_name . 'category_layout'),
+            'category_thumbnail'            => isset($_GET['category_thumbnail']) ? $_GET['category_thumbnail'] : \Configuration::get($prefix_name . 'category_thumbnail'),
+            'category_description'          => isset($_GET['category_description']) ? $_GET['category_description'] : \Configuration::get($prefix_name . 'category_description'),
+            'category_description_bottom'   => isset($_GET['category_description_bottom']) ? $_GET['category_description_bottom'] : \Configuration::get($prefix_name . 'category_description_bottom'),
+            'category_sub'                  => isset($_GET['category_sub']) ? $_GET['category_sub'] :\Configuration::get($prefix_name . 'category_sub'),
+            'category_pagination'           => isset($_GET['category_pagination']) ? $_GET['category_pagination'] :\Configuration::get($prefix_name . 'category_pagination'),
+            'category_filter'               => isset($_GET['category_filter']) ? $_GET['category_filter'] :\Configuration::get($prefix_name . 'category_filter'),
+            'category_column'               => isset($_GET['column']) ? $_GET['column'] :\Configuration::get($prefix_name . 'category_column'),
+            //Product page
+            'product_layout'                => isset($_GET['product_layout']) ? $_GET['product_layout'] :\Configuration::get($prefix_name . 'product_layout'),
+            'main_layout'                   => isset($_GET['product_main']) ? $_GET['product_main'] :\Configuration::get($prefix_name . 'main_layout'),
+            'product_image'                 => isset($_GET['product_image']) ? $_GET['product_image'] :\Configuration::get($prefix_name . 'product_image'),
+            'information_layout'            => isset($_GET['product_infor']) ? $_GET['product_infor'] :\Configuration::get($prefix_name . 'information_layout'),
+
+            'zoom_active'                   =>\Configuration::get($prefix_name . 'zoom'),
+            'thumbnail_items'               => (int)\Configuration::get($prefix_name . 'thumbnail_items') ?\Configuration::get($prefix_name . 'thumbnail_items'): 4,
+            //404 page
+            '404_content'                   =>\Configuration::get($prefix_name . '404_content'),
+            '404_image'                     =>\Configuration::get($prefix_name . '404_image') ?\Configuration::get($prefix_name . '404_image') : '',
+            '404_text1'                     =>\Configuration::get($prefix_name . '404_text1', $this->context->language->id) ?\Configuration::get($prefix_name . '404_text1', $this->context->language->id) : '',
+            '404_text2'                     =>\Configuration::get($prefix_name . '404_text2', $this->context->language->id) ?\Configuration::get($prefix_name . '404_text2', $this->context->language->id) : '',
+		);
+        if (isset($this->context->cookie->shop_view)) {
+            $options['shop_view'] = $this->context->cookie->shop_view;
+        }
+        //echo '<pre>'; print_r($options);die;
+        return $options;
+    }
+
     public function getCategories()
     {
         return ['premium'];

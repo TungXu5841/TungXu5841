@@ -59,11 +59,22 @@ $(document).ready(function()
 	$('#_desktop_megamenu img').parent('a').addClass("img_desktop"); 
 	$('#_mobile_megamenu img').parent('a').addClass("img_banner");
 
+	// $('li.menu-item').hover(function(e) {
+	// 	$('li.menu-item').removeClass('menu-action-hover');
+	// 	$(this).addClass('menu-action-hover');
+	// }, function(e) {
+	// 	setTimeout(function() {
+	// 		$('li.menu-item').removeClass('menu-action-hover');
+	// 	}, 500);
+	// })
+
 	$('li.menu-item').mouseenter(function(){
 		$(this).addClass('menu-action-hover');
 	})
 	$('li.menu-item').mouseleave(function(){
-		$(this).removeClass('menu-action-hover');
+		setTimeout(function() {
+			$('li.menu-item').removeClass('menu-action-hover');
+		}, 500);
 	})
 });
 

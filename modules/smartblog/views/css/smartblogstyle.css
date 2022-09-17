@@ -910,6 +910,9 @@ form#searchbox .button.button-small i {
 .row .sdsarticleCat{
     margin-bottom: 30px;
 }
+#index .row .sdsarticleCat{
+    margin-bottom: 30px;
+}
 /* Smart Blog Post single */
 .smart-blog-single-post-title {
     font-weight: 500;

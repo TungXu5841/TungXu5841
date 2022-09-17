@@ -22,8 +22,8 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-<div class="modal fade js-product-images-modal" id="product-modal">
-  <div class="modal-dialog" role="document">
+<div class="modal js-product-images-modal" id="product-modal">
+  <div class="modal-dialog animationShowPopup animated" role="document">
     <div class="modal-content">
       <button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
         <i class="vecicon-cross"></i>

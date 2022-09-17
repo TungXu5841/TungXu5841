@@ -93,8 +93,8 @@
 
 <!-- Trigger the modal with a button -->
 <!-- Modal -->
-<div class="modal fade" id="vec-product-comment-modal" role="dialog">
-  <div class="modal-dialog">
+<div class="modal" id="vec-product-comment-modal" role="dialog">
+  <div class="modal-dialog animationShowPopup animated">
      <!-- Modal content-->
      <div class="modal-content">
         <div class="modal-body">

@@ -1167,15 +1167,10 @@ class VecMegamenu extends Module
 			
 			$css .= ' .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' > a .menu-subtitle { 
 				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'background: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
+                '.($submenus[$key]['subtitle_bg_color'] != '' ? 'border-color: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
 				'.($submenus[$key]['subtitle_color'] != '' ? 'color: '.$submenus[$key]['subtitle_color'].';' : '').'
 				'.($submenus[$key]['subtitle_fontsize'] != 0 ? 'font-size: '.$submenus[$key]['subtitle_fontsize'].'px;' : '').'
 				'.($submenus[$key]['subtitle_lineheight'] != 0 ? 'line-height: '.$submenus[$key]['subtitle_lineheight'].'px;' : '').';
-			}';
-			$css .= '#_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' > a .menu-subtitle:after{ 
-				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'border-top-color: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
-			}';	
-			$css .= '.vec-mobile-menu.vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' > a .menu-subtitle:after{ 
-				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'border-right-color: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
 			}';
 			$submenu_config = VecMegamenuSubmenuClass::getSubmenuConfig($submenus[$key]['id_vecmegamenu_item']);
 			if($submenu_config['submenu_bg'] == 2 && $submenu_config['submenu_bg_color'] != ''){

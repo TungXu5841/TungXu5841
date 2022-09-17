@@ -66,8 +66,8 @@ $(document).ready(function() {
 					$('.vec-quicklogin-modal').modal('show');
 				}else{
 					var html = '';
-					html += '<div class="modal fade" id="wishlistModal">';
-					html += '<div class="modal-dialog"><div class="modal-content">';
+					html += '<div class="modal" id="wishlistModal">';
+					html += '<div class="modal-dialog animationShowPopup animated"><div class="modal-content">';
 						html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons close">close</i></button>';
 						html += '<div class="modal-body">';
 						html += wishListVar.loggin_required_text;
@@ -126,8 +126,8 @@ $(document).ready(function() {
 					$('.vec-quicklogin-modal').modal('show');
 				}else{
 					var html = '';
-					html += '<div class="modal fade" id="wishlistModal">';
-					html += '<div class="modal-dialog"><div class="modal-content">';
+					html += '<div class="modal" id="wishlistModal">';
+					html += '<div class="modal-dialog animationShowPopup animated"><div class="modal-content">';
 						html += '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="material-icons close">close</i></button>';
 						html += '<div class="modal-body">';
 						html += wishListVar.loggin_required_text;

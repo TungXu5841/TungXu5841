@@ -62,9 +62,9 @@ $(document).ready(function()
 		e.stopPropagation(); 
 		var vega = $(".vec-menu-vertical .menu-content");
 		if(vega.is(':hidden')){
-			vega.slideDown();
+			vega.addClass('v-open'); 
 		} else {
-			vega.slideUp();
+			vega.removeClass('v-open');
 		}
 		e.preventDefault();
 	});

@@ -1,4 +1,4 @@
-<div id="vecpopupnewsletter" class="modal popup-type-2 popup-text-color-{$vecpopup.VEC_NEWSLETTER_TEXT_COLOR}" tabindex="-1" role="dialog"><div class="modal-dialog" role="document">
+<div id="vecpopupnewsletter" class="modal popup-type-2 popup-text-color-{$vecpopup.VEC_NEWSLETTER_TEXT_COLOR}" tabindex="-1" role="dialog"><div class="modal-dialog animationShowPopup animated" role="document">
 	<div class="modal-content">
 		<button type="button" class="close" data-dismiss="modal" aria-label="{l s='Close' d='Shop.Theme.Global'}">
 			<i class="vecicon-cross"></i>

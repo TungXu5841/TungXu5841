@@ -28,14 +28,14 @@
   -webkit-overflow-scrolling: touch;
   opacity: 0;
   visibility: hidden;
-  width: 350px;
+  width: 25rem;
   max-width: 95%;
   background-color: #fff;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  @include vec-transform(translate(350px,0));
-  @include vec-transition(250ms);
+  transition: opacity .5s,transform .5s ease,visibility .5s ease;
+ @include vec-transform(translateX(100%));
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 5px;
@@ -49,9 +49,12 @@
   &.filter-open {
     opacity: 1;
     visibility: visible;
-    transform: none;
-    -webkit-transform: none;
-    -ms-transform: none;
+    @include vec-transform(translateX(0)); 
+    #_desktop_search_filters {
+      > *{
+          animation: 1s animationRighttoLeft;
+      }
+    } 
   }
   .filter-close-btn {
     border: none;
@@ -1517,6 +1520,9 @@
   h1 {
     padding-top: 0.625rem;
   }
+}
+.open>.dropdown-menu {
+  animation: animateUpToDown .35s ease;
 }
 .products-sort-nb-dropdown,
 .products-sort-order,

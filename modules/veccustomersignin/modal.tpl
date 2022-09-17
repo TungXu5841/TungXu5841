@@ -1,5 +1,5 @@
-<div class="modal vec-quicklogin-modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
+<div class="modal vec-quicklogin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog animationShowPopup animated" role="document">
 		<div class="modal-content">
 		  <div class="modal-header">
 		  	<h3 class="login-title">			

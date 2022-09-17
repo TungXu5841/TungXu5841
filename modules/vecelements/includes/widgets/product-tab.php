@@ -530,8 +530,9 @@ class WidgetProductTab extends WidgetProductBase
                 $grid_type = 'grid'. $option_product;
             }
         }
-		if(!isset($vectheme))
-			$this->context->smarty->assign('vectheme', $this->getVecthemeOptions());
+		if(!isset($vectheme)){
+            $this->context->smarty->assign('vectheme', $this->getVecthemeOptions());
+        }
         
         $ajaxtab = false;
         if($settings['enable_ajax']){

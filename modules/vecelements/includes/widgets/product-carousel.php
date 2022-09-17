@@ -158,9 +158,9 @@ class WidgetProductCarousel extends WidgetProductBase
 
         $tpl = 'catalog/_partials/miniatures/_product/'. $grid_type .'.tpl';
 
-        if(!isset($vectheme))
+        if(!isset($vectheme)){
             $this->context->smarty->assign('vectheme', $this->getVecthemeOptions());
-        
+        }
         if (!file_exists(_PS_THEME_DIR_ . "templates/$tpl") &&
             !file_exists(_PS_ALL_THEMES_DIR_ . "{$this->parentTheme}/templates/$tpl")
         ) {

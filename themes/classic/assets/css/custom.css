@@ -5,9 +5,6 @@
 .hidden{
   display: none !important;
 }
-.first-active .js-product-miniature:after{
-  left: 0;
-}
  .slick-block:not(.slick-initialized){
    white-space: nowrap;
    overflow: hidden;
@@ -102,74 +99,3 @@
    }
  }
  
-/***** Checkout *****/
-/* checkout steps */
-.cl-firstname , .cl-lastname{
-  width: 48%;
-  display: inline-block;
-}
-.cl-firstname {
-  margin-right: 4%;
-}
-.cl-lastname{
-  margin-left: -4px;
-}
-.cl-firstname .form-control-comment, .cl-lastname .form-control-comment{
-  display: none;
-}
-.cl-id_gender .form-control-label{
-  position: static;
-}
-
-/* Fix  for birthday field*/
-#field-birthday::-webkit-input-placeholder {
-  color: #fff !important; 
-}
-#field-birthday:-moz-placeholder {
-  color: #fff !important;  
-}
-#field-birthday::-moz-placeholder {
-  color: #fff !important;  
-}
-#field-birthday:-ms-input-placeholder {  
-  color: #fff !important;  
-}
-label.has-value + div > #field-birthday::-webkit-input-placeholder {
-  color: #aaa !important; 
-}
-label.has-value + div > #field-birthday:-moz-placeholder {
-  color: #aaa !important;  
-}
-label.has-value + div > #field-birthday::-moz-placeholder {
-  color: #aaa !important;  
-}
-label.has-value + div > #field-birthday:-ms-input-placeholder {  
-  color: #aaa !important;  
-}
-
-#product-modal .modal-content .modal-body{
-  display: block !important;
-}
-
-.vec-search-widget .search-container.search-topbar.open .search-toggle:before{
-  display: none;
-}
-
-.quickview .images-container .product-images-thumb .thumb-item img{
-  border: 1px solid #e5e5e5;
-}
-
-
-.vec-menu-content .vec-menu-horizontal .menu-content .menu-item.menu_initialized.menu-action-hover>.menu-dropdown{
-  opacity: 1;
-  visibility: visible;
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-  -o-transition: -o-transform 0.3s, opacity 0.3s;
-  -ms-transition: -ms-transform 0.3s, opacity 0.3s;
-  -moz-transition: -moz-transform 0.3s, opacity 0.3s;
-  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-}
-.vec-menu-content .vec-menu-horizontal .menu-content .menu-item .menu-dropdown{
-  top: 150%;
-}

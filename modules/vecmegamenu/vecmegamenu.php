@@ -1172,6 +1172,9 @@ class VecMegamenu extends Module
 				'.($submenus[$key]['subtitle_fontsize'] != 0 ? 'font-size: '.$submenus[$key]['subtitle_fontsize'].'px;' : '').'
 				'.($submenus[$key]['subtitle_lineheight'] != 0 ? 'line-height: '.$submenus[$key]['subtitle_lineheight'].'px;' : '').';
 			}';
+            $css .= '.vec-mobile-menu .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' > a .menu-subtitle:after{  
+				'.($submenus[$key]['subtitle_bg_color'] != '' ? 'border-right-color: '.$submenus[$key]['subtitle_bg_color'].';' : '').'
+			}';	 
 			$submenu_config = VecMegamenuSubmenuClass::getSubmenuConfig($submenus[$key]['id_vecmegamenu_item']);
 			if($submenu_config['submenu_bg'] == 2 && $submenu_config['submenu_bg_color'] != ''){
 				$css .= '#_desktop_megamenu .vec-menu-horizontal .menu-content .menu-item.menu-item'.$submenus[$key]['id_vecmegamenu_item'].' .menu-dropdown .vec-sub-inner,

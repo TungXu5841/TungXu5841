@@ -231,7 +231,6 @@ div.star a:hover {
   position: relative;
   margin-right: 15px;
   padding: 0;
-  margin-bottom: 10px;
   cursor: pointer;
   display: inline-block;
 }
@@ -249,7 +248,7 @@ div.star a:hover {
   vertical-align:-1px;
 }
 .comments_advices a.reviews:before {
-  content: "\e9a3";
+  content: "\e915"; 
 }
 .comments_advices a.open-comment-form:before {
   content: "\e980"; 

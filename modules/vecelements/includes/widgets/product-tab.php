@@ -269,43 +269,7 @@ class WidgetProductTab extends WidgetProductBase
 				'tab' 			=> ControlsManager::TAB_STYLE,
 			]
 		);
-			$this->addControl(
-				'title_type',
-				[
-					'label' => __( 'Title type' ),
-					'type' => ControlsManager::SELECT,
-					'default' => 'normal',
-					'prefix_class' => 'title-',
-					'options' => [
-						'normal'  => __( 'Normal' ),
-						'absolute' => __( 'Absolute' ),
-					],
-				]
-			);
-			$this->addResponsiveControl(
-				'title_absolute',
-				[
-					'label' => __( 'Title absolute' ),
-					'type' => ControlsManager::SLIDER,
-					'size_units' => [ 'px' ],
-					'range' => [
-						'px' => [
-							'min' => -100,
-							'max' => 100,
-						],
-					],
-					'default' => [
-						'unit' => 'px',
-						'size' => -45,
-					],
-					'selectors' => [
-						'{{WRAPPER}} .nav-tabs' => 'top: {{SIZE}}{{UNIT}};',
-					],
-					'condition'    	=> [
-						'title_type' => 'absolute',
-					],
-				]
-			);
+			
 			$this->addControl(
 				'title_align',
 				[
@@ -331,25 +295,12 @@ class WidgetProductTab extends WidgetProductBase
 					],
 				]
 			);
-			$this->addResponsiveControl(
-				'title_size',
+			$this->addGroupControl(
+				GroupControlTypography::getType(),
 				[
-					'label' => __( 'Title size' ),
-					'type' => ControlsManager::SLIDER,
-					'size_units' => [ 'px' ],
-					'range' => [
-						'px' => [
-							'min' => 0,
-							'max' => 100,
-						],
-					],
-					'default' => [
-						'unit' => 'px',
-						'size' => 15,
-					],
-					'selectors' => [
-						'{{WRAPPER}} .nav-tabs li a' => 'font-size: {{SIZE}}{{UNIT}};',
-					],
+					'name' => 'title_size',
+					'selector' => '{{WRAPPER}} .nav-tabs li a',
+					'separator' => 'none',
 				]
 			);
 			$this->addResponsiveControl(
@@ -449,7 +400,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li:hover a' => 'fill: {{VALUE}}; color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li a:hover' => 'fill: {{VALUE}}; color: {{VALUE}};',
 							],
 						]
 					);
@@ -460,7 +411,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li:hover a' => 'background-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li a:hover' => 'background-color: {{VALUE}};',
 							],
 						]
 					);
@@ -471,7 +422,7 @@ class WidgetProductTab extends WidgetProductBase
 							'type' => ControlsManager::COLOR,
 							'default' => '',
 							'selectors' => [
-								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li:hover a' => 'border-color: {{VALUE}};',
+								'{{WRAPPER}} .nav-tabs li a.active, {{WRAPPER}} .nav-tabs li a:hover' => 'border-color: {{VALUE}};',
 							],
 						]
 					);
@@ -520,6 +471,7 @@ class WidgetProductTab extends WidgetProductBase
             return;
         }
 		$settings = $this->getSettingsForDisplay();
+		$id_int = \Tools::substr($this->getIdInt(), 0, 4);
 
 		$grid_type = 'grid1';
         if($settings['product_display']){
@@ -541,7 +493,7 @@ class WidgetProductTab extends WidgetProductBase
         $class_tab = [];
 
         if($settings['enable_slider']){
-        	$class_tab[]= 'elementor-block-carousel';
+        	$class_tab[]= 'elementor-block-carousel slick-block';
 			$class_tab[] = 'items-desktop-'. ($settings['slides_to_show'] ? $settings['slides_to_show'] : $settings['default_slides_desktop']);
 			$class_tab[] = 'items-tablet-'. ($settings['slides_to_show_tablet'] ? $settings['slides_to_show_tablet'] : $settings['default_slides_tablet']);
 			$class_tab[] = 'items-mobile-'. ($settings['slides_to_show_mobile'] ? $settings['slides_to_show_mobile'] : $settings['default_slides_mobile']);
@@ -557,8 +509,8 @@ class WidgetProductTab extends WidgetProductBase
 		<div class="product-tabs-widget" data-ajax="<?= $ajaxtab; ?>">
 			<ul class="nav nav-tabs">
 				<?php foreach ( $settings['tabs'] as $index => $tab ) : ?>
-					<li data-id="<?= $tab['_id'] ?>" class="nav-item">
-						<a class="nav-link  <?php if(!$index) { ?>active<?php } ?>" href="#<?= $tab['_id'] ?>" data-toggle="tab" role="tab"><?= $tab['tab_title'] ?></a>
+					<li data-id="<?= $id_int.$index ?>" class="nav-item">
+						<a class="nav-link  <?php if(!$index) { ?>active<?php } ?>" href="#tab-pane-<?= $id_int.$index ?>" data-toggle="tab" role="tab"><?= $tab['tab_title'] ?></a>
 					</li>
 				<?php endforeach; ?>
 			</ul>
@@ -592,7 +544,7 @@ class WidgetProductTab extends WidgetProductBase
 					}					
 
 					?>
-					<div class="tab-pane <?php if($settings['enable_slider']): ?>elementor-image-carousel-wrapper elementor-slick-slider<?php endif; ?> <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $tab['_id'] ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
+					<div class="tab-pane <?php if($settings['enable_slider']): ?>elementor-image-carousel-wrapper elementor-slick-slider<?php endif; ?> <?php if(!$index) { ?>fade in active<?php } ?>" id="tab-pane-<?= $id_int.$index ?>" <?php if($tab_data) { ?> data-tab_content='<?= json_encode($tab_data); ?>'<?php } ?>>
 						<?php 
 							if($products){ 
 								echo $this->context->smarty->fetch( _VEC_PATH_ . 'views/templates/front/widgets/product-tab.tpl', ['products' => $products] ); 

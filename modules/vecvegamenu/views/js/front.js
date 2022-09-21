@@ -61,10 +61,10 @@ $(document).ready(function()
 	$(".vec-menu-vertical .title_vertical").on('click', function(e){
 		e.stopPropagation(); 
 		var vega = $(".vec-menu-vertical .menu-content");
-		if(vega.is(':hidden')){
-			vega.addClass('v-open'); 
+		if(vega.hasClass('v-open')){
+			vega.removeClass('v-open'); 
 		} else {
-			vega.removeClass('v-open');
+			vega.addClass('v-open');
 		}
 		e.preventDefault();
 	});

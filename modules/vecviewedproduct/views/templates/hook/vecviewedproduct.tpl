@@ -24,7 +24,7 @@
 *}
 
 <section class="vec-viewed-products clearfix">
-  {if $title}<h2>{$title}</h2>{/if}
+  {if $title}<div class="product-title"><h2>{$title}</h2></div>{/if}
   <div class="elementor-slick-slider">
     <div class="products slick-slider slick-arrows-inside {$classes}" data-slick-options="{$slider_options}">
       {foreach from=$products item="product"}

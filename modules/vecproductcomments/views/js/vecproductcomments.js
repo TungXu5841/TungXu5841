@@ -40,7 +40,7 @@ $(function() {
 	});
 });
 // vecproductcomments
-$(document).on('click','#product_comments_block_extra ul.comments_advices a', function(e){
+$(document).on('click','#product_comments_block_extra .comments_advices a', function(e){
 	$('*[class^="tab-pane"]').removeClass('active');
 	$('*[class^="tab-pane"]').removeClass('in');
 	$('*[class^="collapse"]').removeClass('in');

@@ -37,7 +37,7 @@ class VecCompareActionsModuleFrontController extends ModuleFrontController
         $productsIds = $this->context->cookie->vecCompare;
         $productsIds = json_decode($productsIds, true);
         
-        if (!in_array($idProduct, $productsIds)) {
+        if (!$productsIds || !in_array($idProduct, $productsIds)) {
             $productsIds[] = $idProduct;
             $productsIds = json_encode($productsIds, true);
 

@@ -36,9 +36,11 @@
 		</div> <!-- .comments_note -->
 	{/if}
 	{if $nbComments_extra != 0}
-		<a href="#product_comments_block_tab" class="reviews" >
-			{$ratings.avg|round:2} | {$nbComments_extra} {l s='Reviews' mod='vecproductcomments'}
-		</a>
+		<div class="comments_advices">
+			<a href="#product_comments_block_tab" class="reviews" >
+				{$ratings.avg|round:2} | {$nbComments_extra} {l s='Reviews' mod='vecproductcomments'}
+			</a>
+		</div>
 	{/if}
 </div>
 {/if}

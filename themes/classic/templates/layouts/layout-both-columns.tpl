@@ -45,7 +45,7 @@
         {include file='catalog/_partials/product-activation.tpl'}
       {/block}
 
-      <header id="header" class=""> 
+      <header id="header" class="{if $vectheme.header_sticky == '1'}use-sticky"{/if}"> 
         {block name='header'}
           {include file='_partials/header.tpl'}
         {/block}

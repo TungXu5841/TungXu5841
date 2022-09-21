@@ -3084,7 +3084,72 @@ button.swiper-pagination-bullet {
 .animated.infinite {
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite; }
-
+@keyframes zoomOut {
+  0% {
+      opacity: 0;
+      transform: scale(1.2); }
+    50% {
+      opacity: 0.5; }
+    100% {
+      opacity: 1;
+      transform: scale(1); } } 
+.zoomOut {
+  animation-name: zoomOut;
+}
+@keyframes  fadeInDownLight {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+.fadeInDownLight {
+  animation-name: fadeInDownLight; }
+@keyframes  fadeInUpLight {
+  0% {
+    opacity: 0;
+    transform: translateY(15px); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+.fadeInUpLight {
+  animation-name: fadeInUpLight; } 
+  @keyframes  fadeInLeftLight {
+  0% {
+    opacity: 0;
+    transform: translateX(-15px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+.fadeInLeftLight {
+  animation-name: fadeInLeftLight; }
+@keyframes  fadeInRightLight {
+  0% {
+    opacity: 0;
+    transform: translateX(15px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+.fadeInRightLight {
+  animation-name: fadeInRightLight; }   
+  @keyframes  fadeInLeftSmall {
+    0% {
+      opacity: 0;
+      transform: translateX(-10%); } 
+    100% {
+      opacity: 1;
+      transform: translateX(0); } }
+  .fadeInLeftSmall {
+    animation-name: fadeInLeftSmall; }
+  @keyframes  fadeInRightSmall {
+    0% {
+      opacity: 0;
+      transform: translateX(10%); }
+    100% {
+      opacity: 1;
+      transform: translateX(0); } }
+  .fadeInRightSmall {
+    animation-name: fadeInRightSmall; }  
 .elementor-shape {
   overflow: hidden;
   position: absolute;

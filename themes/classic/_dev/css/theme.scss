@@ -54,11 +54,11 @@
         -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
         -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
         box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
-        -webkit-animation: 0.7s ease-out 0s 1 normal running fadeInDown;
-        -moz-animation: 0.7s ease-out 0s 1 normal running fadeInDown;
-        -ms-animation: 0.7s ease-out 0s 1 normal running fadeInDown;
-        animation: 0.7s ease-out 0s 1 normal running fadeInDown;  
-        @include vec-transition(300ms); 
+        -webkit-animation: 0.6s ease-out 0s 1 normal running animateUpToDown ;
+        -moz-animation: 0.6s ease-out 0s 1 normal running animateUpToDown ;
+        -ms-animation: 0.6s ease-out 0s 1 normal running animateUpToDown ;
+        animation: 0.6s ease-out 0s 1 normal running animateUpToDown;  
+        animation-fill-mode: none; 
 		.not-sticky {
 			display: none;  
 		}
@@ -491,7 +491,15 @@
         transform: none;
     }
 }
+@keyframes animationfading {
+    from {
+        opacity: 0;
+    }
 
+    to {
+        opacity: 1;
+    }
+}
 .blockcart {
     position: relative;
 	display: inline-flex;
@@ -550,10 +558,7 @@
                 visibility: visible;
                 @include vec-transform(translateX(0));
                 .content-sidebar {
-                    > *{
-                        animation: 1s animationRighttoLeft;
-
-                    }
+                    animation: 1s animationfading; 
                 }
             }
             .content-sidebar {
@@ -2467,39 +2472,6 @@
     }
 }
 //products
-body:not(.elementor-editor-active) {
-    .categoryproducts,
-    .products-accessories,
-    .elementor-widget-product-tab, 
-    .elementor-widget-product-sale,
-    .elementor-widget-product-carousel {
-        &:hover {
-            z-index: 1; 
-        }
-        .elementor-slick-slider {
-            .slick-list {
-                margin-bottom: -96px;
-                padding-bottom: 96px;
-            }
-            .slick-dotted {
-                margin-bottom: 0 !important; 
-                .slick-dots {
-                    bottom: auto;
-                    margin-top: 10px;  
-                    pointer-events: none;
-                    > * {
-                        pointer-events: auto;
-                    }
-                }
-            }
-            .slick-arrows-inside {
-                .slick-arrow { 
-                    margin-top: -48px;
-                }
-            }
-        }
-    }
-}
 .categoryproducts,
 .products-accessories,
 .elementor-widget-product-tab, 
@@ -2607,28 +2579,37 @@ body:not(.elementor-editor-active) {
     }
 }
 .elementor-widget-product-tab {
-    .tab-content .tab-pane{
-        &:not(.active) { 
-            display: block;
-            height: 0;
-            overflow-y: hidden;
-            min-height: 0;
+    .tab-content {
+        .tab-pane{
+            &:not(.active) { 
+                display: block;
+                height: 0;
+                overflow-y: hidden;
+                min-height: 0;
+            }
+            &.active {
+                animation-duration: 1.25s;
+                animation-name: fadeInUpLight; 
+               
+            }
         }
-        &.active {
-            animation-duration: 1.25s;
-            animation-name: fadeInUpLight; 
-           
+        .tab-loading {
+            position: relative;
+            &:before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                background-image: url(../img/lazy-load.svg);
+                background-size: 36px auto;
+                background-position: center center;
+                background-repeat: no-repeat;  
+                position: absolute;
+                top: 0;
+                left: 0;
+
+            }
+            
         }
-    }
-    .tab-loading {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background-image: url(../img/lazy-load.svg);
-        background-size: 45px auto;
-        background-position: center center;
-        background-repeat: no-repeat;  
     }
 }
 .elementor-widget-brand-carousel,
@@ -3225,7 +3206,7 @@ body:not(.elementor-editor-active) {
         &.list-sale {
             padding: 1.25rem;
             @media (min-width: 768px) {
-                display: flex !important;
+                display: flex; 
                 .img-block {
                     flex: 0 0 auto;
                     width: 45%;

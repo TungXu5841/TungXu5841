@@ -51,9 +51,7 @@
     visibility: visible;
     @include vec-transform(translateX(0)); 
     #_desktop_search_filters {
-      > *{
-          animation: 1s animationRighttoLeft;
-      }
+      animation: 1s animationfading;
     } 
   }
   .filter-close-btn {
@@ -247,13 +245,7 @@
   &:after {
     left: 0;
   }
-  &.product-miniature-grid1 {
-    .box-hover {
-      &:after {
-        left: 0;
-      }
-    }
-  }
+
 }
 .js-product-miniature {
   position: relative;
@@ -413,52 +405,41 @@
   &.product-miniature-grid1 {
     &:not(:hover) {
       .add-links {
-        a {
-          opacity: 0;
-          visibility: hidden;
-          @include vec-transform(translateX(20px)); 
-        }
+        opacity: 0;
+        visibility: hidden;
+        @include vec-transform(translateY(-20px)); 
       }
     }   
     &:hover { 
+      .product-content {
+        @include vec-transform(translateY(-50px));  
+      }
       .box-hover {
-        top: calc(100% - 3px);
+        top: calc(100% - 10px);
         opacity: 1;
         visibility: visible;
-        @include vec-transition(200ms);
-        &:after {
-          border-color: var(--hovercolor);
-          @include vec-transition(300ms);
-        }
+        @include vec-transition(350ms);
       }
     
     }  
+    .product-content {
+      background-color: $white;
+      @include vec-transition(350ms);
+    }
     .box-hover {
       position: absolute;
       left: 0;
       right: 0;
-      top: calc(100% - 20px);
-      padding:0  1.25rem 1.25rem 1.25rem;
+      top: 100%;
+      padding:0  1.25rem;
       @media (max-width: 767px) {
-        padding:0  8px 1.25rem 8px; 
+        padding:0  8px 0 8px; 
       }
       background: $white;
       z-index: 2;
       opacity: 0;
       visibility: hidden;
-      @include vec-transition(200ms);
-      &:after {
-        content: '';
-        position: absolute;
-        left: -1px;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        border: 1px solid $border-gray;
-        border-top: 0;
-        pointer-events: none;
-        @include vec-transition(300ms);
-      }
+      @include vec-transition(350ms);
     }
     .add-links {
       position: absolute;
@@ -467,6 +448,7 @@
       display: inline-flex;
       flex-direction: column;
       z-index: 2;
+      @include vec-transition(350ms);
       a {
         width: 2.125rem;
         height: 2.125rem;
@@ -477,25 +459,8 @@
         border: 1px solid $border-gray;
         color: $gray-dark;
         background: $white;
+        border-radius: 50%;
         cursor: pointer;
-        &:nth-child(1) {
-          -webkit-transition: transform .2s ease,opacity .2s ease,visibility .2s ease;
-          -moz-transition: transform .2s ease,opacity .2s ease,visibility .2s ease;
-          -o-transition: transform .2s ease,opacity .2s ease,visibility .2s ease;
-          transition: transform .2s ease,opacity .2s ease,visibility .2s ease;
-        }
-        &:nth-child(2) {
-          -webkit-transition: transform .2s ease .1s,opacity .2s ease .1s,visibility .2s ease .1s;
-          -moz-transition: transform .2s ease .1s,opacity .2s ease .1s,visibility .2s ease .1s;
-          -o-transition: transform .2s ease .1s,opacity .2s ease .1s,visibility .2s ease .1s;
-          transition: transform .2s ease .1s,opacity .2s ease .1s,visibility .2s ease .1s;
-        }
-        &:nth-child(3) {
-          webkit-transition: transform .2s ease .2s,opacity .2s ease .2s,visibility .2s ease .2s;
-          -moz-transition: transform .2s ease .2s,opacity .2s ease .2s,visibility .2s ease .2s;
-          -o-transition: transform .2s ease .2s,opacity .2s ease .2s,visibility .2s ease .2s;
-          transition: transform .2s ease .2s,opacity .2s ease .2s,visibility .2s ease .2s;
-        }
         &:not(:last-child) {
           margin-bottom: .3125rem;
         }
@@ -1038,7 +1003,7 @@
       bottom: 0; 
       z-index: 2;
       > * {
-        width: 50%;
+        flex: 1;
       }
     }
     button.ajax-add-to-cart-button,

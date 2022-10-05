@@ -71,42 +71,68 @@ class VecThemeoptions extends Module implements WidgetInterface
     public function install()
     {
         //General
-        Configuration::updateValue($this->name . 'g_main_color', '#4fb68d');
+        Configuration::updateValue($this->name . 'g_main_color', '#FAB529');
         Configuration::updateValue($this->name . 'g_body_gfont_url', 'https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         Configuration::updateValue($this->name . 'g_body_gfont_name', '"Rubik", sans-serif');
         Configuration::updateValue($this->name . 'g_body_font_size', 14);
         Configuration::updateValue($this->name . 'g_body_font_color', '#666666');
+		
+        Configuration::updateValue($this->name . 'button_text', '#0C0C0C');
+        Configuration::updateValue($this->name . 'button_texth', '#0C0C0C');
+		Configuration::updateValue($this->name . 'button_border', 'none');
+        Configuration::updateValue($this->name . 'button_border_width', '1px');
+		Configuration::updateValue($this->name . 'button_border_color', '#FAB529');
+        Configuration::updateValue($this->name . 'button_border_colorh', '#E1A224');
+		Configuration::updateValue($this->name . 'button_background', '#FAB529');
+        Configuration::updateValue($this->name . 'button_backgroundh', '#E1A224');
+
 		//header
 		Configuration::updateValue($this->name . 'header_sticky', 1);
+		//page title	
+		Configuration::updateValue($this->name . 'ptitle_color', '#0C0C0C');
+		Configuration::updateValue($this->name . 'ptitle_size', 'default');
         // Product
-        Configuration::updateValue($this->name . 'p_display', 1);
-        Configuration::updateValue($this->name . 'p_name_color', '#253237');
-        Configuration::updateValue($this->name . 'p_name_colorh', '#4fb68d');
-        Configuration::updateValue($this->name . 'p_name_size', 14);
-        Configuration::updateValue($this->name . 'p_name_length', 0);
+        Configuration::updateValue($this->name . 'second_img', 'fade');
+        Configuration::updateValue($this->name . 'grid_type', 1);
+        Configuration::updateValue($this->name . 'grid_name_color', '#0C0C0C');
+        Configuration::updateValue($this->name . 'grid_name_colorh', '#045FB4');
+        Configuration::updateValue($this->name . 'grid_name_size', 14);
+        Configuration::updateValue($this->name . 'grid_name_length', 'cut');
+        Configuration::updateValue($this->name . 'grid_name_cut', 45);
         Configuration::updateValue($this->name . 'p_name_transform', 1);
-        Configuration::updateValue($this->name . 'p_price_color', '#555555');
-        Configuration::updateValue($this->name . 'p_price_size', 15);
+        Configuration::updateValue($this->name . 'p_price_color', '#DA2E1F');
+        Configuration::updateValue($this->name . 'p_price_size', 16);
+		
+		Configuration::updateValue($this->name . 'new_bgcolor', '#09A14B');
+        Configuration::updateValue($this->name . 'new_color', '#ffffff');
+		Configuration::updateValue($this->name . 'sale_bgcolor', '#DA2E1F');
+        Configuration::updateValue($this->name . 'sale_color', '#ffffff');
+		Configuration::updateValue($this->name . 'pack_bgcolor', '#09A14B');
+        Configuration::updateValue($this->name . 'pack_color', '#ffffff');
+		
         // Category page
+        Configuration::updateValue($this->name . 'category_width', 'inherit');
         Configuration::updateValue($this->name . 'category_layout', 1);
         Configuration::updateValue($this->name . 'category_thumbnail', 0);
         Configuration::updateValue($this->name . 'category_description', 'hide');
         Configuration::updateValue($this->name . 'category_description_bottom', 0);
-        Configuration::updateValue($this->name . 'category_pagination', 'default');
         Configuration::updateValue($this->name . 'category_sub', 0);
         Configuration::updateValue($this->name . 'PS_PRODUCTS_PER_PAGE', 16);
-        Configuration::updateValue($this->name . 'cp_perrow', 2);
-        Configuration::updateValue($this->name . 'category_filter', 1);
+        Configuration::updateValue($this->name . 'category_column', 3);
+        Configuration::updateValue($this->name . 'category_pagination', 'default');
         // Product page
-        Configuration::updateValue($this->name . 'productp_layout', 1);
-        Configuration::updateValue($this->name . 'ppl1_thumbnail', 0);
-        Configuration::updateValue($this->name . 'ppl1_items', 4);
-        Configuration::updateValue($this->name . 'pp_name_color', '#253237');
-        Configuration::updateValue($this->name . 'pp_name_size', 24);
-        Configuration::updateValue($this->name . 'pp_name_transform', 1);
-        Configuration::updateValue($this->name . 'pp_price_color', '#555555');
-        Configuration::updateValue($this->name . 'pp_price_size', 22);
-        Configuration::updateValue($this->name . 'pp_infortab', 0);
+        Configuration::updateValue($this->name . 'product_width', 'inherit');
+        Configuration::updateValue($this->name . 'product_layout', 1);
+        Configuration::updateValue($this->name . 'main_layout', 1);
+        Configuration::updateValue($this->name . 'product_image', 'horizontal');
+        Configuration::updateValue($this->name . 'information_layout', 1);
+        Configuration::updateValue($this->name . 'zoom', 1);
+		Configuration::updateValue($this->name . 'thumbnail_items', 4);
+        Configuration::updateValue($this->name . 'product_name_color', '#1D1E22');
+        Configuration::updateValue($this->name . 'product_name_size', 24);
+        Configuration::updateValue($this->name . 'product_name_transform', 1);
+        Configuration::updateValue($this->name . 'product_price_color', '#DA2E1F');
+        Configuration::updateValue($this->name . 'product_price_size', 26);
 
         $this->vecImportImages();
 

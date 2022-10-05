@@ -51,53 +51,74 @@ global_settings:
   configuration:
     PS_IMAGE_QUALITY: png
   modules:
+   to_disable:
+     - welcome
+     - ps_customtext
+     - ps_featuredproducts
+     - ps_bestsellers
+     - ps_imageslider
+     - ps_mainmenu
+     - ps_banner
+     - ps_searchbar 
+     - blockwishlist 
+     - ps_shoppingcart 
+     - productcomments 
    to_enable:
+     - ps_socialfollow
+     - ps_contactinfo
      - ps_linklist
+     - ps_categoryproducts 
+     - blockreassurance 
+     - veccompare
+     - veccustomersignin
+     - vecelements
+     - vecmegamenu
+     - vecmobilepanel
+     - vecpopupnewsletter
+     - vecproductcomments
+     - vecsearchbar
+     - vecshoppingcart
+     - vecthemeoptions
+     - vecvegamenu
+     - vecviewedproduct
+     - vecwishlist
+     - smartblog
+     - smartbloglatestcomments
+     - smartblogrecentposts
+     - smartblogsearch
+     - smartblogtag
+     - smartblogcategories
   hooks:
     modules_to_hook:
-      displayAfterBodyOpeningTag:
-        - blockreassurance
-      displayNavFullWidth:
-        - blockreassurance
-      displayNav1:
-        - ps_contactinfo
-      displayNav2:
+      displayMegamenuMobileTop:
         - ps_languageselector
         - ps_currencyselector
-        - ps_customersignin
-        - ps_shoppingcart
-      displayTop:
-        - ps_mainmenu
-        - ps_searchbar
-      displayHome:
-        - ps_imageslider
-        - ps_featuredproducts
-        - ps_banner
-        - ps_customtext
-      displayFooterBefore:
-        - blockreassurance
-        - ps_emailsubscription
-        - ps_socialfollow
-      displayFooter:
-        - ps_linklist
-        - ps_customeraccountlinks
-        - ps_contactinfo
-      displayFooterAfter:
-        - blockreassurance
+      displayProductListFunctionalButtons:
+        - veccompare 
+      displayBeforeBodyClosingTag:
+        - veccustomersignin
+        - vecwishlist
+        - vecpopupnewsletter
+      displayProductListCompare:
+        - veccompare
       displayLeftColumn:
         - ps_categorytree
         - ps_facetedsearch
-      displaySearch:
-        - ps_searchbar
+      displayRightColumn:
+        - smartblogsearch
+        - smartblogcategories
+        - smartblogrecentposts
+        - smartblogtag
       displayProductAdditionalInfo:
         - ps_sharebuttons
+      displayAfterButtonCart:
+        - veccompare
+        - vecwishlist
+      displayFooterProduct:
+        - ps_categoryproducts   
+        - vecviewedproduct   
       displayReassurance:
         - blockreassurance
-      displayOrderConfirmation2:
-        - ps_featuredproducts
-      displayCrossSellingShoppingCart:
-        - ps_featuredproducts
-
   image_types:
     cart_default:
       width: 125
@@ -108,20 +129,20 @@ global_settings:
       height: 98
       scope: [products, categories, manufacturers, suppliers]
     medium_default:
-      width: 452
-      height: 452
+      width: 600
+      height: 600
       scope: [products, manufacturers, suppliers]
     home_default:
-      width: 250
-      height: 250
+      width: 450
+      height: 450
       scope: [products]
     large_default:
-      width: 800
-      height: 800
+      width: 1200
+      height: 1200
       scope: [products, manufacturers, suppliers]
     category_default:
-      width: 141
-      height: 180
+      width: 960
+      height: 255
       scope: [categories]
     stores_default:
       width: 170
@@ -136,3 +157,25 @@ theme_settings:
     new-products: layout-left-column
     prices-drop: layout-left-column
     contact: layout-left-column
+dependencies:
+  modules:
+     - ps_categoryproducts  
+     - veccompare
+     - veccustomersignin
+     - vecelements
+     - vecmegamenu
+     - vecmobilepanel
+     - vecpopupnewsletter
+     - vecproductcomments
+     - vecsearchbar
+     - vecshoppingcart
+     - vecthemeoptions
+     - vecvegamenu
+     - vecviewedproduct
+     - vecwishlist
+     - smartblog
+     - smartbloglatestcomments
+     - smartblogrecentposts
+     - smartblogsearch
+     - smartblogtag
+     - smartblogcategories

@@ -1,3 +1,4 @@
+<div>
 <article class="thumbnail-container list-sale product-miniature js-product-miniature item_in" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
     <div class="img-block">
         {block name='product_thumbnail'}
@@ -100,3 +101,4 @@
         
     </div>
 </article>
+</div>

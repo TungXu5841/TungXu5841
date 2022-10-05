@@ -35,7 +35,7 @@
      width: 33.333333%;
    }
  }
- @media (min-width: 768px) {
+ @media (min-width: 768px) and (max-width: 1024px) {
    .items-tablet-1:not(.slick-initialized) > * {
      max-width: 100%;
      -ms-flex-preferred-size: 100%;
@@ -56,7 +56,7 @@
      flex-basis: 20%;
    }
  }
- @media (min-width: 992px) {
+ @media (min-width: 1025px) {
    .items-desktop-1:not(.slick-initialized) > * {
      max-width: 100%;
      -ms-flex-preferred-size: 100%;

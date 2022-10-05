@@ -108,6 +108,8 @@ class VecThemeoptions extends Module implements WidgetInterface
         Configuration::updateValue($this->name . 'pp_price_size', 22);
         Configuration::updateValue($this->name . 'pp_infortab', 0);
 
+        $this->vecImportImages();
+
         return parent::install()
         && $this->registerHook('header')
         && $this->registerHook('displayBackofficeHeader')
@@ -679,45 +681,103 @@ class VecThemeoptions extends Module implements WidgetInterface
         }
     }
 
-    public function presetDemo($demo){
-        $import_url = 'https://tungxu.site/prestashop/import-data/';
-        
-    	require_once _PS_MODULE_DIR_.$this->parent_module.'/'.$this->parent_module.'.php';
-    	$files = array(
-    	    $layout.'-header.json', $layout.'-home.json', $layout.'-footer.json'
-    	);
-        
-		foreach ($files as $file){
-			$_FILES['file']['tmp_name'] = $import_url. $layout. '/'. $file;
-			$response = \CE\Plugin::instance()->templates_manager->importTemplate();
+    public function vecImportImages(){
 
-			if (is_object($response)){
-				$this->ajaxDie(json_encode(array(
-					'success' => false,
-					'data' => [
-						'message' => $this->l('Error!!! Reload and try again.'),
-					]
-				)));
-			}
-		}
 
-        switch ($demo) {
-            case 'home1':
-                //Add changed configure
-                //Import elements
-                break;
-            case 'home2':
-                //Add changed configure
-                //Import elements
-                break;
-            case 'home3':
-                //Add changed configure
-                //Import elements
-                break;
-            case 'home4':
-                //Add changed configure
-                //Import elements
-                break;
+        $images = array(
+            'https://tungxu.store/img/cms/1_1.jpg',
+            'https://tungxu.store/img/cms/1_2.jpg',
+            'https://tungxu.store/img/cms/1_3.jpg',
+            'https://tungxu.store/img/cms/1_4.jpg',
+            'https://tungxu.store/img/cms/2_1.jpg',
+            'https://tungxu.store/img/cms/2_3.jpg',
+            'https://tungxu.store/img/cms/2_4.jpg',
+            'https://tungxu.store/img/cms/3_1.jpg',
+            'https://tungxu.store/img/cms/3_3.jpg',
+            'https://tungxu.store/img/cms/3_4.jpg',
+            'https://tungxu.store/img/cms/4_1.jpg',
+            'https://tungxu.store/img/cms/5_1.jpg',
+            'https://tungxu.store/img/cms/7_1.jpg',
+            'https://tungxu.store/img/cms/8_1.jpg',
+            'https://tungxu.store/img/cms/9_1.jpg',
+            'https://tungxu.store/img/cms/10_1.jpg',
+            'https://tungxu.store/img/cms/11_1.jpg',
+            'https://tungxu.store/img/cms/slider1_1.jpg',
+            'https://tungxu.store/img/cms/slider1_2.jpg',
+            'https://tungxu.store/img/cms/slider1_3.jpg',
+            'https://tungxu.store/img/cms/slider1_4.jpg',
+            'https://tungxu.store/img/cms/slider2_1.jpg',
+            'https://tungxu.store/img/cms/slider2_2.jpg',
+            'https://tungxu.store/img/cms/slider2_3.jpg',
+            'https://tungxu.store/img/cms/slider2_4.jpg',
+        );
+        
+        $error = false;
+        foreach($images as $image){
+            if(! $this->importImageFromURL($image, false)){
+                $error = true;
+            }
         }
+
+        return true;
+    }
+
+    protected function importImageFromURL($url, $regenerate = true)
+    {
+        $origin_image = pathinfo($url);
+        $origin_name = $origin_image['filename'];
+        $tmpfile = tempnam(_PS_TMP_IMG_DIR_, 'ps_import');
+  
+        $path = _PS_IMG_DIR_ . 'cms/';
+
+        $url = urldecode(trim($url));
+        $parced_url = parse_url($url);
+
+        if (isset($parced_url['path'])) {
+            $uri = ltrim($parced_url['path'], '/');
+            $parts = explode('/', $uri);
+            foreach ($parts as &$part) {
+                $part = rawurlencode($part);
+            }
+            unset($part);
+            $parced_url['path'] = '/' . implode('/', $parts);
+        }
+
+        if (isset($parced_url['query'])) {
+            $query_parts = [];
+            parse_str($parced_url['query'], $query_parts);
+            $parced_url['query'] = http_build_query($query_parts);
+        }
+
+        if (!function_exists('http_build_url')) {
+            require_once _PS_TOOL_DIR_ . 'http_build_url/http_build_url.php';
+        }
+
+        $url = http_build_url('', $parced_url);
+
+        $orig_tmpfile = $tmpfile;
+
+        if (Tools::copy($url, $tmpfile)) {
+            // Evaluate the memory required to resize the image: if it's too much, you can't resize it.
+            if (!ImageManager::checkImageMemoryLimit($tmpfile)) {
+                @unlink($tmpfile);
+
+                return false;
+            }
+
+            $tgt_width = $tgt_height = 0;
+            $src_width = $src_height = 0;
+            $error = 0;
+            ImageManager::resize($tmpfile, $path . $origin_name .'.jpg', null, null, 'jpg', false, $error, $tgt_width, $tgt_height, 5, $src_width, $src_height);
+   
+        } else {
+            echo 'cant copy image';
+            @unlink($orig_tmpfile);
+
+            return false;
+        }
+        unlink($orig_tmpfile);
+
+        return true;
     }
 }

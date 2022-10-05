@@ -1,11 +1,65 @@
 /* global $ */
 $(document).ready(function () {
-    ajaxSearch();
+	var flagSearch = false;
+    $('.search-input').on('click', function(e){
+    	e.stopPropagation();
+    	var searchWidget = $(this).parents('.vec-search-widget'),
+    		searchContainer = searchWidget.find('.search-container');
+    	if(searchContainer.hasClass('js-dropdown')) return;
+
+    	if($('.vec-overlay').hasClass('open')) return;
+    
+	    $('.vec-overlay').addClass('open');
+	    $('body').addClass('search-open');
+	    let searchSuggest = searchWidget.find('.search-suggest'),
+	    	resultShow = searchSuggest.find('.suggest-ajax-results');
+	    searchSuggest.removeClass('unvisible');
+
+        if($('.search-suggest-products').length > 0 && $('.search-suggest-products').data('id_products').length > 0){
+            ajaxSuggestProducts();
+        }
+	       
+    	if(!flagSearch){
+    		ajaxSearch(searchWidget);
+    		flagSearch = true;
+    	}
+    	
+    })
+    $('.search-toggle').on('click', function(e){
+    	e.preventDefault();
+    	console.log($(this));
+    	var searchWidget = $(this).parents('.vec-search-widget');
+    	setTimeout(function() {
+            searchWidget.find('.search-input').focus();
+            if($('.vec-overlay').hasClass('open')) return;
+    
+		    $('.vec-overlay').addClass('open');
+		    $('body').addClass('search-open');
+		    let searchSuggest = searchWidget.find('.search-suggest'),
+		    	searchContent = searchWidget.find('.search-content'),
+		    	resultShow = searchSuggest.find('.suggest-ajax-results');
+		    searchSuggest.removeClass('unvisible');
+		    searchContent.removeClass('unvisible');
+
+	        if($('.search-suggest-products').length > 0 && $('.search-suggest-products').data('id_products').length > 0){
+	            ajaxSuggestProducts();
+	        }
+		        
+		    
+	    	if(!flagSearch){
+	    		ajaxSearch(searchWidget);
+	    		flagSearch = true;
+	    	}
+        },10);
+    	if(!flagSearch){
+    		ajaxSearch(searchWidget);
+    		flagSearch = true;
+    	}
+    })
 });
 
-var ajaxSearch = function(){
-    var searchWidget = $('.vec-search-widget'),
-        searchContainer = searchWidget.find('.search-container'),
+var ajaxSearch = function(searchWidget){
+    let searchContainer = searchWidget.find('.search-container'),
         searchDropdown = searchWidget.find('.dropdown-menu'), 
         searchContent = searchWidget.find('.search-content'),
         searchForm    = searchContent.find('.search-form'),
@@ -15,10 +69,7 @@ var ajaxSearch = function(){
         searchURL     = searchForm.data('search-controller-url'),
         controller    = searchForm.find('input[name="controller"]').val(),
         order         = searchForm.find('input[name="order"]').val(),
-        searchClear   = searchForm.find('.search-clear'),
-        view_more     = 'View more', //Need to check
-		search_not_found = 'There is no product', //Need to check
-        flagSuggest   = false;
+        searchClear   = searchForm.find('.search-clear');
 
     $('.search-cat-value').on('click', function(e){
         e.preventDefault();
@@ -31,39 +82,16 @@ var ajaxSearch = function(){
     if(searchContainer.hasClass('search-topbar') || searchContainer.hasClass('search-dropdown')){
         $('body').on('click', '.search-toggle', function(){
             searchContent.removeClass('unvisible');
-            setTimeout(function() {
-                searchInput.focus();
-                searchInputClick();
-            },10);
-            
         })
-        $('body').on('click', '.dialog-close-button', function(){
+        $('.dialog-close-button').on('click', function(){
+        	$('.search-toggle').dropdown('toggle');
             searchContent.addClass('unvisible');
+            $('.vec-overlay').removeClass('open');
+        	$('body').removeClass('search-open')
         })
         
-    }
-    function searchInputClick(){
-        if($('.vec-overlay').hasClass('open')) return;
-        
-        $('.vec-overlay').addClass('open');
-        $('body').addClass('search-open');
-        var resultShow = searchSuggest.find('.suggest-ajax-results');
-
-        searchSuggest.removeClass('unvisible');
-
-        if(!flagSuggest){
-            if($('.search-suggest-products').length > 0 && $('.search-suggest-products').data('id_products').length > 0){
-                searchSuggest.addClass('loading');
-                ajaxSuggestProducts();
-            }
-            flagSuggest = true;
-        } 
-    }
+    };
     searchInput
-        .on('click', function(e){
-            e.stopPropagation();
-            searchInputClick();
-        })
         .keyup(function() {
             if($(this).val().length >= 3){
                 searchClear.removeClass('unvisible').addClass('loading_search');
@@ -72,8 +100,8 @@ var ajaxSearch = function(){
                 clearTimeout(timer);
                 var timer = setTimeout(function() {
                     var limit = 10;
-                    if(search_limit){
-                        var limit = search_limit;
+                    if(vecsearch.limit){
+                        var limit = vecsearch.limit;
                     }
                     var data = {
                         's': searchInput.val(),
@@ -101,9 +129,9 @@ var ajaxSearch = function(){
                                             html += '</a>';
                                         html += '</div>';   
                                     }
-                                    html += '<a href="'+ searchURL +'?order='+ order +'&s='+ searchInput.val() +'">'+ view_more +'</a>';
+                                    html += '<a href="'+ searchURL +'?order='+ order +'&s='+ searchInput.val() +'">'+ vecsearch.view_more +'</a>';
                                 }else{
-                                    html += search_not_found;
+                                    html += vecsearch.search_not_found;
                                 }
                                 
                             html += '</div>';
@@ -143,6 +171,10 @@ var ajaxSearch = function(){
 };
 
 var ajaxSuggestProducts = function(){
+
+	if(!$('.search-suggest-products').is(':empty')) return; //Return if suggest products loaded.
+
+	$('.search-suggest').removeClass('loading');
     var ids = $('.search-suggest-products').data('id_products');
     var baseDir = vectheme.baseDir;
     $.ajax({

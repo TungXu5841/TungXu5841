@@ -79,6 +79,7 @@ class GroupControlImageSize extends GroupControlBase
         if (empty($settings[$setting_key]['url'])) {
             return '';
         }
+        if($settings['_css_classes'] == 'nolazy') $loading = '';
         $attr = [
             'src="' . esc_attr(Helper::getMediaLink($settings[$setting_key]['url'])) . '"',
             'loading="' . esc_attr($loading) . '"',

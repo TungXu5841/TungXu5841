@@ -356,10 +356,11 @@ class VecSearchbar extends Module implements WidgetInterface
         $this->context->controller->registerJavascript('modules-vec_search', 'modules/' . $this->name . '/views/js/front/vecsearchbar.js', ['position' => 'bottom', 'priority' => 150]);
         Media::addJsDef(
             array(
-                'search_not_found' => $this->trans('No product found', [], 'Modules.Searchbar.Admin'),
-                'view_more' => $this->trans('View more results', [], 'Modules.Searchbar.Admin'),
-                'suggest_products' => Configuration::get($this->name.'_suggest_status'),
-                'search_limit'  => Configuration::get($this->name.'_limit'),
+                'vecsearch' => array(
+                    'search_not_found' => $this->l('No product found'),
+                    'view_more' => $this->l('View more results'),
+                    'limit'  => Configuration::get($this->name.'_limit') ? Configuration::get($this->name.'_limit') : 10,
+                )
              )
         );
     }

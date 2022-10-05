@@ -938,15 +938,21 @@ class VecElements extends Module
     
     public function installDemoData(){
         $languages = Language::getLanguages(false);
-				
+                
         $path = $this->getLocalPath() . 'install/import-data/';
         $fileList = array(
             'demo1-header',
-            'demo1-home',
+            'demo1-homepage',
             'demo1-footer',
-            'demo2-footer',
-            'demo2-home',
             'demo2-header',
+            'demo2-homepage',
+            'demo2-footer',
+            'demo3-header',
+            'demo3-homepage',
+            'demo3-footer',
+            'demo4-header',
+            'demo4-homepage',
+            'demo4-footer',
         );
         foreach($fileList as $fileName){
             $postarr = array();        
@@ -958,6 +964,8 @@ class VecElements extends Module
 
                 $uid = new UId(0, UId::THEME);
 
+                $id_shop = $this->context->shop->id;
+                $uid->id_shop = $id_shop;
                 $post = WPPost::getInstance($uid);
                 $postarr['post_author'] = \Context::getContext()->employee->id;
                 $postarr['post_title'] = $fileName;

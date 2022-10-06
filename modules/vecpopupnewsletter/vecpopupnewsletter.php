@@ -234,7 +234,6 @@ class VecPopupNewsletter extends Module
 	public function hookHeader($params)
 	{
 		$this->context->controller->addJS(($this->_path).'views/js/front.js');
-		$this->context->controller->addCSS(($this->_path).'views/css/front.css');
 
         Media::addJsDef(array(
 			'vecpopup' => array(

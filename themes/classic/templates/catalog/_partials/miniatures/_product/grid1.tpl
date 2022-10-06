@@ -92,15 +92,15 @@
 				</div>
 				{/if}
 			{/block}
+			{block name='product_variants'}
+			{if $product.main_variants}
+			{include file='catalog/_partials/variant-links.tpl' variants=$product.main_variants}
+			{/if}
+			{/block} 
 			<div class="box-hover">
 				<div class="product-cart">
 				{include file='catalog/_partials/miniatures/customize/button-cart.tpl' product=$product}
-				</div>
-				{block name='product_variants'}
-				{if $product.main_variants}
-				{include file='catalog/_partials/variant-links.tpl' variants=$product.main_variants}
-				{/if}
-				{/block} 
+				</div>		
 			</div>
 		</div>
 	</article>

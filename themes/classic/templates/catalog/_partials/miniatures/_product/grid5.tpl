@@ -50,6 +50,13 @@
 				{/foreach}
 				</ul>
 			{/block}
+			{if isset($product.specific_prices.to) && $product.specific_prices.to|strtotime > $smarty.now && $product.specific_prices.from|strtotime < $smarty.now}
+		    <div class="countdown">
+		        <div class="time_count_down">
+		        <span class="specific-prices-timer" data-date-y ='{$product.specific_prices.to|date_format:"%Y"}' data-date-m ='{$product.specific_prices.to|date_format:"%m"}' data-date-d='{$product.specific_prices.to|date_format:"%d"}' data-date-h = '{$product.specific_prices.to|date_format:"%H"}' data-date-mi = '{$product.specific_prices.to|date_format:"%M"}' data-date-s= '{$product.specific_prices.to|date_format:"%S"}' ></span>
+		        </div>
+		    </div>
+		    {/if}
 		</div>
 		<div class="product-content">
 			{if isset($product.id_manufacturer)}

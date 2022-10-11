@@ -371,28 +371,28 @@ class smartblog extends Module
 		$languages = Language::getLanguages(false);
 		for ($i = 1; $i <= 4; $i++) {
 			if ($i == 1) :
-				$title = 'A certified web agency SmartDataSoft';
-				$slug  = 'a-certified-web-agency-smartdatasoft';
-				$des   = 'SmartDataSoft is an offshore web development company located in Bangladesh. We are serving this sector since 2010. Our team is committed to develop high quality web based application and theme for our clients and also for the global marketplace. As your web development partner we will assist you in planning, development, implementation and upgrade! Why SmartDataSoft? SmartDataSoft released their first prestashop theme in November 2012. Till now we have 6+ prestashop theme which are getting sold on global renowned marketplace. We have brought products like Revolution Slider and Visual Composer to PrestaShop. SmartBlog, the most popular blog module for PrestaShop is also built by us.
+				$title = 'Building intelligent transportation systems';
+				$slug  = 'building-intelligent-transportation-systems';
+				$des   = 'ThemeVec is an offshore web development company located in Bangladesh. We are serving this sector since 2010. Our team is committed to develop high quality web based application and theme for our clients and also for the global marketplace. As your web development partner we will assist you in planning, development, implementation and upgrade! Why SmartDataSoft? SmartDataSoft released their first prestashop theme in November 2012. Till now we have 6+ prestashop theme which are getting sold on global renowned marketplace. We have brought products like Revolution Slider and Visual Composer to PrestaShop. SmartBlog, the most popular blog module for PrestaShop is also built by us.
 				
-				After a long time SmartDataSoft is back as ClassyDevs with a team of talented developers. Till now they have already released two awesome modules. The best elementor based page builder for PrestaShop Crazy Elements and the latest version of the best slider module Revolution Slider 6. They have brought the latest version of SmartBlog 4.0.0 on their site. Classy Product Extra Tab is another free module with which you can add extra tabs to your products.';
+				After a long time SmartDataSoft is back as ThemeVec with a team of talented developers. Till now they have already released two awesome modules. The best elementor based page builder for PrestaShop Crazy Elements and the latest version of the best slider module Revolution Slider 6. They have brought the latest version of SmartBlog 4.0.0 on their site. Classy Product Extra Tab is another free module with which you can add extra tabs to your products.';
 			elseif ($i == 2) :
-				$title = 'Answers to your Questions about PrestaShop 1.7';
-				$slug  = 'question-about-prestashop';
+				$title = 'The Ultimate Success Formula – How?';
+				$slug  = 'the-ultimate-success-formula-how';
 				$des   = 'PrestaShop has launched PrestaShop 1.7, the latest software version. It was developed with the help of user feedback from the last few years. Today, over 250,000 online stores use PrestaShop to sell their products. What do these sellers need to know?
 				
 				How can I upgrade my store to 1.7? Developers are updating the one-click upgrade module to work with the transition to version 1.7. Take note that this module will only deal with your store\'s data. The theme and modules will be those used by default, and your theme from version 1.5/1.6 will be deactivated, as will all of your third-party modules. Be sure to consider that before updating! We strongly recommend you get in touch with our partner agencies and developers to make sure that your move to version 1.7 goes off without a hitch.';
 			elseif ($i == 3) :
-				$title = 'Crazy Elements is the best elementor based page builder for PrestaShop';
-				$slug  = 'crazy-elements-is-the-best-page-builder-for-prestashop';
-				$des   = 'Crazy Elements and elementor based page builder for PrestaShop vows to upgrade and take your PrestaShop web page editing and scheming abilities to a whole new level.
+				$title = 'Utilizing mobile technology in the field';
+				$slug  = 'utilizing-mobile-technology-in-the-field';
+				$des   = 'Vec Elements and elementor based page builder for PrestaShop vows to upgrade and take your PrestaShop web page editing and scheming abilities to a whole new level.
 
 				This elementor based add-ons is the most recent inclusion in the list of PrestaShop premium product libraries. Appreciate this premium page builder for elementor that consist of leading-edge widgets that are clearly set to take your PrestaShop page building knowledge to the next level.
 				
 				Unlike most other addons, Crazy Elements offers itself with numerous strong  widgets. These significant widgets would surely give you a feel of surprise about these wonderful widgets. Let’s explore all the outstanding widgets of Crazy Elements.';
 			elseif ($i == 4) :
-				$title = 'Slider Revolution 6 for PrestaShop is available now';
-				$slug  = 'slider-revolution-six-is-available';
+				$title = 'Working from home? Let’s get started.';
+				$slug  = 'working-from-home-let-get-started';
 				$des   = 'Slider Revolution is a PrestaShop advanced module for today’s skyward web design demands. Wrapped with cool features, it can turn dull and static designs into visually-grabbing, responsive websites with just a few snaps.
 				
 				This Powerful PrestaShop module helps the designer of any level to display the website to their visitors and clients in an attractive way. You can now wow your clients and site visitors with astonishing responsive designs that look wonderful on any device. No coding knowledge is needed. Transcend even the most unreal fantasy with special effects, animation, and exciting designs—the powerful drag & drop visual editor will let you tell your own stories in no time!

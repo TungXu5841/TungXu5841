@@ -63,6 +63,12 @@ $(document).ready(function() {
 				if($('.vec-quicklogin-modal').length > 0){
 					$('.vec-quicklogin-modal .modal-header').find('h3').hide();
 					$('.wishlist-title').show();
+					//Remove quick view modal
+					$('.quickview').modal('hide');
+					$('.quickview').on('hidden.bs.modal', function () {
+			        	$('.quickview').remove();
+			      	});	
+			      	//Show login modal
 					$('.vec-quicklogin-modal').modal('show');
 				}else{
 					var html = '';
@@ -77,7 +83,7 @@ $(document).ready(function() {
 					$("body").append(html);
 
 					if($('.quickview').length > 0){
-						$('.quickview').modal('hide')
+						$('.quickview').modal('hide');
 						$('.quickview').on('hidden.bs.modal', function () {
 				        	$('.quickview').remove();
 				        	$('#wishlistModal').modal('show');

@@ -2903,7 +2903,8 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 	getDefaultSettings: function getDefaultSettings() {
 		return {
 			selectors: {
-				carousel: '.elementor-image-carousel , .elementor-block-carousel'
+				carousel: '.elementor-image-carousel , .elementor-block-carousel',
+				countdown: '.specific-prices-timer'
 			}
 		};
 	},
@@ -2912,7 +2913,8 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		var selectors = this.getSettings('selectors');
 
 		return {
-			$carousel: this.$element.find(selectors.carousel)
+			$carousel: this.$element.find(selectors.carousel),
+			$countdown: this.$element.find(selectors.countdown),
 		};
 	},
 
@@ -2920,6 +2922,7 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		var _this = this;
 		elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
 		var elementCarousel = this.elements.$carousel;
+		var countDownSelector = this.elements.$countdown;
 		elementCarousel.on('init', function(event, slick, currentSlide){
 			var slideToShow = $(this).find('.slick-slide.slick-active').length - 1;
 			$(this).find('.slick-slide').removeClass('first-active').removeClass('last-active');
@@ -3021,6 +3024,10 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 			}
 			
 		});
+		
+		countDownSelector.each(function(){
+			_this.initCountDown($(this));	
+		})
 	},
 	matchHeight: function matchHeight(pos_content = null){
 		function init(pos_content) {
@@ -3050,7 +3057,21 @@ var ImageCarouselHandler = elementorModules.frontend.handlers.Base.extend({
 		
 		init(pos_content);
 		
-	}
+	},
+	initCountDown: function initCountDown($target){
+		var date_y = $target.attr('data-date-y'),
+			date_m = $target.attr('data-date-m'),
+			date_d = $target.attr('data-date-d'),
+			date_h = $target.attr('data-date-h'),
+			date_mi= $target.attr('data-date-mi'),
+			date_s = $target.attr('data-date-s');
+
+		$target.countdown({
+			until: new Date(date_y,date_m-1,date_d,date_h,date_mi,date_s),
+			labels: ['Years', 'Months', 'Weeks', vectheme.cd_days_text, vectheme.cd_hours_text, vectheme.cd_mins_text, vectheme.cd_secs_text],
+			labels1: ['Year', 'Month', 'Week', vectheme.cd_day_text, vectheme.cd_hour_text, vectheme.cd_min_text, vectheme.cd_sec_text],
+		});
+	},
 });
 
 module.exports = function ($scope) {
@@ -4082,10 +4103,18 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 	            if( data ) {
 	                tabContent.find('#tab-pane-' + idTab).append(data.html);
 	                _this.initSlider($('#tab-pane-'+ idTab).find('.elementor-block-carousel'));
+	                var countdownTabSelector = $('#tab-pane-'+ idTab).find('.specific-prices-timer');
+	                countdownTabSelector.each(function(){
+						_this.initCountDown($(this));	
+					})
 	            }
 	        });
 			
-		})	
+		});
+
+		tabWidget.find('.specific-prices-timer').each(function(){
+			_this.initCountDown($(this));	
+		})
 	},
 	initSlider: function initSlider($target){
 		var _this = this;
@@ -4190,6 +4219,20 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 				elementMatchHeight.addClass('match_height');
 				_this.matchHeight($(this));
 			}
+		});
+	},
+	initCountDown: function initCountDown($target){
+		var date_y = $target.attr('data-date-y'),
+			date_m = $target.attr('data-date-m'),
+			date_d = $target.attr('data-date-d'),
+			date_h = $target.attr('data-date-h'),
+			date_mi= $target.attr('data-date-mi'),
+			date_s = $target.attr('data-date-s');
+
+		$target.countdown({
+			until: new Date(date_y,date_m-1,date_d,date_h,date_mi,date_s),
+			labels: ['Years', 'Months', 'Weeks', vectheme.cd_days_text, vectheme.cd_hours_text, vectheme.cd_mins_text, vectheme.cd_secs_text],
+			labels1: ['Year', 'Month', 'Week', vectheme.cd_day_text, vectheme.cd_hour_text, vectheme.cd_min_text, vectheme.cd_sec_text],
 		});
 	},
 	loadTab: function loadTab(tabData, $this, idTab, tabs, cache , height, callback){
@@ -4345,8 +4388,10 @@ module.exports = function ($scope) {
 			var _this = this,
 				saleWidget = this.$element.find('.product-sale-widget'),
 				countDownSelector = saleWidget.find('.specific-prices-timer');
+			countDownSelector.each(function(){
+				_this.initCountDown($(this));	
+			})
 			
-			_this.initCountDown(countDownSelector);	
 		},
 		initCountDown: function initCountDown($target){
 			var date_y = $target.attr('data-date-y'),

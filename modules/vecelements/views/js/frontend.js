@@ -4228,6 +4228,7 @@ var AjaxTabHandler = elementorModules.frontend.handlers.Base.extend({
 			date_h = $target.attr('data-date-h'),
 			date_mi= $target.attr('data-date-mi'),
 			date_s = $target.attr('data-date-s');
+			
 		$target.countdown({
 			until: new Date(date_y,date_m-1,date_d,date_h,date_mi,date_s),
 			labels: ['Years', 'Months', 'Weeks', vectheme.cd_days_text, vectheme.cd_hours_text, vectheme.cd_mins_text, vectheme.cd_secs_text],

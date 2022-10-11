@@ -196,6 +196,7 @@ $(document).ready(function() {
 		});
 	});
 		
+		
 	function wishlistRefreshStatus()
 	{
 		$('.js-wishlist').each(function(){

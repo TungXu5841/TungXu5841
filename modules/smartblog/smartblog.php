@@ -445,7 +445,6 @@ class smartblog extends Module
 	{
 		$this->smarty->assign('meta_title', 'This is Title' . ' - ' . 'MName');
 	}
-	
 	public function SmartHookInsert()
 	{
 		$hookvalue = array();

@@ -186,7 +186,6 @@ $(document).ready(function() {
 		$('.js-wishlist-remove-all').addClass('loading');
 		
 		$.post(wishListVar.actions, data, null, 'json').then(function (resp) {
-			
 			wishListVar.ids = resp.productsIds;
 			wishlistRefreshStatus();
 			

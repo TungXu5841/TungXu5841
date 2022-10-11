@@ -91,7 +91,7 @@ class VecCompare extends Module implements WidgetInterface
             $hookName = $configuration['hook'];
         }
 
-        $templateFile = 'compare_top.tpl';
+        $templateFile = 'compare-top.tpl';
         if (preg_match('/^displayProductAdditionalInfo\d*$/', $hookName) || preg_match('/^displayAfterButtonCart\d*$/', $hookName)) { 
             $templateFile = 'btn-product-page.tpl';
         }elseif(preg_match('/^displayProductListFunctionalButtons\d*$/', $hookName)){

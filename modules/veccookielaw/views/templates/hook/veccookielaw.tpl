@@ -24,7 +24,7 @@
 *}
 
 <div id="veccookielaw" class="flex-layout center-vertical space-between {$design}">
-	{$content nofilter}
+	<span>{$content nofilter}</span>
 	<button class="btn btn-primary" id="veccookielaw-accept">
 		{if $button}
 			{$button}

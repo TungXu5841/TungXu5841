@@ -373,7 +373,33 @@
   color: #4e4c4c;
   background: #f6f6f6;
 }
+@-webkit-keyframes horizontal-shaking {
+  0%, 18%, 100% {
+      transform: translate3d(0, 0, 0)
+  }
 
+  2%, 6%, 10%, 14% {
+      transform: translate3d(-5px, 0, 0)
+  }
+
+  4%, 8%, 12%, 16% {
+      transform: translate3d(5px, 0, 0)
+  }
+}
+
+@keyframes horizontal-shaking {
+  0%, 18%, 100% {
+      transform: translate3d(0, 0, 0)
+  }
+
+  2%, 6%, 10%, 14% {
+      transform: translate3d(-5px, 0, 0)
+  }
+
+  4%, 8%, 12%, 16% {
+      transform: translate3d(5px, 0, 0)
+  }
+}
 .product-actions {
   .control-label {
     display: block;
@@ -389,6 +415,8 @@
     text-transform: uppercase;
     padding: .8125rem 2.8125rem;
     width: 100%;
+    animation: horizontal-shaking 6s ease infinite;
+    animation-delay: 5s;
     &.disabled:hover, &:disabled:hover {
       background: var(--buttonbackground);
       color: var(--buttoncolor); 

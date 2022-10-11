@@ -737,10 +737,15 @@ form {
 .vec-quicklogin-modal {
   h3 {
     color: $gray-dark;
+    text-align: center;
+    margin: .625rem 0;
   }
   .vec-login-btn {
     margin-top: 0.5rem; 
     width: 100%; 
+  }
+  .vec-register {
+    text-align: center;
   }
 }
 .close {

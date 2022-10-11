@@ -1033,7 +1033,7 @@
         overflow: hidden;
         border-radius: 0;
         border: none;
-        padding: 0;
+        padding: .375rem 0;
         box-shadow: 0 0 3.76px 0.24px rgba(0, 0, 0, 0.15);
         min-width: auto;
         float: none;
@@ -1065,7 +1065,7 @@
         z-index: 9999; 
     }
     .search-suggest {
-        animation: animateUpToDown .35s ease;
+        animation: animationShowPopup .35s ease;
     }
 }
 .vec-search-widget {
@@ -1179,6 +1179,7 @@
                 .search-content{
                     max-width: 1170px;
                     margin: auto;
+                    position: relative;
                     .search-form {
                         margin: auto;
                     }
@@ -1186,7 +1187,8 @@
             }
             .dialog-lightbox-close-button {
                 position: absolute;
-                top: .625rem;
+                top: -1.875rem;
+                right: 0;
                 color: $gray-dark;
                 font-size: 1.25rem;
                 opacity: 1;
@@ -3618,6 +3620,7 @@
 }
 .animationShowPopup {
     animation-name: animationShowPopup; 
+    animation-duration: 0.7s !important;  
 }
 #vecpopupnewsletter { 
     &.popup-text-color-dark {
@@ -3761,4 +3764,36 @@
         }
     }
 }
- 
+ #veccookielaw {
+    padding: .3125rem 1.875rem;
+    position: fixed;
+    font-size: 1rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    animation-name: fadeInUp;
+    animation-duration: 1.25s;  
+    > * {
+        margin: .625rem 0; 
+    }
+    @media (max-width: 767px) {
+        padding: .3125rem .9375rem;
+        font-size: .75rem;
+     }
+ }
+ #veccookielaw-accept {
+    min-width: 12.5rem;
+ }
+ #field-birthday::-webkit-input-placeholder { 
+    color: transparent;
+}
+#field-birthday:-moz-placeholder { 
+    color: transparent;
+}
+#field-birthday::-moz-placeholder {
+    color: transparent;
+}
+#field-birthday:-ms-input-placeholder {  
+    color: transparent;
+}

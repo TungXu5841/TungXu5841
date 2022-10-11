@@ -29,7 +29,7 @@
 		{foreach from=$menus item=menu name=menus}	 			
 				<li class="{if $menu.link == {$urls.pages.index} && $page.page_name == 'index'}home{/if} menu-item menu-item{$menu.id_vecvegamenu_item} {$menu.item_class|escape:'html':'UTF-8'} {if $menu.submenu_type != 2 && !empty($menu.sub_menu.info_rows) > 0}hasChild{/if} {if isset($menu.selected_item) && $menu.selected_item == 1}active{/if}">
 					
-						<a href="{if $menu.link}{$menu.link|escape:'html':'UTF-8'}{elseif $menu.custom_link}{$menu.custom_link|escape:'html':'UTF-8'}{else}javascript:void(0){/if}" {if $menu.new_window == 1} target="_blank" {/if}>
+						<a href="{if $menu.type_link == 0}{$menu.link|escape:'html':'UTF-8'}{elseif $menu.type_link == 1}{$menu.custom_link|escape:'html':'UTF-8'}{else}javascript:void(0){/if}" {if $menu.new_window == 1} target="_blank" {/if}>
 						
 						{if $menu.type_icon == 2 && $menu.icon != ''}
 						<img class="img-icon" src="{$menu.icon|escape:'html':'UTF-8'}" alt=""/>

@@ -1119,6 +1119,7 @@
         font-size: 0;
         font-weight: 400;
         height: 2.8125rem;
+        padding: 0;
 
         &::before {
           font-family: $font-icon;
@@ -1157,6 +1158,7 @@
         font-size: 0;
         font-weight: 400;
         height: 2.8125rem;
+        padding: 0;
 
         &::before {
           font-family: $font-icon;
@@ -1734,7 +1736,7 @@
     width: 100%;
     padding: .3125rem $small-space .3125rem $medium-space;
     margin-left: 0;
-    color: $gray-darker  !important;
+    color: $gray-darker !important;
     border: 1px solid $border-gray;
     cursor: pointer;
     background: $gray-light;

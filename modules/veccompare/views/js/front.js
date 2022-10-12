@@ -16,6 +16,7 @@ var vecCompare = {
                 $('.js-compare-count, #qmcompare-count').text(veccompare.nbProducts);
                 selector.removeClass('loading');
                 selector.addClass('cmp_added').removeClass('js-compare-add').addClass('js-compare-remove');
+                selector.attr('title',veccompare.remove_text);
             }
         })
         
@@ -43,6 +44,7 @@ var vecCompare = {
                 }
                 selector.removeClass('loading');
                 selector.removeClass('cmp_added').removeClass('js-compare-remove').addClass('js-compare-add');
+                selector.attr('title',veccompare.add_text);
             }
         })
         
@@ -80,6 +82,7 @@ var vecCompare = {
             });
             if(flag) {
                 $(this).addClass('cmp_added').removeClass('js-compare-add').addClass('js-compare-remove');
+                $(this).attr('title',veccompare.remove_text);
             }
         })
     },

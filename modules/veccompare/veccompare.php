@@ -79,9 +79,11 @@ class VecCompare extends Module implements WidgetInterface
             'nbProducts' =>  (int) $this->context->cookie->vecCompareNb,
             'idProducts' =>  $productsIds,
             'success_text' => $this->l('Product added to compare.'),
+            'add_text' => $this->l('Add to compare'),
+            'remove_text' => $this->l('Added to compare'),
             'compare_url' => $this->context->link->getModuleLink('veccompare', 'comparator'),
             'compare_text' => $this->l('View compare products'),
-            'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__
+            'baseDir' => $protocol_content.Tools::getHttpHost().__PS_BASE_URI__,
         ]));
     }
 
@@ -95,11 +97,14 @@ class VecCompare extends Module implements WidgetInterface
         
         if (preg_match('/^displayProductAdditionalInfo\d*$/', $hookName) || preg_match('/^displayAfterButtonCart\d*$/', $hookName)) { 
             $templateFile = 'btn-product-page.tpl';
+            $assign = $this->getWidgetVariables($hookName, $configuration);
+            $this->smarty->assign($assign);
         }elseif(preg_match('/^displayProductListFunctionalButtons\d*$/', $hookName)){
             $templateFile = 'btn-product-miniature.tpl';
+            $assign = $this->getWidgetVariables($hookName, $configuration);
+            $this->smarty->assign($assign);
         }
-        $assign = $this->getWidgetVariables($hookName, $configuration);
-        $this->smarty->assign($assign);
+        
         return $this->fetch('module:' . $this->name . '/views/templates/hook/' . $templateFile);
     }
 
@@ -110,8 +115,6 @@ class VecCompare extends Module implements WidgetInterface
         }
         return array(
             'id_product' => $configuration['smarty']->tpl_vars['product']->value['id_product'],
-            'name' => $configuration['smarty']->tpl_vars['product']->value['name'],
-            'image' => $configuration['smarty']->tpl_vars['product']->value['cover']['bySize']['home_default']['url'],
         );
     }
 

@@ -2297,7 +2297,12 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity .5s, transform .5s ease, visibility .5s ease;
-    overflow: auto;
+
+    .tab-content {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
 
     .menu-close {
         background: $gray-dark;
@@ -2371,7 +2376,7 @@
         }
     }
 
-    .compare-top,
+    .btn-compare-top,
     .btn-wishlist-top {
         background: transparent;
         border-bottom: 1px solid $border-gray;
@@ -3799,6 +3804,48 @@
     margin-bottom: .3125rem;
 }
 
+.countdown-timer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include vec-transition(350ms);
+
+    .countdown-row {
+        @include flex;
+        justify-content: center;
+
+        .countdown-section {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #d9d9d9;
+            color: #000;
+            min-width: 2.5rem;
+            padding: .5rem 2px;
+            line-height: 1;
+            text-align: center;
+            border-radius: 3px;
+
+            &:not(:last-child) {
+                margin-right: .3125rem;
+            }
+
+            .countdown-amount {
+                font-size: .875rem;
+                font-weight: 500;
+                margin-bottom: .125rem;
+            }
+
+            .countdown-period {
+                font-size: 10px;
+                text-transform: capitalize;
+            }
+        }
+    }
+}
+
 .design-countdown-1 {
     .countdown-row {
         @include flex;
@@ -3813,6 +3860,7 @@
             min-width: 2.8125rem;
             padding: .625rem 2px;
             line-height: 1;
+            border-radius: 3px;
 
             &:not(:last-child) {
                 margin-right: .625rem;
@@ -3838,6 +3886,7 @@
         color: var(--buttoncolor);
         display: inline-flex;
         padding: 0 .625rem;
+        border-radius: 3px;
 
         .countdown-section {
             display: inline-flex;

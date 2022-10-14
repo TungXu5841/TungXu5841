@@ -539,7 +539,7 @@ class WidgetSlideshow extends WidgetBase {
 		                'label' => __('Border'),
 		                'placeholder' => '1px',
 		                'default' => '1px',
-		                'selector' => '{{WRAPPER}} a.slideshow-button',
+		                'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} a.slideshow-button',
 		            )
 		        );
 
@@ -550,7 +550,7 @@ class WidgetSlideshow extends WidgetBase {
 		                'type' => ControlsManager::DIMENSIONS,
 		                'size_units' => array('px', '%'),
 		                'selectors' => array(
-		                    '{{WRAPPER}} a.slideshow-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		                    '{{WRAPPER}} {{CURRENT_ITEM}} a.slideshow-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		                ),
 		            )
 		        );
@@ -559,7 +559,7 @@ class WidgetSlideshow extends WidgetBase {
 		            GroupControlBoxShadow::getType(),
 		            array(
 		                'name' => 'button_box_shadow',
-		                'selector' => '{{WRAPPER}} a.slideshow-button',
+		                'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} a.slideshow-button',
 		            )
 		        );
 
@@ -570,7 +570,7 @@ class WidgetSlideshow extends WidgetBase {
 		                'type' => ControlsManager::DIMENSIONS,
 		                'size_units' => array('px', 'em', '%'),
 		                'selectors' => array(
-		                    '{{WRAPPER}} a.slideshow-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+		                    '{{WRAPPER}} {{CURRENT_ITEM}} a.slideshow-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 		                ),
 		                'separator' => 'before',
 		            )

@@ -172,7 +172,7 @@ class WidgetLanguageSelector extends WidgetBase
                     'unit' => 'px',
                 ], 
                 'selectors' => [
-                    '{{WRAPPER}} .language-widget .dropdown-menu' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .language-widget .dropdown-menu' => 'min-width: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'skin' => 'dropdown'

@@ -172,7 +172,7 @@ class WidgetCurrencySelector extends WidgetBase
                     'unit' => 'px',
                 ], 
                 'selectors' => [
-                    '{{WRAPPER}} .currency-widget .dropdown-menu' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .currency-widget .dropdown-menu' => 'min-width: {{SIZE}}{{UNIT}};',
                 ],
                 'condition' => [
                     'skin' => 'dropdown'

@@ -27,7 +27,6 @@ $(document).ready(function () {
     })
     $('.search-toggle').on('click', function(e){
     	e.preventDefault();
-    	console.log($(this));
     	var searchWidget = $(this).parents('.vec-search-widget');
     	setTimeout(function() {
             searchWidget.find('.search-input').focus();
@@ -174,7 +173,7 @@ var ajaxSuggestProducts = function(){
 
 	if(!$('.search-suggest-products').is(':empty')) return; //Return if suggest products loaded.
 
-	$('.search-suggest').removeClass('loading');
+	$('.search-suggest').addClass('loading');
     var ids = $('.search-suggest-products').data('id_products');
     var baseDir = vectheme.baseDir;
     $.ajax({

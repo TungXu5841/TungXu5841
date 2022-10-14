@@ -5,7 +5,7 @@
 		</button>
 		<div class="wrapper-popup">
 		{if $vecpopup.VEC_NEWSLETTER_BG == 1 && !empty($vecpopup.VEC_NEWSLETTER_BG_IMAGE)}
-			<img class="img-responsive" src="{$vecpopup.VEC_NEWSLETTER_BG_IMAGE}" alt="" title="" loading="lazy">
+			<img class="img-responsive" src="{$vecpopup.VEC_NEWSLETTER_BG_IMAGE}" alt="" loading="lazy">
 		{/if}
 		{if $vecpopup.VEC_NEWSLETTER_FORM == 1 && Module::isEnabled('ps_emailsubscription')}	
 			<div class="popup-content">

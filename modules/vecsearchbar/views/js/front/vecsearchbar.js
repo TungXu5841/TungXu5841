@@ -171,7 +171,7 @@ var ajaxSearch = function(searchWidget){
 
 var ajaxSuggestProducts = function(){
 
-	if(!$('.search-suggest-products').is(':empty')) return; //Return if suggest products loaded.
+	if(!$('.search-suggest-products').is(':empty')) return; 
 
 	$('.search-suggest').addClass('loading');
     var ids = $('.search-suggest-products').data('id_products');

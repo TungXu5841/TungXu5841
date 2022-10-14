@@ -183,7 +183,7 @@ class WidgetBrandCarousel extends WidgetBase
 			<div class="elementor-manufacturer-wrapper">
 				<div class="elementor-manufacturer-image">
 					<a href="<?= $link ?>">
-						<img src="<?= $image ?>" alt="<?= $manufacturer['name'] ?>" loading="lazy"/>
+						<img loading="lazy" src="<?= $image ?>" alt="<?= $manufacturer['name'] ?>"/>
 					</a>
 				</div>
 			</div>

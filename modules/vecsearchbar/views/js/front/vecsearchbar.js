@@ -173,7 +173,7 @@ var ajaxSuggestProducts = function(){
 
 	if(!$('.search-suggest-products').is(':empty')) return; 
 
-	$('.search-suggest').addClass('loading');
+	$('.search-suggest-products').addClass('loading');
     var ids = $('.search-suggest-products').data('id_products');
     var baseDir = vectheme.baseDir;
     $.ajax({
@@ -199,7 +199,7 @@ var ajaxSuggestProducts = function(){
                 html += '</div>';
             }
             html += '</div>';
-            $('.search-suggest').removeClass('loading');
+            $('.search-suggest-products').removeClass('loading');
             $('.search-suggest-products').append(html);
         }
     });

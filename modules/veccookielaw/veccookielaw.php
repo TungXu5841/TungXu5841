@@ -58,7 +58,7 @@ class VecCookieLaw extends Module implements WidgetInterface
             $this->registerHook('displayBeforeBodyClosingTag')) 
         {
             Configuration::updateValue($this->name . '_design', '1');
-            Configuration::updateValue($this->name . '_bg_color', '#908E8F');
+            Configuration::updateValue($this->name . '_bg_color', '#000000cc');
             Configuration::updateValue($this->name . '_color', '#ffffff');
             $values = array();
             $languages = Language::getLanguages(false);

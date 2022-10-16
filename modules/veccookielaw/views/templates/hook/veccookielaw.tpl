@@ -23,7 +23,7 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<div id="veccookielaw" class="flex-layout center-vertical space-between {$design}">
+<div id="veccookielaw" class="flex-layout center-vertical cookielaw-layout-{$design}">
 	<span>{$content nofilter}</span>
 	<button class="btn btn-primary" id="veccookielaw-accept">
 		{if $button}

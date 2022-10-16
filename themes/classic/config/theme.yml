@@ -73,7 +73,6 @@ global_settings:
      - veccustomersignin
      - vecelements
      - vecmegamenu
-     - vecmobilepanel
      - vecpopupnewsletter
      - vecproductcomments
      - vecsearchbar
@@ -82,6 +81,8 @@ global_settings:
      - vecvegamenu
      - vecviewedproduct
      - vecwishlist
+     - veccookielaw
+     - vecproductextratab
      - smartblog
      - smartbloglatestcomments
      - smartblogrecentposts
@@ -90,9 +91,11 @@ global_settings:
      - smartblogcategories
   hooks:
     modules_to_hook:
-      displayMegamenuMobileTop:
+      displayMegamenuMobileBottom:
         - ps_languageselector
         - ps_currencyselector
+        - vecwishlist
+        - veccompare
       displayProductListFunctionalButtons:
         - veccompare 
       displayBeforeBodyClosingTag:
@@ -157,6 +160,8 @@ theme_settings:
     new-products: layout-left-column
     prices-drop: layout-left-column
     contact: layout-left-column
+    module-smartblog-category: layout-right-column
+    module-smartblog-list: layout-right-column 
 dependencies:
   modules:
      - ps_categoryproducts  
@@ -164,7 +169,6 @@ dependencies:
      - veccustomersignin
      - vecelements
      - vecmegamenu
-     - vecmobilepanel
      - vecpopupnewsletter
      - vecproductcomments
      - vecsearchbar
@@ -173,6 +177,8 @@ dependencies:
      - vecvegamenu
      - vecviewedproduct
      - vecwishlist
+     - veccookielaw
+     - vecproductextratab
      - smartblog
      - smartbloglatestcomments
      - smartblogrecentposts

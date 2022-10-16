@@ -1243,7 +1243,7 @@
     }
 
     .search-suggest {
-        animation: animationShowPopup .35s ease;
+        animation: animateUpToDown .35s ease;
     }
 }
 
@@ -1375,7 +1375,6 @@
                 .search-content {
                     max-width: 1170px;
                     margin: auto;
-                    position: relative;
 
                     .search-form {
                         margin: auto;
@@ -1385,8 +1384,8 @@
 
             .dialog-lightbox-close-button {
                 position: absolute;
-                top: -1.875rem;
-                right: 0;
+                top: .625rem;
+                right: 1.25rem;
                 color: $gray-dark;
                 font-size: 1.25rem;
                 opacity: 1;
@@ -1441,9 +1440,10 @@
     .suggest-content {
         background-color: $white;
         padding: 1.25rem;
-        border: 1px solid $border-gray;
+        border-top: 0;
         max-height: 33.4375rem;
         overflow-y: auto;
+        box-shadow: 0 0 2.76px 0.24px rgba(0, 0, 0, 0.15);
 
         &::-webkit-scrollbar {
             -webkit-appearance: none;
@@ -1493,7 +1493,25 @@
         text-transform: uppercase;
         color: rgba(0, 0, 0, 0.6);
         margin-bottom: .9375rem;
-        font-weight: 400;
+    }
+
+    .search-suggest-products.loading {
+        position: relative;
+        height: 36px;
+
+        &:before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-image: url(../img/lazy-load.svg);
+            background-size: 36px auto;
+            background-position: center center;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
     }
 
     .search-item {
@@ -2288,7 +2306,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%;
+    width: 25rem;
     max-width: 90%;
     z-index: 99;
     margin: 0;
@@ -4426,15 +4444,17 @@
 }
 
 #veccookielaw {
-    padding: .3125rem 1.875rem;
     position: fixed;
-    font-size: 1rem;
-    left: 0;
-    right: 0;
     bottom: 0;
     z-index: 9999;
     animation-name: fadeInUp;
     animation-duration: 1.25s;
+    box-shadow: #888 0px 0px 3.76px 0.24px;
+
+    p {
+        margin: 0;
+        font-size: inherit;
+    }
 
     >* {
         margin: .625rem 0;
@@ -4446,8 +4466,43 @@
     }
 }
 
-#veccookielaw-accept {
+.cookielaw-layout-1 {
+    font-size: .75rem;
+    left: 1.875rem;
+    flex-direction: column;
+    max-width: 20rem;
+    text-align: center;
+    padding: .3125rem .9375rem;
+}
+
+.cookielaw-layout-1 #veccookielaw-accept {
+    padding: .3125rem 1.25rem;
+    border-radius: 3px;
+}
+
+.cookielaw-layout-2 {
+    padding: .3125rem 1.875rem;
+    font-size: .9375rem;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    padding: .3125rem 1.875rem;
+
+    @media (max-width: 767px) {
+        padding: .3125rem .9375rem;
+        font-size: .75rem;
+    }
+}
+
+.cookielaw-layout-2 #veccookielaw-accept {
     min-width: 12.5rem;
+    border-radius: 3px;
+
+    @media (max-width: 767px) {
+        padding: .3125rem .9375rem;
+        font-size: .75rem;
+        min-width: auto;
+    }
 }
 
 #field-birthday::-webkit-input-placeholder {
